@@ -3,7 +3,7 @@ include "../config/conf.php";
 include "t-conf.php"; // Ensure this connects to your database
 
 
- // Get teacher ID from session
+// Get teacher ID from session
 
 $bookingtable = $prefix . "_resources.`booking`";
 $studenttable = $prefix . "_resources.`student`";
@@ -34,23 +34,27 @@ $sql = "SELECT
         JOIN $teachertable ON schedule.teacher_id = teacher.id
         WHERE teacher.id = ?";
 
-$stmt = $conn->prepare($sql);
-$stmt->bind_param("i", $id);
-$stmt->execute();
-$result = $stmt->get_result();
-
 $bookings = [];
-while ($row = $result->fetch_assoc()) {
-    $row['platform'] = ($row['platform'] == 1) ? "Online" : "Offline";
+$stmt = $conn->prepare($sql);
+if ($stmt) {
+    $stmt->bind_param("i", $id);
+    $stmt->execute();
+    $result = $stmt->get_result();
 
-    $row['statusColor'] = match ($row['status']) {
-        'Upcoming' => 'red',
-        'In Progress' => 'orange',
-        'Finished' => 'green',
-        default => ''
-    };
+    while ($row = $result->fetch_assoc()) {
+        $row['platform'] = ($row['platform'] == 1) ? "Online" : "Offline";
 
-    $bookings[] = $row;
+        $row['statusColor'] = match ($row['status']) {
+            'Upcoming' => 'red',
+            'In Progress' => 'orange',
+            'Finished' => 'green',
+            default => ''
+        };
+
+        $bookings[] = $row;
+    }
+} else {
+
 }
 
 header('Content-Type: application/json');
