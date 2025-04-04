@@ -1,0 +1,231 @@
+/* Prevent Bootstrap from messing with your calendar */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+    color: #03011E;
+    font-family: Poppins;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    letter-spacing: 0.32px;
+}
+.calendar ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.calendar .weeks, .calendar .days {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 5px;
+}
+
+.calendar .days li {
+    padding-top:7px;
+    padding-bottom: 7px;
+    padding-right: 23px;
+    padding-left: 21px;
+    aspect-ratio: 1/1;
+    background: #FBF9F9;
+    display: flex;
+    justify-content: right;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.calendar .days li:hover {
+    background-color: #E3E3E3;
+}
+
+.calendar .days li.active {
+    background-color: #29B866;
+    color: white;
+    aspect-ratio: 1/1;
+}
+
+body {
+    background-image: linear-gradient(180deg, #F1FFF0 66.19%, #D0F0C1 130%);
+    min-height: 100vh;
+
+}
+
+.calendar-wrapper {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.calendar ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+
+
+.mini-calendar ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+/* Mini Calendar Styling */
+.mini-calendar {
+    background: white;
+    padding: 15px;
+    border-radius: 10px;
+}
+
+/* Days styling */
+.mini-calendar .weeks, .mini-calendar .days-mini {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 3px;
+}
+
+.mini-calendar .days-mini li {
+    padding: 5px;
+    background: #FBF9F9;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+/* Hover effect */
+.mini-calendar .days-mini li:hover {
+    background-color: #E3E3E3;
+}
+
+/* Highlight for the current day */
+.mini-calendar .days-mini li.today {
+    border: 2px solid #29B866;
+    background-color: white;
+    color: #29B866;
+    font-weight: bold;
+}
+
+.navbar-nav .nav-link.active {
+    font-weight: bold;
+    color: black !important;
+}
+@media (max-width: 1274px) {
+    .mini-calendar {
+        display: none;
+    }
+    /* Container for announcements & bulletin */
+.announcement-bulletin-container {
+    margin-top: 20px; /* Space below the calendar */
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 100%;
+    max-width: 800px; /* Adjust width to align with the calendar */
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Announcement & Bulletin Styling */
+.announcement-section, .bulletin-section {
+    border-radius: 15px;
+    background: #FFF;
+    box-shadow: 0px 0px 14.4px rgba(3, 1, 30, 0.15);
+    padding: 15px;
+}
+}
+
+
+/* Announcement & Bulletin Board Styling */
+.announcement-section, .bulletin-section {
+    border-radius: 15px;
+    background: #FFF;
+    box-shadow: 0px 0px 14.4px rgba(3, 1, 30, 0.15);
+    text-align: left;
+    padding: 15px;
+    max-width: 350px;
+}
+
+/* Space between announcements and bulletin */
+.announcement-section {
+    margin-bottom: 20px; /* Adds space between announcement and bulletin */
+}
+
+.announcement-section h4, .bulletin-section h4 {
+    margin-bottom: 10px;
+    font-weight: 600;
+}
+
+.announcement-section ul, .bulletin-section ul {
+    padding-left: 18px;
+    list-style-type: disc;
+}
+
+.announcement-section li, .bulletin-section li {
+    margin-bottom: 5px;
+    font-size: 14px;
+}
+/* Space between mini-calendar and announcements */
+.mini-calendar{
+    margin-bottom: 20px;
+}
+.scheduled {
+    background-color: #29B866 !important;
+    color: white !important;
+    border-radius: 50%;
+}
+.toggle-btn {
+    padding: 5px 10px;
+    border: 1px solid #29B866;
+    border-radius: 0px 0px 0px 0px;
+    background: none;
+    cursor: pointer;
+    margin-right: 5px;
+    color: #29B866;
+    text-align: center;
+    font-family: Poppins;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 130%;
+}
+.toggle-btn:first-child {
+    border-radius: 5px 0px 0px 5px;
+}
+.toggle-btn:last-child {
+    border-radius: 0px 5px 5px 0px;
+    background: #FAB755;
+    color : #FFF;
+    border: 1px solid #FAB755;
+}
+.disabled {
+    color: gray !important;
+    cursor: not-allowed !important;
+}
+
+.custom-save-btn {
+    border-radius: 5px;
+    background: #29B866;
+    box-shadow: 0px 4px 8.1px 0px rgba(3, 1, 30, 0.25);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+}
+.custom-cancel-btn {
+    border-radius: 5px;
+    background: #FFF;
+    box-shadow: 0px 4px 8.1px 0px rgba(3, 1, 30, 0.25);
+    border: none;
+    padding: 10px 20px;
+    color: #03011E;
+}
+.myprofile {
+    display: flex;
+    align-items: stretch; /* Ensures both columns stretch to the same height */
+    justify-content: center;
+}

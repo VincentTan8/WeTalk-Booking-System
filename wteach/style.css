@@ -1,0 +1,280 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+    color: #03011E;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    letter-spacing: 0.32px;
+}
+
+body {
+    background-image: linear-gradient(180deg, #A3D9FB 27.29%, #E29FFF 105.37%);
+    min-height: 100vh;
+}
+
+.calendar ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.calendar .weeks, .calendar .days {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 5px;
+    text-align: right;
+}
+
+.calendar .days li {
+    padding: 10px;
+    aspect-ratio: 1/1;
+    background: #FBF9F9;
+    display: flex;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    font-size: 14px;
+}
+
+.calendar .days li:hover {
+    background-color: #E3E3E3;
+}
+
+.calendar .days li.active {
+    background-color: #916DFF;
+    color: white;
+}
+
+.calendar-wrapper {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.mini-calendar {
+    background: white;
+    padding: 15px;
+    border-radius: 10px;
+}
+
+.mini-calendar .weeks, .mini-calendar .days-mini {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 3px;
+    list-style: none;
+}
+
+.mini-calendar .days-mini li {
+    padding: 5px;
+    background: #FBF9F9;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.mini-calendar .days-mini li:hover {
+    background-color: #E3E3E3;
+}
+
+.mini-calendar .days-mini li.today {
+    border: 2px solid #916DFF;
+    background-color: white;
+    color: #916DFF;
+    font-weight: bold;
+}
+
+.navbar-nav .nav-link.active {
+    font-weight: bold;
+    color: black !important;
+}
+
+/* Responsive adjustments */
+@media (max-width: 1274px) {
+    .mini-calendar {
+        display: none;
+    }
+
+    .announcement-bulletin-container {
+        margin-top: 20px;
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        width: 100%;
+        max-width: 800px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+}
+
+@media (max-width: 768px) {
+    .calendar-wrapper {
+        padding: 10px;
+    }
+
+    .calendar .days li {
+        padding: 5px;
+        font-size: 12px;
+    }
+
+    .modal-dialog {
+        max-width: 90%;
+    }
+
+    .custom-save-btn, .custom-cancel-btn {
+        width: 100%;
+        text-align: center;
+        padding: 12px;
+        font-size: 14px;
+    }
+}
+
+/* Announcement & Bulletin Board Styling */
+.announcement-section, .bulletin-section {
+    border-radius: 15px;
+    background: #FFF;
+    box-shadow: 0px 0px 14.4px rgba(3, 1, 30, 0.15);
+    text-align: left;
+    height: 30%; /* Set height to 30% */
+    max-width: 350px;
+}
+
+.announcement-section {
+    margin-bottom: 20px;
+}
+
+.announcement-section h4, .bulletin-section h4 {
+    border-radius: 15px 15px 0px 0px;
+    background: #916DFF;
+    padding: 10px;
+    color: white;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 700;
+    text-align:center;
+}
+
+/* Style for ul elements inside announcement and bulletin */
+.announcement-section ul, .bulletin-section ul {
+    padding-left: 0;
+    list-style-type: disc;
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Center the list items horizontally */
+    justify-content: center; /* Center the list items vertically */
+    height: auto; /* Ensure the ul takes up the full height of its parent */
+    gap: 10px; /* Space between list items */
+    margin: 0; /* Remove any default margin */
+}
+
+/* Style for individual list items */
+.announcement-section li, .bulletin-section li {
+    font-size: 14px;
+    text-align: center; /* Center the text inside each list item */
+    margin: 5px 0; /* Add spacing between the items */
+}
+
+/* Responsive List Items */
+@media (max-width: 768px) {
+    .announcement-section, .bulletin-section {
+        height: auto; /* Allow the sections to expand on smaller screens */
+    }
+
+    .announcement-section ul, .bulletin-section ul {
+        gap: 8px; /* Adjust space between list items */
+    }
+
+    .announcement-section li, .bulletin-section li {
+        font-size: 12px; /* Reduce font size on smaller screens */
+    }
+}
+
+@media (max-width: 480px) {
+    .announcement-section, .bulletin-section {
+        height: auto; /* Allow the sections to expand on small screens */
+        padding: 10px; /* Reduce padding for smaller screens */
+    }
+
+    .announcement-section ul, .bulletin-section ul {
+        gap: 6px; /* Further reduce space between list items */
+    }
+
+    .announcement-section li, .bulletin-section li {
+        font-size: 12px; /* Keep font size reduced on very small screens */
+    }
+}
+
+
+.mini-calendar {
+    margin-bottom: 20px;
+}
+
+.scheduled {
+    background-color: #916DFF !important;
+    color: white !important;
+    border-radius: 50%;
+}
+
+.available {
+    background-color: #6f42c1 !important;
+    color: white !important;
+    border-radius: 50%;
+}
+
+.custom-save-btn {
+    border-radius: 5px;
+    background: #916DFF;
+    box-shadow: 0px 4px 8.1px 0px rgba(3, 1, 30, 0.25);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+}
+
+.custom-cancel-btn {
+    border-radius: 5px;
+    background: #FFF;
+    box-shadow: 0px 4px 8.1px 0px rgba(3, 1, 30, 0.25);
+    border: none;
+    padding: 10px 20px;
+    color: #03011E;
+}
+
+.myprofile {
+    display: flex;
+    align-items: stretch;
+    justify-content: center;
+}
+
+.toggle-group {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+.toggle-radio {
+    display: none;
+}
+
+.toggle-label {
+    padding: 10px 20px;
+    border-radius: 10px;
+    border: 2px solid #DBE7FF;
+    background: #FBF9F9;
+    cursor: pointer;
+    text-align: center;
+    min-width: 80px;
+}
+
+.toggle-radio:checked + .toggle-label {
+    border: 2px solid #916DFF;
+    background: #FBF9F9;
+}
+

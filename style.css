@@ -1,0 +1,236 @@
+/* General Styles */
+body {
+    font-family: "Poppins", sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #fcf4ff;
+}
+
+/* Styled Login Box */
+.rectangle-div {
+    width: 100%;
+    max-width: 1100px;
+    padding-top:2px;
+    padding-bottom:2px;
+    height: auto;
+    display: flex;
+    align-items: center;
+    box-shadow: 0px 0px 45px rgba(3, 1, 30, 0.25);
+    border-radius: 20px;
+    background-color: #fff;
+    overflow: hidden;
+}
+
+/* Left Side - Image */
+.login-image-container {
+    width: 40%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 5px 10px; /* Reduced top & bottom padding, kept 10px on sides */
+}
+
+.login-image {
+    max-width: 100%;
+    height: auto;
+    border-radius: 10px; /* Optional: Adds slight rounding */
+}
+
+/* Right Side - Form */
+.login-form-container {
+    width: 60%;
+    padding: 30px;
+}
+
+/* Input Fields */
+.form-control {
+    border-radius: 10px;
+    border: 2px solid rgba(0, 0, 0, 0.15);
+    padding: 10px;
+}
+
+/* Sign-In Button */
+.btn-success {
+    background: #FFB000 !important; /* New background color */
+    border: none;
+    padding: 10px;
+    font-size: 18px;
+    font-weight: bold;
+    border-radius: 5px;
+    color: white;
+}
+
+.btn-success:hover {
+    background: #E69C00 !important; /* Slightly darker shade on hover */
+    color: white;
+}
+/* Bottom Links */
+a {
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+/* Logo for Small Screens (Hidden on Large Screens) */
+.logo-image {
+    display: none;
+    width: 120px;
+    margin: 0 auto;
+}
+
+/* Responsive Design */
+@media (max-width: 991px) { /* For tablets and phones */
+    .rectangle-div {
+        flex-direction: column;
+        height: auto;
+        max-width: 90%;
+    }
+
+    .login-image-container {
+        width: 100%;
+        height: auto;
+        padding: 5px 10px; /* Adjusted padding */
+    }
+
+    .login-form-container {
+        width: 100%;
+        padding: 20px;
+    }
+}
+
+@media (max-width: 791px) { /* For small screens */
+    /* Change background to logo */
+    body {
+        background: url("uploads/logo/nologo.png") center/cover no-repeat;
+    }
+
+    /* Make the login box transparent */
+    .rectangle-div {
+        background: rgba(255, 255, 255, 0.85);
+        padding: 20px;
+        border-radius: 10px;
+        max-width: 350px;
+    }
+
+    /* Hide the image inside the box */
+    .login-image-container {
+        display: none;
+    }
+
+    /* Adjust the form */
+    .login-form-container {
+        width: 100%;
+    }
+
+    /* Show the logo */
+    .logo-image {
+        display: block;
+    }
+}
+
+/* Forgot Password Section */
+.line-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 20px 0;
+}
+
+.line-container .line {
+    flex: 1;
+    height: 1px;
+    background-color: rgba(0, 0, 0, 0.2);
+    margin: 0 10px;
+}
+
+.line-container a {
+    color: #29b866;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.line-container a:hover {
+    text-decoration: underline;
+}
+/* Forgot Password Link (Align Left) */
+.forgot-password-link {
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 600;
+    color: #29b866;
+}
+
+.forgot-password-link:hover {
+    text-decoration: underline;
+}
+
+/* Sign In Text (Left-Aligned) */
+.sign-in-title {
+    font-size: 40px; /* Adjust size if needed */
+    font-weight: bold;
+    color: #29b866;
+    text-align: left;
+    margin-bottom: 20px;
+}
+
+/* OR Section */
+.or-text {
+    font-weight: bold;
+    font-size: 16px;
+    color: #333;
+}
+
+/* Social Login Buttons */
+.social-login-container {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 15px;
+}
+
+.social-btn img {
+    width: 50px; /* Adjust size as needed */
+    height: 50px;
+    transition: transform 0.2s ease-in-out;
+}
+
+.social-btn img:hover {
+    transform: scale(1.1);
+}
+
+/* Sign Up Title */
+.sign-up-title {
+    color: #29B866;
+    font-family: Helvetica, sans-serif;
+    font-size: 50px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    text-align: left; /* Ensure it aligns to the left */
+    margin-bottom: 20px;
+}
+
+/* Style the role selection radio buttons */
+/* .role-box {
+    display: inline-block;
+    padding: 10px 20px;
+    border: 2px solid #28a745;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.3s ease-in-out;
+    font-weight: bold;
+    background-color: white;
+}
+
+.role-selection:checked + .role-box {
+    background-color: #28a745;
+    color: white;
+    border-color: #218838;
+}
+
+.form-check-inline {
+    margin: 0 10px;
+} */
+
