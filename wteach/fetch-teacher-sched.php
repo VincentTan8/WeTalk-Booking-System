@@ -5,7 +5,7 @@ include 't-conf.php';
 
 $tablename = $prefix . "_resources.`schedule`";
 $sql = "SELECT scheddate, schedstarttime, schedendtime, platform 
-        FROM $tablename WHERE `booking_id` IS NULL AND `teacher_id` = $id";
+        FROM $tablename WHERE `booking_ref_num` IS NULL AND `teacher_ref_num` = $ref_num";
 $result = $conn->query($sql);
 
 $schedules = [];

@@ -27,16 +27,16 @@ body {
 .calendar .weeks, .calendar .days {
     display: grid;
     grid-template-columns: repeat(7, 1fr);
-    gap: 5px;
+    gap: 10px;
     text-align: right;
 }
 
 .calendar .days li {
     padding: 10px;
     aspect-ratio: 1/1;
-    background: #FBF9F9;
+    background: #fff;
     display: flex;
-    border-radius: 5px;
+    border-radius: 15px;
     cursor: pointer;
     transition: background-color 0.3s;
     font-size: 14px;
