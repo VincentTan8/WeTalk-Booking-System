@@ -96,21 +96,20 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['email'])) {
                     <div class="mb-3">
                         <input type="text" name="phone" class="form-control" placeholder="Contact Number" required>
                     </div>
-
+                    <!-- Role Selection -->
                     <div class="mb-3 text-center">
                         <label class="form-label fw-bold">Sign Up As:</label>
-                            <div class="d-flex justify-content-center">
-                                <div class="form-check form-check-inline">
-                                    <input class="form-check-input role-selection" type="radio" name="role" id="student" value="student" required>
-                                    <label class="form-check-label role-box" for="student">Student</label>
-                                </div>
-                                <div class="form-check form-check-inline">
-                                    <input class="form-check-input role-selection" type="radio" name="role" id="parent" value="parent" required>
-                                    <label class="form-check-label role-box" for="parent">Parent</label>
-                                </div>
-                            </div>
+                        <div class="role-selection">
+                            <label class="role-box">
+                                <input type="radio" name="role" value="student" required>
+                                Student
+                            </label>
+                            <label class="role-box">
+                                <input type="radio" name="role" value="parent" required>
+                                Parent
+                            </label>
+                        </div>
                     </div>
-
 
                     <button type="submit" class="btn btn-success w-100 mt-3">Sign Up</button>
                 </form>
