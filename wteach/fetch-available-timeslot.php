@@ -27,10 +27,10 @@ while ($row = $resultTimeslots->fetch_assoc()) {
 $sqlBooked = "SELECT DISTINCT t.starttime 
               FROM $timeslotTable t
               JOIN $scheduleTable s ON s.schedstarttime = t.starttime
-              WHERE s.scheddate = ? AND s.teacher_id = ?";
+              WHERE s.scheddate = ? AND s.teacher_ref_num = ?";
 
 $stmt = $conn->prepare($sqlBooked);
-$stmt->bind_param("si", $selectedDate, $teacherId);
+$stmt->bind_param("ss", $selectedDate, $teacherId);
 $stmt->execute();
 $resultBooked = $stmt->get_result();
 
