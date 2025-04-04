@@ -9,7 +9,7 @@ $sql = "SELECT scheddate, schedstarttime, schedendtime, platform
 $result = $conn->query($sql);
 
 $schedules = [];
-if ($result->num_rows > 0) {
+if ($result) {
     while ($row = $result->fetch_assoc()) {
         $schedules[] = [
             'scheddate' => $row['scheddate'],
