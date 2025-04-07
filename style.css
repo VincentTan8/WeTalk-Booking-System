@@ -10,8 +10,8 @@ body {
 .rectangle-div {
     width: 100%;
     max-width: 1100px;
-    padding-top:2px;
-    padding-bottom:2px;
+    padding-top: 2px;
+    padding-bottom: 2px;
     height: auto;
     display: flex;
     align-items: center;
@@ -27,13 +27,15 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 5px 10px; /* Reduced top & bottom padding, kept 10px on sides */
+    padding: 5px 10px;
+    /* Reduced top & bottom padding, kept 10px on sides */
 }
 
 .login-image {
     max-width: 100%;
     height: auto;
-    border-radius: 10px; /* Optional: Adds slight rounding */
+    border-radius: 10px;
+    /* Optional: Adds slight rounding */
 }
 
 /* Right Side - Form */
@@ -51,7 +53,8 @@ body {
 
 /* Sign-In Button */
 .btn-success {
-    background: #FFB000 !important; /* New background color */
+    background: #FFB000 !important;
+    /* New background color */
     border: none;
     padding: 10px;
     font-size: 18px;
@@ -61,9 +64,11 @@ body {
 }
 
 .btn-success:hover {
-    background: #E69C00 !important; /* Slightly darker shade on hover */
+    background: #E69C00 !important;
+    /* Slightly darker shade on hover */
     color: white;
 }
+
 /* Bottom Links */
 a {
     text-decoration: none;
@@ -81,7 +86,9 @@ a:hover {
 }
 
 /* Responsive Design */
-@media (max-width: 991px) { /* For tablets and phones */
+@media (max-width: 991px) {
+
+    /* For tablets and phones */
     .rectangle-div {
         flex-direction: column;
         height: auto;
@@ -91,7 +98,8 @@ a:hover {
     .login-image-container {
         width: 100%;
         height: auto;
-        padding: 5px 10px; /* Adjusted padding */
+        padding: 5px 10px;
+        /* Adjusted padding */
     }
 
     .login-form-container {
@@ -100,7 +108,9 @@ a:hover {
     }
 }
 
-@media (max-width: 791px) { /* For small screens */
+@media (max-width: 791px) {
+
+    /* For small screens */
     /* Change background to logo */
     body {
         background: url("uploads/logo/nologo.png") center/cover no-repeat;
@@ -154,6 +164,7 @@ a:hover {
 .line-container a:hover {
     text-decoration: underline;
 }
+
 /* Forgot Password Link (Align Left) */
 .forgot-password-link {
     text-decoration: none;
@@ -168,7 +179,8 @@ a:hover {
 
 /* Sign In Text (Left-Aligned) */
 .sign-in-title {
-    font-size: 40px; /* Adjust size if needed */
+    font-size: 40px;
+    /* Adjust size if needed */
     font-weight: bold;
     color: #29b866;
     text-align: left;
@@ -191,7 +203,8 @@ a:hover {
 }
 
 .social-btn img {
-    width: 50px; /* Adjust size as needed */
+    width: 50px;
+    /* Adjust size as needed */
     height: 50px;
     transition: transform 0.2s ease-in-out;
 }
@@ -208,7 +221,8 @@ a:hover {
     font-style: normal;
     font-weight: 700;
     line-height: normal;
-    text-align: left; /* Ensure it aligns to the left */
+    text-align: left;
+    /* Ensure it aligns to the left */
     margin-bottom: 20px;
 }
 
@@ -236,11 +250,13 @@ a:hover {
 
 /* Make the radio button square */
 .role-box input[type="radio"] {
-    appearance: none; /* Remove default styling */
+    appearance: none;
+    /* Remove default styling */
     width: 20px;
     height: 20px;
     border: 2px solid #916DFF;
-    border-radius: 4px; /* Slightly rounded edges */
+    border-radius: 4px;
+    /* Slightly rounded edges */
     cursor: pointer;
     position: relative;
     transition: 0.2s;
@@ -259,9 +275,11 @@ a:hover {
     gap: 8px;
     cursor: pointer;
 }
+
 /* Add spacing between the two options */
 .role-selection {
     display: flex;
     justify-content: center;
-    gap: 20px; /* Adjust the spacing between the two choices */
+    gap: 20px;
+    /* Adjust the spacing between the two choices */
 }
