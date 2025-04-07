@@ -234,3 +234,34 @@ a:hover {
     margin: 0 10px;
 } */
 
+/* Make the radio button square */
+.role-box input[type="radio"] {
+    appearance: none; /* Remove default styling */
+    width: 20px;
+    height: 20px;
+    border: 2px solid #916DFF;
+    border-radius: 4px; /* Slightly rounded edges */
+    cursor: pointer;
+    position: relative;
+    transition: 0.2s;
+}
+
+/* When checked, fill the box */
+.role-box input[type="radio"]:checked {
+    background-color: #916DFF;
+    border-color: #916DFF;
+}
+
+/* Align text properly with the radio button */
+.role-box {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+}
+/* Add spacing between the two options */
+.role-selection {
+    display: flex;
+    justify-content: center;
+    gap: 20px; /* Adjust the spacing between the two choices */
+}
