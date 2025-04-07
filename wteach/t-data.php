@@ -11,7 +11,7 @@ $scheduletable = $prefix . "_resources.`schedule`";
 $teachertable = $prefix . "_resources.`teacher`";
 
 $sql = "SELECT 
-            b.ref_num AS booking_ref_num,  -- Add this line
+            b.ref_num AS booking_ref_num, 
             concat(student.fname, ' ', student.lname) AS student_name, 
             schedule.schedstarttime, 
             schedule.schedendtime,
@@ -36,25 +36,21 @@ $sql = "SELECT
 
 $bookings = [];
 $stmt = $conn->prepare($sql);
-if ($stmt) {
-    $stmt->bind_param("s", $ref_num);
-    $stmt->execute();
-    $result = $stmt->get_result();
+$stmt->bind_param("s", $ref_num);
+$stmt->execute();
+$result = $stmt->get_result();
 
-    while ($row = $result->fetch_assoc()) {
-        $row['platform'] = ($row['platform'] == 1) ? "Online" : "Offline";
+while ($row = $result->fetch_assoc()) {
+    $row['platform'] = ($row['platform'] == 1) ? "Online" : "Offline";
 
-        $row['statusColor'] = match ($row['status']) {
-            'Upcoming' => 'red',
-            'In Progress' => 'orange',
-            'Finished' => 'green',
-            default => ''
-        };
+    $row['statusColor'] = match ($row['status']) {
+        'Upcoming' => 'red',
+        'In Progress' => 'orange',
+        'Finished' => 'green',
+        default => ''
+    };
 
-        $bookings[] = $row;
-    }
-} else {
-
+    $bookings[] = $row;
 }
 
 header('Content-Type: application/json');
