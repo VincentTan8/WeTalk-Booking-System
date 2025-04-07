@@ -9,9 +9,11 @@ function login($conn, $input, $password) {
     $tables = ['student', 'teacher', 'cs'];
 
     foreach ($tables as $table) {
-        $query = "SELECT `email`, `username` FROM `$table` WHERE (email = ? OR username = ?) AND password = ?";
+        $query = "SELECT `email` FROM `$table` WHERE email = ?  AND password = ?";
+        // $query = "SELECT `email`, `username` FROM `$table` WHERE (email = ? OR username = ?) AND password = ?";
         $stmt = $conn->prepare($query);
-        $stmt->bind_param("sss", $input, $input, $password);
+        // $stmt->bind_param("sss", $input, $input, $password);
+        $stmt->bind_param("ss", $input, $password);
         $stmt->execute();
         $result = $stmt->get_result();
 
