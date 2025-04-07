@@ -1,26 +1,27 @@
 <?php
 $current = 'class';
 $cell_width = 64;?>
-<div class="container">
+<div class="test">
+<div class="col-9" style="justify-self: center;">
 <?php include "header.php";
 ?>
-<div class="container-fluid"> <!-- Use fluid container for responsiveness -->
+<div class="" > <!-- Use fluid container for responsiveness -->
         <div class="row mt-4">
             <!-- Calendar Column -->
-            <div class="col-lg-9 col-md-12"> <!-- Adjust for medium and small screens -->
-                <div class="p-3 rounded">
-                    <div class="wrapper p-3 rounded">
-                        <header class="d-flex justify-content-between align-items-center mb-3" style="color:#916DFF;">
+            <div class="col-lg-9 col-md-12" style="margin-bottom:10px;"> <!-- Adjust for medium and small screens -->
+                <div class=" rounded">
+                    <div class="wrapper  rounded">
+                        <header class="header" style="margin-bottom:30px;">
                             <div class="icons">
-                                <span id="prev" class="material-symbols-outlined" style="cursor: pointer">chevron_left</span>
+                                <span id="prev" class="material-symbols-outlined" style="color: #916DFF;">chevron_left</span>
                             </div>
-                            <p class="current-date"></p>
+                            <p class="current-date">April 2025</p> <!-- This will be updated dynamically by JS -->
                             <div class="icons">
-                                <span id="next" class="material-symbols-outlined" style="cursor: pointer">chevron_right</span>
+                                <span id="next" class="material-symbols-outlined" style="color: #916DFF;">chevron_right</span>
                             </div>
                         </header>
                         <div class="calendar">
-                            <ul class="weeks justify-content-between">
+                            <ul class="weeks justify-content-between" style="margin-right:6px;">
                                 <li>Sun</li>
                                 <li>Mon</li>
                                 <li>Tue</li>
@@ -53,27 +54,43 @@ $cell_width = 64;?>
                 <div class="modal-body">
                     <p id="selectedDate"></p>
                     <form action="add-schedule.php" method="POST">
-                        <label for="platformSelect">1. Select Platform.</label>
-                        <div id="platformSelect" class="toggle-group">
+                                            <!-- 1. Select Language -->
+                    <label for="languageSelect">1. Select Language.</label>
+                    <select id="languageSelect" name="language" class="form-select mb-3" required>
+                        <option value="">Choose Language</option>
+                        <option value="English">English</option>
+                        <option value="Filipino">Filipino</option>
+                        <option value="Mandarin">Mandarin</option>
+                        <option value="Spanish">Spanish</option>
+                        <!-- Add more as needed -->
+                    </select>
+
+
+                    <label for="platformSelect">2. Select Platform.</label>
+                        <div id="platformSelect" class="toggle-group mb-3">
                             <input type="radio" class="toggle-radio" id="online" name="platform" value="1" checked>
                             <label class="toggle-label" for="online">Online</label>
                             <input type="radio" class="toggle-radio" id="offline" name="platform" value="0">
                             <label class="toggle-label" for="offline">Offline</label>
                         </div>
-                        <label for="dayInput">2. Select Date/Time Preferred.</label><br>
-                        <input type="text" id="dateInput" name="scheddate" required>
-                        <label for="timeSelect"></label>
-                        <select id="timeSelect" name="schedtime" required>
+
+                    <label for="dayInput">3. Select Date/Time Preferred.</label>
+                        <div class="datetime-group mb-3">
+                            <input type="text" id="dateInput" name="scheddate" required>
+                            <select id="timeSelect" name="schedtime" required>
                             <option value="">Select Timeslot</option>
-                        </select>
+                            </select>
+                        </div>
                         <br><br>
-                        <input type="submit" value="Add Schedule" style="border-radius: 10px; background: #916DFF; color:white;">
+                        <input type="submit" value="Save" style="border-radius: 10px; background: #916DFF;padding: 13px 54px; color:white; border:none;">
                         <br>
                     </form>
                 </div>
             </div>
         </div>
     </div>
+</div>
+</div>
 
     <!-- Scripts -->
     <script src="calendar.js"></script>

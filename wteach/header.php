@@ -27,33 +27,35 @@ check_access('teacher'); ?>
 
 <!-- Navigation Bar -->
 <nav class="navbar navbar-expand-lg navbar-light"
-    style=" box-shadow: 0px 0px 14.4px rgba(3, 1, 30, 0.15); border-radius: 15px;background:white; margin-top:50px;">
-    <div class="container-fluid">
+    style=" box-shadow: 0px 0px 14.4px rgba(3, 1, 30, 0.15); border-radius: 15px;background:white; margin-top:50px; padding-top: 20px; padding-left:50px; padding-right:50px; padding-bottom:20px;">
+    <div class="d-flex" style="width: 100%;">
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent"
             aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="collapse navbar-collapse" id="navbarContent" style="height:60px;">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0" style="font-family: Poppins;">
-                <li class="nav-item">
-                    <a class="nav-link <?php echo $current == 'home' ? 'active fw-bold text-primary' : ''; ?>"
-                        href="index.php">My Profile</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link <?php echo $current == 'student' ? 'active fw-bold text-primary' : ''; ?>"
-                        href="student.php">My Student</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link <?php echo $current == 'class' ? 'active fw-bold text-primary' : ''; ?>"
-                        href="calendar.php">My Schedule</a>
-                </li>
-                <!-- <li class="nav-item">
-                            <a class="nav-link {{ $current == 'download' ? 'active text-primary' : '' }}" href="download.php">Download</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link {{ $current == 'help' ? 'active text-primary' : '' }}" href="help.php">Need Help?</a>
-                        </li> -->
-            </ul>
+        <div class="collapse navbar-collapse" id="navbarContent" style="justify-content: space-between; height:60px;">
+            <div class="d-flex align-items-center">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0" style="font-family: Poppins; gap:50px;">
+                    <li class="nav-item">
+                        <a class="nav-link <?php echo $current == 'home' ? 'active fw-bold text-primary' : ''; ?>"
+                            href="index.php">My Profile</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link <?php echo $current == 'student' ? 'active fw-bold text-primary' : ''; ?>"
+                            href="student.php">My Student</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link <?php echo $current == 'class' ? 'active fw-bold text-primary' : ''; ?>"
+                            href="calendar.php">My Schedule</a>
+                    </li>
+                    <!-- <li class="nav-item">
+                                <a class="nav-link {{ $current == 'download' ? 'active text-primary' : '' }}" href="download.php">Download</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link {{ $current == 'help' ? 'active text-primary' : '' }}" href="help.php">Need Help?</a>
+                            </li> -->
+                </ul>
+            </div>
             <!-- Profile Section -->
             <div class="d-flex align-items-center">
                 <img class="rounded-circle me-2" src="upload/teacher.jpg" alt="Teacher Profile" width="40" height="40">

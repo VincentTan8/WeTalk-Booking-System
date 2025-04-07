@@ -1,6 +1,7 @@
 <?php
 $current = 'student';?>
-<div class="container">
+<div class="test">
+<div class="col-9" style="justify-self: center;">
 <?php include "header.php" ?>
 
 
@@ -12,7 +13,7 @@ $current = 'student';?>
 <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
 <script src="https://cdn.datatables.net/responsive/2.2.9/js/dataTables.responsive.min.js"></script>
 <div class="row mt-4">
-<div class="col-9">
+<div class="col-9" style="margin-bottom:20px;">
 <div class=" p-3 bg-white  rounded ">
 
 <table id="bookingTable" class="display" style="width:100%;">
@@ -96,11 +97,12 @@ $(document).ready(function () {
     }, 10000);
 });
 </script>
-<div class="col-3 minical-container">
-    <?php include "minical.php"; ?>
-    </div>
-
+<div class="col-lg-3 col-md-12 minical-container" > 
+                <?php include "minical.php"; ?>
+            </div>
 <!-- JavaScript Files -->
 <script src="minical.js"></script>
 </div>
 </div>
+</div>
+

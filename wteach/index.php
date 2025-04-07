@@ -1,10 +1,11 @@
 <?php
 $current = 'home';?>
-<div class="container">
+<div class="test">
+<div class="col-9" style="justify-self: center;">
     <?php include "header.php"; ?>
     
 
-    <div class="container myprofile" style="margin-top:5em;">
+    <div class=" myprofile" style="margin-top:5em;">
         <div class="row d-flex align-items-stretch" style="gap: 15px; width:100%;">
 
             <!-- Profile Information Display (Left Side) -->
@@ -105,5 +106,6 @@ $current = 'home';?>
             </div>
         </div>
     </div>
+</div>
 </div>
 <script src="editTeacher.js"></script>

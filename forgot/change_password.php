@@ -13,7 +13,7 @@ include "../config/conf.php";
 
 // Check if OTP was verified
 if (!isset($_SESSION['otp_verified']) || $_SESSION['otp_verified'] !== true) {
-    header("Location: forgot_password.php");
+    header("Location: index.php");
     exit();
 }
 
