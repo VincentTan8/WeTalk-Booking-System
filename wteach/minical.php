@@ -1,11 +1,17 @@
 <div class="sidebar-content">
     <!-- Mini Calendar (Will Disappear on Small Screens) -->
+     
     <div class="mini-calendar">
+    <div class="my-schedule-label">
+        My Schedule
+    </div>
+    <div class="calendar-body">
         <div class="current-date-mini"></div>
         <ul class="weeks">
             <li>S</li> <li>M</li> <li>T</li> <li>W</li> <li>TH</li> <li>F</li> <li>S</li>
         </ul>
         <ul class="days-mini"></ul>
+        </div>
     </div>
 
     <!-- Announcements (Always Visible) -->
