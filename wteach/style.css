@@ -8,7 +8,7 @@
     color: #03011E;
     font-size: 16px;
     font-style: normal;
-    font-weight: 400;
+    font-weight: 700;
     line-height: normal;
     letter-spacing: 0.32px;
 }
@@ -16,6 +16,10 @@
 body {
     background-image: linear-gradient(180deg, #A3D9FB 27.29%, #E29FFF 105.37%);
     min-height: 100vh;
+}
+
+.wrapper{
+    padding-right:16px;
 }
 
 .calendar ul {
@@ -33,13 +37,14 @@ body {
 
 .calendar .days li {
     padding: 10px;
-    aspect-ratio: 1/1;
+    aspect-ratio: 14/13;
     background: #fff;
     display: flex;
     border-radius: 15px;
     cursor: pointer;
     transition: background-color 0.3s;
-    font-size: 14px;
+    font-size: 16px;
+    
 }
 
 .calendar .days li:hover {
@@ -57,33 +62,52 @@ body {
     border-radius: 10px;
 }
 
-.mini-calendar {
-    background: white;
-    padding: 15px;
-    border-radius: 10px;
+
+.mini-calendar .weeks li {
+    color: #03011E;
+    text-align: center;
+    font-family: 'Poppins', sans-serif;
+    font-size: 13px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    letter-spacing: 0.26px;
 }
 
 .mini-calendar .weeks, .mini-calendar .days-mini {
     display: grid;
     grid-template-columns: repeat(7, 1fr);
     gap: 3px;
+    margin-bottom: 10px; /* Set 10px margin between weeks and days */
     list-style: none;
+    padding-left:0px;
 }
 
 .mini-calendar .days-mini li {
-    padding: 5px;
-    background: #FBF9F9;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: background-color 0.3s;
+    color: #03011E;
+    text-align: center;
+    font-family: 'Poppins', sans-serif;
+    font-size: 13px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    letter-spacing: 0.26px;
 }
 
 .mini-calendar .days-mini li:hover {
     background-color: #E3E3E3;
 }
+.mini-calendar .current-date-mini {
+    color: #000;
+    text-align: center;
+    font-family: 'Poppins', sans-serif;
+    font-size: 13px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    letter-spacing: 0.26px;
+}
+
 
 .mini-calendar .days-mini li.today {
     border: 2px solid #916DFF;
@@ -91,10 +115,13 @@ body {
     color: #916DFF;
     font-weight: bold;
 }
-
+.navbar-nav .nav-link{
+    opacity:0.75;
+}
 .navbar-nav .nav-link.active {
     font-weight: bold;
     color: black !important;
+    opacity:1;
 }
 
 /* Responsive adjustments */
@@ -143,43 +170,42 @@ body {
     background: #FFF;
     box-shadow: 0px 0px 14.4px rgba(3, 1, 30, 0.15);
     text-align: left;
-    height: 30%; /* Set height to 30% */
-    max-width: 350px;
+    box-sizing: border-box;
+    max-height: 250px; /* Set max-height for both sections */
+    overflow-y: auto; /* Allow scroll if content exceeds max height */
 }
 
+/* Let content determine the height */
 .announcement-section {
     margin-bottom: 20px;
 }
 
+/* Headings */
 .announcement-section h4, .bulletin-section h4 {
     border-radius: 15px 15px 0px 0px;
     background: #916DFF;
     padding: 10px;
     color: white;
     font-size: 16px;
-    font-style: normal;
     font-weight: 700;
-    text-align:center;
+    text-align: center;
 }
 
-/* Style for ul elements inside announcement and bulletin */
+/* List styles */
 .announcement-section ul, .bulletin-section ul {
-    padding-left: 0;
+    padding: 10px 15px;
     list-style-type: disc;
-    display: flex;
-    flex-direction: column;
-    align-items: center; /* Center the list items horizontally */
-    justify-content: center; /* Center the list items vertically */
-    height: auto; /* Ensure the ul takes up the full height of its parent */
-    gap: 10px; /* Space between list items */
-    margin: 0; /* Remove any default margin */
+    display: block; /* Remove flex so it wraps naturally */
+    margin: 0;
+    padding-left:40px;
 }
 
-/* Style for individual list items */
+/* List items */
 .announcement-section li, .bulletin-section li {
     font-size: 14px;
-    text-align: center; /* Center the text inside each list item */
-    margin: 5px 0; /* Add spacing between the items */
+    text-align: left; /* More readable on narrow screens */
+    margin: 5px 0;
+    word-wrap: break-word;
 }
 
 /* Responsive List Items */
@@ -194,6 +220,9 @@ body {
 
     .announcement-section li, .bulletin-section li {
         font-size: 12px; /* Reduce font size on smaller screens */
+    }
+    .wrapper{
+        padding-right:0px;
     }
 }
 
@@ -210,11 +239,33 @@ body {
     .announcement-section li, .bulletin-section li {
         font-size: 12px; /* Keep font size reduced on very small screens */
     }
+    .wrapper{
+        padding-right:0px;
+    }
 }
 
 
 .mini-calendar {
     margin-bottom: 20px;
+    border-radius: 15px;
+    background: #FFF;
+    box-shadow: 0px 0px 14.4px 0px rgba(3, 1, 30, 0.15);
+
+}
+.calendar-body {
+    padding: 10px; /* Apply padding to only the calendar body (month, days, weeks) */
+}
+.my-schedule-label {
+    border-radius: 15px 15px 0px 0px;
+    background: #916DFF;
+    padding: 10px;
+    text-align: center;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 700;
+    font-size: 16px;
+    color: #03011E;
+    color:white;
+   
 }
 
 .scheduled {
@@ -256,7 +307,9 @@ body {
 .toggle-group {
     display: flex;
     gap: 10px;
-    margin-bottom: 10px;
+    width: 100%;
+    box-sizing: border-box;
+   
 }
 
 .toggle-radio {
@@ -264,17 +317,83 @@ body {
 }
 
 .toggle-label {
-    padding: 10px 20px;
-    border-radius: 10px;
-    border: 2px solid #DBE7FF;
-    background: #FBF9F9;
-    cursor: pointer;
+    flex: 1;
     text-align: center;
-    min-width: 80px;
+    padding: 14px 0;
+    border-radius: 10px;
+    background-color: #FBF9F9;
+    border: 2px solid #a3a1a1;
+    cursor: pointer;
+    font-weight: 500;
+    font-size: 14px;
+    transition: background-color 0.3s, color 0.3s, border 0.3s;
 }
-
 .toggle-radio:checked + .toggle-label {
     border: 2px solid #916DFF;
     background: #FBF9F9;
+}
+
+#languageSelect {
+    border-radius: 10px;
+    border: 2px solid #a3a1a1;
+    background: #FBF9F9;
+    padding: 13px 15px;
+    font-size: 14px;
+    width: 100%;
+    box-sizing: border-box;
+ 
+
+}
+.datetime-group {
+    display: flex;
+    gap: 10px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+#dateInput,
+#timeSelect {
+    flex: 1;
+    border-radius: 10px;
+    border: 2px solid #a3a1a1;
+    background: #FBF9F9;
+    padding: 13px 15px;
+    font-size: 14px;
+    box-sizing: border-box;
+}
+#languageSelect,
+#platformSelect,
+.datetime-group {
+    margin-top: 20px;  /* Margin top */
+    margin-bottom: 30px; /* Margin bottom */
+}
+header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #916DFF;
+    gap: 10px; /* Add space between the icons and the month name */
+}
+
+.icons {
+    color: #916DFF; /* Set the same color for both chevrons */
+    font-size: 24px; /* Adjust size of chevrons */
+    cursor: pointer;
+}
+
+.current-date {
+        font-size: 18px; /* Size of the month text */
+        font-weight: 700; /* Bold text */
+        color: #916DFF; /* Apply your desired color here */
+        margin: 0; /* Optional: remove any default margin */
+    
+}
+
+/* Optional: Style for the calendar and other parts if needed */
+
+.calendar ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
 }
 
