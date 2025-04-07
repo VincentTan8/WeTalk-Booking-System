@@ -58,8 +58,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         //Booking reference num generate
         //B-{date}{time}{count}
         $timestamp = date('YmdHis'); // e.g., 20250407152345
-        $prefix = 'B-' . $timestamp;
-        $new_ref_num = generateRefNum($conn, $prefix, $bookingtable);
+        $ref_num_prefix = 'B-' . $timestamp;
+        $new_ref_num = generateRefNum($conn, $ref_num_prefix, $bookingtable);
 
         $sql = "INSERT INTO $bookingtable (`ref_num`, `schedule_ref_num`, `student_ref_num`, `encoded_by`) 
                 VALUES ('$new_ref_num', '$schedule_ref_num', '$student_ref_num', '$ref_num - $presentdate');";
