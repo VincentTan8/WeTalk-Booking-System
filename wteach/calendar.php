@@ -5,10 +5,10 @@ $cell_width = 64; ?>
     <div class="col-9" style="justify-self: center;">
         <?php include "header.php";
         ?>
-        <div class=""> <!-- Use fluid container for responsiveness -->
+        <div class="container-fluid"> <!-- Use fluid container for responsiveness -->
             <div class="row mt-4">
                 <!-- Calendar Column -->
-                <div class="col-lg-9 col-md-12" style="margin-bottom:10px;">
+                <div class=" col-12 col-lg-9 col-md-12" style="margin-bottom:10px;">
                     <!-- Adjust for medium and small screens -->
                     <div class=" rounded">
                         <div class="wrapper  rounded">
