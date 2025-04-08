@@ -1,13 +1,13 @@
 const daysTag = document.querySelector(".days"),
-      currentDate = document.querySelector(".current-date"),
-      prevNextIcon = document.querySelectorAll(".icons span");
+    currentDate = document.querySelector(".current-date"),
+    prevNextIcon = document.querySelectorAll(".icons span");
 
 let date = new Date(),
     currYear = date.getFullYear(),
     currMonth = date.getMonth();
 
 const months = ["January", "February", "March", "April", "May", "June", "July",
-                "August", "September", "October", "November", "December"];
+    "August", "September", "October", "November", "December"];
 
 let schedules = []; //initialize schedules
 
@@ -28,15 +28,24 @@ const updateTimeslots = async (selectedDate) => {
 
         console.log("Available Timeslots:", data); // Debugging output
 
-        timeSelect.innerHTML = '<option value="">Select Timeslot</option>'; // Reset dropdown
-
         if (data.length === 0) {
             timeSelect.innerHTML = '<option value="">No Available Slots</option>';
         } else {
+            // Don't add the "Select Timeslot" option if there are available slots
+            timeSelect.innerHTML = ''; // Clear any previous options
+
             data.forEach(slot => {
                 let option = document.createElement("option");
                 option.value = slot.id;
-                option.textContent = `${slot.starttime} - ${slot.endtime}`;
+                // Convert 'HH:mm:ss' to 'h:mm AM/PM'
+                let timeParts = slot.starttime.split(":");
+                let hours = parseInt(timeParts[0], 10);
+                let minutes = timeParts[1];
+                let ampm = hours >= 12 ? "PM" : "AM";
+                hours = hours % 12 || 12; // Convert 0 to 12
+                let formattedTime = `${hours}:${minutes} ${ampm}`;
+
+                option.textContent = formattedTime;
                 timeSelect.appendChild(option);
             });
         }
@@ -46,12 +55,12 @@ const updateTimeslots = async (selectedDate) => {
     }
 };
 
-const renderCalendar = async() => {
+const renderCalendar = async () => {
     let liTag = "";
     const firstDayOfMonth = new Date(currYear, currMonth, 1).getDay(),
-          lastDateOfMonth = new Date(currYear, currMonth + 1, 0).getDate(),
-          lastDateOfPrevMonth = new Date(currYear, currMonth, 0).getDate(),
-          lastDayOfMonth = new Date(currYear, currMonth, lastDateOfMonth).getDay();
+        lastDateOfMonth = new Date(currYear, currMonth + 1, 0).getDate(),
+        lastDateOfPrevMonth = new Date(currYear, currMonth, 0).getDate(),
+        lastDayOfMonth = new Date(currYear, currMonth, lastDateOfMonth).getDay();
 
     for (let i = firstDayOfMonth; i > 0; i--) {
         liTag += `<li class="inactive" style = "color:grey; justify-content:right;">${lastDateOfPrevMonth - i + 1}</li>`;
@@ -68,7 +77,7 @@ const renderCalendar = async() => {
         const fullDate = `${currYear}-${String(currMonth + 1).padStart(2, '0')}-${String(i).padStart(2, '0')}`;
         const isScheduled = schedules.some(s => s.scheddate === fullDate);
         const isToday = i === date.getDate() && currMonth === date.getMonth() && currYear === date.getFullYear();
-        
+
         const highlightClass = isScheduled ? "scheduled" : isToday ? "active" : "";
 
         liTag += `<li class="${highlightClass}" data-date="${fullDate}" style="justify-content:right;">${i}</li>`;
@@ -86,16 +95,26 @@ const renderCalendar = async() => {
         day.addEventListener("click", () => {
             if (!day.classList.contains("inactive")) {
                 const selectedDate = day.getAttribute("data-date");
-    
-                document.getElementById("dateInput").value = selectedDate;
-                updateTimeslots(selectedDate); // Fetch available times for the selected date
-    
-                const modal = new bootstrap.Modal(document.getElementById('submissionModal'));
-                modal.show();
+                const [year, month, dayNum] = selectedDate.split("-");
+                const monthName = months[parseInt(month, 10) - 1];
+                const formattedDisplay = `${monthName} ${parseInt(dayNum, 10)}, ${year}`;
+
+                const dateInput = document.getElementById("dateInput");
+                dateInput.value = formattedDisplay;
+                dateInput.setAttribute("data-value", selectedDate); // store original if needed
+
+                updateTimeslots(selectedDate);
+
+                // Only show the modal if it's meant to open
+                const modalElement = document.getElementById('submissionModal');
+                if (modalElement) {
+                    const modal = new bootstrap.Modal(modalElement);
+                    modal.show();
+                }
             }
         });
     });
-    
+
 };
 
 renderCalendar();
