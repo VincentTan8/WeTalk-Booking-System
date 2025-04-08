@@ -64,64 +64,6 @@ body {
     border-radius: 10px;
 }
 
-
-/* Mini Calendar for Student, CS , and Teacher */
-.mini-calendar .weeks li {
-    color: #03011E;
-    text-align: center;
-    font-family: 'Poppins', sans-serif;
-    font-size: 13px;
-    font-style: normal;
-    font-weight: 500;
-    line-height: normal;
-    letter-spacing: 0.26px;
-}
-
-.mini-calendar .weeks,
-.mini-calendar .days-mini {
-    display: grid;
-    grid-template-columns: repeat(7, 1fr);
-    gap: 3px;
-    margin-bottom: 10px;
-    /* Set 10px margin between weeks and days */
-    list-style: none;
-    padding-left: 0px;
-}
-
-.mini-calendar .days-mini li {
-    color: #03011E;
-    text-align: center;
-    font-family: 'Poppins', sans-serif;
-    font-size: 13px;
-    font-style: normal;
-    font-weight: 500;
-    line-height: normal;
-    letter-spacing: 0.26px;
-}
-
-.mini-calendar .days-mini li:hover {
-    background-color: #E3E3E3;
-}
-
-.mini-calendar .current-date-mini {
-    color: #000;
-    text-align: center;
-    font-family: 'Poppins', sans-serif;
-    font-size: 13px;
-    font-style: normal;
-    font-weight: 700;
-    line-height: normal;
-    letter-spacing: 0.26px;
-}
-
-
-.mini-calendar .days-mini li.today {
-    border: 2px solid #916DFF;
-    background-color: white;
-    color: #916DFF;
-    font-weight: bold;
-}
-
 /* Header for all */
 .navbar-nav .nav-link {
     opacity: 0.75;
@@ -133,182 +75,23 @@ body {
     opacity: 1;
 }
 
+/* Mini Calendar for Student, CS , and Teacher */
+/* Mini calendar for all */
+.mini-calendar .days-mini li.today {
+    border: 2px solid #916DFF;
+    color: #916DFF;
 
-
-/* Responsive adjustments */
-/* Removes Mini Calendar */
-@media (max-width: 1274px) {
-    .mini-calendar {
-        display: none;
-    }
-
-    .announcement-bulletin-container {
-        margin-top: 20px;
-        display: flex;
-        flex-direction: column;
-        gap: 20px;
-        width: 100%;
-        max-width: 800px;
-        margin-left: auto;
-        margin-right: auto;
-    }
-}
-
-/* Big Calendar only for Teacher and CS */
-@media (max-width: 768px) {
-    .calendar-wrapper {
-        padding: 10px;
-    }
-
-    .calendar .days li {
-        padding: 5px;
-        font-size: 12px;
-    }
-
-    .modal-dialog {
-        max-width: 90%;
-    }
-
-    .custom-save-btn,
-    .custom-cancel-btn {
-        width: 100%;
-        text-align: center;
-        padding: 12px;
-        font-size: 14px;
-    }
-}
-
-/* Used for all in line with mini calendar */
-/* Announcement & Bulletin Board Styling */
-.announcement-section,
-.bulletin-section {
-    border-radius: 15px;
-    background: #FFF;
-    box-shadow: 0px 0px 14.4px rgba(3, 1, 30, 0.15);
-    text-align: left;
-    box-sizing: border-box;
-    max-height: 250px;
-    /* Set max-height for both sections */
-    overflow-y: auto;
-    /* Allow scroll if content exceeds max height */
-}
-
-/* Let content determine the height */
-.announcement-section {
-    margin-bottom: 20px;
 }
 
 /* Headings */
 .announcement-section h4,
 .bulletin-section h4 {
-    border-radius: 15px 15px 0px 0px;
     background: #916DFF;
-    padding: 10px;
     color: white;
-    font-size: 16px;
-    font-weight: 700;
-    text-align: center;
-}
-
-/* List styles */
-.announcement-section ul,
-.bulletin-section ul {
-    padding: 10px 15px;
-    list-style-type: disc;
-    display: block;
-    /* Remove flex so it wraps naturally */
-    margin: 0;
-    padding-left: 40px;
-}
-
-/* List items */
-.announcement-section li,
-.bulletin-section li {
-    font-size: 14px;
-    text-align: left;
-    /* More readable on narrow screens */
-    margin: 5px 0;
-    word-wrap: break-word;
-}
-
-/* Responsive List Items */
-@media (max-width: 768px) {
-
-    .announcement-section,
-    .bulletin-section {
-        height: auto;
-        /* Allow the sections to expand on smaller screens */
-    }
-
-    .announcement-section ul,
-    .bulletin-section ul {
-        gap: 8px;
-        /* Adjust space between list items */
-    }
-
-    .announcement-section li,
-    .bulletin-section li {
-        font-size: 12px;
-        /* Reduce font size on smaller screens */
-    }
-
-    .wrapper {
-        padding-right: 0px;
-    }
-}
-
-@media (max-width: 480px) {
-
-    .announcement-section,
-    .bulletin-section {
-        height: auto;
-        /* Allow the sections to expand on small screens */
-        padding: 10px;
-        /* Reduce padding for smaller screens */
-    }
-
-    .announcement-section ul,
-    .bulletin-section ul {
-        gap: 6px;
-        /* Further reduce space between list items */
-    }
-
-    .announcement-section li,
-    .bulletin-section li {
-        font-size: 12px;
-        /* Keep font size reduced on very small screens */
-    }
-
-    .wrapper {
-        padding-right: 0px;
-    }
-}
-
-/* Mini calendar for all */
-.mini-calendar {
-    margin-bottom: 20px;
-    border-radius: 15px;
-    background: #FFF;
-    box-shadow: 0px 0px 14.4px 0px rgba(3, 1, 30, 0.15);
-
-}
-
-.calendar-body {
-    padding: 10px;
-    /* Apply padding to only the calendar body (month, days, weeks) */
 }
 
 .my-schedule-label {
-    border-radius: 15px 15px 0px 0px;
     background: #916DFF;
-    padding: 10px;
-    text-align: center;
-    font-family: 'Poppins', sans-serif;
-    font-weight: 700;
-    font-size: 16px;
-    color: #03011E;
-    color: white;
-
 }
 
 
