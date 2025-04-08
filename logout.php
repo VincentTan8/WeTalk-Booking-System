@@ -4,6 +4,6 @@ session_start();
 unset($_SESSION['email']);
 // Delete all session variables
 session_destroy();
-echo "<script>window.location = '../login.php'</script>";
+echo "<script>window.location = 'login.php'</script>";
 
 ?>
