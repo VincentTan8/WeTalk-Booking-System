@@ -14,10 +14,10 @@ $current = 'student'; ?>
         <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
         <script src="https://cdn.datatables.net/responsive/2.2.9/js/dataTables.responsive.min.js"></script>
         <div class="row mt-4">
-            <div class="col-9" style="margin-bottom:20px;">
+            <div class="col-12 col-lg-9 " style="margin-bottom:20px;">
                 <div class=" p-3 bg-white  rounded ">
 
-                    <table id="bookingTable" class="display" style="width:100%;">
+                    <table id="bookingTable" class="display" style="width:100%; margin-top:20px;">
                         <thead>
                             <tr>
                                 <th style="background-color: white;"></th> <!-- Column for delete button -->
@@ -52,9 +52,9 @@ $current = 'student'; ?>
                         },
                         "columns": [
                             {
-                                "data": "booking_id",
+                                "data": "booking_ref_num",
                                 "render": function (data, type, row) {
-                                    return `<button class="delete-btn" data-id="${data}" style="background:none;border:none;color:red;cursor:pointer;">❌</button>`;
+                                    return `<button class="delete-btn" data-refnum="${data}" style="background:none;border:none;color:red;cursor:pointer;">❌</button>`;
                                 },
                                 "orderable": false
                             },
@@ -74,13 +74,13 @@ $current = 'student'; ?>
 
                     // Delete button click event
                     $('#bookingTable tbody').on('click', '.delete-btn', function () {
-                        let bookingId = $(this).data('id');
+                        let b_ref_num = $(this).data('refnum');
 
                         if (confirm("Are you sure you want to delete this booking?")) {
                             $.ajax({
                                 url: 'delete-booking.php',
                                 type: 'POST',
-                                data: { booking_id: bookingId },
+                                data: { booking_ref_num: b_ref_num },
                                 success: function (response) {
                                     alert(response);
                                     table.ajax.reload(null, false); // Refresh table
@@ -99,7 +99,7 @@ $current = 'student'; ?>
                 });
             </script>
             <div class="col-lg-3 col-md-12 minical-container">
-                <?php include "minical.php"; ?>
+                <?php include "../utils/minical.php"; ?>
             </div>
             <!-- JavaScript Files -->
             <script src="minical.js"></script>

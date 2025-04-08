@@ -20,8 +20,30 @@ body {
 
 /* Big Calendar for CS and Teacher */
 .wrapper {
-    padding-right: 16px;
+    padding-right: 0;
 }
+
+@media (min-width: 992px) {
+    .wrapper {
+        padding-right: 16px;
+    }
+}
+
+.calendar {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: auto;
+
+}
+
+
+.calendar-wrapper {
+    width: 100%;
+    overflow-x: auto;
+    padding: 10px;
+    box-sizing: border-box;
+}
+
 
 .calendar ul {
     list-style-type: none;
@@ -38,14 +60,12 @@ body {
 }
 
 .calendar .days li {
-    padding: 10px;
-    aspect-ratio: 14/13;
-    background: #fff;
-    display: flex;
+    min-width: 30px;
+    padding: 6px;
+    font-size: 14px;
+    aspect-ratio: 14 / 13;
     border-radius: 15px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-    font-size: 16px;
+    background: #FFF;
 
 }
 
@@ -265,7 +285,7 @@ header {
     /* Ensure the navbar toggler works and content collapses */
     .navbar-collapse {
         display: block;
-        overflow: hidden;
+        overflow: visible !important;
     }
 
     .navbar-toggler {
