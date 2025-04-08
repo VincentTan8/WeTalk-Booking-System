@@ -9,13 +9,13 @@ if (!isset($_POST['date'])) {
     exit;
 }
 $selectedDate = $_POST['date'];
-$teacherId = $id; // Ensure teacher_id is stored in session
+$teacher_ref_num = $ref_num; // Ensure teacher_id is stored in session
 
-$timeslotTable = $prefix . "_resources.`timeslots`";
-$scheduleTable = $prefix . "_resources.`schedule`";
+$timeslottable = $prefix . "_resources.`timeslots`";
+$scheduletable = $prefix . "_resources.`schedule`";
 
 // Get all start times from the timeslot table
-$sqlTimeslots = "SELECT id, starttime, endtime FROM $timeslotTable";
+$sqlTimeslots = "SELECT id, starttime, endtime FROM $timeslottable";
 $resultTimeslots = $conn->query($sqlTimeslots);
 
 $allTimeslots = [];
@@ -25,12 +25,12 @@ while ($row = $resultTimeslots->fetch_assoc()) {
 
 // Get all start times that are already booked for the selected date and teacher
 $sqlBooked = "SELECT DISTINCT t.starttime 
-              FROM $timeslotTable t
-              JOIN $scheduleTable s ON s.schedstarttime = t.starttime
+              FROM $timeslottable t
+              JOIN $scheduletable s ON s.schedstarttime = t.starttime
               WHERE s.scheddate = ? AND s.teacher_ref_num = ?";
 
 $stmt = $conn->prepare($sqlBooked);
-$stmt->bind_param("ss", $selectedDate, $teacherId);
+$stmt->bind_param("ss", $selectedDate, $teacher_ref_num);
 $stmt->execute();
 $resultBooked = $stmt->get_result();
 
