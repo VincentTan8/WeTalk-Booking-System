@@ -14,7 +14,9 @@ check_access('student'); ?>
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../style.css">
     <link rel="stylesheet" href="style.css">
+
 
     <!-- Bootstrap JS and Popper -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -37,7 +39,7 @@ check_access('student'); ?>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link <?php echo $current == 'class' ? 'active fw-bold text-primary' : ''; ?>"
-                        href="class_n.php">My Class</a>
+                        href="class.php">My Class</a>
                 </li>
                 <!-- <li class="nav-item">
                             <a class="nav-link {{ $current == 'download' ? 'active text-primary' : '' }}" href="calendar.php">My Download</a>

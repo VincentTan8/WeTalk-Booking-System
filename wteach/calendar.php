@@ -41,7 +41,7 @@ $cell_width = 64; ?>
 
                 <!-- Sidebar Column -->
                 <div class="col-lg-3 col-md-12 minical-container">
-                    <?php include "minical.php"; ?>
+                    <?php include "../utils/minical.php"; ?>
                 </div>
             </div>
         </div>

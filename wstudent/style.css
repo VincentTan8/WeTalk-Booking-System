@@ -1,6 +1,7 @@
 /* Prevent Bootstrap from messing with your calendar */
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
-*{
+
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -13,13 +14,20 @@
     line-height: normal;
     letter-spacing: 0.32px;
 }
+
+body {
+    background-image: linear-gradient(180deg, #EBF2FA 33%, #C2D6EE 104.24%);
+    min-height: 100vh;
+}
+
 .calendar ul {
     list-style-type: none;
     padding: 0;
     margin: 0;
 }
 
-.calendar .weeks, .calendar .days {
+.calendar .weeks,
+.calendar .days {
     display: grid;
     grid-template-columns: repeat(7, 1fr);
     gap: 5px;
@@ -30,7 +38,7 @@
     background: #FBF9F9;
     display: flex;
     justify-content: center;
-    
+
     border-radius: 5px;
     cursor: pointer;
     transition: background-color 0.3s;
@@ -67,114 +75,41 @@ body {
     color: black !important;
 }
 
+.my-schedule-label {
+    border-radius: 15px 15px 0px 0px;
+    background: #FFAC00;
+    padding: 10px;
+    text-align: center;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 700;
+    font-size: 16px;
+    color: #03011E;
+    color: white;
 
-
-.mini-calendar ul {
-    list-style-type: none;
-    padding: 0;
 }
 
-/* Mini Calendar Styling */
-.mini-calendar {
-    background: white;
-    padding: 15px;
-    border-radius: 10px;
-}
-
-/* Days styling */
-.mini-calendar .weeks, .mini-calendar .days-mini {
-    display: grid;
-    grid-template-columns: repeat(7, 1fr);
-    gap: 3px;
-}
-
-.mini-calendar .days-mini li {
-    padding: 5px;
-    background: #FBF9F9;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-}
-
-/* Hover effect */
-.mini-calendar .days-mini li:hover {
-    background-color: #E3E3E3;
-}
-
-/* Highlight for the current day */
+/* Mini Calendar for Student, CS , and Teacher */
+/* Mini calendar for all */
 .mini-calendar .days-mini li.today {
     border: 2px solid #FFAC00;
-    background-color: white;
     color: #FFAC00;
-    font-weight: bold;
+
 }
 
-.navbar-nav .nav-link.active {
-    font-weight: bold;
-    color: black !important;
-}
-@media (max-width: 1274px) {
-    .mini-calendar {
-        display: none;
-    }
-    /* Container for announcements & bulletin */
-.announcement-bulletin-container {
-    margin-top: 20px; /* Space below the calendar */
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-    width: 100%;
-    max-width: 800px; /* Adjust width to align with the calendar */
-    margin-left: auto;
-    margin-right: auto;
+/* Headings */
+.announcement-section h4,
+.bulletin-section h4 {
+    background: #FFAC00;
+    color: white;
 }
 
-/* Announcement & Bulletin Styling */
-.announcement-section, .bulletin-section {
-    border-radius: 15px;
-    background: #FFF;
-    box-shadow: 0px 0px 14.4px rgba(3, 1, 30, 0.15);
-    padding: 15px;
-}
+.my-schedule-label {
+    background: #FFAC00;
 }
 
 
-/* Announcement & Bulletin Board Styling */
-.announcement-section, .bulletin-section {
-    border-radius: 15px;
-    background: #FFF;
-    box-shadow: 0px 0px 14.4px rgba(3, 1, 30, 0.15);
-    text-align: left;
-    padding: 15px;
-    max-width: 350px;
-}
 
-/* Space between announcements and bulletin */
-.announcement-section {
-    margin-bottom: 20px; /* Adds space between announcement and bulletin */
-}
 
-.announcement-section h4, .bulletin-section h4 {
-    margin-bottom: 10px;
-    font-weight: 600;
-}
-
-.announcement-section ul, .bulletin-section ul {
-    padding-left: 18px;
-    list-style-type: disc;
-}
-
-.announcement-section li, .bulletin-section li {
-    margin-bottom: 5px;
-    font-size: 14px;
-}
-/* Space between mini-calendar and announcements */
-.mini-calendar{
-    margin-bottom: 20px;
-}
 .platform-option {
     border-radius: 10px;
     border: 2px solid #DBE7FF;
@@ -193,10 +128,11 @@ body {
 
 .platform-option.active {
     border-radius: 10px;
-border: 2px solid #FFAC00;
+    border: 2px solid #FFAC00;
 
-background: #FBF9F9;
+    background: #FBF9F9;
 }
+
 .custom-save-btn {
     border-radius: 5px;
     background: #FFAC00;
@@ -205,6 +141,7 @@ background: #FBF9F9;
     border: none;
     padding: 10px 20px;
 }
+
 .custom-cancel-btn {
     border-radius: 5px;
     background: #FFF;
@@ -213,16 +150,20 @@ background: #FBF9F9;
     padding: 10px 20px;
     color: #03011E;
 }
+
 .myprofile {
     display: flex;
-    align-items: stretch; /* Ensures both columns stretch to the same height */
+    align-items: stretch;
+    /* Ensures both columns stretch to the same height */
     justify-content: center;
 }
 
-.myprofileinfo, .myprofile-edit {
+.myprofileinfo,
+.myprofile-edit {
     display: flex;
     flex-direction: column;
 }
+
 .dtime {
     border-radius: 10px;
     border: 2px solid #DBE7FF;
@@ -238,6 +179,7 @@ background: #FBF9F9;
     cursor: pointer;
     margin: 5px;
 }
+
 /* .modal-content{
     width:80%; 
     border-radius: 15px; 
@@ -246,3 +188,23 @@ background: #FBF9F9;
     position: fixed; 
 }
  */
+#edit-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+
+    padding: 13px 54px 13px 67px;
+
+    color: #FFF;
+    font-family: 'Poppins', sans-serif;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    letter-spacing: 0.32px;
+
+    background-color: #f0ad4e;
+    /* Keep default btn-warning or customize */
+    border: none;
+}

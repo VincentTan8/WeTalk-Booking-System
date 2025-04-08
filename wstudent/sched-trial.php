@@ -1,8 +1,16 @@
 <div class="container d-flex justify-content-center">
     <!-- White Background Box -->
-    <div class="card p-4 shadow" style="width: 100%; max-width: 600px; background-color: white; border-radius: 12px;">
+    <div class="card  shadow" style="width: 100%; max-width: 600px; background-color: white; border-radius: 12px;">
         <div class="text-center">
-            <button id="edit-button" class="btn btn-warning w-100" onclick="openPopup()">Schedule a Trial Class</button>
+            <button id="edit-button" class="btn btn-warning w-100" onclick="openPopup()">
+                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="none" viewBox="0 0 14 14">
+                    <path d="M1.5 7H7M7 7H12.5M7 7V1.5M7 7V12.5" stroke="#FFF" stroke-width="3" stroke-linecap="round"
+                        stroke-linejoin="round" />
+                </svg>
+                <span style="color:#fff;">Schedule a Trial Class</span>
+            </button>
+
+
         </div>
     </div>
 </div>
@@ -36,8 +44,10 @@
                             <div class="form-group">
                                 <label>Platform:</label>
                                 <div class="d-flex">
-                                    <div id="online" class="platform-option active" onclick="togglePlatform('online')">Online</div>
-                                    <div id="offline" class="platform-option" onclick="togglePlatform('offline')">Offline</div>
+                                    <div id="online" class="platform-option active" onclick="togglePlatform('online')">
+                                        Online</div>
+                                    <div id="offline" class="platform-option" onclick="togglePlatform('offline')">
+                                        Offline</div>
                                 </div>
                             </div>
                         </div>
@@ -48,7 +58,7 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label>Language:</label>
-                                <select id="languageSelect" name="language" class="form-control" required >
+                                <select id="languageSelect" name="language" class="form-control" required>
                                     <option value="">Select Language</option>
                                     <!-- Populate dynamically -->
                                 </select>
@@ -59,8 +69,9 @@
                             <div class="form-group">
                                 <label>Date/Time</label>
                                 <div class="d-flex">
-                                    <input type="date" id="dateInput" name="date" class="form-control dtime" required="" >
-                                    <select id="timeSelect" class="dtime" name="time" class="form-control" required="" >
+                                    <input type="date" id="dateInput" name="date" class="form-control dtime"
+                                        required="">
+                                    <select id="timeSelect" class="dtime" name="time" class="form-control" required="">
                                         <option value="">Select Time</option>
                                         <!-- Populate dynamically -->
                                     </select>
@@ -80,7 +91,8 @@
 
                     <!-- Submit Button -->
                     <div class="form-group text-center" style="margin-top: 20px;">
-                        <input type="submit" value="Save" class="btn" style="border-radius: 10px; background: #FFAC00; color: white;">
+                        <input type="submit" value="Save" class="btn"
+                            style="border-radius: 10px; background: #FFAC00; color: white;">
                     </div>
                 </form>
             </div>
@@ -118,11 +130,11 @@
                 },
                 body: 'sched_id=' + scheduleId
             })
-            .then(response => response.text())
-            .then(data => {
-                teacherSelect.innerHTML = data;
-            })
-            .catch(error => console.error('Error fetching teachers:', error));
+                .then(response => response.text())
+                .then(data => {
+                    teacherSelect.innerHTML = data;
+                })
+                .catch(error => console.error('Error fetching teachers:', error));
         }
     }
 
@@ -132,11 +144,11 @@
         document.getElementById(selected).classList.add('active');
         document.getElementById('platformSelect').value = selected;
     }
-    
+
 </script>
 
 <!-- Custom CSS for responsive layout -->
 <style>
-  
+
 
 </style>

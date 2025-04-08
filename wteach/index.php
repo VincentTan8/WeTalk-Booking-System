@@ -11,7 +11,9 @@ $current = 'home'; ?>
                 <!-- Profile Information Display (Left Side) -->
                 <div class="col-12 col-md-6 myprofileinfo d-flex flex-column"
                     style="background-color: #FBF9F9; padding: 20px; border-radius: 10px; flex: 1;">
-                    <div class="myprofile-name d-flex align-items-center" style="width: 100%;">
+                    <div class="myprofile-name d-flex flex-column flex-md-row align-items-center text-center text-md-start"
+                        style="width: 100%;">
+
                         <!-- Profile Image aligned to the left -->
                         <img class="myprofile-pic me-3" alt="Profile" src="upload/teacher.jpg"
                             style="width: 150px; height: 150px; border-radius: 50%;">
@@ -111,7 +113,7 @@ $current = 'home'; ?>
                         <div class="edit mt-4 text-center">
                             <button id="edit-button" class="edit-click  btn-primary me-2 custom-save-btn"
                                 name="save">Save</button>
-                            <button type="button" class="btn btn-secondary custom-cancel-btn">Cancel</button>
+
                         </div>
                     </form>
                 </div>
