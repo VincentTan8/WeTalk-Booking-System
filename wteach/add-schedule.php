@@ -9,6 +9,8 @@ if (!isset($_SESSION)) {
 // Database connection
 include "../config/conf.php";
 include 't-conf.php';
+include '../utils/generateRefNum.php';
+
 // Check connection
 if (!$conn) {
     die("Connection failed: " . mysqli_connect_error());
@@ -19,9 +21,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Get input values and sanitize them
     $scheddate = $_POST['scheddate'];
     $schedtime_id = $_POST['schedtime'];
+    $platform = $_POST["platform"];
 
-    $tablename = $prefix . "_resources.`timeslots`";
-    $sql = "SELECT `starttime`, `endtime` FROM $tablename WHERE `id` = ?";
+    $timeslottable = $prefix . "_resources.`timeslots`";
+    $teachertable = $prefix . "_resources.`teacher`";
+    $scheduletable = $prefix . "_resources.`schedule`";
+
+    $sql = "SELECT `starttime`, `endtime` FROM $timeslottable WHERE `id` = ?";
     $stmt = $conn->prepare($sql);
     $stmt->bind_param("i", $schedtime_id);
     $stmt->execute();
@@ -30,37 +36,37 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $schedstarttime = $row["starttime"];
     $schedendtime = $row["endtime"];
 
-    $platform = $_POST["platform"];
-
-    $teacher_id = $id; //from t-conf.php
-    $tablename = $prefix . "_resources.`teacher`";
-    $sql = "SELECT `language_id` FROM $tablename WHERE `id` = ?";
+    $teacher_ref_num = $ref_num; //from t-conf.php
+    $sql = "SELECT `language_id` FROM $teachertable WHERE `ref_num` = ?";
     $stmt = $conn->prepare($sql);
-    $stmt->bind_param("i", $teacher_id);
+    $stmt->bind_param("s", $teacher_ref_num);
     $stmt->execute();
     $result = $stmt->get_result();
     $row = $result->fetch_assoc();
     $language_id = $row["language_id"];
 
     //check if schedule already exists in DB
-    $tablename = $prefix . "_resources.`schedule`";
-    $sql = "SELECT `id` FROM $tablename WHERE `scheddate` = ? AND `schedstarttime` = ? AND `teacher_id` = ?";
+    $sql = "SELECT `ref_num` FROM $scheduletable WHERE `scheddate` = ? AND `schedstarttime` = ? AND `teacher_ref_num` = ?";
     $stmt = $conn->prepare($sql);
-    $stmt->bind_param("ssi", $scheddate, $schedstarttime, $teacher_id);
+    $stmt->bind_param("sss", $scheddate, $schedstarttime, $teacher_ref_num);
     $stmt->execute();
     $result = $stmt->get_result();
 
     if ($result->fetch_assoc()) {
         echo "<script type='text/javascript'>alert('Schedule already exists!'); window.location.href='schedule.php';</script>";
     } else {
-        // SQL query to insert data
-        $tablename = $prefix . "_resources.`schedule`";
-        $sql = "INSERT INTO $tablename (`scheddate`, `schedstarttime`, `schedendtime`, `teacher_id`, `platform`, `language_id`) 
-                VALUES (?, ?, ?, ?, ?, ?)";
-        
+        //Schedule reference num generate
+        //SC-{date}{time}{count}
+        $timestamp = date('YmdHis'); // e.g., 20250407152345
+        $ref_num_prefix = 'SC-' . $timestamp;
+        $new_ref_num = generateRefNum($conn, $ref_num_prefix, $scheduletable);
+
+        $sql = "INSERT INTO $scheduletable (`ref_num`, `scheddate`, `schedstarttime`, `schedendtime`, `teacher_ref_num`, `platform`, `language_id`) 
+                VALUES (?, ?, ?, ?, ?, ?, ?)";
+
         $stmt = $conn->prepare($sql);
-        $stmt->bind_param("sssiii", $scheddate, $schedstarttime, $schedendtime, $teacher_id, $platform, $language_id);
-        
+        $stmt->bind_param("sssssii", $new_ref_num, $scheddate, $schedstarttime, $schedendtime, $teacher_ref_num, $platform, $language_id);
+
         if ($stmt->execute()) {
             echo "<script type='text/javascript'>alert('Schedule added successfully!'); window.location.href='schedule.php';</script>";
         } else {
