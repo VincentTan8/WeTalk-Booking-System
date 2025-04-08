@@ -23,6 +23,7 @@ if (isset($_SESSION['email']) && !empty($_SESSION['email'])) {
 		$gender = $row["gender"];
 		$birthday = $row["birthday"];
 		$id = $row["id"];
+		$ref_num = $row["ref_num"];
 		$_SESSION['user_email'] = $row['email'];  // You can store email or other details as needed
 	}
 }
