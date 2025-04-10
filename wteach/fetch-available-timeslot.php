@@ -1,6 +1,5 @@
 <?php
 include "../config/conf.php";
-include 't-conf.php';
 
 header('Content-Type: application/json');
 
@@ -9,7 +8,7 @@ if (!isset($_POST['date'])) {
     exit;
 }
 $selectedDate = $_POST['date'];
-$teacher_ref_num = $ref_num; // Ensure teacher_id is stored in session
+$teacher_ref_num = $_SESSION['ref_num']; // Ensure teacher_id is stored in session
 
 $timeslottable = $prefix . "_resources.`timeslots`";
 $scheduletable = $prefix . "_resources.`schedule`";
