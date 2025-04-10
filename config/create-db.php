@@ -220,7 +220,7 @@ $query = "CREATE TABLE `$tablename` (
 		`schedendtime` TIME,
 		`platform` INT NOT NULL,
 		`teacher_ref_num` VARCHAR(100) NOT NULL,
-		`booking_ref_num` VARCHAR(100) NOT NULL,
+		`booking_ref_num` VARCHAR(100) NULL,
 		`language_id` INT DEFAULT NULL,
 		FOREIGN KEY (`teacher_ref_num`) REFERENCES `teacher`(`ref_num`) ON DELETE CASCADE,
 		FOREIGN KEY (`language_id`) REFERENCES `language`(`id`) ON DELETE SET NULL

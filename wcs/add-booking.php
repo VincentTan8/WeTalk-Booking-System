@@ -32,11 +32,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     $query = "SELECT s.ref_num as schedule_ref_num, s.scheddate, s.schedstarttime, s.schedendtime, t.email as teacher_email, t.fname as teacher_fname, t.lname as teacher_lname 
               FROM $scheduletable s
-              JOIN $tistable ts ON s.scheddate = ts.scheddate AND s.schedstarttime = ts.schedstarttime AND s.teacher_ref_num = $teacher_ref_num
-              JOIN $teachertable t ON t.ref_num = $teacher_ref_num
+              JOIN $tistable ts ON s.scheddate = ts.scheddate AND s.schedstarttime = ts.schedstarttime AND s.teacher_ref_num = '$teacher_ref_num'
+              JOIN $teachertable t ON t.ref_num = '$teacher_ref_num'
               WHERE ts.id = $schedgroup_id";
 
-    $student_query = $conn->query("SELECT `email`, `fname`, `lname` FROM $studenttable WHERE `ref_num` = $student_ref_num;");
+    $student_query = $conn->query("SELECT `email`, `fname`, `lname` FROM $studenttable WHERE `ref_num` = '$student_ref_num';");
     $row = $student_query->fetch_assoc();
     $student_email = $row["email"];
     $student_fname = $row["fname"];
@@ -63,7 +63,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 VALUES ('$new_ref_num', '$schedule_ref_num', '$student_ref_num', '$ref_num - $presentdate');";
 
         if ($conn->query($sql)) {
-            $sql = "UPDATE $scheduletable SET `booking_ref_num` = $new_ref_num WHERE `ref_num` = $schedule_ref_num";
+            $sql = "UPDATE $scheduletable SET `booking_ref_num` = '$new_ref_num' WHERE `ref_num` = '$schedule_ref_num'";
             $conn->query($sql);
 
             $studentMessage = "Thank you for joining us, $student_fname!\n\n"
