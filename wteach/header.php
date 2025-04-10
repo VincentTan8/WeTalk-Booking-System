@@ -16,11 +16,18 @@ check_access('teacher'); ?>
     <link rel="stylesheet" href="../style.css">
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Symbols+Outlined">
+    <!-- Select2 CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" rel="stylesheet" />
+
+    <!-- Select2 JS -->
+
+
 
     <!-- Bootstrap JS and Popper -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
 
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
@@ -52,16 +59,19 @@ check_access('teacher'); ?>
             </ul>
             <!-- Profile Section -->
             <div class="d-flex align-items-center" style="padding-right: 50px;">
-                <img class="rounded-circle me-2" src="upload/teacher.jpg" alt="Teacher Profile" width="40" height="40">
-                <div class="dropdown">
-                    <a class="dropdown-toggle text-dark fw-bold" href="#" id="navbarDropdown" role="button"
-                        data-bs-toggle="dropdown" aria-expanded="false" style="font-family: Poppins;">
-                        Hi Teacher <?php echo $fname; ?>
-                    </a>
-                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                        <li><a class="dropdown-item" href="../forgot/change_password.php">Change Password</a></li>
-                        <li><a class="dropdown-item" href="../logout.php">Log out</a></li>
-                    </ul>
+                <div class="profile-info">
+                    <img class="rounded-circle me-2" src="upload/teacher.jpg" alt="Teacher Profile" width="40"
+                        height="40">
+                    <div class="dropdown">
+                        <a class="dropdown-toggle text-dark fw-bold" href="#" id="navbarDropdown" role="button"
+                            data-bs-toggle="dropdown" aria-expanded="false" style="font-family: Poppins;">
+                            Hi Teacher <?php echo $fname; ?>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                            <li><a class="dropdown-item" href="../forgot/change_password.php">Change Password</a></li>
+                            <li><a class="dropdown-item" href="../logout.php">Log out</a></li>
+                        </ul>
+                    </div>
                 </div>
             </div>
         </div>
