@@ -8,8 +8,8 @@ $current = 'home'; ?>
         <div class="row d-flex align-items-stretch" style="gap: 15px; width:100%;">
 
             <!-- Profile Information Display -->
-            <div class="col-12 col-md-6 myprofileinfo d-flex flex-column"
-                style="background-color: #FBF9F9; padding: 20px; border-radius: 10px; flex: 1;">
+            <div class="col-12 col-md-12 col-lg-6 myprofileinfo d-flex flex-column"
+                style="background-color: #FBF9F9; padding: 20px; border-radius: 10px; ">
                 <div class="myprofile-name d-flex align-items-center" style="width: 100%;">
                     <img class="myprofile-pic me-3" alt="Profile" src="upload/student.jpg"
                         style="width: 150px; height: 150px; border-radius: 50%;">
@@ -62,7 +62,7 @@ $current = 'home'; ?>
                                     value="<?php echo $fname; ?>" required>
                             </div>
                             <div class="first-name-parent mb-3">
-                                <div class="profile-info-text">Email Address</div>
+                                <div class="profile-info-text">Email </div>
                                 <input class="editprofile form-control" name="email" type="email"
                                     value="<?php echo $email; ?>" required>
                             </div>

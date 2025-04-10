@@ -483,3 +483,19 @@ a:hover {
     color: white;
 
 }
+
+.profile-info .inline {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 20px;
+    /* adds space between the two columns */
+}
+
+.profile-info-text,
+.profile-info-text2 {
+    text-align: left;
+    flex: 1;
+    /* each takes equal width */
+    word-break: break-word;
+}
