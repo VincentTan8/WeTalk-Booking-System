@@ -1,5 +1,23 @@
 <?php
-$current = 'home'; ?>
+$current = 'home';
+include "../config/conf.php";
+include "t-conf.php";  //should be the only call of t-conf
+
+$username = $_SESSION['username'];
+$fname = $_SESSION['fname'];
+$lname = $_SESSION['lname'];
+$alias = $_SESSION['alias'];
+$email = $_SESSION['email'];
+$bio = $_SESSION['bio'];
+$city = $_SESSION['city'];
+$phone = $_SESSION['phone'];
+$gender = $_SESSION['gender'];
+$birthday = $_SESSION['birthday'];
+$id = $_SESSION['id'];
+$ref_num = $_SESSION['ref_num'];
+$access = $_SESSION['access'];
+?>
+
 <div style="display: grid">
     <div class="col-9" style="justify-self: center;">
         <?php include "header.php"; ?>
@@ -22,7 +40,7 @@ $current = 'home'; ?>
                             <div class="name-text" style="font-size: 1.5em; font-weight: bold;">
                                 <?php echo $fname . " " . $lname; ?>
                             </div>
-                            <div class="bio-text text-muted">Curious mind, big dreams!</div>
+                            <div class="bio-text text-muted"><?php echo $bio ?></div>
                         </div>
                     </div>
 
