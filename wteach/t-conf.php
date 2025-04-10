@@ -15,16 +15,17 @@ if (isset($_SESSION['email']) && !empty($_SESSION['email'])) {
 	if ($teacher) {
 		for ($i = 0; $i < $teacher->num_rows; $i++) {
 			$row = $teacher->fetch_assoc();
-			$fname = $row["fname"];
-			$lname = $row["lname"];
-			$email = $row["email"];
-			$city = $row["city"];
-			$phone = $row["phone"];
-			$gender = $row["gender"];
-			$birthday = $row["birthday"];
-			$id = $row["id"];
-			$ref_num = $row["ref_num"];
-			$_SESSION['user_email'] = $row['email'];  // You can store email or other details as needed
+			$_SESSION['username'] = $row['username'];
+			$_SESSION['fname'] = $row['fname'];
+			$_SESSION['lname'] = $row['lname'];
+			$_SESSION['alias'] = $row['alias'];
+			$_SESSION['bio'] = $row['bio'];
+			$_SESSION['city'] = $row['city'];
+			$_SESSION['phone'] = $row['phone'];
+			$_SESSION['gender'] = $row['gender'];
+			$_SESSION['birthday'] = $row['birthday'];
+			$_SESSION['id'] = $row['id'];
+			$_SESSION['ref_num'] = $row['ref_num'];
 		}
 	} else {
 
