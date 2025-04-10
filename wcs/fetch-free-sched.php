@@ -1,11 +1,11 @@
 <?php
-// <!-- Gets free schedules, not booked schedules -->
+// <!-- Gets free schedules of all teachers, not booked schedules -->
 include "../config/conf.php";
 include 'cs-conf.php';
 
 $tablename = $prefix . "_resources.`schedule`";
 $sql = "SELECT scheddate, schedstarttime, schedendtime, platform 
-        FROM $tablename WHERE `booking_id` IS NULL";
+        FROM $tablename WHERE `booking_ref_num` IS NULL";
 $result = $conn->query($sql);
 
 $schedules = [];
