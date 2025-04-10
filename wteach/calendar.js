@@ -14,7 +14,6 @@ let schedules = []; //initialize schedules
 
 const updateTimeslots = async (selectedDate) => {
     const timeSelect = document.getElementById("timeSelect");
-    timeSelect.innerHTML = '<option value="">Loading...</option>'; // Show loading
 
     try {
         const response = await fetch("fetch-available-timeslot.php", {
@@ -100,8 +99,9 @@ const renderCalendar = async () => {
                 const formattedDisplay = `${monthName} ${parseInt(dayNum, 10)}, ${year}`;
 
                 const dateInput = document.getElementById("dateInput");
+                const hiddenDateInput = document.getElementById("hiddenDateInput");
                 dateInput.value = formattedDisplay;
-                dateInput.setAttribute("data-value", selectedDate); // store original if needed
+                hiddenDateInput.value = selectedDate; // store original in dat hidden input
 
                 updateTimeslots(selectedDate);
 
@@ -132,5 +132,27 @@ prevNextIcon.forEach(icon => {
             date = new Date();
         }
         renderCalendar();
+    });
+});
+
+//Jquery DatePicker
+//for updating the text of the date picker into our desired format
+$(document).ready(function () {
+    $("#dateInput").datepicker({
+        dateFormat: "MM dd, yy", // Example: April 1, 2025
+        onSelect:  function (dateText, inst) {
+            // Get selected date as a Date object
+            const selectedDate = $(this).datepicker("getDate");
+
+            // Format to desired output ("2025-04-10")
+            const year = selectedDate.getFullYear();
+            const month = (selectedDate.getMonth() + 1).toString().padStart(2, "0");
+            const day = selectedDate.getDate().toString().padStart(2, "0");
+            const formatted = `${year}-${month}-${day}`;
+
+            updateTimeslots(formatted); 
+            const hiddenDateInput = document.getElementById("hiddenDateInput");
+            hiddenDateInput.value = formatted; 
+        }
     });
 });

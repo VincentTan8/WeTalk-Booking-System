@@ -79,7 +79,8 @@ $cell_width = 64; ?>
 
                             <label for="dayInput">3. Select Date/Time Preferred.</label>
                             <div class="datetime-group mb-3">
-                                <input type="text" id="dateInput" name="scheddate" required>
+                                <input type="text" id="dateInput" name="formatteddate" required>
+                                <input type="hidden" id="hiddenDateInput" name="scheddate">
                                 <select id="timeSelect" name="schedtime" required>
                                     <option value="">Select Timeslot</option>
                                 </select>
@@ -99,10 +100,3 @@ $cell_width = 64; ?>
 <!-- Scripts -->
 <script src="calendar.js"></script>
 <script src="minical.js"></script>
-<script>
-    $(document).ready(function () {
-        $("#dateInput").datepicker({
-            dateFormat: "MM dd, yy" // Example: April 1, 2025
-        });
-    });
-</script>
