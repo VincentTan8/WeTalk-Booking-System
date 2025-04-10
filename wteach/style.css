@@ -385,16 +385,89 @@ header {
     }
 }
 
-/* Style the Select2 dropdown to look similar to the datepicker input */
 .select2-container {
-    width: 100% !important;
-    border-radius: 8px;
-    /* Match datepicker's border-radius */
-    border: 1px solid #ccc;
-    /* Same border color as datepicker */
-    background-color: #fff;
-    /* White background for Select2 */
-    font-size: 14px;
-    z-index: 1060;
-    /* Match font size */
+    z-index: 9999;
+}
+
+.select2-dropdown {
+    z-index: 9999 !important;
+}
+
+.select2-container--default .select2-selection--single .select2-selection__rendered {
+    text-align: center;
+    /* Center the text */
+}
+
+.select2-container--default .select2-selection__clear {
+    position: fixed;
+    /* Absolute position to keep it fixed in place */
+    right: 10px;
+    /* Keep it on the right side */
+    top: 50%;
+    /* Center it vertically in the selection container */
+    transform: translateY(-50%);
+    /* Adjust for exact vertical centering */
+    color: #fff;
+    /* Color of the button */
+    font-size: 16px;
+    /* Adjust size for visibility */
+    background: none;
+    /* Remove any background */
+    border: none;
+    /* Remove any border */
+    cursor: pointer;
+    /* Ensure it's clickable */
+    z-index: 9999;
+
+}
+
+.select2-container--default .select2-selection--multiple {
+    max-height: 50px;
+    /* Set a max height for the selected items container */
+    overflow-y: auto;
+    /* Enable scrolling when the selected items exceed the max height */
+    display: flex;
+    flex-wrap: wrap;
+    /* Allow wrapping of selected items */
+    padding-right: 10px;
+    /* Optional: Adds some space on the right for the scrollbar */
+    position: relative;
+    /* So that the "Clear All" button can be positioned absolutely */
+    border-radius: 10px !important;
+    /* Add rounded corners */
+    border: 2px solid #a3a1a1 !important;
+    /* Add border with a light color */
+    background: #FBF9F9;
+
+}
+
+.select2-container .select2-search--inline .select2-search__field {
+    height: auto !important;
+    text-align: center;
+    place-content: center;
+    color: #03011E !important;
+}
+
+.select2-container--default .select2-selection--multiple .select2-selection__arrow {
+    top: 50% !important;
+    transform: translateY(-50%);
+    right: 10px;
+    height: auto !important;
+    position: absolute;
+    color: #03011E !important;
+}
+
+.select2-container--default .select2-selection__rendered {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+    /* Adds spacing between selected items */
+    justify-content: center;
+    /* Centers the selected items horizontally */
+    justify-content: flex-start;
+    overflow-x: auto;
+    /* Enable horizontal scrolling for selected items */
+    padding-right: 30px;
+    /* Ensure space for the button */
+    max-width: calc(100% - 30px);/
 }

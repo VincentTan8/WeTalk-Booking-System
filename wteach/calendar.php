@@ -107,18 +107,3 @@ $current = 'class'; ?>
 <!-- Scripts -->
 <script src="calendar.js"></script>
 <script src="minical.js"></script>
-<script>
-    $(document).ready(function () {
-        // Initialize Select2 on #timeSelect
-        $('#timeSelect').select2({
-            width: '100%', // Ensures Select2 takes up the full width of the container
-            placeholder: "Select Timeslot", // Placeholder for Select2 dropdown
-            allowClear: true // Optionally allow clearing the selection
-        });
-
-        // Handle opening Select2 dropdown to adjust z-index
-        $('.select2-container').on('select2:open', function () {
-            $('.select2-dropdown').css('z-index', 1050); // Ensure dropdown is visible over other elements
-        });
-    });
-</script>

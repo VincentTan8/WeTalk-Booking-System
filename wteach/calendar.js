@@ -135,12 +135,12 @@ prevNextIcon.forEach(icon => {
     });
 });
 
-//Jquery DatePicker
+//Jquery DatePicker and select2
 //for updating the text of the date picker into our desired format
 $(document).ready(function () {
     $("#dateInput").datepicker({
         dateFormat: "MM dd, yy", // Example: April 1, 2025
-        onSelect:  function (dateText, inst) {
+        onSelect: function (dateText, inst) {
             // Get selected date as a Date object
             const selectedDate = $(this).datepicker("getDate");
 
@@ -150,9 +150,44 @@ $(document).ready(function () {
             const day = selectedDate.getDate().toString().padStart(2, "0");
             const formatted = `${year}-${month}-${day}`;
 
-            updateTimeslots(formatted); 
+            updateTimeslots(formatted);
             const hiddenDateInput = document.getElementById("hiddenDateInput");
-            hiddenDateInput.value = formatted; 
+            hiddenDateInput.value = formatted;
         }
+    });
+
+    $('#timeSelect').select2({
+        multiple: true,  // This makes the select box allow multiple selections
+        width: '100%',
+        placeholder: "Select Timeslot",
+        allowClear: true,
+        dropdownParent: $('#submissionModal')
+    });
+
+    // Remove selected items from the dropdown list
+    $('#timeSelect').on('select2:select', function (e) {
+        var selectedItems = $(this).val();
+
+        // Disable the options that are selected in the dropdown
+        $(this).find('option').each(function () {
+            var optionValue = $(this).val();
+            if ($.inArray(optionValue, selectedItems) > -1) {
+                // Hide selected options from the dropdown
+                $(this).prop('disabled', true);
+            }
+        });
+
+        // Refresh select2 to apply the changes
+        $(this).trigger('change');
+    });
+
+    // Re-enable all options when the dropdown is closed
+    $('#timeSelect').on('select2:unselect', function (e) {
+        $(this).find('option').each(function () {
+            $(this).prop('disabled', false); // Enable all options when unselecting
+        });
+
+        // Refresh select2 to apply the changes
+        $(this).trigger('change');
     });
 });
