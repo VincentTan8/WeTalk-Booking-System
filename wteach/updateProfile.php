@@ -1,6 +1,6 @@
 <?php
 include "../config/conf.php";
-include "t-conf.php";
+$ref_num = $_SESSION['ref_num'];
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Get the updated data from the form submission
