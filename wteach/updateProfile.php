@@ -7,18 +7,21 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $fname = $_POST['fname'];
     $lname = $_POST['lname'];
     $email = $_POST['email'];
+    $username = $_POST['username'];
+    $alias = $_POST['alias'];
     $phone = $_POST['phone'];
     $city = $_POST['city'];
     $gender = $_POST['gender'];
     $birthday = $_POST['birthday'];
+    $bio = $_POST['bio'];
 
     $tablename = $prefix . "_resources.`teacher`";
     $sql = "UPDATE $tablename 
-            SET `fname` = ?, `lname` = ?, `phone` = ?, `city` = ?, `gender` = ?, `birthday` = ? 
+            SET `fname` = ?, `lname` = ?, `email` = ?, `username` = ?, `alias` = ?, `phone` = ?, `city` = ?, `gender` = ?, `birthday` = ?, `bio` = ? 
             WHERE `ref_num` = ?";
 
     $stmt = $conn->prepare($sql);
-    $stmt->bind_param("sssssss", $fname, $lname, $phone, $city, $gender, $birthday, $ref_num);
+    $stmt->bind_param("sssssssssss", $fname, $lname, $email, $username, $alias, $phone, $city, $gender, $birthday, $bio, $ref_num);
 
     if ($stmt->execute()) {
         // Send back the updated data as a JSON response
@@ -27,10 +30,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             'fname' => $fname,
             'lname' => $lname,
             'email' => $email,
+            'username' => $username,
+            'alias' => $alias,
             'phone' => $phone,
             'gender' => $gender,
             'city' => $city,
-            'birthday' => $birthday
+            'birthday' => $birthday,
+            'bio' => $bio
         ]);
         $stmt->close();
     } else {
