@@ -59,7 +59,7 @@ check_access('teacher'); ?>
             </ul>
             <!-- Profile Section -->
             <div class="d-flex align-items-center" style="padding-right: 50px;">
-                <div class="profile-info">
+                <div class="profile-nav">
                     <img class="rounded-circle me-2" src="upload/teacher.jpg" alt="Teacher Profile" width="40"
                         height="40">
                     <div class="dropdown">
