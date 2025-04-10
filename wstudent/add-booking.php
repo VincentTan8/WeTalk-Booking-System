@@ -65,7 +65,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 VALUES ('$new_ref_num', '$schedule_ref_num', '$student_ref_num', '$ref_num - $presentdate');";
 
         if ($conn->query($sql)) {
-            $sql = "UPDATE $scheduletable SET `booking_ref_num` = $new_ref_num WHERE `ref_num` = $schedule_ref_num";
+            $sql = "UPDATE $scheduletable SET `booking_ref_num` = $new_ref_num WHERE `ref_num` = '$schedule_ref_num'";
             $conn->query($sql);
 
             $studentMessage = "Thank you for joining us, $student_fname!\n\n"
