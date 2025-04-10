@@ -5,7 +5,8 @@ $cell_width = 64; ?>
     <div class="col-9" style="justify-self: center;">
         <?php include "header.php";
         ?>
-        <div class="container-fluid"> <!-- Use fluid container for responsiveness -->
+        <div class="container-fluid" style="padding-right:0px; padding-left:0px;">
+            <!-- Use fluid container for responsiveness -->
             <div class="row mt-4">
                 <!-- Calendar Column -->
                 <div class=" col-12 col-lg-9 col-md-12" style="margin-bottom:10px;">
@@ -101,8 +102,22 @@ $cell_width = 64; ?>
 <script src="minical.js"></script>
 <script>
     $(document).ready(function () {
+        // Initialize datepicker for #dateInput
         $("#dateInput").datepicker({
             dateFormat: "MM dd, yy" // Example: April 1, 2025
+        });
+
+
+        // Initialize Select2 on #timeSelect
+        $('#timeSelect').select2({
+            width: '100%', // Ensures Select2 takes up the full width of the container
+            placeholder: "Select Timeslot", // Placeholder for Select2 dropdown
+            allowClear: true // Optionally allow clearing the selection
+        });
+
+        // Handle opening Select2 dropdown to adjust z-index
+        $('.select2-container').on('select2:open', function () {
+            $('.select2-dropdown').css('z-index', 1050); // Ensure dropdown is visible over other elements
         });
     });
 </script>
