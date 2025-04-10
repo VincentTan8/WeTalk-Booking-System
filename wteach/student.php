@@ -1,4 +1,11 @@
 <?php
+if (!isset($_SESSION)) {
+    session_start();
+    ob_start();
+}
+?>
+
+<?php
 $current = 'student'; ?>
 <div style="display: grid">
     <div class="col-9" style="justify-self: center;">
