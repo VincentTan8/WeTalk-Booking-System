@@ -1,24 +1,27 @@
 <?php
 include "../config/conf.php";
-include "t-conf.php";
+$ref_num = $_SESSION['ref_num'];
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Get the updated data from the form submission
     $fname = $_POST['fname'];
     $lname = $_POST['lname'];
     $email = $_POST['email'];
-    $phone =$_POST['phone'];
-    $city =$_POST['city'];
-    $gender =$_POST['gender'];
-    $birthday =$_POST['birthday'];
+    $username = $_POST['username'];
+    $alias = $_POST['alias'];
+    $phone = $_POST['phone'];
+    $city = $_POST['city'];
+    $gender = $_POST['gender'];
+    $birthday = $_POST['birthday'];
+    $bio = $_POST['bio'];
 
     $tablename = $prefix . "_resources.`teacher`";
     $sql = "UPDATE $tablename 
-            SET `fname` = ?, `lname` = ?, `phone` = ?, `city` = ?, `gender` = ?, `birthday` = ? 
-            WHERE `email` = ?";
+            SET `fname` = ?, `lname` = ?, `email` = ?, `username` = ?, `alias` = ?, `phone` = ?, `city` = ?, `gender` = ?, `birthday` = ?, `bio` = ? 
+            WHERE `ref_num` = ?";
 
     $stmt = $conn->prepare($sql);
-    $stmt->bind_param("sssssss", $fname, $lname, $phone, $city, $gender, $birthday, $email);
+    $stmt->bind_param("sssssssssss", $fname, $lname, $email, $username, $alias, $phone, $city, $gender, $birthday, $bio, $ref_num);
 
     if ($stmt->execute()) {
         // Send back the updated data as a JSON response
@@ -27,10 +30,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             'fname' => $fname,
             'lname' => $lname,
             'email' => $email,
+            'username' => $username,
+            'alias' => $alias,
             'phone' => $phone,
             'gender' => $gender,
             'city' => $city,
-            'birthday' => $birthday
+            'birthday' => $birthday,
+            'bio' => $bio
         ]);
         $stmt->close();
     } else {

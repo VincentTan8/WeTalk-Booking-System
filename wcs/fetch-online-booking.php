@@ -5,7 +5,7 @@ include 'cs-conf.php';
 
 $tablename = $prefix . "_resources.`schedule`";
 $sql = "SELECT scheddate, schedstarttime, schedendtime, platform 
-        FROM $tablename WHERE `booking_id` IS NOT NULL AND `platform` = 1";
+        FROM $tablename WHERE `booking_ref_num` IS NOT NULL AND `platform` = 1";
 $result = $conn->query($sql);
 
 $schedules = [];

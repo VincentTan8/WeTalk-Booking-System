@@ -1,7 +1,9 @@
-<?php include "../config/conf.php";
-include "t-conf.php";
+<?php
 include "../access.php";
-check_access('teacher'); ?>
+check_access('teacher');
+
+$teacher_name = $_SESSION['alias'] === NULL ? $_SESSION['fname'] : $_SESSION['alias'];
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -54,9 +56,9 @@ check_access('teacher'); ?>
                     <img class="rounded-circle me-2" src="upload/teacher.jpg" alt="Teacher Profile" width="40"
                         height="40">
                     <div class="dropdown">
-                        <a class="dropdown-toggle text-dark fw-bold" href="#" id="navbarDropdown" role="button"
+                        <a class="dropdown-toggle text-dark fw-bold alias" href="#" id="navbarDropdown" role="button"
                             data-bs-toggle="dropdown" aria-expanded="false" style="font-family: Poppins;">
-                            Hi Teacher <?php echo $fname; ?>
+                            Hi <?php echo $teacher_name; ?>
                         </a>
                         <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                             <li><a class="dropdown-item" href="../forgot/change_password.php">Change Password</a></li>

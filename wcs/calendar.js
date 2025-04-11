@@ -67,7 +67,7 @@ const renderCalendar = async(type) => {
 
     if(type === "free"){
         //gets free schedules, does not include booked schedules
-        await fetch('fetch-teacher-sched.php')
+        await fetch('fetch-free-sched.php')
             .then(response => response.json())
             .then(data => {
                 schedules = data;

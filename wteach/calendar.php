@@ -1,6 +1,12 @@
 <?php
-$current = 'class';
-$cell_width = 64; ?>
+if (!isset($_SESSION)) {
+    session_start();
+    ob_start();
+}
+?>
+
+<?php
+$current = 'class'; ?>
 <div style="display: grid">
     <div class="col-9" style="justify-self: center;">
         <?php include "header.php";
@@ -82,7 +88,7 @@ $cell_width = 64; ?>
                             <div class="datetime-group mb-3">
                                 <input type="text" id="dateInput" name="formatteddate" required>
                                 <input type="hidden" id="hiddenDateInput" name="scheddate">
-                                <select id="timeSelect" name="schedtime" required>
+                                <select id="timeSelect" name="schedtime[]" required>
                                     <option value="">Select Timeslot</option>
                                 </select>
                             </div>

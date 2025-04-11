@@ -1,9 +1,6 @@
 <?php
 include "../config/conf.php";
-include "t-conf.php"; // Ensure this connects to your database
-
-
-// Get teacher ID from session
+$ref_num = $_SESSION['ref_num'];
 
 $bookingtable = $prefix . "_resources.`booking`";
 $studenttable = $prefix . "_resources.`student`";
