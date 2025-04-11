@@ -68,11 +68,7 @@ $current = 'class'; ?>
                             <label for="languageSelect">1. Select Language.</label>
                             <select id="languageSelect" name="language" class="form-select mb-3" required>
                                 <option value="">Choose Language</option>
-                                <option value="English">English</option>
-                                <option value="Filipino">Filipino</option>
-                                <option value="Mandarin">Mandarin</option>
-                                <option value="Spanish">Spanish</option>
-                                <!-- Add more as needed -->
+
                             </select>
 
 
@@ -85,23 +81,29 @@ $current = 'class'; ?>
                             </div>
 
                             <label for="dayInput">3. Select Date/Time Preferred.</label>
-                            <div class="datetime-group mb-3">
-                                <input type="text" id="dateInput" name="formatteddate" required>
-                                <input type="hidden" id="hiddenDateInput" name="scheddate">
-                                <select id="timeSelect" name="schedtime[]" required>
-                                    <option value="">Select Timeslot</option>
-                                </select>
+                            <div class="datetime-group">
+                                <div class="form-group flex-fill">
+                                    <input type="text" id="dateInput" name="formatteddate" class="form-control"
+                                        required>
+                                    <input type="hidden" id="hiddenDateInput" name="scheddate">
+                                </div>
+                                <div class="form-group flex-fill">
+                                    <select id="timeSelect" name="schedtime[]" class="form-select" required>
+                                        <option value="">Select Timeslot</option>
+                                    </select>
+                                </div>
                             </div>
-                            <br><br>
-                            <input type="submit" value="Save"
-                                style="border-radius: 10px; background: #916DFF;padding: 13px 54px; color:white; border:none;">
-                            <br>
-                        </form>
                     </div>
+                    <br><br>
+                    <input type="submit" value="Save"
+                        style="border-radius: 10px; background: #916DFF;padding: 13px 54px; color:white; border:none;">
+                    <br>
+                    </form>
                 </div>
             </div>
         </div>
     </div>
+</div>
 </div>
 
 <!-- Scripts -->
