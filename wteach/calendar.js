@@ -11,6 +11,30 @@ const months = ["January", "February", "March", "April", "May", "June", "July",
 
 let schedules = []; //initialize schedules
 
+const languageSelect = document.getElementById("languageSelect");
+
+const fetchLanguages = async () => {
+    try {
+        const response = await fetch("fetch-language.php");
+        const data = await response.json();
+
+        // Clear existing options
+        languageSelect.innerHTML = '';
+
+        // Populate the select element with the languages
+        data.forEach(language => {
+            let option = document.createElement("option");
+            option.value = language.id;
+            option.textContent = language.details;
+            languageSelect.appendChild(option);
+        });
+    } catch (error) {
+        console.error("Error fetching languages:", error);
+    }
+};
+
+// Call the fetchLanguages function when the page is loaded
+fetchLanguages();
 
 const updateTimeslots = async (selectedDate) => {
     const timeSelect = document.getElementById("timeSelect");
