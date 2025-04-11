@@ -21,19 +21,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $scheddate = $_POST['scheddate'];
     $schedtime_ids = $_POST['schedtime'];
     $platform = $_POST["platform"];
+    $language_id = $_POST["language"];
 
     $teachertable = $prefix . "_resources.`teacher`";
     $timeslottable = $prefix . "_resources.`timeslots`";
     $scheduletable = $prefix . "_resources.`schedule`";
 
     $teacher_ref_num = $_SESSION['ref_num']; //from t-conf.php
-    $sql = "SELECT `language_id` FROM $teachertable WHERE `ref_num` = ?";
-    $stmt = $conn->prepare($sql);
-    $stmt->bind_param("s", $teacher_ref_num);
-    $stmt->execute();
-    $result = $stmt->get_result();
-    $row = $result->fetch_assoc();
-    $language_id = $row["language_id"];
 
     foreach ($schedtime_ids as $schedtime_id) {
         $sql = "SELECT `starttime`, `endtime` FROM $timeslottable WHERE `id` = ?";
