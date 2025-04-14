@@ -26,7 +26,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 document.querySelector('.profile-info-text2.birthday').innerText = data.birthday;
                 alert('Profile updated successfully!');
             } else {
-                alert('Error updating profile.');
+                alert('Error updating profile. ' + data.error);
             }
         })
         .catch(error => {
