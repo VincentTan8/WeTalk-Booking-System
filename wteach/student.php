@@ -106,7 +106,7 @@ $current = 'student'; ?>
                 });
             </script>
             <div class="col-lg-3 col-md-12 minical-container">
-                <?php include "../utils/minical.php"; ?>
+                <?php include "../utils/sidebar.php"; ?>
             </div>
             <!-- JavaScript Files -->
             <script src="minical.js"></script>

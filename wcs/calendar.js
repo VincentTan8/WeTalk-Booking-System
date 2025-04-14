@@ -33,17 +33,17 @@ toggleFree.addEventListener("click", function () {
     type = "free";
     renderCalendar(type);
 })
-     
+
 const daysTag = document.querySelector(".days"),
-currentDateElement = document.querySelector(".current-date"),
-prevNextIcon = document.querySelectorAll(".icons span");
+    currentDateElement = document.querySelector(".current-date"),
+    prevNextIcon = document.querySelectorAll(".icons span");
 
 let date = new Date(),
     currYear = date.getFullYear(),
     currMonth = date.getMonth();
 
 const months = ["January", "February", "March", "April", "May", "June", "July",
-                "August", "September", "October", "November", "December"];
+    "August", "September", "October", "November", "December"];
 
 let schedules = []; //initialize schedules
 
@@ -54,18 +54,18 @@ const addLastDays = (lastDayOfMonth, liTag) => {
     daysTag.innerHTML = liTag; //for the document query selector on li click events to work
 }
 
-const renderCalendar = async(type) => {
+const renderCalendar = async (type) => {
     let liTag = "";
     const firstDayOfMonth = new Date(currYear, currMonth, 1).getDay(),
-            lastDateOfMonth = new Date(currYear, currMonth + 1, 0).getDate(),
-            lastDateOfPrevMonth = new Date(currYear, currMonth, 0).getDate(),
-            lastDayOfMonth = new Date(currYear, currMonth, lastDateOfMonth).getDay();
+        lastDateOfMonth = new Date(currYear, currMonth + 1, 0).getDate(),
+        lastDateOfPrevMonth = new Date(currYear, currMonth, 0).getDate(),
+        lastDayOfMonth = new Date(currYear, currMonth, lastDateOfMonth).getDay();
 
     for (let i = firstDayOfMonth; i > 0; i--) {
         liTag += `<li class="inactive" style="pointer-events: none; opacity: 0.5;">${lastDateOfPrevMonth - i + 1}</li>`;
     }
 
-    if(type === "free"){
+    if (type === "free") {
         //gets free schedules, does not include booked schedules
         await fetch('fetch-free-sched.php')
             .then(response => response.json())
@@ -78,13 +78,13 @@ const renderCalendar = async(type) => {
             const fullDate = `${currYear}-${String(currMonth + 1).padStart(2, '0')}-${String(i).padStart(2, '0')}`;
             const isScheduled = schedules.some(s => s.scheddate === fullDate);
             const isToday = i === date.getDate() && currMonth === date.getMonth() && currYear === date.getFullYear();
-            
+
             // Check if the date is before today
             const currentDate = new Date();
             const compareDate = new Date(currYear, currMonth, i);
             const isPast = compareDate < currentDate.setHours(0, 0, 0, 0);
-            const highlightClass = isScheduled ? "scheduled" : isToday ? "active" : isPast ? "past" : "";
-            
+            const highlightClass = isScheduled ? "scheduled" : isPast ? "past" : "";
+
             // const highlightClass = isScheduled ? "scheduled" : isToday ? "active" : "";
 
             liTag += `<li class="${highlightClass}" data-date="${fullDate}" ${isPast ? 'style="pointer-events: none; opacity: 0.5;"' : ""}>${i}</li>`;
@@ -112,7 +112,7 @@ const renderCalendar = async(type) => {
                 });
             }
         });
-    } else if(type === "online"){
+    } else if (type === "online") {
         //render calendar for showing online booked schedules
         //gets online bookings only
         await fetch('fetch-online-booking.php')
@@ -121,19 +121,19 @@ const renderCalendar = async(type) => {
                 schedules = data;
             })
             .catch(error => console.error('Error fetching online bookings:', error));
-        
+
         for (let i = 1; i <= lastDateOfMonth; i++) {
             const fullDate = `${currYear}-${String(currMonth + 1).padStart(2, '0')}-${String(i).padStart(2, '0')}`;
             const isScheduled = schedules.some(s => s.scheddate === fullDate);
             const isToday = i === date.getDate() && currMonth === date.getMonth() && currYear === date.getFullYear();
-            
-            const highlightClass = isScheduled ? "scheduled" : isToday ? "active" : "";
+
+            const highlightClass = isScheduled ? "scheduled" : "";
 
             liTag += `<li class="${highlightClass}" data-date="${fullDate}">${i}</li>`;
         }
 
         addLastDays(lastDayOfMonth, liTag);
-    } else if(type === "offline"){
+    } else if (type === "offline") {
         //render calendar for showing offline booked schedules
         //gets offline bookings only
         await fetch('fetch-offline-booking.php')
@@ -142,13 +142,13 @@ const renderCalendar = async(type) => {
                 schedules = data;
             })
             .catch(error => console.error('Error fetching offline bookings:', error));
-        
+
         for (let i = 1; i <= lastDateOfMonth; i++) {
             const fullDate = `${currYear}-${String(currMonth + 1).padStart(2, '0')}-${String(i).padStart(2, '0')}`;
             const isScheduled = schedules.some(s => s.scheddate === fullDate);
             const isToday = i === date.getDate() && currMonth === date.getMonth() && currYear === date.getFullYear();
-            
-            const highlightClass = isScheduled ? "scheduled" : isToday ? "active" : "";
+
+            const highlightClass = isScheduled ? "scheduled" : "";
 
             liTag += `<li class="${highlightClass}" data-date="${fullDate}">${i}</li>`;
         }
@@ -157,7 +157,7 @@ const renderCalendar = async(type) => {
     }
 
     currentDateElement.innerText = `${months[currMonth]} ${currYear}`;
-};   
+};
 
 renderCalendar(type);
 
