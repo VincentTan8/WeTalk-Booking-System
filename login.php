@@ -1,20 +1,19 @@
 <?php
 include "config/conf.php"; // Ensure this contains database connection
-
-
+include "utils/constants.php"; //constains userTables
 $error = ""; // Initialize error variable
 
 // Function to check login credentials (email or username)
-function login($conn, $input, $password)
+function login($conn, $input, $password, $userTables)
 {
-    $tables = ['student', 'teacher', 'cs', 'parent'];
+    $tables = $userTables;
 
     foreach ($tables as $table) {
-        $query = "SELECT `email` FROM `$table` WHERE email = ?  AND password = ?";
-        // $query = "SELECT `email`, `username` FROM `$table` WHERE (email = ? OR username = ?) AND password = ?";
+        // $query = "SELECT `email` FROM `$table` WHERE email = ?  AND password = ?";
+        $query = "SELECT `email`, `username` FROM `$table` WHERE (email = ? OR username = ?) AND password = ?";
         $stmt = $conn->prepare($query);
-        // $stmt->bind_param("sss", $input, $input, $password);
-        $stmt->bind_param("ss", $input, $password);
+        // $stmt->bind_param("ss", $input, $password);
+        $stmt->bind_param("sss", $input, $input, $password);
         $stmt->execute();
         $result = $stmt->get_result();
 
@@ -30,12 +29,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $input = $_POST['email_or_username']; // Accepts email or username
     $password = $_POST['password'];
 
-    $loginResult = login($conn, $input, $password);
+    $loginResult = login($conn, $input, $password, $userTables);
 
     if ($loginResult) {
         $userType = $loginResult['user_type'];
         $_SESSION['access'] = $userType;
         $_SESSION['email'] = $loginResult['user_data']['email']; // Store email in session
+        $_SESSION['username'] = $loginResult['user_data']['username']; // Store username in session
 
         // Redirect user based on their type
         if ($userType === 'student') {
