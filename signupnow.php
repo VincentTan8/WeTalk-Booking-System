@@ -1,16 +1,25 @@
 <?php
 include "config/conf.php"; // Ensure this contains database connection
 
-// Handle signup form submission
+
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['email'])) {
     $fname = $_POST['fname'];
     $lname = $_POST['lname'];
     $email = $_POST['email'];
     $password = $_POST['password'];
     $phone = $_POST['phone'];
+    $role = $_POST['role']; // student or parent
 
-    // Insert into student table
-    $tablename = $prefix . "_resources.`student`";
+    // Determine which table to use
+    if ($role === 'student') {
+        $tablename = $prefix . "_resources.`student`";
+    } elseif ($role === 'parent') {
+        $tablename = $prefix . "_resources.`parent`";
+    } else {
+        die("Invalid role selected.");
+    }
+
+    // Insert into selected table
     $sql = "INSERT INTO $tablename (`fname`, `lname`, `email`, `phone`, `password`) 
         VALUES (?, ?, ?, ?, ?)";
 
@@ -37,6 +46,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['email'])) {
     $stmt->close();
 }
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
