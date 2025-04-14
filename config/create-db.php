@@ -115,7 +115,8 @@ $query = "CREATE TABLE `$tablename` (
 		`gender` VARCHAR(20),
 		`language_id` INT DEFAULT NULL,
 		`password` VARCHAR(100) NOT NULL,
-		FOREIGN KEY (`language_id`) REFERENCES `language`(`id`) ON DELETE SET NULL
+		FOREIGN KEY (`language_id`) REFERENCES `language`(`id`) ON DELETE SET NULL,
+		INDEX (`email`)
 	);"
 ;
 if ($conn->query($query) === TRUE) {
@@ -150,7 +151,8 @@ $query = "CREATE TABLE `$tablename` (
 		`phone` VARCHAR(50),
 		`birthday` DATE,
 		`gender` VARCHAR(20),
-		`password` VARCHAR(100) NOT NULL
+		`password` VARCHAR(100) NOT NULL,
+		INDEX (`email`)
 	);"
 ;
 if ($conn->query($query) === TRUE) {
@@ -179,7 +181,8 @@ $query = "CREATE TABLE `$tablename` (
 		`gender` VARCHAR(20),
 		`password` VARCHAR(100) NOT NULL,
 		`parent_ref_num` VARCHAR(100) NULL,
-		FOREIGN KEY (`parent_ref_num`) REFERENCES `parent`(`ref_num`) ON DELETE SET NULL
+		FOREIGN KEY (`parent_ref_num`) REFERENCES `parent`(`ref_num`) ON DELETE SET NULL,
+		INDEX (`email`)
 	);"
 ;
 if ($conn->query($query) === TRUE) {
@@ -284,7 +287,8 @@ $query = "CREATE TABLE `$tablename` (
 		`phone` VARCHAR(50),
 		`birthday` DATE,
 		`gender` VARCHAR(20),
-		`password` VARCHAR(100) NOT NULL
+		`password` VARCHAR(100) NOT NULL,
+		INDEX (`email`)
 	);"
 ;
 if ($conn->query($query) === TRUE) {
