@@ -1,0 +1,339 @@
+/* Prevent Bootstrap from messing with your calendar */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+    color: #03011E;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    letter-spacing: 0.32px;
+}
+
+body {
+    background-image: linear-gradient(180deg, #EBF2FA 33%, #C2D6EE 104.24%);
+    min-height: 100vh;
+}
+
+.navbar-nav {
+    display: flex;
+    justify-content: center;
+
+    transition: transform 0.3s ease-in-out;
+    /* Add transition for sliding effect */
+}
+
+.profile-nav {
+    display: flex;
+    align-items: center;
+}
+
+.profile-nav img {
+    margin-right: 10px;
+    /* Adds space between image and name */
+}
+
+@media (max-width: 1104px) {
+    .custom-navbar {
+        overflow: hidden;
+    }
+
+    /* Navbar items - collapsed view */
+    .navbar-nav {
+        flex-direction: column !important;
+        align-items: flex-start;
+        padding-left: 20px;
+        gap: 10px !important;
+        transition: transform 0.3s ease-in-out;
+        opacity: 0;
+        visibility: hidden;
+        transform: translateY(-20px);
+        /* Slightly hide for smooth transition */
+    }
+
+    .custom-navbar.show .navbar-nav {
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0);
+        /* Slide in from top */
+        transition: opacity 0.3s ease, visibility 0s 0s, transform 0.3s ease-in-out;
+    }
+
+    .profile-nav {
+        opacity: 0;
+        visibility: hidden;
+        transform: translateY(-20px);
+        transition: opacity 0.3s ease 0s, visibility 0s 0s, transform 0.3s ease-in-out 0s;
+    }
+
+    /* When navbar is toggled, profile should appear after menu animation */
+    .custom-navbar.show .profile-nav {
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0);
+        transition: opacity 0.3s ease 0.1s, visibility 0s 0s, transform 0.3s ease-in-out;
+    }
+
+    /* Adjust dropdown menu visibility */
+    .custom-navbar .dropdown-menu {
+        opacity: 0;
+        visibility: hidden;
+        height: 0;
+        padding: 0;
+        transition: opacity 0.3s ease, visibility 0s 0.3s, height 0.3s ease, padding 0.3s ease;
+    }
+
+    .custom-navbar.show .dropdown-menu {
+        opacity: 1;
+        visibility: visible;
+        height: auto;
+        padding: 10px 0;
+    }
+
+    /* Navbar toggler button */
+    .navbar-toggler {
+        display: block;
+        font-size: 30px;
+        color: white;
+        border: none;
+        padding: 10px;
+        border-radius: 5px;
+    }
+
+    /* When navbar is toggled */
+    .navbar-collapse.show .navbar-nav {
+        opacity: 1;
+        /* Make it visible after animation */
+        visibility: visible;
+        /* Set visibility to visible */
+        transform: translateY(0);
+        /* Move to original position */
+        transition: opacity 0.3s ease, visibility 0.3s ease 0.3s;
+        /* Delay visibility until after transform */
+    }
+
+    /* Ensure the navbar toggler works and content collapses */
+    .navbar-collapse {
+        display: block;
+        overflow: visible !important;
+    }
+
+    .navbar-toggler {
+        display: block;
+    }
+}
+
+@media (min-width: 1105px) {
+
+    /* No stacking, navbar should behave normally */
+    .navbar-nav {
+        flex-direction: row !important;
+        transform: none;
+    }
+
+    .navbar-collapse {
+        display: flex !important;
+        overflow: visible !important;
+    }
+
+    .navbar-toggler {
+        display: none;
+    }
+}
+
+.calendar ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.calendar .weeks,
+.calendar .days {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 5px;
+}
+
+.calendar .days li {
+    height: 130px;
+    background: #FBF9F9;
+    display: flex;
+    justify-content: center;
+
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.calendar .days li:hover {
+    background-color: #E3E3E3;
+}
+
+.calendar .days li.active {
+    background-color: #FFAC00;
+    color: white;
+}
+
+body {
+    background-image: linear-gradient(180deg, #EBF2FA 33%, #C2D6EE 104.24%);
+    min-height: 100vh;
+}
+
+.calendar-wrapper {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.calendar ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+/* Header for all */
+.navbar-nav .nav-link {
+    opacity: 0.75;
+}
+
+.navbar-nav .nav-link.active {
+    font-weight: bold;
+    color: black !important;
+}
+
+.my-schedule-label {
+    border-radius: 15px 15px 0px 0px;
+    background: #FFAC00;
+    padding: 10px;
+    text-align: center;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 700;
+    font-size: 16px;
+    color: #03011E;
+    color: white;
+
+}
+
+/* Mini Calendar for Student, CS , and Teacher */
+/* Mini calendar for all */
+.mini-calendar .days-mini li.today {
+    border: 2px solid #FFAC00;
+    color: #FFAC00;
+
+}
+
+/* Headings */
+.announcement-section h4,
+.bulletin-section h4 {
+    background: #FFAC00;
+    color: white;
+}
+
+.my-schedule-label {
+    background: #FFAC00;
+}
+
+
+
+
+.platform-option {
+    border-radius: 10px;
+    border: 2px solid #DBE7FF;
+    background: #FBF9F9;
+    display: flex;
+    max-width: 50%;
+    height: 64.779px;
+    padding: 13px 73px;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    flex-shrink: 0;
+    cursor: pointer;
+    margin: 5px;
+}
+
+.platform-option.active {
+    border-radius: 10px;
+    border: 2px solid #FFAC00;
+
+    background: #FBF9F9;
+}
+
+.custom-save-btn {
+    border-radius: 5px;
+    background: #FFAC00;
+    box-shadow: 0px 4px 8.1px 0px rgba(3, 1, 30, 0.25);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+}
+
+.custom-cancel-btn {
+    border-radius: 5px;
+    background: #FFF;
+    box-shadow: 0px 4px 8.1px 0px rgba(3, 1, 30, 0.25);
+    border: none;
+    padding: 10px 20px;
+    color: #03011E;
+}
+
+.myprofile {
+    display: flex;
+    align-items: stretch;
+    /* Ensures both columns stretch to the same height */
+    justify-content: center;
+}
+
+.myprofileinfo,
+.myprofile-edit {
+    display: flex;
+    flex-direction: column;
+}
+
+.dtime {
+    border-radius: 10px;
+    border: 2px solid #DBE7FF;
+    background: #FBF9F9;
+    display: flex;
+    max-width: 45%;
+    height: 64.779px;
+    padding: 13px 73px;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    flex-shrink: 0;
+    cursor: pointer;
+    margin: 5px;
+}
+
+/* .modal-content{
+    width:80%; 
+    border-radius: 15px; 
+    background: #FFF; 
+    box-shadow: 0px 0px 25px 0px rgba(3, 1, 30, 0.15); 
+    position: fixed; 
+}
+ */
+#edit-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+
+    padding: 13px 54px 13px 67px;
+
+    color: #FFF;
+    font-family: 'Poppins', sans-serif;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    letter-spacing: 0.32px;
+
+    background-color: #f0ad4e;
+    /* Keep default btn-warning or customize */
+    border: none;
+}
