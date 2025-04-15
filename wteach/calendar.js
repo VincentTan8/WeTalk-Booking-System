@@ -101,7 +101,7 @@ const renderCalendar = async () => {
         const isScheduled = schedules.some(s => s.scheddate === fullDate);
         const isToday = i === date.getDate() && currMonth === date.getMonth() && currYear === date.getFullYear();
 
-        const highlightClass = isScheduled ? "scheduled" : isToday ? "active" : "";
+        const highlightClass = isScheduled ? "scheduled" : "";
 
         liTag += `<li class="${highlightClass}" data-date="${fullDate}" style="justify-content:right;">${i}</li>`;
         // liTag += `<li class="${isToday}" data-date="${currYear}-${String(currMonth + 1).padStart(2, '0')}-${String(i).padStart(2, '0')}" style = "justify-content:right;">${i}</li>`;

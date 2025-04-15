@@ -49,7 +49,7 @@ let schedules = []; //initialize schedules
 
 const addLastDays = (lastDayOfMonth, liTag) => {
     for (let i = lastDayOfMonth; i < 6; i++) {
-        liTag += `<li class="inactive" style="pointer-events: none; opacity: 0.5;"></li>`;
+        liTag += `<li class="inactive" style="pointer-events: none; opacity: 0.5;">${i - lastDayOfMonth + 1}</li>`;
     }
     daysTag.innerHTML = liTag; //for the document query selector on li click events to work
 }
@@ -62,7 +62,7 @@ const renderCalendar = async (type) => {
         lastDayOfMonth = new Date(currYear, currMonth, lastDateOfMonth).getDay();
 
     for (let i = firstDayOfMonth; i > 0; i--) {
-        liTag += `<li class="inactive" style="pointer-events: none; opacity: 0.5;"></li>`;
+        liTag += `<li class="inactive" style="pointer-events: none; opacity: 0.5;">${lastDateOfPrevMonth - i + 1}</li>`;
     }
 
     if (type === "free") {

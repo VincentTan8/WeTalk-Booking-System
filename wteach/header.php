@@ -1,8 +1,8 @@
 <?php
 include "../access.php";
 check_access('teacher');
-
-$teacher_name = $_SESSION['alias'] === NULL ? $_SESSION['fname'] : $_SESSION['alias'];
+// == " covers empty check like null '' and ' '
+$teacher_name = trim($_SESSION['alias']) == '' ? $_SESSION['fname'] : $_SESSION['alias'];
 ?>
 
 <!DOCTYPE html>

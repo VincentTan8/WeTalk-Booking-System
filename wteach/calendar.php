@@ -78,6 +78,8 @@ $current = 'class'; ?>
                                 <label class="toggle-label" for="online">Online</label>
                                 <input type="radio" class="toggle-radio" id="offline" name="platform" value="0">
                                 <label class="toggle-label" for="offline">Offline</label>
+                                <input type="radio" class="toggle-radio" id="both" name="platform" value="2">
+                                <label class="toggle-label" for="both">Both</label>
                             </div>
 
                             <label for="dayInput">3. Select Date/Time Preferred.</label>
