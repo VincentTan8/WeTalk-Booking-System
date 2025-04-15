@@ -55,7 +55,7 @@ $student_name = trim($_SESSION['nickname']) == '' ? $_SESSION['fname'] : $_SESSI
             <div class="d-flex align-items-center">
                 <img class="rounded-circle me-2" src="upload/student.jpg" alt="Student Profile" width="40" height="40">
                 <div class="dropdown">
-                    <a class="dropdown-toggle text-dark fw-bold" href="#" id="navbarDropdown" role="button"
+                    <a class="dropdown-toggle text-dark fw-bold nickname" href="#" id="navbarDropdown" role="button"
                         data-bs-toggle="dropdown" aria-expanded="false" style="font-family: Poppins;">
                         Hi <?php echo $student_name; ?>
                     </a>
