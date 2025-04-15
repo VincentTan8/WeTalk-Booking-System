@@ -20,140 +20,48 @@ body {
 }
 
 /* Header for all */
-.navbar-nav .nav-link {
-    opacity: 0.75;
+
+.profile-pic-wrapper {
+    position: relative;
+    display: inline-block;
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    overflow: hidden;
+    cursor: pointer;
+    margin-right: 20px;
 }
 
-.navbar-nav .nav-link.active {
-    font-weight: bold;
-    color: black !important;
-    opacity: 1;
+.myprofile-pic {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+    display: block;
 }
 
-/* Basic adjustments for navbar */
-.navbar-nav {
-    display: flex;
-    justify-content: center;
-    transition: transform 0.3s ease-in-out;
-    /* Add transition for sliding effect */
-}
-
-.profile-nav {
+.camera-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.4);
     display: flex;
     align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    border-radius: 50%;
 }
 
-.profile-nav img {
-    margin-right: 10px;
-    /* Adds space between image and name */
+.camera-overlay img {
+    width: 40px;
+    height: 40px;
 }
 
-@media (max-width: 1104px) {
-    .custom-navbar {
-        overflow: hidden;
-    }
-
-    /* Navbar items - collapsed view */
-    .navbar-nav {
-        flex-direction: column !important;
-        align-items: flex-start;
-        padding-left: 20px;
-        gap: 10px !important;
-        transition: transform 0.3s ease-in-out;
-        opacity: 0;
-        visibility: hidden;
-        transform: translateY(-20px);
-        /* Slightly hide for smooth transition */
-    }
-
-    .custom-navbar.show .navbar-nav {
-        opacity: 1;
-        visibility: visible;
-        transform: translateY(0);
-        /* Slide in from top */
-        transition: opacity 0.3s ease, visibility 0s 0s, transform 0.3s ease-in-out;
-    }
-
-    .profile-nav {
-        opacity: 0;
-        visibility: hidden;
-        transform: translateY(-20px);
-        transition: opacity 0.3s ease 0s, visibility 0s 0s, transform 0.3s ease-in-out 0s;
-    }
-
-    /* When navbar is toggled, profile should appear after menu animation */
-    .custom-navbar.show .profile-nav {
-        opacity: 1;
-        visibility: visible;
-        transform: translateY(0);
-        transition: opacity 0.3s ease 0.1s, visibility 0s 0s, transform 0.3s ease-in-out;
-    }
-
-    /* Adjust dropdown menu visibility */
-    .custom-navbar .dropdown-menu {
-        opacity: 0;
-        visibility: hidden;
-        height: 0;
-        padding: 0;
-        transition: opacity 0.3s ease, visibility 0s 0.3s, height 0.3s ease, padding 0.3s ease;
-    }
-
-    .custom-navbar.show .dropdown-menu {
-        opacity: 1;
-        visibility: visible;
-        height: auto;
-        padding: 10px 0;
-    }
-
-    /* Navbar toggler button */
-    .navbar-toggler {
-        display: block;
-        font-size: 30px;
-        color: white;
-        border: none;
-        padding: 10px;
-        border-radius: 5px;
-    }
-
-    /* When navbar is toggled */
-    .navbar-collapse.show .navbar-nav {
-        opacity: 1;
-        /* Make it visible after animation */
-        visibility: visible;
-        /* Set visibility to visible */
-        transform: translateY(0);
-        /* Move to original position */
-        transition: opacity 0.3s ease, visibility 0.3s ease 0.3s;
-        /* Delay visibility until after transform */
-    }
-
-    /* Ensure the navbar toggler works and content collapses */
-    .navbar-collapse {
-        display: block;
-        overflow: visible !important;
-    }
-
-    .navbar-toggler {
-        display: block;
-    }
-}
-
-@media (min-width: 1105px) {
-
-    /* No stacking, navbar should behave normally */
-    .navbar-nav {
-        flex-direction: row !important;
-        transform: none;
-    }
-
-    .navbar-collapse {
-        display: flex !important;
-        overflow: visible !important;
-    }
-
-    .navbar-toggler {
-        display: none;
-    }
+.profile-pic-wrapper:hover .camera-overlay {
+    opacity: 1;
 }
 
 /* Big Calendar for CS and Teacher */
