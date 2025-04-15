@@ -1,8 +1,9 @@
-<?php include "../config/conf.php";
-include "s-conf.php";
+<?php
 include "../access.php";
-check_access('student'); ?>
-
+check_access('student');
+// == '' covers empty check like null and ' '
+$student_name = trim($_SESSION['nickname']) == '' ? $_SESSION['fname'] : $_SESSION['nickname'];
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -16,10 +17,12 @@ check_access('student'); ?>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="../style.css">
     <link rel="stylesheet" href="style.css">
-
-
-    <!-- Bootstrap JS and Popper -->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Symbols+Outlined">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
 </head>
 
@@ -52,9 +55,9 @@ check_access('student'); ?>
             <div class="d-flex align-items-center">
                 <img class="rounded-circle me-2" src="upload/student.jpg" alt="Student Profile" width="40" height="40">
                 <div class="dropdown">
-                    <a class="dropdown-toggle text-dark fw-bold" href="#" id="navbarDropdown" role="button"
+                    <a class="dropdown-toggle text-dark fw-bold nickname" href="#" id="navbarDropdown" role="button"
                         data-bs-toggle="dropdown" aria-expanded="false" style="font-family: Poppins;">
-                        Hi <?php echo $fname; ?>
+                        Hi <?php echo $student_name; ?>
                     </a>
                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                         <li><a class="dropdown-item" href="../forgot/change_password.php">Change Password</a></li>

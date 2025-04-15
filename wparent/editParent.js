@@ -17,7 +17,6 @@ document.addEventListener('DOMContentLoaded', function () {
                     // Dynamically update the profile information without reloading the page
                     document.querySelector('.myprofile-name .name-text').innerText = data.fname + " " + data.lname;
                     document.querySelector('.myprofile-name .bio-text').innerText = data.bio;
-                    document.querySelector('.profile-nav .nickname').innerText = "Hi " + data.nickname;
                     document.querySelector('.profile-info-text2.email').innerText = data.email;
                     document.querySelector('.profile-info-text2.username').innerText = data.username;
                     document.querySelector('.profile-info-text2.phone').innerText = data.phone;
@@ -26,7 +25,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     document.querySelector('.profile-info-text2.birthday').innerText = data.birthday;
                     alert('Profile updated successfully!');
                 } else {
-                    alert('Error updating profile.' + data.error);
+                    alert('Error updating profile.');
                 }
             })
             .catch(error => {

@@ -216,10 +216,9 @@ a:hover {
 /* Sign Up Title */
 .sign-up-title {
     color: #29B866;
-    font-family: Helvetica, sans-serif;
-    font-size: 50px;
+    font-size: 40px;
     font-style: normal;
-    font-weight: 700;
+    font-weight: bold;
     line-height: normal;
     text-align: left;
     /* Ensure it aligns to the left */
@@ -498,4 +497,8 @@ a:hover {
     flex: 1;
     /* each takes equal width */
     word-break: break-word;
+}
+
+.dataTables_filter {
+    margin-bottom: 20px;
 }

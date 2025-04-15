@@ -1,16 +1,35 @@
-document.addEventListener("DOMContentLoaded", function() {
-    const editButton = document.getElementById('edit-button'); // Select the edit button
-    editButton.addEventListener("click", function() {
-        const inputs = document.querySelectorAll('.editinfocontainer input'); // Select all input boxes
-        const isEditing = inputs[0].hasAttribute('readonly'); // Check if currently in edit mode
+document.addEventListener('DOMContentLoaded', function () {
+    const form = document.querySelector('form');
 
-        inputs.forEach(input => {
-            input.readOnly = !isEditing; // Toggle readonly attribute
-        });
+    form.addEventListener('submit', function (e) {
+        e.preventDefault(); // Prevent form from refreshing the page
 
-        // Debugging statement to check button text change
-        console.log(`Button clicked. Current state: ${isEditing ? 'Editing' : 'Saving'}`);
-        
-        editButton.textContent = isEditing ? 'Save' : 'Edit'; // Change button text
+        const formData = new FormData(form);
+
+        // Send AJAX request to PHP script
+        fetch('updateProfile.php', {
+            method: 'POST',
+            body: formData
+        })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    // Dynamically update the profile information without reloading the page
+                    document.querySelector('.myprofile-name .name-text').innerText = data.fname + " " + data.lname;
+                    document.querySelector('.myprofile-name .bio-text').innerText = data.bio;
+                    document.querySelector('.profile-info-text2.email').innerText = data.email;
+                    document.querySelector('.profile-info-text2.username').innerText = data.username;
+                    document.querySelector('.profile-info-text2.phone').innerText = data.phone;
+                    document.querySelector('.profile-info-text2.gender').innerText = data.gender;
+                    document.querySelector('.profile-info-text2.city').innerText = data.city;
+                    document.querySelector('.profile-info-text2.birthday').innerText = data.birthday;
+                    alert('Profile updated successfully!');
+                } else {
+                    alert('Error updating profile. ' + data.error);
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
     });
 });

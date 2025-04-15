@@ -1,21 +1,17 @@
 <?php
 $current = 'home';
 include "../config/conf.php";
-include "s-conf.php";  //should be the only call of s-conf
+include "p-conf.php";
 
 $username = $_SESSION['username'];
 $fname = $_SESSION['fname'];
 $lname = $_SESSION['lname'];
-$nickname = $_SESSION['nickname'];
 $email = $_SESSION['email'];
 $bio = $_SESSION['bio'];
 $city = $_SESSION['city'];
 $phone = $_SESSION['phone'];
 $gender = $_SESSION['gender'];
 $birthday = $_SESSION['birthday'];
-$age = $_SESSION['age'];
-$nationality = $_SESSION['nationality'];
-$parent_ref_num = $_SESSION['parent_ref_num'];
 $id = $_SESSION['id'];
 $ref_num = $_SESSION['ref_num'];
 ?>
@@ -73,13 +69,8 @@ $ref_num = $_SESSION['ref_num'];
                             <div class="profile-info-text2 city"><?php echo $city; ?></div>
                         </div>
                         <div class="inline d-flex justify-content-between mb-2">
-                            <div class="profile-info-text">Student ID:</div>
-                            <div class="profile-info-text2"><?php echo $ref_num; ?></div>
-                        </div>
-
-                        <div class="inline d-flex justify-content-between mb-2">
                             <div class="profile-info-text">Parent ID:</div>
-                            <div class="profile-info-text2"><?php echo $parent_ref_num; ?></div>
+                            <div class="profile-info-text2"><?php echo $ref_num; ?></div>
                         </div>
                     </div>
                 </div>
@@ -104,27 +95,20 @@ $ref_num = $_SESSION['ref_num'];
                                 </div>
 
                                 <div class="first-name-parent mb-3">
-                                    <div class="profile-info-text">Nickname</div>
-                                    <input class="editprofile form-control" name="nickname" type="text"
-                                        value="<?php echo $nickname; ?>">
-                                </div>
-
-                                <div class="first-name-parent mb-3">
                                     <div class="profile-info-text">Phone</div>
                                     <input class="editprofile form-control" name="phone" type="text"
                                         value="<?php echo $phone; ?>">
                                 </div>
 
                                 <div class="first-name-parent mb-3">
-                                    <div class="profile-info-text">Age</div>
-                                    <input class="editprofile form-control" name="age" type="text"
-                                        value="<?php echo $age; ?>">
-                                </div>
-
-                                <div class="first-name-parent mb-3">
                                     <div class="profile-info-text">Gender</div>
                                     <input class="editprofile form-control" name="gender" type="text"
                                         value="<?php echo $gender; ?>">
+                                </div>
+                                <div class="first-name-parent mb-3">
+                                    <div class="profile-info-text">Bio</div>
+                                    <input class="editprofile form-control" name="bio" type="text"
+                                        value="<?php echo $bio; ?>">
                                 </div>
                             </div>
 
@@ -154,17 +138,7 @@ $ref_num = $_SESSION['ref_num'];
                                         value="<?php echo $birthday; ?>">
                                 </div>
 
-                                <div class="first-name-parent mb-3">
-                                    <div class="profile-info-text">Nationality</div>
-                                    <input class="editprofile form-control" name="nationality" type="text"
-                                        value="<?php echo $nationality; ?>">
-                                </div>
 
-                                <div class="first-name-parent mb-3">
-                                    <div class="profile-info-text">Bio</div>
-                                    <input class="editprofile form-control" name="bio" type="text"
-                                        value="<?php echo $bio; ?>">
-                                </div>
                             </div>
                         </div>
 
@@ -180,4 +154,4 @@ $ref_num = $_SESSION['ref_num'];
         </div>
     </div>
 </div>
-<script src="editStudent.js"></script>
+<script src="editParent.js"></script>

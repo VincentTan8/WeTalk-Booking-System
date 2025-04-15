@@ -15,25 +15,14 @@
 }
 
 body {
-    background-image: linear-gradient(180deg, #1eb089 27.29%, #1caf88 105.37%);
+    background-image: linear-gradient(180deg, #EBF2FA 33%, #C2D6EE 104.24%);
     min-height: 100vh;
 }
 
-/* Header for all */
-.navbar-nav .nav-link {
-    opacity: 0.75;
-}
-
-.navbar-nav .nav-link.active {
-    font-weight: bold;
-    color: black !important;
-    opacity: 1;
-}
-
-/* Basic adjustments for navbar */
 .navbar-nav {
     display: flex;
     justify-content: center;
+
     transition: transform 0.3s ease-in-out;
     /* Add transition for sliding effect */
 }
@@ -156,31 +145,6 @@ body {
     }
 }
 
-/* Big Calendar for CS and Teacher */
-.wrapper {
-    padding-right: 0;
-}
-
-@media (min-width: 992px) {
-    .wrapper {
-        padding-right: 16px;
-    }
-}
-
-.calendar {
-    width: 100%;
-    max-width: 100%;
-    overflow-x: auto;
-
-}
-
-.calendar-wrapper {
-    width: 100%;
-    overflow-x: auto;
-    padding: 10px;
-    box-sizing: border-box;
-}
-
 .calendar ul {
     list-style-type: none;
     padding: 0;
@@ -191,17 +155,18 @@ body {
 .calendar .days {
     display: grid;
     grid-template-columns: repeat(7, 1fr);
-    gap: 10px;
-    text-align: right;
+    gap: 5px;
 }
 
 .calendar .days li {
-    min-width: 30px;
-    padding: 6px;
-    font-size: 14px;
-    aspect-ratio: 14 / 13;
-    border-radius: 15px;
-    background: #FFF;
+    height: 130px;
+    background: #FBF9F9;
+    display: flex;
+    justify-content: center;
+
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
 }
 
 .calendar .days li:hover {
@@ -209,97 +174,97 @@ body {
 }
 
 .calendar .days li.active {
-    background-color: #2F8B58;
+    background-color: #FFAC00;
     color: white;
 }
 
+body {
+    background-image: linear-gradient(180deg, #EBF2FA 33%, #C2D6EE 104.24%);
+    min-height: 100vh;
+}
+
+.calendar-wrapper {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.calendar ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+/* Header for all */
+.navbar-nav .nav-link {
+    opacity: 0.75;
+}
+
+.navbar-nav .nav-link.active {
+    font-weight: bold;
+    color: black !important;
+}
+
+.my-schedule-label {
+    border-radius: 15px 15px 0px 0px;
+    background: #FFAC00;
+    padding: 10px;
+    text-align: center;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 700;
+    font-size: 16px;
+    color: #03011E;
+    color: white;
+
+}
+
+/* Mini Calendar for Student, CS , and Teacher */
+/* Mini calendar for all */
 .mini-calendar .days-mini li.today {
-    border: 2px solid #2F8B58;
-    color: #2F8B58;
+    border: 2px solid #FFAC00;
+    color: #FFAC00;
+
 }
 
 /* Headings */
 .announcement-section h4,
 .bulletin-section h4 {
-    background: #2F8B58;
+    background: #FFAC00;
     color: white;
 }
 
-
 .my-schedule-label {
-    background: #2F8B58;
+    background: #FFAC00;
 }
 
-.scheduled {
-    background-color: #2F8B58 !important;
-    color: white !important;
-    border-radius: 50%;
-}
 
-header {
+
+
+.platform-option {
+    border-radius: 10px;
+    border: 2px solid #DBE7FF;
+    background: #FBF9F9;
     display: flex;
+    max-width: 50%;
+    height: 64.779px;
+    padding: 13px 73px;
     justify-content: center;
     align-items: center;
-    color: #2F8B58;
     gap: 10px;
-    /* Add space between the icons and the month name */
-}
-
-.icons {
-    color: #f0f0f0 !important;
-    /* Set the same color for both chevrons */
-    font-size: 24px;
-    /* Adjust size of chevrons */
+    flex-shrink: 0;
     cursor: pointer;
+    margin: 5px;
 }
 
-.current-date {
-    font-size: 18px;
-    /* Size of the month text */
-    font-weight: 700;
-    /* Bold text */
-    color: #f0f0f0;
-    /* Apply your desired color here */
-    margin: 0;
-    /* Optional: remove any default margin */
+.platform-option.active {
+    border-radius: 10px;
+    border: 2px solid #FFAC00;
 
-}
-
-.toggle-btn {
-    padding: 5px 10px;
-    border: 1px solid #2F8B58;
-    border-radius: 0px 0px 0px 0px;
-    background: none;
-    cursor: pointer;
-    margin-right: 5px;
-    color: #2F8B58;
-    text-align: center;
-    font-family: Poppins;
-    font-size: 12px;
-    font-style: normal;
-    font-weight: 500;
-    line-height: 130%;
-}
-
-.toggle-btn:first-child {
-    border-radius: 5px 0px 0px 5px;
-}
-
-.toggle-btn:last-child {
-    border-radius: 0px 5px 5px 0px;
-    background: #FAB755;
-    color: #FFF;
-    border: 1px solid #FAB755;
-}
-
-.disabled {
-    color: gray !important;
-    cursor: not-allowed !important;
+    background: #FBF9F9;
 }
 
 .custom-save-btn {
     border-radius: 5px;
-    background: #2F8B58;
+    background: #FFAC00;
     box-shadow: 0px 4px 8.1px 0px rgba(3, 1, 30, 0.25);
     color: white;
     border: none;
@@ -320,4 +285,55 @@ header {
     align-items: stretch;
     /* Ensures both columns stretch to the same height */
     justify-content: center;
+}
+
+.myprofileinfo,
+.myprofile-edit {
+    display: flex;
+    flex-direction: column;
+}
+
+.dtime {
+    border-radius: 10px;
+    border: 2px solid #DBE7FF;
+    background: #FBF9F9;
+    display: flex;
+    max-width: 45%;
+    height: 64.779px;
+    padding: 13px 73px;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    flex-shrink: 0;
+    cursor: pointer;
+    margin: 5px;
+}
+
+/* .modal-content{
+    width:80%; 
+    border-radius: 15px; 
+    background: #FFF; 
+    box-shadow: 0px 0px 25px 0px rgba(3, 1, 30, 0.15); 
+    position: fixed; 
+}
+ */
+#edit-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+
+    padding: 13px 54px 13px 67px;
+
+    color: #FFF;
+    font-family: 'Poppins', sans-serif;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    letter-spacing: 0.32px;
+
+    background-color: #f0ad4e;
+    /* Keep default btn-warning or customize */
+    border: none;
 }
