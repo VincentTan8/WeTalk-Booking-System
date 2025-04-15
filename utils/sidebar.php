@@ -25,7 +25,12 @@
         <h4>Announcements</h4>
         <ul>
             <li>New event on March 30th</li>
-            <li>Holiday on April 2nd</li>
+            <li>Holiday on May 1st</li>
+            <!-- <li>Harry blowout on May 4th</li>
+            <li>A long holiday item is here for some reason</li>
+            <li>What happens if another long item is placed at the announcements section?</li>
+            <li>Some event on December 3rd</li>
+            <li>Christmas party on Dec 17th</li> -->
         </ul>
     </div>
 
@@ -35,6 +40,10 @@
         <ul>
             <li>Reminder: Submit reports by April 10th</li>
             <li>School trip registration open</li>
+            <!-- <li>A long bulletin board item is placed here for testing</li>
+            <li>Another long bulletin board item is over here. How will the container behave when a long losted item is
+                placed?</li>
+            <li>Bulletin board item here</li> -->
         </ul>
     </div>
 </div>
