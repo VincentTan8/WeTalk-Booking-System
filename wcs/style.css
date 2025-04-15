@@ -1,42 +1,207 @@
 /* Prevent Bootstrap from messing with your calendar */
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
-*{
+
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
     font-family: 'Poppins', sans-serif;
     color: #03011E;
-    font-family: Poppins;
     font-size: 16px;
     font-style: normal;
-    font-weight: 400;
+    font-weight: 700;
     line-height: normal;
     letter-spacing: 0.32px;
 }
+
+body {
+    background-image: linear-gradient(180deg, #1eb089 27.29%, #1caf88 105.37%);
+    min-height: 100vh;
+}
+
+/* Header for all */
+.navbar-nav .nav-link {
+    opacity: 0.75;
+}
+
+.navbar-nav .nav-link.active {
+    font-weight: bold;
+    color: black !important;
+    opacity: 1;
+}
+
+/* Basic adjustments for navbar */
+.navbar-nav {
+    display: flex;
+    justify-content: center;
+    transition: transform 0.3s ease-in-out;
+    /* Add transition for sliding effect */
+}
+
+.profile-nav {
+    display: flex;
+    align-items: center;
+}
+
+.profile-nav img {
+    margin-right: 10px;
+    /* Adds space between image and name */
+}
+
+@media (max-width: 1104px) {
+    .custom-navbar {
+        overflow: hidden;
+    }
+
+    /* Navbar items - collapsed view */
+    .navbar-nav {
+        flex-direction: column !important;
+        align-items: flex-start;
+        padding-left: 20px;
+        gap: 10px !important;
+        transition: transform 0.3s ease-in-out;
+        opacity: 0;
+        visibility: hidden;
+        transform: translateY(-20px);
+        /* Slightly hide for smooth transition */
+    }
+
+    .custom-navbar.show .navbar-nav {
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0);
+        /* Slide in from top */
+        transition: opacity 0.3s ease, visibility 0s 0s, transform 0.3s ease-in-out;
+    }
+
+    .profile-nav {
+        opacity: 0;
+        visibility: hidden;
+        transform: translateY(-20px);
+        transition: opacity 0.3s ease 0s, visibility 0s 0s, transform 0.3s ease-in-out 0s;
+    }
+
+    /* When navbar is toggled, profile should appear after menu animation */
+    .custom-navbar.show .profile-nav {
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0);
+        transition: opacity 0.3s ease 0.1s, visibility 0s 0s, transform 0.3s ease-in-out;
+    }
+
+    /* Adjust dropdown menu visibility */
+    .custom-navbar .dropdown-menu {
+        opacity: 0;
+        visibility: hidden;
+        height: 0;
+        padding: 0;
+        transition: opacity 0.3s ease, visibility 0s 0.3s, height 0.3s ease, padding 0.3s ease;
+    }
+
+    .custom-navbar.show .dropdown-menu {
+        opacity: 1;
+        visibility: visible;
+        height: auto;
+        padding: 10px 0;
+    }
+
+    /* Navbar toggler button */
+    .navbar-toggler {
+        display: block;
+        font-size: 30px;
+        color: white;
+        border: none;
+        padding: 10px;
+        border-radius: 5px;
+    }
+
+    /* When navbar is toggled */
+    .navbar-collapse.show .navbar-nav {
+        opacity: 1;
+        /* Make it visible after animation */
+        visibility: visible;
+        /* Set visibility to visible */
+        transform: translateY(0);
+        /* Move to original position */
+        transition: opacity 0.3s ease, visibility 0.3s ease 0.3s;
+        /* Delay visibility until after transform */
+    }
+
+    /* Ensure the navbar toggler works and content collapses */
+    .navbar-collapse {
+        display: block;
+        overflow: visible !important;
+    }
+
+    .navbar-toggler {
+        display: block;
+    }
+}
+
+@media (min-width: 1105px) {
+
+    /* No stacking, navbar should behave normally */
+    .navbar-nav {
+        flex-direction: row !important;
+        transform: none;
+    }
+
+    .navbar-collapse {
+        display: flex !important;
+        overflow: visible !important;
+    }
+
+    .navbar-toggler {
+        display: none;
+    }
+}
+
+/* Big Calendar for CS and Teacher */
+.wrapper {
+    padding-right: 0;
+}
+
+@media (min-width: 992px) {
+    .wrapper {
+        padding-right: 16px;
+    }
+}
+
+.calendar {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: auto;
+
+}
+
+.calendar-wrapper {
+    width: 100%;
+    overflow-x: auto;
+    padding: 10px;
+    box-sizing: border-box;
+}
+
 .calendar ul {
     list-style-type: none;
     padding: 0;
     margin: 0;
 }
 
-.calendar .weeks, .calendar .days {
+.calendar .weeks,
+.calendar .days {
     display: grid;
     grid-template-columns: repeat(7, 1fr);
-    gap: 5px;
+    gap: 10px;
+    text-align: right;
 }
 
 .calendar .days li {
-    padding-top:7px;
-    padding-bottom: 7px;
-    padding-right: 23px;
-    padding-left: 21px;
-    aspect-ratio: 1/1;
-    background: #FBF9F9;
-    display: flex;
-    justify-content: right;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s;
+    min-width: 30px;
+    padding: 6px;
+    font-size: 14px;
+    aspect-ratio: 14 / 13;
+    border-radius: 15px;
+    background: #FFF;
 }
 
 .calendar .days li:hover {
@@ -44,149 +209,70 @@
 }
 
 .calendar .days li.active {
-    background-color: #29B866;
+    background-color: #2F8B58;
     color: white;
-    aspect-ratio: 1/1;
 }
 
-body {
-    background-image: linear-gradient(180deg, #F1FFF0 66.19%, #D0F0C1 130%);
-    min-height: 100vh;
-
-}
-
-.calendar-wrapper {
-    background: white;
-    padding: 20px;
-    border-radius: 10px;
-}
-
-.calendar ul {
-    list-style-type: none;
-    padding: 0;
-}
-
-
-
-.mini-calendar ul {
-    list-style-type: none;
-    padding: 0;
-}
-
-/* Mini Calendar Styling */
-.mini-calendar {
-    background: white;
-    padding: 15px;
-    border-radius: 10px;
-}
-
-/* Days styling */
-.mini-calendar .weeks, .mini-calendar .days-mini {
-    display: grid;
-    grid-template-columns: repeat(7, 1fr);
-    gap: 3px;
-}
-
-.mini-calendar .days-mini li {
-    padding: 5px;
-    background: #FBF9F9;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-}
-
-/* Hover effect */
-.mini-calendar .days-mini li:hover {
-    background-color: #E3E3E3;
-}
-
-/* Highlight for the current day */
 .mini-calendar .days-mini li.today {
-    border: 2px solid #29B866;
-    background-color: white;
-    color: #29B866;
-    font-weight: bold;
+    border: 2px solid #2F8B58;
+    color: #2F8B58;
 }
 
-.navbar-nav .nav-link.active {
-    font-weight: bold;
-    color: black !important;
-}
-@media (max-width: 1274px) {
-    .mini-calendar {
-        display: none;
-    }
-    /* Container for announcements & bulletin */
-.announcement-bulletin-container {
-    margin-top: 20px; /* Space below the calendar */
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-    width: 100%;
-    max-width: 800px; /* Adjust width to align with the calendar */
-    margin-left: auto;
-    margin-right: auto;
-}
-
-/* Announcement & Bulletin Styling */
-.announcement-section, .bulletin-section {
-    border-radius: 15px;
-    background: #FFF;
-    box-shadow: 0px 0px 14.4px rgba(3, 1, 30, 0.15);
-    padding: 15px;
-}
+/* Headings */
+.announcement-section h4,
+.bulletin-section h4 {
+    background: #2F8B58;
+    color: white;
 }
 
 
-/* Announcement & Bulletin Board Styling */
-.announcement-section, .bulletin-section {
-    border-radius: 15px;
-    background: #FFF;
-    box-shadow: 0px 0px 14.4px rgba(3, 1, 30, 0.15);
-    text-align: left;
-    padding: 15px;
-    max-width: 350px;
+.my-schedule-label {
+    background: #2F8B58;
 }
 
-/* Space between announcements and bulletin */
-.announcement-section {
-    margin-bottom: 20px; /* Adds space between announcement and bulletin */
-}
-
-.announcement-section h4, .bulletin-section h4 {
-    margin-bottom: 10px;
-    font-weight: 600;
-}
-
-.announcement-section ul, .bulletin-section ul {
-    padding-left: 18px;
-    list-style-type: disc;
-}
-
-.announcement-section li, .bulletin-section li {
-    margin-bottom: 5px;
-    font-size: 14px;
-}
-/* Space between mini-calendar and announcements */
-.mini-calendar{
-    margin-bottom: 20px;
-}
 .scheduled {
-    background-color: #29B866 !important;
+    background-color: #2F8B58 !important;
     color: white !important;
     border-radius: 50%;
 }
+
+header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #2F8B58;
+    gap: 10px;
+    /* Add space between the icons and the month name */
+}
+
+.icons {
+    color: #f0f0f0 !important;
+    /* Set the same color for both chevrons */
+    font-size: 24px;
+    /* Adjust size of chevrons */
+    cursor: pointer;
+}
+
+.current-date {
+    font-size: 18px;
+    /* Size of the month text */
+    font-weight: 700;
+    /* Bold text */
+    color: #f0f0f0;
+    /* Apply your desired color here */
+    margin: 0;
+    /* Optional: remove any default margin */
+
+}
+
 .toggle-btn {
     padding: 5px 10px;
-    border: 1px solid #29B866;
+    border: 1px solid #2F8B58;
     border-radius: 0px 0px 0px 0px;
     background: none;
     cursor: pointer;
     margin-right: 5px;
-    color: #29B866;
+    color: #2F8B58;
     text-align: center;
     font-family: Poppins;
     font-size: 12px;
@@ -194,15 +280,18 @@ body {
     font-weight: 500;
     line-height: 130%;
 }
+
 .toggle-btn:first-child {
     border-radius: 5px 0px 0px 5px;
 }
+
 .toggle-btn:last-child {
     border-radius: 0px 5px 5px 0px;
     background: #FAB755;
-    color : #FFF;
+    color: #FFF;
     border: 1px solid #FAB755;
 }
+
 .disabled {
     color: gray !important;
     cursor: not-allowed !important;
@@ -210,12 +299,13 @@ body {
 
 .custom-save-btn {
     border-radius: 5px;
-    background: #29B866;
+    background: #2F8B58;
     box-shadow: 0px 4px 8.1px 0px rgba(3, 1, 30, 0.25);
     color: white;
     border: none;
     padding: 10px 20px;
 }
+
 .custom-cancel-btn {
     border-radius: 5px;
     background: #FFF;
@@ -224,8 +314,10 @@ body {
     padding: 10px 20px;
     color: #03011E;
 }
+
 .myprofile {
     display: flex;
-    align-items: stretch; /* Ensures both columns stretch to the same height */
+    align-items: stretch;
+    /* Ensures both columns stretch to the same height */
     justify-content: center;
 }
