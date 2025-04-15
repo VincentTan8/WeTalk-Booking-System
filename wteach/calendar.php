@@ -93,12 +93,12 @@ $current = 'class'; ?>
                                     </select>
                                 </div>
                             </div>
+                            <div class="text-center">
+                                <input type="submit" value="Save"
+                                    style="border-radius: 10px; background: #916DFF;padding: 13px 54px; color:white; border:none;">
+                            </div>
+                        </form>
                     </div>
-                    <br><br>
-                    <input type="submit" value="Save"
-                        style="border-radius: 10px; background: #916DFF;padding: 13px 54px; color:white; border:none;">
-                    <br>
-                    </form>
                 </div>
             </div>
         </div>
