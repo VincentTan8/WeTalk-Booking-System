@@ -2,7 +2,7 @@
 include "../access.php";
 check_access('student');
 // == '' covers empty check like null and ' '
-$student_name = trim($_SESSION['nickname']) == '' ? $_SESSION['fname'] : $_SESSION['nickname'];
+$student_name = trim($_SESSION['nickname'] ?? '') == '' ? $_SESSION['fname'] : $_SESSION['nickname'];
 ?>
 
 <!DOCTYPE html>
