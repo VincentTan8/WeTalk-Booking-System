@@ -1,7 +1,7 @@
 <?php
 include "../access.php";
 check_access('teacher');
-// == " covers empty check like null '' and ' '
+// == '' covers empty check like null '' and ' '
 $teacher_name = trim($_SESSION['alias']) == '' ? $_SESSION['fname'] : $_SESSION['alias'];
 ?>
 
