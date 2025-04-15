@@ -27,15 +27,16 @@ $student_name = trim($_SESSION['nickname']) == '' ? $_SESSION['fname'] : $_SESSI
 </head>
 
 <!-- Navigation Bar -->
-<nav class="navbar navbar-expand-lg navbar-light"
-    style=" box-shadow: 0px 0px 14.4px rgba(3, 1, 30, 0.15); border-radius: 15px;background:white; margin-top:50px;">
+<nav class="navbar navbar-light custom-navbar"
+    style="box-shadow: 0px 0px 14.4px rgba(3, 1, 30, 0.15); border-radius: 15px; background: white; margin-top: 50px;">
     <div class="container-fluid">
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent"
             aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="collapse navbar-collapse" id="navbarContent" style="height:60px;">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0" style="font-family: Poppins;">
+        <div class="collapse navbar-collapse" id="navbarContent" style="height: 60px;">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0"
+                style="font-family: Poppins; gap: 50px; padding: 25px 50px; flex-direction: row;">
                 <li class="nav-item">
                     <a class="nav-link <?php echo $current == 'home' ? 'active fw-bold text-primary' : ''; ?>"
                         href="index.php">My Profile</a>
@@ -44,17 +45,12 @@ $student_name = trim($_SESSION['nickname']) == '' ? $_SESSION['fname'] : $_SESSI
                     <a class="nav-link <?php echo $current == 'class' ? 'active fw-bold text-primary' : ''; ?>"
                         href="class.php">My Class</a>
                 </li>
-                <!-- <li class="nav-item">
-                            <a class="nav-link {{ $current == 'download' ? 'active text-primary' : '' }}" href="calendar.php">My Download</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link {{ $current == 'help' ? 'active text-primary' : '' }}" href="help.php">Need Help?</a>
-                        </li> -->
             </ul>
             <!-- Profile Section -->
-            <div class="d-flex align-items-center">
-                <img class="rounded-circle me-2" src="upload/student.jpg" alt="Student Profile" width="40" height="40">
-                <div class="dropdown">
+            <div class="d-flex align-items-center position-relative" style="padding-right: 50px;">
+                <div class="profile-nav dropdown">
+                    <img class="rounded-circle me-2" src="upload/student.jpg" alt="Student Profile" width="40"
+                        height="40">
                     <a class="dropdown-toggle text-dark fw-bold nickname" href="#" id="navbarDropdown" role="button"
                         data-bs-toggle="dropdown" aria-expanded="false" style="font-family: Poppins;">
                         Hi <?php echo $student_name; ?>
@@ -70,3 +66,15 @@ $student_name = trim($_SESSION['nickname']) == '' ? $_SESSION['fname'] : $_SESSI
 </nav>
 
 <!-- Main Content -->
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const toggler = document.querySelector(".navbar-toggler");
+        const navbar = document.querySelector(".custom-navbar");
+
+        if (toggler && navbar) {
+            toggler.addEventListener("click", function () {
+                navbar.classList.toggle("show");
+            });
+        }
+    });
+</script>
