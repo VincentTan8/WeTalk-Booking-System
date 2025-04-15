@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', function () {
-    const form = document.querySelector('form');
+    const form = document.getElementById('edit-profile-form');
 
     form.addEventListener('submit', function (e) {
         e.preventDefault(); // Prevent form from refreshing the page
