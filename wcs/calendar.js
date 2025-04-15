@@ -83,8 +83,9 @@ const renderCalendar = async (type) => {
             const currentDate = new Date();
             const compareDate = new Date(currYear, currMonth, i);
             const isPast = compareDate < currentDate.setHours(0, 0, 0, 0);
-            const highlightClass = isScheduled ? "scheduled" : isPast ? "past" : "";
 
+            // TODO: consider changing which class should apply first since free sched today that are past the time does not display on the modal
+            const highlightClass = isScheduled ? "scheduled" : isPast ? "past" : "";
             // const highlightClass = isScheduled ? "scheduled" : isToday ? "active" : "";
 
             liTag += `<li class="${highlightClass}" data-date="${fullDate}" ${isPast ? 'style="pointer-events: none; opacity: 0.5;"' : ""}>${i}</li>`;
