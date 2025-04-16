@@ -68,15 +68,6 @@ body {
     padding: 0;
 }
 
-/* Header for all */
-.navbar-nav .nav-link {
-    opacity: 0.75;
-}
-
-.navbar-nav .nav-link.active {
-    font-weight: bold;
-    color: black !important;
-}
 
 .my-schedule-label {
     border-radius: 15px 15px 0px 0px;

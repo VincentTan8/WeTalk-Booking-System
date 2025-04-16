@@ -1,9 +1,9 @@
-document.addEventListener('DOMContentLoaded', function() {
-    const form = document.querySelector('form');
-    
-    form.addEventListener('submit', function(e) {
+document.addEventListener('DOMContentLoaded', function () {
+    const form = document.getElementById('edit-profile-form');
+
+    form.addEventListener('submit', function (e) {
         e.preventDefault(); // Prevent form from refreshing the page
-        
+
         const formData = new FormData(form);
 
         // Send AJAX request to PHP script

@@ -283,6 +283,128 @@ a:hover {
     /* Adjust the spacing between the two choices */
 }
 
+.navbar-nav .nav-link {
+    opacity: 0.75;
+}
+
+.navbar-nav .nav-link.active {
+    font-weight: bold;
+    color: black !important;
+    opacity: 1;
+}
+
+/* Basic adjustments for navbar */
+.navbar-nav {
+    display: flex;
+    justify-content: center;
+    transition: transform 0.3s ease-in-out;
+    /* Add transition for sliding effect */
+}
+
+.profile-nav {
+    display: flex;
+    align-items: center;
+}
+
+.profile-nav img {
+    margin-right: 10px;
+    /* Adds space between image and name */
+}
+
+@media (max-width: 1104px) {
+    #navbarContainer {
+        padding: 25px 50px;
+    }
+
+    .navbar-nav {
+        flex-direction: column !important;
+        align-items: flex-start;
+        padding-left: 20px;
+        gap: 10px !important;
+        transition: opacity 0.3s ease, visibility 0s 0.3s, transform 0.3s ease-in-out;
+        opacity: 0;
+        visibility: hidden;
+        transform: translateY(-20px);
+    }
+
+    /* No delay for profile-nav */
+    .profile-nav {
+        opacity: 0;
+        visibility: hidden;
+        transform: translateY(-20px);
+        transition: opacity 0.3s ease, visibility 0s 0s, transform 0.3s ease-in-out;
+    }
+
+    /* When navbar is toggled, both navbar items and profile should appear together */
+    .navbar-collapse.show .navbar-nav,
+    .navbar-collapse.show .profile-nav {
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0);
+        transition: opacity 0.3s ease, visibility 0s 0s, transform 0.3s ease-in-out;
+    }
+}
+
+@media (min-width: 1105px) {
+
+    /* Navbar in row layout on larger screens */
+    .navbar-nav {
+        flex-direction: row !important;
+        transform: none;
+    }
+
+    .navbar-collapse {
+        display: flex !important;
+        overflow: visible !important;
+    }
+
+    .navbar-toggler {
+        display: none;
+    }
+}
+
+.profile-pic-wrapper {
+    position: relative;
+    display: inline-block;
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    overflow: hidden;
+    cursor: pointer;
+    margin-right: 20px;
+}
+
+.myprofile-pic {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+    display: block;
+}
+
+.camera-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.4);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    border-radius: 50%;
+}
+
+.camera-overlay img {
+    width: 40px;
+    height: 40px;
+}
+
+.profile-pic-wrapper:hover .camera-overlay {
+    opacity: 1;
+}
 
 /* Mini calendar for all */
 .mini-calendar {

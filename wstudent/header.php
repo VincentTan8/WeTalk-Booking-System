@@ -3,7 +3,7 @@ include "../access.php";
 check_access('student');
 // == '' covers empty check like null and ' '
 $student_name = trim($_SESSION['nickname'] ?? '') == '' ? $_SESSION['fname'] : $_SESSION['nickname'];
-?>
+$profile_pic = $_SESSION['profile_pic']; ?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -19,6 +19,7 @@ $student_name = trim($_SESSION['nickname'] ?? '') == '' ? $_SESSION['fname'] : $
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Symbols+Outlined">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
@@ -27,15 +28,16 @@ $student_name = trim($_SESSION['nickname'] ?? '') == '' ? $_SESSION['fname'] : $
 </head>
 
 <!-- Navigation Bar -->
-<nav class="navbar navbar-expand-lg navbar-light"
-    style=" box-shadow: 0px 0px 14.4px rgba(3, 1, 30, 0.15); border-radius: 15px;background:white; margin-top:50px;">
-    <div class="container-fluid">
+<nav class="navbar navbar-light custom-navbar"
+    style="box-shadow: 0px 0px 14.4px rgba(3, 1, 30, 0.15); border-radius: 15px; background: white; margin-top: 50px;">
+    <div id="navbarContainer" class="container-fluid">
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent"
             aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="collapse navbar-collapse" id="navbarContent" style="height:60px;">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0" style="font-family: Poppins;">
+        <div class="collapse navbar-collapse" id="navbarContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0"
+                style="font-family: Poppins; gap: 50px; padding: 25px 50px; flex-direction: row;">
                 <li class="nav-item">
                     <a class="nav-link <?php echo $current == 'home' ? 'active fw-bold text-primary' : ''; ?>"
                         href="index.php">My Profile</a>
@@ -44,17 +46,12 @@ $student_name = trim($_SESSION['nickname'] ?? '') == '' ? $_SESSION['fname'] : $
                     <a class="nav-link <?php echo $current == 'class' ? 'active fw-bold text-primary' : ''; ?>"
                         href="class.php">My Class</a>
                 </li>
-                <!-- <li class="nav-item">
-                            <a class="nav-link {{ $current == 'download' ? 'active text-primary' : '' }}" href="calendar.php">My Download</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link {{ $current == 'help' ? 'active text-primary' : '' }}" href="help.php">Need Help?</a>
-                        </li> -->
             </ul>
             <!-- Profile Section -->
-            <div class="d-flex align-items-center">
-                <img class="rounded-circle me-2" src="upload/student.jpg" alt="Student Profile" width="40" height="40">
-                <div class="dropdown">
+            <div class="d-flex align-items-center position-relative" style="padding-right: 50px;">
+                <div class="profile-nav dropdown">
+                    <img class="rounded-circle me-2" src="upload/<?php echo $profile_pic ?>" alt="Student Profile"
+                        width="40" height="40">
                     <a class="dropdown-toggle text-dark fw-bold nickname" href="#" id="navbarDropdown" role="button"
                         data-bs-toggle="dropdown" aria-expanded="false" style="font-family: Poppins;">
                         Hi <?php echo $student_name; ?>

@@ -37,20 +37,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $_SESSION['email'] = $loginResult['user_data']['email']; // Store email in session
         $_SESSION['username'] = $loginResult['user_data']['username']; // Store username in session
 
-        // Redirect user based on their type
-        if ($userType === 'student') {
-            header("Location: wstudent/index.php");
-            exit;
-        } elseif ($userType === 'teacher') {
-            header("Location: wteach/index.php");
-            exit;
-        } elseif ($userType === 'cs') {
-            header("Location: wcs/index.php");
-            exit;
-        } elseif ($userType === 'parent') {
-            header("Location: wparent/index.php");
+        $loginMap = [
+            'student' => 'wstudent',
+            'teacher' => 'wteach',
+            'cs' => 'wcs',
+            'parent' => 'wparent'
+        ];
+        $loginFolderName = isset($loginMap[$userType]) ? $loginMap[$userType] : null;
+
+        if (!$loginFolderName) {
+            echo "Invalid user type.";
             exit;
         }
+
+        $login_dir = $loginFolderName . '/index.php'; //important that no trailing slash here
+        header('Location: ' . $login_dir);
     } else {
         $error = "Invalid email/username or password. Please try again."; // Set error message
     }
