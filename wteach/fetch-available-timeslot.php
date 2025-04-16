@@ -1,4 +1,5 @@
 <?php
+//fetch available timeslots of teacher for current date
 include "../config/conf.php";
 
 header('Content-Type: application/json');

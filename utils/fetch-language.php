@@ -1,5 +1,5 @@
 <?php
-// <!-- fetch languages -->
+//  Fetch all languages
 include "../config/conf.php";
 
 $tablename = $prefix . "_resources.`language`";

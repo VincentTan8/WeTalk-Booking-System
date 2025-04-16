@@ -1,11 +1,12 @@
 <?php
-// Fetch available teachers given a schedule (date)
+// Fetch available teachers given a configured schedule (from TIS table)
 include '../config/conf.php';
 
 // Check connection
 if (!$conn) {
     die("Connection failed: " . mysqli_connect_error());
 }
+// todo change sched_id to schedule parameters
 if (isset($_POST['sched_id'])) {
     $sched_id = $_POST['sched_id'];
 
