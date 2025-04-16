@@ -8,7 +8,7 @@ function generateRefNum($conn, $ref_num_prefix, $tablename)
     $result = $stmt->get_result()->fetch_assoc();
     $count = $result['count'];
 
-    $sequence = str_pad($count + 1, 2, '0', STR_PAD_LEFT); // e.g., 01, 02, ...
+    $sequence = str_pad($count + 1, 4, '0', STR_PAD_LEFT); // e.g., 01, 02, ...
     $reference = $ref_num_prefix . $sequence;
 
     return $reference;

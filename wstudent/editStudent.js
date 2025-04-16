@@ -15,9 +15,10 @@ document.addEventListener('DOMContentLoaded', function () {
             .then(data => {
                 if (data.success) {
                     // Dynamically update the profile information without reloading the page
+                    const student_name = data.nickname.trim() == '' ? data.fname : data.nickname;
+                    document.querySelector('.profile-nav .nickname').innerText = "Hi " + student_name;
                     document.querySelector('.myprofile-name .name-text').innerText = data.fname + " " + data.lname;
                     document.querySelector('.myprofile-name .bio-text').innerText = data.bio;
-                    document.querySelector('.profile-nav .nickname').innerText = "Hi " + data.nickname;
                     document.querySelector('.profile-info-text2.email').innerText = data.email;
                     document.querySelector('.profile-info-text2.username').innerText = data.username;
                     document.querySelector('.profile-info-text2.phone').innerText = data.phone;

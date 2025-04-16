@@ -1,8 +1,8 @@
 <?php
 include "../access.php";
 check_access('teacher');
-// == " covers empty check like null '' and ' '
-$teacher_name = trim($_SESSION['alias']) == '' ? $_SESSION['fname'] : $_SESSION['alias'];
+// == '' covers empty check like null '' and ' '
+$teacher_name = trim($_SESSION['alias'] ?? '') == '' ? $_SESSION['fname'] : $_SESSION['alias'];
 $profile_pic = $_SESSION['profile_pic']; ?>
 
 <!DOCTYPE html>
@@ -39,8 +39,7 @@ $profile_pic = $_SESSION['profile_pic']; ?>
                 style="font-family: Poppins; gap: 50px; padding: 25px 50px; flex-direction: row;">
                 <li class="nav-item">
                     <a class="nav-link <?php echo $current == 'home' ? 'active fw-bold text-primary' : ''; ?>"
-                        href="index.php">My
-                        Profile</a>
+                        href="index.php">My Profile</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link <?php echo $current == 'student' ? 'active fw-bold text-primary' : ''; ?>"

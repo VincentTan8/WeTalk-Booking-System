@@ -91,7 +91,6 @@ $current = 'class'; ?>
                                 </div>
                                 <div class="form-group flex-fill">
                                     <select id="timeSelect" name="schedtime[]" class="form-select" required>
-                                        <option value="">Select Timeslot</option>
                                     </select>
                                 </div>
                             </div>

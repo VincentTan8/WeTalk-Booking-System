@@ -1,5 +1,6 @@
 <?php
 include "config/conf.php"; // Ensure this contains database connection
+include "utils/generateRefNum.php";
 
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['email'])) {
@@ -10,21 +11,25 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['email'])) {
     $phone = $_POST['phone'];
     $role = $_POST['role']; // student or parent
 
-    // Determine which table to use
+    // Determine which role is selected
     if ($role === 'student') {
         $tablename = $prefix . "_resources.`student`";
+        $ref_num_prefix = "ST-";
+        $ref_num = generateRefNum($conn, $ref_num_prefix, $tablename);
     } elseif ($role === 'parent') {
         $tablename = $prefix . "_resources.`parent`";
+        $ref_num_prefix = "PT-";
+        $ref_num = generateRefNum($conn, $ref_num_prefix, $tablename);
     } else {
         die("Invalid role selected.");
     }
 
     // Insert into selected table
-    $sql = "INSERT INTO $tablename (`fname`, `lname`, `email`, `phone`, `password`) 
-        VALUES (?, ?, ?, ?, ?)";
+    $sql = "INSERT INTO $tablename (`ref_num`, `fname`, `lname`, `email`, `phone`, `password`) 
+        VALUES (?, ?, ?, ?, ?, ?)";
 
     $stmt = $conn->prepare($sql);
-    $stmt->bind_param("sssss", $fname, $lname, $email, $phone, $password);
+    $stmt->bind_param("ssssss", $ref_num, $fname, $lname, $email, $phone, $password);
 
     if ($stmt->execute()) {
         // Send email notification
