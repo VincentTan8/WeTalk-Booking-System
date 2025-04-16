@@ -14,6 +14,8 @@ $gender = $_SESSION['gender'];
 $birthday = $_SESSION['birthday'];
 $id = $_SESSION['id'];
 $ref_num = $_SESSION['ref_num'];
+$profile_pic = $_SESSION['profile_pic'];
+$user_type = $_SESSION['access'];
 ?>
 
 <div style="display: grid">
@@ -26,13 +28,31 @@ $ref_num = $_SESSION['ref_num'];
 
                 <!-- Profile Information Display (Left Side) -->
                 <div class="col-12 col-md-12 col-lg-6 myprofileinfo d-flex flex-column"
-                    style="background-color: #FBF9F9; padding: 20px; border-radius: 10px; ">
+                    style="background-color: #FBF9F9; padding: 20px; border-radius: 10px;">
                     <div class="myprofile-name d-flex flex-column flex-md-row align-items-center text-center text-md-start"
                         style="width: 100%;">
 
-                        <!-- Profile Image aligned to the left -->
-                        <img class="myprofile-pic me-3" alt="Profile" src="upload/student.jpg"
-                            style="width: 150px; height: 150px; border-radius: 50%;">
+                        <!-- Profile Image aligned to the left, clickable for image upload -->
+                        <form action="../utils/upload-profile-pic.php" method="post" enctype="multipart/form-data">
+                            <div class="profile-pic-wrapper"
+                                onclick="document.getElementById('profile-pic-upload').click();">
+                                <img class="myprofile-pic me-3" alt="Profile"
+                                    src="upload/<?php echo $profile_pic ? $profile_pic : 'cs.jpg'; ?>">
+                                <div class="camera-overlay">
+                                    <i class="fa fa-camera" style="color: white; font-size: 24px;"></i>
+                                </div>
+                            </div>
+
+
+                            <!-- Hidden file input for uploading a new profile picture -->
+                            <input type="file" name="ufile" style="display: none;" id="profile-pic-upload"
+                                onchange="this.form.submit();">
+                            <!-- Hidden fields to pass user info to the upload handler -->
+                            <input type="hidden" name="user_id" value="<?php echo $id; ?>">
+                            <input type="hidden" name="user_type" value="<?php echo $user_type; ?>">
+                            <!-- Assuming logged-in user is of type 'cs' -->
+                        </form>
+
                         <!-- Profile Name and Bio aligned to the left -->
                         <div class="profile-container">
                             <div class="name-text" style="font-size: 1.5em; font-weight: bold;">
@@ -144,9 +164,8 @@ $ref_num = $_SESSION['ref_num'];
 
                         <!-- Save & Cancel Buttons -->
                         <div class="edit mt-4 text-center">
-                            <button id="edit-button" class="edit-click  btn-primary me-2 custom-save-btn"
+                            <button type="submit" id="edit-button" class="edit-click btn-primary me-2 custom-save-btn"
                                 name="save">Save</button>
-
                         </div>
                     </form>
                 </div>
