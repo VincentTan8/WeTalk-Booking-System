@@ -1,14 +1,6 @@
 <?php
-if (!isset($_SESSION)) {
-    session_start();
-    ob_start();
-}
-?>
-
-<?php
-// Database connection
+// Fetch available teachers given a schedule (date)
 include '../config/conf.php';
-include 's-conf.php';
 
 // Check connection
 if (!$conn) {
@@ -22,7 +14,7 @@ if (isset($_POST['sched_id'])) {
             FROM $tablename
             WHERE `id` = $sched_id");
     $row = $result->fetch_assoc();
-    $availableteachers = $row['teacher_ids'];     //sample value: 1,8,9
+    $availableteachers = $row['teacher_ids'];     //sample value: WT-0001,WT-0002,WT-0003
 
     // Fetch teachers assigned to the selected schedule
     $tablename = $prefix . "_resources.`teacher`";
