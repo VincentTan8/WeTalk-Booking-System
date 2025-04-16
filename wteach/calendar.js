@@ -15,7 +15,7 @@ const languageSelect = document.getElementById("languageSelect");
 
 const fetchLanguages = async () => {
     try {
-        const response = await fetch("fetch-language.php");
+        const response = await fetch("../utils/fetch-language.php");
         const data = await response.json();
 
         // Clear existing options
@@ -48,9 +48,6 @@ const updateTimeslots = async (selectedDate) => {
             body: `date=${encodeURIComponent(selectedDate)}`
         });
         const data = await response.json();
-
-        console.log("Available Timeslots:", data); // Debugging output
-
         if (data.length === 0) {
             timeSelect.innerHTML = '<option value="">No Available Slots</option>';
         } else {
@@ -184,7 +181,7 @@ $(document).ready(function () {
         multiple: true,  // This makes the select box allow multiple selections
         width: '100%',
         placeholder: "Select Timeslot",
-        allowClear: true,
+        allowClear: false,
         dropdownParent: $('#submissionModal')
     });
 
