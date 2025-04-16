@@ -312,109 +312,42 @@ a:hover {
 }
 
 @media (max-width: 1104px) {
-    .custom-navbar {
-        overflow: hidden;
+    #navbarContainer {
+        padding: 25px 50px;
     }
 
-    .profile-nav .dropdown-menu {
-        z-index: 1100;
-        /* Higher than Bootstrap's collapse (default is 1000) */
-        position: absolute;
-        /* Ensure it respects z-index */
-    }
-
-    /* Navbar items - collapsed view */
     .navbar-nav {
         flex-direction: column !important;
         align-items: flex-start;
         padding-left: 20px;
         gap: 10px !important;
-        transition: transform 0.3s ease-in-out;
+        transition: opacity 0.3s ease, visibility 0s 0.3s, transform 0.3s ease-in-out;
         opacity: 0;
         visibility: hidden;
         transform: translateY(-20px);
-        /* Slightly hide for smooth transition */
     }
 
-    .custom-navbar.show .navbar-nav {
-        opacity: 1;
-        visibility: visible;
-        transform: translateY(0);
-        /* Slide in from top */
-        transition: opacity 0.3s ease, visibility 0s 0s, transform 0.3s ease-in-out;
-    }
-
+    /* No delay for profile-nav */
     .profile-nav {
         opacity: 0;
         visibility: hidden;
         transform: translateY(-20px);
-        transition: opacity 0.3s ease 0s, visibility 0s 0s, transform 0.3s ease-in-out 0s;
+        transition: opacity 0.3s ease, visibility 0s 0s, transform 0.3s ease-in-out;
     }
 
-    /* When navbar is toggled, profile should appear after menu animation */
-    .custom-navbar.show .profile-nav {
+    /* When navbar is toggled, both navbar items and profile should appear together */
+    .navbar-collapse.show .navbar-nav,
+    .navbar-collapse.show .profile-nav {
         opacity: 1;
         visibility: visible;
         transform: translateY(0);
-        transition: opacity 0.3s ease 0.1s, visibility 0s 0s, transform 0.3s ease-in-out;
-    }
-
-    /* Adjust dropdown menu visibility */
-    .custom-navbar .dropdown-menu {
-        opacity: 0;
-        visibility: hidden;
-        height: 0;
-        padding: 0;
-        transition: opacity 0.3s ease, visibility 0s 0.3s, height 0.3s ease, padding 0.3s ease;
-    }
-
-    .custom-navbar.show .dropdown-menu {
-        opacity: 1;
-        visibility: visible;
-        height: auto;
-        padding: 10px 0;
-    }
-
-    .profile-nav .dropdown-menu-end.show {
-        overflow: visible !important;
-    }
-
-    /* Navbar toggler button */
-    .navbar-toggler {
-        display: block;
-        font-size: 30px;
-        color: white;
-        border: none;
-        padding: 10px;
-        border-radius: 5px;
-    }
-
-    /* When navbar is toggled */
-    .navbar-collapse.show .navbar-nav {
-        opacity: 1;
-        /* Make it visible after animation */
-        visibility: visible;
-        /* Set visibility to visible */
-        transform: translateY(0);
-        /* Move to original position */
-        transition: opacity 0.3s ease, visibility 0.3s ease 0.3s;
-        /* Delay visibility until after transform */
-    }
-
-    /* Ensure the navbar toggler works and content collapses */
-    .navbar-collapse {
-        display: block;
-        overflow: visible !important;
-    }
-
-    .navbar-toggler {
-        display: block;
+        transition: opacity 0.3s ease, visibility 0s 0s, transform 0.3s ease-in-out;
     }
 }
 
 @media (min-width: 1105px) {
 
-    /* No stacking, navbar should behave normally */
+    /* Navbar in row layout on larger screens */
     .navbar-nav {
         flex-direction: row !important;
         transform: none;
@@ -428,6 +361,49 @@ a:hover {
     .navbar-toggler {
         display: none;
     }
+}
+
+.profile-pic-wrapper {
+    position: relative;
+    display: inline-block;
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    overflow: hidden;
+    cursor: pointer;
+    margin-right: 20px;
+}
+
+.myprofile-pic {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+    display: block;
+}
+
+.camera-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.4);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    border-radius: 50%;
+}
+
+.camera-overlay img {
+    width: 40px;
+    height: 40px;
+}
+
+.profile-pic-wrapper:hover .camera-overlay {
+    opacity: 1;
 }
 
 /* Mini calendar for all */
