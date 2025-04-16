@@ -29,6 +29,7 @@ if (isset($_SESSION['email']) && !empty($_SESSION['email'])) {
 			$_SESSION['parent_ref_num'] = $row['parent_ref_num'];
 			$_SESSION['id'] = $row['id'];
 			$_SESSION['ref_num'] = $row['ref_num'];
+			$_SESSION['profile_pic'] = $row['profile_pic'];
 		}
 	} else {
 
