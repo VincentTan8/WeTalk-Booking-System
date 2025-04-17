@@ -14,17 +14,17 @@ $sql = "SELECT
             schedule.schedendtime,
             schedule.scheddate, 
             schedule.platform,
-            CASE 
-                WHEN NOW() BETWEEN 
-                    STR_TO_DATE(CONCAT(scheddate, ' ', schedstarttime), '%Y-%m-%d %H:%i:%s') 
-                    AND 
-                    STR_TO_DATE(CONCAT(scheddate, ' ', schedendtime), '%Y-%m-%d %H:%i:%s') 
-                THEN 'In Progress'
-                WHEN NOW() > 
-                    STR_TO_DATE(CONCAT(scheddate, ' ', schedendtime), '%Y-%m-%d %H:%i:%s') 
-                THEN 'Finished'
-                ELSE 'Upcoming'
-            END AS status 
+        CASE 
+            WHEN NOW() BETWEEN 
+                STR_TO_DATE(CONCAT(scheddate, ' ', schedstarttime), '%Y-%m-%d %H:%i:%s') 
+                AND 
+                STR_TO_DATE(CONCAT(scheddate, ' ', schedendtime), '%Y-%m-%d %H:%i:%s') 
+            THEN 'In Progress'
+            WHEN NOW() > 
+                STR_TO_DATE(CONCAT(scheddate, ' ', schedendtime), '%Y-%m-%d %H:%i:%s') 
+            THEN 'Finished'
+            ELSE 'Upcoming'
+        END AS status 
         FROM $bookingtable b
         JOIN $studenttable ON b.student_ref_num = student.ref_num
         JOIN $scheduletable ON b.schedule_ref_num = schedule.ref_num
