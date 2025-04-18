@@ -2,7 +2,7 @@
     <!-- White Background Box -->
     <div class="card  shadow" style="width: 100%; max-width: 600px; background-color: white; border-radius: 12px;">
         <div class="">
-            <button id="edit-button" class="btn btn-warning w-100">
+            <button id="sched-button" class="btn btn-warning w-100">
                 <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="none" viewBox="0 0 14 14">
                     <path d="M1.5 7H7M7 7H12.5M7 7V1.5M7 7V12.5" stroke="#FFF" stroke-width="3" stroke-linecap="round"
                         stroke-linejoin="round" />
