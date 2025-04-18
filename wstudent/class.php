@@ -32,13 +32,13 @@ $current = 'class';
                     <table id='bookingTable' class='display' style='width:100%;'>
                         <thead>
                             <tr>
-                                <th style="background-color: white;"></th> <!-- Column for delete button -->
-                                <th style='background-color: #FFAC00; color: white;'>Teacher Name</th>
-                                <th style='background-color: #FFAC00; color: white;'>Schedule Date</th>
-                                <th style='background-color: #FFAC00; color: white;'>Start Time</th>
-                                <th style='background-color: #FFAC00; color: white;'>End Time</th>
-                                <th style='background-color: #FFAC00; color: white;'>Platform</th>
-                                <th style='background-color: #FFAC00; color: white;'>Status</th>
+                                <th class="highlight-student"></th> <!-- Column for delete button -->
+                                <th class="highlight-student" style="color: white;">Teacher Name</th>
+                                <th class="highlight-student" style="color: white;">Schedule Date</th>
+                                <th class="highlight-student" style="color: white;">Start Time</th>
+                                <th class="highlight-student" style="color: white;">End Time</th>
+                                <th class="highlight-student" style="color: white;">Platform</th>
+                                <th class="highlight-student" style="color: white;">Status</th>
                             </tr>
                         </thead>
                         <tbody></tbody>

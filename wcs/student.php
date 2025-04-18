@@ -22,13 +22,14 @@ $current = 'class'; ?>
                 <table id="bookingTable" class="display" style="width:100%; margin-top:20px;">
                     <thead>
                         <tr>
-                            <th style='background-color: #29B866; color: white;'>Student Name</th>
-                            <th style='background-color: #29B866; color: white;'>Teacher Name</th>
-                            <th style='background-color: #29B866; color: white;'>Schedule Date</th>
-                            <th style='background-color: #29B866; color: white;'>Start Time</th>
-                            <th style='background-color: #29B866; color: white;'>End Time</th>
-                            <th style='background-color: #29B866; color: white;'>Platform</th>
-                            <th style='background-color: #29B866; color: white;'>Status</th>
+                            <!-- No delete column?? maybe?? -->
+                            <th class='highlight-cs' style='color: white;'>Student Name</th>
+                            <th class='highlight-cs' style='color: white;'>Teacher Name</th>
+                            <th class='highlight-cs' style='color: white;'>Schedule Date</th>
+                            <th class='highlight-cs' style='color: white;'>Start Time</th>
+                            <th class='highlight-cs' style='color: white;'>End Time</th>
+                            <th class='highlight-cs' style='color: white;'>Platform</th>
+                            <th class='highlight-cs' style='color: white;'>Status</th>
                         </tr>
                     </thead>
                     <tbody>
