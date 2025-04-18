@@ -23,26 +23,26 @@ while ($row = $resultTimeslots->fetch_assoc()) {
     $allTimeslots[$row['starttime']] = $row; // Store by starttime for quick lookup
 }
 
-// Get all start times that are already booked for the selected date and teacher
-$sqlBooked = "SELECT DISTINCT t.starttime 
+// Get all start times that are already scheduled for the selected date and teacher
+$sqlScheduled = "SELECT DISTINCT t.starttime 
               FROM $timeslottable t
               JOIN $scheduletable s ON s.schedstarttime = t.starttime
               WHERE s.scheddate = ? AND s.teacher_ref_num = ?";
 
-$stmt = $conn->prepare($sqlBooked);
+$stmt = $conn->prepare($sqlScheduled);
 $stmt->bind_param("ss", $selectedDate, $teacher_ref_num);
 $stmt->execute();
-$resultBooked = $stmt->get_result();
+$result = $stmt->get_result();
 
-$bookedTimes = [];
-while ($row = $resultBooked->fetch_assoc()) {
-    $bookedTimes[] = $row['starttime'];
+$scheduledTimes = [];
+while ($row = $result->fetch_assoc()) {
+    $scheduledTimes[] = $row['starttime'];
 }
 
-// Compare: Only return timeslots **not found** in the bookedTimes array
+// Compare: Only return timeslots **not found** in the scheduledTimes array
 $availableTimeslots = [];
 foreach ($allTimeslots as $starttime => $timeslot) {
-    if (!in_array($starttime, $bookedTimes)) {
+    if (!in_array($starttime, $scheduledTimes)) {
         $availableTimeslots[] = [
             'id' => $timeslot['id'],
             'starttime' => $timeslot['starttime'],
