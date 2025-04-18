@@ -1,6 +1,10 @@
 /* Prevent Bootstrap from messing with your calendar */
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
 
+:root {
+    --student-color: #FFAC00;
+}
+
 * {
     margin: 0;
     padding: 0;
@@ -48,13 +52,8 @@ body {
 }
 
 .calendar .days li.active {
-    background-color: #FFAC00;
+    background-color: var(--student-color);
     color: white;
-}
-
-body {
-    background-image: linear-gradient(180deg, #EBF2FA 33%, #C2D6EE 104.24%);
-    min-height: 100vh;
 }
 
 .calendar-wrapper {
@@ -71,7 +70,7 @@ body {
 
 .my-schedule-label {
     border-radius: 15px 15px 0px 0px;
-    background: #FFAC00;
+    background: var(--student-color);
     padding: 10px;
     text-align: center;
     font-family: 'Poppins', sans-serif;
@@ -85,20 +84,20 @@ body {
 /* Mini Calendar for Student, CS , and Teacher */
 /* Mini calendar for all */
 .mini-calendar .days-mini li.today {
-    border: 2px solid #FFAC00;
-    color: #FFAC00;
+    border: 2px solid var(--student-color);
+    color: var(--student-color);
 
 }
 
 /* Headings */
 .announcement-section h4,
 .bulletin-section h4 {
-    background: #FFAC00;
+    background: var(--student-color);
     color: white;
 }
 
 .my-schedule-label {
-    background: #FFAC00;
+    background: var(--student-color);
 }
 
 
@@ -120,14 +119,14 @@ body {
 
 .platform-option.active {
     border-radius: 10px;
-    border: 2px solid #FFAC00;
+    border: 2px solid var(--student-color);
 
     background: #FBF9F9;
 }
 
 .custom-save-btn {
     border-radius: 5px;
-    background: #FFAC00;
+    background: var(--student-color);
     box-shadow: 0px 4px 8.1px 0px rgba(3, 1, 30, 0.25);
     color: white;
     border: none;
@@ -181,7 +180,7 @@ body {
 }
 
 .toggle-radio:checked+.toggle-label {
-    border: 2px solid #FFAC00;
+    border: 2px solid var(--student-color);
     background: #FBF9F9;
 }
 
@@ -206,6 +205,11 @@ body {
 
 .datetime-group .form-group {
     width: 100%;
+}
+
+/* Used in Student Jquery Datepicker */
+.highlight-student {
+    background-color: var(--student-color);
 }
 
 /* When screen is wider than 768px (tablet and up) */
