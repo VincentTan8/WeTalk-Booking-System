@@ -21,9 +21,7 @@
         <div class="modal-content" style="">
             <div class="modal-header">
                 <h5 class="modal-title">Schedule a Trial Class</h5>
-                <button type="button" class="close" onclick="closePopup()">
-                    <span>&times;</span>
-                </button>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
             </div>
             <div class="modal-body">
                 <form action="add-booking.php" method="post">
