@@ -178,11 +178,6 @@ body {
     color: white;
 }
 
-body {
-    background-image: linear-gradient(180deg, #EBF2FA 33%, #C2D6EE 104.24%);
-    min-height: 100vh;
-}
-
 .calendar-wrapper {
     background: white;
     padding: 20px;
@@ -317,23 +312,3 @@ body {
     position: fixed; 
 }
  */
-#edit-button {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-
-    padding: 13px 54px 13px 67px;
-
-    color: #FFF;
-    font-family: 'Poppins', sans-serif;
-    font-size: 16px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: normal;
-    letter-spacing: 0.32px;
-
-    background-color: #f0ad4e;
-    /* Keep default btn-warning or customize */
-    border: none;
-}
