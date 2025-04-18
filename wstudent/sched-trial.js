@@ -1,10 +1,9 @@
-function openPopup() {
-    $('#popup').modal('show');
-}
+import { months, formatDate } from "../utils/constants.js";
 
-function closePopup() {
-    $('#popup').modal('hide');
-}
+document.getElementById('edit-button').addEventListener('click', () => {
+    //open Popup
+    $('#popup').modal('show');
+});
 
 const languageSelect = document.getElementById("languageSelect");
 
@@ -27,7 +26,6 @@ const fetchLanguages = async () => {
         console.error("Error fetching languages:", error);
     }
 };
-
 // Call the fetchLanguages function when the page is loaded
 fetchLanguages();
 
@@ -72,7 +70,7 @@ const updateTimeslots = async (selectedDate) => {
         timeSelect.innerHTML = '<option value="">Error Loading Slots</option>';
     }
 };
-
+//todo call this when timeslot gets reselected
 function fetchTeachers() {
     const scheduleId = document.getElementById('scheduleSelect').value;
     const teacherSelect = document.getElementById('teacherSelect');
@@ -97,12 +95,14 @@ function fetchTeachers() {
     }
 }
 
-function togglePlatform(selected) {
-    document.getElementById('online').classList.remove('active');
-    document.getElementById('offline').classList.remove('active');
-    document.getElementById(selected).classList.add('active');
-    document.getElementById('platformSelect').value = selected;
-}
+const selectedDate = formatDate(new Date());
+const [year, month, dayNum] = selectedDate.split("-");
+const monthName = months[parseInt(month, 10) - 1];
+const formattedDisplay = `${monthName} ${parseInt(dayNum, 10)}, ${year}`;
+const dateInput = document.getElementById("dateInput");
+const hiddenDateInput = document.getElementById("hiddenDateInput");
+dateInput.value = formattedDisplay;
+hiddenDateInput.value = selectedDate; // store original in dat hidden input
 
 //Jquery DatePicker and select2 for date input
 $(document).ready(function () {
