@@ -115,4 +115,4 @@ $current = 'class';
     });
 </script>
 
-<script src="minical.js"></script>
+<script src="../utils/minical.js"></script>

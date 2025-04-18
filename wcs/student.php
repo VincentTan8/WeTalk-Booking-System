@@ -79,4 +79,4 @@ $current = 'class'; ?>
 </script>
 
 <!-- JavaScript Files -->
-<script src="minical.js"></script>
+<script src="../utils/minical.js"></script>

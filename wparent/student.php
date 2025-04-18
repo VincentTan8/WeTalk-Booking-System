@@ -36,9 +36,6 @@ $current = 'student'; ?>
                         <tbody></tbody>
                     </table>
 
-
-
-
                 </div>
 
                 <div class="container d-flex justify-content-center" style="margin-top:20px;">
@@ -104,8 +101,6 @@ $current = 'student'; ?>
                 </div>
             </div>
 
-
-
             <div id="studentModal" class="modal" style="display: none;">
                 <div class="modal-content"
                     style="max-width: 800px; margin: auto; padding: 20px; background: white; border-radius: 10px; position: relative;">
@@ -114,79 +109,79 @@ $current = 'student'; ?>
                     <div id="modalBody"></div>
                 </div>
             </div>
-            <!-- Initialize DataTable -->
-            <script>
-                $(document).ready(function () {
-                    let table = $('#studentTable').DataTable({
-                        "paging": true,
-                        "searching": true,
-                        "ordering": true,
-                        "info": true,
-                        "scrollX": true,
-                        "responsive": true,
-                        "ajax": {
-                            "url": "p-data.php",
-                            "dataSrc": ""
-                        },
-                        "columns": [
-                            { "data": "student_ref_num" },
-                            { "data": "full_name" },
-                            { "data": "gender" },
-                            {
-                                "data": "student_ref_num",
-                                "render": function (data, type, row) {
-                                    return `<button class="btn btn-sm btn-primary view-details" data-id="${data}">Details</button>`;
-                                }
-                            }
-                        ],
-                        "columnDefs": [
-                            {
-                                "targets": [0],  // The first column (Student Number)
-                                "width": "20%"   // Set the width to 15%
-                            }
-                        ]
-                    });
-                });
-                $(document).on('click', '.view-details', function () {
-                    const studentId = $(this).data('id');
 
-                    $.ajax({
-                        url: 'fetch-student-details.php',
-                        method: 'POST',
-                        data: { ref_num: studentId },
-                        success: function (response) {
-                            $('#modalBody').html(response);
-                            $('#studentModal').fadeIn();
-                        }
-                    });
-                });
-
-                // Close modal
-                $(document).on('click', '#closeModal', function () {
-                    $('#studentModal').fadeOut();
-                });
-                $(document).on('click', function (e) {
-                    if ($(e.target).closest('.modal-content').length === 0) {
-                        $('#studentModal').fadeOut();
-                    }
-                });
-
-                // Open and close the "Add Student" popup modal
-                function openPopup() {
-                    $('#popup').modal('show');
-                }
-
-                function closePopup() {
-                    $('#popup').modal('hide');
-                }
-            </script>
             <div class="col-lg-3 col-md-12 minical-container">
                 <?php include "../utils/sidebar.php"; ?>
             </div>
-
-
-            <!-- JavaScript Files -->
-            <script src="minical.js"></script>
         </div>
     </div>
 </div>
+
+<!-- Initialize DataTable -->
+<script>
+    $(document).ready(function () {
+        let table = $('#studentTable').DataTable({
+            "paging": true,
+            "searching": true,
+            "ordering": true,
+            "info": true,
+            "scrollX": true,
+            "responsive": true,
+            "ajax": {
+                "url": "p-data.php",
+                "dataSrc": ""
+            },
+            "columns": [
+                { "data": "student_ref_num" },
+                { "data": "full_name" },
+                { "data": "gender" },
+                {
+                    "data": "student_ref_num",
+                    "render": function (data, type, row) {
+                        return `<button class="btn btn-sm btn-primary view-details" data-id="${data}">Details</button>`;
+                    }
+                }
+            ],
+            "columnDefs": [
+                {
+                    "targets": [0],  // The first column (Student Number)
+                    "width": "20%"   // Set the width to 15%
+                }
+            ]
+        });
+    });
+    $(document).on('click', '.view-details', function () {
+        const studentId = $(this).data('id');
+
+        $.ajax({
+            url: 'fetch-student-details.php',
+            method: 'POST',
+            data: { ref_num: studentId },
+            success: function (response) {
+                $('#modalBody').html(response);
+                $('#studentModal').fadeIn();
+            }
+        });
+    });
+
+    // Close modal
+    $(document).on('click', '#closeModal', function () {
+        $('#studentModal').fadeOut();
+    });
+    $(document).on('click', function (e) {
+        if ($(e.target).closest('.modal-content').length === 0) {
+            $('#studentModal').fadeOut();
+        }
+    });
+
+    // Open and close the "Add Student" popup modal
+    function openPopup() {
+        $('#popup').modal('show');
+    }
+
+    function closePopup() {
+        $('#popup').modal('hide');
+    }
+</script>
+
+<script src="../utils/minical.js"></script>
