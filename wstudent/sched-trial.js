@@ -6,7 +6,6 @@ document.getElementById('edit-button').addEventListener('click', () => {
 });
 
 const languageSelect = document.getElementById("languageSelect");
-
 const fetchLanguages = async () => {
     try {
         const response = await fetch("../utils/fetch-language.php");
@@ -26,8 +25,10 @@ const fetchLanguages = async () => {
         console.error("Error fetching languages:", error);
     }
 };
-// Call the fetchLanguages function when the page is loaded
-fetchLanguages();
+
+const fetchDates = async () => {
+
+}
 
 const updateTimeslots = async (selectedDate) => {
     const timeSelect = document.getElementById("timeSelect");
@@ -70,7 +71,7 @@ const updateTimeslots = async (selectedDate) => {
         timeSelect.innerHTML = '<option value="">Error Loading Slots</option>';
     }
 };
-//todo call this when timeslot gets reselected
+//todo update this function to submit configured schedules
 function fetchTeachers() {
     const scheduleId = document.getElementById('scheduleSelect').value;
     const teacherSelect = document.getElementById('teacherSelect');
@@ -95,6 +96,7 @@ function fetchTeachers() {
     }
 }
 
+//Initialize date values
 const selectedDate = formatDate(new Date());
 const [year, month, dayNum] = selectedDate.split("-");
 const monthName = months[parseInt(month, 10) - 1];
@@ -103,6 +105,20 @@ const dateInput = document.getElementById("dateInput");
 const hiddenDateInput = document.getElementById("hiddenDateInput");
 dateInput.value = formattedDisplay;
 hiddenDateInput.value = selectedDate; // store original in dat hidden input
+
+//change to available days given a language and platform
+let enableDays = ['2025-04-19', '2025-04-24', '2025-04-03'];
+
+function enableAllTheseDays(date) {
+    var currentDate = $.datepicker.formatDate('yy-mm-dd', date);
+    var result = [false, "", "No Dates Available"];
+    $.each(enableDays, function(k, d) {
+        if (currentDate === d) {
+            result = [true, "highlight-student", "Available"];
+        }
+    });
+    return result;
+}
 
 //Jquery DatePicker and select2 for date input
 $(document).ready(function () {
@@ -120,7 +136,10 @@ $(document).ready(function () {
             updateTimeslots(formatted);
             const hiddenDateInput = document.getElementById("hiddenDateInput");
             hiddenDateInput.value = formatted;
-        }
+
+            updateTimeslots(selectedDate);
+        },
+        beforeShowDay: enableAllTheseDays,
     });
 
     $('#timeSelect').select2({
@@ -129,4 +148,7 @@ $(document).ready(function () {
         placeholder: "Select Timeslot",
         dropdownParent: $('#submissionModal')
     });
+
+    // Call the functions when the page is loaded
+    fetchLanguages();
 });
