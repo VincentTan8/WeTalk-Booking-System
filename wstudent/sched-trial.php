@@ -2,7 +2,7 @@
     <!-- White Background Box -->
     <div class="card  shadow" style="width: 100%; max-width: 600px; background-color: white; border-radius: 12px;">
         <div class="">
-            <button id="edit-button" class="btn btn-warning w-100" onclick="openPopup()">
+            <button id="edit-button" class="btn btn-warning w-100">
                 <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="none" viewBox="0 0 14 14">
                     <path d="M1.5 7H7M7 7H12.5M7 7V1.5M7 7V12.5" stroke="#FFF" stroke-width="3" stroke-linecap="round"
                         stroke-linejoin="round" />
@@ -32,7 +32,6 @@
 
                     </select>
 
-
                     <!-- Platform Selection -->
                     <label for="platformSelect">2. Select Platform.</label>
                     <div id="platformSelect" class="toggle-group mb-3">
@@ -51,20 +50,16 @@
                         </div>
                         <div class="form-group flex-fill">
                             <select id="timeSelect" name="schedtime[]" class="form-select" required>
-                                <option value="">Select Timeslot</option>
                             </select>
                         </div>
                     </div>
 
                     <!-- Teacher Selection -->
-
                     <label for="teacherSelect" class="form-label text-start d-block">4. Select Teacher:</label>
                     <select id="teacherSelect" name="teacher" class="form-select mb-3" required>
                         <option value="">Select Teacher</option>
                         <!-- Populate dynamically -->
                     </select>
-
-                    <!-- Submit Button -->
 
                     <div class="text-center">
                         <input type="submit" value="Save"
@@ -76,4 +71,4 @@
     </div>
 </div>
 
-<script src="sched-trial.js"></script>
+<script src="sched-trial.js" type="module"></script>
