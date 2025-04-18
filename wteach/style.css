@@ -1,5 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
 
+:root {
+    --teacher-color: #916DFF;
+}
+
 * {
     margin: 0;
     padding: 0;
@@ -74,7 +78,7 @@ body {
 }
 
 .calendar .days li.active {
-    background-color: #916DFF;
+    background-color: var(--teacher-color);
     color: white;
 }
 
@@ -84,30 +88,28 @@ body {
     border-radius: 10px;
 }
 
-
-
 /* Mini Calendar for Student, CS , and Teacher */
 /* Mini calendar for all */
 .mini-calendar .days-mini li.today {
-    border: 2px solid #916DFF;
-    color: #916DFF;
+    border: 2px solid var(--teacher-color);
+    color: var(--teacher-color);
 
 }
 
 /* Headings */
 .announcement-section h4,
 .bulletin-section h4 {
-    background: #916DFF;
+    background: var(--teacher-color);
     color: white;
 }
 
 .my-schedule-label {
-    background: #916DFF;
+    background: var(--teacher-color);
 }
 
 
 .scheduled {
-    background-color: #916DFF !important;
+    background-color: var(--teacher-color) !important;
     color: white !important;
     border-radius: 50%;
 }
@@ -120,7 +122,7 @@ body {
 
 .custom-save-btn {
     border-radius: 5px;
-    background: #916DFF;
+    background: var(--teacher-color);
     box-shadow: 0px 4px 8.1px 0px rgba(3, 1, 30, 0.25);
     color: white;
     border: none;
@@ -168,7 +170,7 @@ body {
 }
 
 .toggle-radio:checked+.toggle-label {
-    border: 2px solid #916DFF;
+    border: 2px solid var(--teacher-color);
     background: #FBF9F9;
 }
 
@@ -195,6 +197,10 @@ body {
 
 .datetime-group .form-group {
     width: 100%;
+}
+
+.highlight-teacher {
+    background-color: var(--teacher-color);
 }
 
 /* When screen is wider than 768px (tablet and up) */
@@ -238,13 +244,13 @@ header {
     display: flex;
     justify-content: center;
     align-items: center;
-    color: #916DFF;
+    color: var(--teacher-color);
     gap: 10px;
     /* Add space between the icons and the month name */
 }
 
 .icons {
-    color: #916DFF;
+    color: var(--teacher-color);
     /* Set the same color for both chevrons */
     font-size: 24px;
     /* Adjust size of chevrons */
@@ -256,7 +262,7 @@ header {
     /* Size of the month text */
     font-weight: 700;
     /* Bold text */
-    color: #916DFF;
+    color: var(--teacher-color);
     /* Apply your desired color here */
     margin: 0;
     /* Optional: remove any default margin */
