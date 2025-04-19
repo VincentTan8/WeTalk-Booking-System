@@ -184,33 +184,4 @@ $(document).ready(function () {
         allowClear: false,
         dropdownParent: $('#submissionModal')
     });
-
-    // // Remove selected items from the dropdown list
-    // $('#timeSelect').on('select2:select', function (e) {
-    //     var selectedItems = $(this).val();
-
-    //     // Disable the options that are selected in the dropdown
-    //     $(this).find('option').each(function () {
-    //         var optionValue = $(this).val();
-    //         if ($.inArray(optionValue, selectedItems) > -1) {
-    //             // Hide selected options from the dropdown
-    //             $(this).prop('disabled', true);
-    //             $(this).trigger('change');  // Trigger the change event to update Select2
-    //         }
-    //     });
-
-    //     // Refresh select2 to apply the changes
-    //     $(this).trigger('change');
-    // });
-
-    // // Re-enable all options when the dropdown is closed
-    // $('#timeSelect').on('select2:unselect', function (e) {
-    //     $(this).find('option').each(function () {
-    //         $(this).prop('disabled', false); // Enable all options when unselecting
-    //         $(this).trigger('change');  // Trigger the change event to update Select2
-    //     });
-
-    //     // Refresh select2 to apply the changes
-    //     $(this).trigger('change');
-    // });
 });

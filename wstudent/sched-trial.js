@@ -76,10 +76,8 @@ const updateTimeslots = async (selectedDate) => {
         });
         const data = await response.json();
 
-        console.log("Available Timeslots:", data); // Debugging output
-
         if (data.length === 0) {
-            timeSelect.placeholder = 'No Available Slots';
+            timeSelect.innerHTML = '<option value="">No Available Slots</option>';
         } else {
              // Don't add the "Select Timeslot" option if there are available slots
             timeSelect.innerHTML = ''; // Clear any previous options
