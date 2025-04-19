@@ -45,7 +45,8 @@
                     <label for="dayInput">3. Select Date/Time Preferred.</label>
                     <div class="datetime-group">
                         <div class="form-group flex-fill">
-                            <input type="text" id="dateInput" name="formatteddate" class="form-control" required>
+                            <input type="text" id="dateInput" name="formatteddate" class="form-control text-center"
+                                required>
                             <input type="hidden" id="hiddenDateInput" name="scheddate">
                         </div>
                         <div class="form-group flex-fill">
