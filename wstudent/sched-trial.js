@@ -33,29 +33,18 @@ const fetchLanguages = async () => {
     }
 };
 
-platforms.forEach(platform => {
-    platform.addEventListener("change", function () {
-        //todo reset date time and teacher selection by calling a function
-        
-
-        fetch("fetch-schedule.php", {
-            method: "POST",
-            headers: { "Content-Type": "application/x-www-form-urlencoded" },
-            body: "platform=" + encodeURIComponent(this.value) +
-                "&selectedDate=" + encodeURIComponent(scheduleSelect.getAttribute("data-date"))
-        })
-            .then(response => response.text())
-            .then(data => {
-                scheduleSelect.innerHTML = data; // Update dropdown
-            })
-            .catch(error => console.error("Error fetching schedules:", error));
-    });
-});
-
-
 const fetchDates = async () => {
+    const selectedPlatform = document.querySelector('input[name="platform"]:checked').value;
+    const selectedLanguage = languageSelect.value;
     try {
-        const response = await fetch("fetch-available-dates.php");
+        const response = await fetch("fetch-available-dates.php", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/x-www-form-urlencoded"
+            },
+            body: `platform=${encodeURIComponent(selectedPlatform)}` +
+                  `&language_id=${encodeURIComponent(selectedLanguage)}`
+        });
         const data = await response.json();
 
         const availableDates = data.dates;
@@ -66,13 +55,17 @@ const fetchDates = async () => {
 }
 
 const updateTimeslots = async (selectedDate) => {
+    const selectedPlatform = document.querySelector('input[name="platform"]:checked').value;
+    const selectedLanguage = languageSelect.value;
     try {
         const response = await fetch("fetch-available-times.php", {
             method: "POST",
             headers: {
                 "Content-Type": "application/x-www-form-urlencoded"
             },
-            body: `date=${encodeURIComponent(selectedDate)}`
+            body: `date=${encodeURIComponent(selectedDate)}` +
+                  `&platform=${encodeURIComponent(selectedPlatform)}` +
+                  `&language_id=${encodeURIComponent(selectedLanguage)}`
         });
         const data = await response.json();
 
@@ -86,7 +79,7 @@ const updateTimeslots = async (selectedDate) => {
                 let option = document.createElement("option");
                 option.value = slot.id;
                 // Convert 'HH:mm:ss' to 'h:mm AM/PM'
-                let timeParts = slot.schedstarttime.split(":");
+                let timeParts = slot.starttime.split(":");
                 let hours = parseInt(timeParts[0], 10);
                 let minutes = timeParts[1];
                 let ampm = hours >= 12 ? "PM" : "AM";
@@ -126,6 +119,19 @@ const fetchTeachers = () => {
     }
 }
 
+languageSelect.addEventListener("change", async function () {
+    //todo reset date time and teacher selection by calling a function
+    await refreshDateTime();
+});
+
+platforms.forEach(platform => {
+    platform.addEventListener("change", async function () {
+        //todo reset date time and teacher selection by calling a function
+        await refreshDateTime();
+    });
+});
+
+//for Jquery Datepicker parameter
 function enableAllTheseDays(date) {
     var currentDate = $.datepicker.formatDate('yy-mm-dd', date);
     var result = [false, "", "No Dates Available"];
@@ -137,23 +143,26 @@ function enableAllTheseDays(date) {
     return result;
 }
 
-//Initialize date values
-enableDays = await fetchDates();
-if(enableDays.length > 0) {
-    const selectedDate = formatDate(enableDays[0]);
-    const [year, month, dayNum] = selectedDate.split("-");
-    const monthName = months[parseInt(month, 10) - 1];
-    const formattedDisplay = `${monthName} ${parseInt(dayNum, 10)}, ${year}`;
-    dateInput.value = formattedDisplay;
-    hiddenDateInput.value = selectedDate; // store original in dat hidden input
-    updateTimeslots(selectedDate);
+const refreshDateTime = async () => {
+    //Initialize date values
+    enableDays = await fetchDates();
+    if(enableDays.length > 0) {
+        const selectedDate = formatDate(enableDays[0]);
+        const [year, month, dayNum] = selectedDate.split("-");
+        const monthName = months[parseInt(month, 10) - 1];
+        const formattedDisplay = `${monthName} ${parseInt(dayNum, 10)}, ${year}`;
+        dateInput.value = formattedDisplay;
+        hiddenDateInput.value = selectedDate; // store original in dat hidden input
+        updateTimeslots(selectedDate);
 
-} else {
-    dateInput.placeholder = "No available dates"; 
+    } else {
+        dateInput.value = '';
+        dateInput.placeholder = "No available dates"; 
+    }
 }
 
 //Jquery DatePicker and select2 for date input
-$(document).ready(function () {
+$(document).ready(async function () {
     $("#dateInput").datepicker({
         dateFormat: "MM dd, yy", // Example: April 1, 2025
         onSelect: function (dateText, inst) {
@@ -173,6 +182,6 @@ $(document).ready(function () {
         dropdownParent: $('#popup')
     });
 
-    // Call the functions when the page is loaded
-    fetchLanguages();
+    await fetchLanguages();  //call it to populate languages on first run
+    await refreshDateTime();
 });
