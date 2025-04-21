@@ -3,23 +3,25 @@ $current = 'home';
 include "../config/conf.php";
 include "s-conf.php";  //should be the only call of s-conf
 
-$username = $_SESSION['username'];
-$fname = $_SESSION['fname'];
-$lname = $_SESSION['lname'];
-$nickname = $_SESSION['nickname'];
-$email = $_SESSION['email'];
-$bio = $_SESSION['bio'];
-$city = $_SESSION['city'];
-$phone = $_SESSION['phone'];
-$gender = $_SESSION['gender'];
-$birthday = $_SESSION['birthday'];
-$age = $_SESSION['age'];
-$nationality = $_SESSION['nationality'];
-$parent_ref_num = $_SESSION['parent_ref_num'];
-$id = $_SESSION['id'];
-$ref_num = $_SESSION['ref_num'];
-$profile_pic = $_SESSION['profile_pic'];
-$user_type = $_SESSION['access'];
+if (isset($_SESSION['ref_num'])) {
+    $username = $_SESSION['username'];
+    $fname = $_SESSION['fname'];
+    $lname = $_SESSION['lname'];
+    $nickname = $_SESSION['nickname'];
+    $email = $_SESSION['email'];
+    $bio = $_SESSION['bio'];
+    $city = $_SESSION['city'];
+    $phone = $_SESSION['phone'];
+    $gender = $_SESSION['gender'];
+    $birthday = $_SESSION['birthday'];
+    $age = $_SESSION['age'];
+    $nationality = $_SESSION['nationality'];
+    $parent_ref_num = $_SESSION['parent_ref_num'];
+    $id = $_SESSION['id'];
+    $ref_num = $_SESSION['ref_num'];
+    $profile_pic = $_SESSION['profile_pic'];
+    $user_type = $_SESSION['access'];
+}
 ?>
 
 <div style="display: grid">
