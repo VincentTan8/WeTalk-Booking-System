@@ -1,9 +1,11 @@
 <?php
 include "config/conf.php"; // Ensure this contains database connection
+include "utils/constants.php"; //constains userTables
 include "utils/generateRefNum.php";
+include "utils/emailExists.php";
+$error = ""; // Initialize error variable
 
-
-if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['email'])) {
+if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['email']) && !empty($_POST['email'])) {
     $fname = $_POST['fname'];
     $lname = $_POST['lname'];
     $email = $_POST['email'];
@@ -24,31 +26,33 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['email'])) {
         die("Invalid role selected.");
     }
 
-    // Insert into selected table
-    $sql = "INSERT INTO $tablename (`ref_num`, `fname`, `lname`, `email`, `phone`, `password`) 
+    if (emailExists($conn, $email, $userTables, $ref_num)) {
+        $error = "Email already exists. Please use another email"; // Set error message
+    } else {
+        // Insert into selected table
+        $sql = "INSERT INTO $tablename (`ref_num`, `fname`, `lname`, `email`, `phone`, `password`) 
         VALUES (?, ?, ?, ?, ?, ?)";
 
-    $stmt = $conn->prepare($sql);
-    $stmt->bind_param("ssssss", $ref_num, $fname, $lname, $email, $phone, $password);
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param("ssssss", $ref_num, $fname, $lname, $email, $phone, $password);
 
-    if ($stmt->execute()) {
-        // Send email notification
-        $subject = "Welcome to WeTalk!";
-        $message = "Hello $fname,\n\nYour account has been successfully created.\n\nBest regards,\nWeTalk";
-        $headers = "From: contact@wetalk.com";
+        if ($stmt->execute()) {
+            // Send email notification
+            $subject = "Welcome to WeTalk!";
+            $message = "Hello $fname,\n\nYour account has been successfully created.\n\nBest regards,\nWeTalk";
+            $headers = "From: contact@wetalk.com";
 
-        if (mail($email, $subject, $message, $headers)) {
-            echo "<script>alert('Registration successful! An email has been sent!'); window.location.href='login.php';</script>";
+            if (mail($email, $subject, $message, $headers)) {
+                echo "<script>alert('Registration successful! An email has been sent!'); window.location.href='login.php';</script>";
+            } else {
+                echo "<script>alert('Registration successful! Email failed to send!'); window.location.href='login.php';</script>";
+            }
+            exit();
         } else {
-            echo "<script>alert('Registration successful! Email failed to send!'); window.location.href='login.php';</script>";
+            echo "Error: " . $stmt->error;
         }
-
-        exit();
-    } else {
-        echo "Error: " . $stmt->error;
+        $stmt->close();
     }
-
-    $stmt->close();
 }
 ?>
 
@@ -87,10 +91,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['email'])) {
 
                 <h2 class="sign-up-title">Sign Up</h2>
 
-                <?php if (!empty($error)): ?>
-                    <div class="alert alert-danger text-center"><?php echo $error; ?></div>
-                <?php endif; ?>
-
                 <form action="" method="POST">
                     <div class="mb-3">
                         <input type="text" name="fname" class="form-control" placeholder="First Name" required>
@@ -103,6 +103,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['email'])) {
                     <div class="mb-3">
                         <input type="email" name="email" class="form-control" placeholder="Email" required>
                     </div>
+
+                    <?php if (!empty($error)): ?>
+                        <div class="text-danger mb-3 px-1"><?php echo $error; ?></div>
+                    <?php endif; ?>
 
                     <div class="mb-3">
                         <input type="password" name="password" class="form-control" placeholder="Password" required>

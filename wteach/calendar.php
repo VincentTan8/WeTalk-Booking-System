@@ -109,4 +109,4 @@ $current = 'class'; ?>
 
 <!-- Scripts -->
 <script src="calendar.js"></script>
-<script src="minical.js"></script>
+<script src="../utils/minical.js"></script>

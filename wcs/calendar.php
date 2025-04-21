@@ -120,59 +120,58 @@ include "../config/conf.php";
                 </div>
             </div>
         </div>
-
-        <!-- Scripts -->
-        <script src="calendar.js"></script>
-        <script src="minical.js"></script>
-        <script>
-            //script for toggles/filters
-            document.addEventListener("DOMContentLoaded", function () {
-                const platforms = document.querySelectorAll('input[name="platform"]');
-                const scheduleSelect = document.getElementById("scheduleSelect");
-                const teacherSelect = document.getElementById("teacherSelect");
-
-                platforms.forEach(platform => {
-                    platform.addEventListener("change", function () {
-                        //reset schedule and teacher selection
-                        scheduleSelect.innerHTML = '<option value="">Select Schedule</option>';
-                        teacherSelect.innerHTML = '<option value="">Select Teacher</option>';
-
-                        fetch("fetch-schedule.php", {
-                            method: "POST",
-                            headers: { "Content-Type": "application/x-www-form-urlencoded" },
-                            body: "platform=" + encodeURIComponent(this.value) +
-                                "&selectedDate=" + encodeURIComponent(scheduleSelect.getAttribute("data-date"))
-                        })
-                            .then(response => response.text())
-                            .then(data => {
-                                scheduleSelect.innerHTML = data; // Update dropdown
-                            })
-                            .catch(error => console.error("Error fetching schedules:", error));
-                    });
-                });
-
-                scheduleSelect.addEventListener("change", function () {
-                    const sched_id = this.value;
-
-                    // Clear the teachers dropdown if no timeslot is selected
-                    if (sched_id === "") {
-                        teacherSelect.innerHTML = '<option value="">Select Teacher</option>';
-                        return;
-                    }
-
-                    // Use fetch() to get teachers based on the selected timeslot
-                    fetch("fetch-teacher.php", {
-                        method: "POST",
-                        headers: { "Content-Type": "application/x-www-form-urlencoded" },
-                        body: "sched_id=" + encodeURIComponent(sched_id)
-                    })
-                        .then(response => response.text())
-                        .then(data => {
-                            teacherSelect.innerHTML = data; // Update dropdown
-                        })
-                        .catch(error => console.error("Error fetching teachers:", error));
-                });
-            });
-        </script>
     </div>
 </div>
+
+<script src="calendar.js"></script>
+<script src="../utils/minical.js"></script>
+<script>
+    //script for toggles/filters
+    document.addEventListener("DOMContentLoaded", function () {
+        const platforms = document.querySelectorAll('input[name="platform"]');
+        const scheduleSelect = document.getElementById("scheduleSelect");
+        const teacherSelect = document.getElementById("teacherSelect");
+
+        platforms.forEach(platform => {
+            platform.addEventListener("change", function () {
+                //reset schedule and teacher selection
+                scheduleSelect.innerHTML = '<option value="">Select Schedule</option>';
+                teacherSelect.innerHTML = '<option value="">Select Teacher</option>';
+
+                fetch("fetch-schedule.php", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/x-www-form-urlencoded" },
+                    body: "platform=" + encodeURIComponent(this.value) +
+                        "&selectedDate=" + encodeURIComponent(scheduleSelect.getAttribute("data-date"))
+                })
+                    .then(response => response.text())
+                    .then(data => {
+                        scheduleSelect.innerHTML = data; // Update dropdown
+                    })
+                    .catch(error => console.error("Error fetching schedules:", error));
+            });
+        });
+
+        scheduleSelect.addEventListener("change", function () {
+            const sched_id = this.value;
+
+            // Clear the teachers dropdown if no timeslot is selected
+            if (sched_id === "") {
+                teacherSelect.innerHTML = '<option value="">Select Teacher</option>';
+                return;
+            }
+
+            // Use fetch() to get teachers based on the selected timeslot
+            fetch("fetch-teacher.php", {
+                method: "POST",
+                headers: { "Content-Type": "application/x-www-form-urlencoded" },
+                body: "sched_id=" + encodeURIComponent(sched_id)
+            })
+                .then(response => response.text())
+                .then(data => {
+                    teacherSelect.innerHTML = data; // Update dropdown
+                })
+                .catch(error => console.error("Error fetching teachers:", error));
+        });
+    });
+</script>

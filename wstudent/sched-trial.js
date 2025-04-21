@@ -1,12 +1,17 @@
-function openPopup() {
-    $('#popup').modal('show');
-}
+import { months, formatDate } from "../utils/constants.js";
 
-function closePopup() {
-    $('#popup').modal('hide');
-}
+document.getElementById('sched-button').addEventListener('click', () => {
+    //open Popup
+    $('#popup').modal('show');
+});
 
 const languageSelect = document.getElementById("languageSelect");
+const platforms = document.querySelectorAll('input[name="platform"]');
+const timeSelect = document.getElementById("timeSelect");
+const dateInput = document.getElementById("dateInput");
+const hiddenDateInput = document.getElementById("hiddenDateInput");
+const teacherSelect = document.getElementById('teacherSelect');
+let enableDays = [];
 
 const fetchLanguages = async () => {
     try {
@@ -28,14 +33,41 @@ const fetchLanguages = async () => {
     }
 };
 
-// Call the fetchLanguages function when the page is loaded
-fetchLanguages();
+platforms.forEach(platform => {
+    platform.addEventListener("change", function () {
+        //todo reset date time and teacher selection by calling a function
+        
+
+        fetch("fetch-schedule.php", {
+            method: "POST",
+            headers: { "Content-Type": "application/x-www-form-urlencoded" },
+            body: "platform=" + encodeURIComponent(this.value) +
+                "&selectedDate=" + encodeURIComponent(scheduleSelect.getAttribute("data-date"))
+        })
+            .then(response => response.text())
+            .then(data => {
+                scheduleSelect.innerHTML = data; // Update dropdown
+            })
+            .catch(error => console.error("Error fetching schedules:", error));
+    });
+});
+
+
+const fetchDates = async () => {
+    try {
+        const response = await fetch("fetch-available-dates.php");
+        const data = await response.json();
+
+        const availableDates = data.dates;
+        return availableDates;
+    } catch (error) {
+        console.error("Error fetching dates:", error);
+    }
+}
 
 const updateTimeslots = async (selectedDate) => {
-    const timeSelect = document.getElementById("timeSelect");
-
     try {
-        const response = await fetch("../utils/fetch-available-timeslot.php", {
+        const response = await fetch("fetch-available-times.php", {
             method: "POST",
             headers: {
                 "Content-Type": "application/x-www-form-urlencoded"
@@ -44,25 +76,22 @@ const updateTimeslots = async (selectedDate) => {
         });
         const data = await response.json();
 
-        console.log("Available Timeslots:", data); // Debugging output
-
         if (data.length === 0) {
             timeSelect.innerHTML = '<option value="">No Available Slots</option>';
         } else {
-            // Don't add the "Select Timeslot" option if there are available slots
+             // Don't add the "Select Timeslot" option if there are available slots
             timeSelect.innerHTML = ''; // Clear any previous options
 
             data.forEach(slot => {
                 let option = document.createElement("option");
                 option.value = slot.id;
                 // Convert 'HH:mm:ss' to 'h:mm AM/PM'
-                let timeParts = slot.starttime.split(":");
+                let timeParts = slot.schedstarttime.split(":");
                 let hours = parseInt(timeParts[0], 10);
                 let minutes = timeParts[1];
                 let ampm = hours >= 12 ? "PM" : "AM";
                 hours = hours % 12 || 12; // Convert 0 to 12
                 let formattedTime = `${hours}:${minutes} ${ampm}`;
-
                 option.textContent = formattedTime;
                 timeSelect.appendChild(option);
             });
@@ -73,9 +102,9 @@ const updateTimeslots = async (selectedDate) => {
     }
 };
 
-function fetchTeachers() {
+//todo update this function to submit configured schedules
+const fetchTeachers = () => {
     const scheduleId = document.getElementById('scheduleSelect').value;
-    const teacherSelect = document.getElementById('teacherSelect');
     if (scheduleId === "") {
         teacherSelect.innerHTML = '<option value="">Select Teacher</option>';
         return;
@@ -97,11 +126,30 @@ function fetchTeachers() {
     }
 }
 
-function togglePlatform(selected) {
-    document.getElementById('online').classList.remove('active');
-    document.getElementById('offline').classList.remove('active');
-    document.getElementById(selected).classList.add('active');
-    document.getElementById('platformSelect').value = selected;
+function enableAllTheseDays(date) {
+    var currentDate = $.datepicker.formatDate('yy-mm-dd', date);
+    var result = [false, "", "No Dates Available"];
+    $.each(enableDays, function(k, d) {
+        if (currentDate === d) {
+            result = [true, "highlight-student", "Available"];
+        }
+    });
+    return result;
+}
+
+//Initialize date values
+enableDays = await fetchDates();
+if(enableDays.length > 0) {
+    const selectedDate = formatDate(enableDays[0]);
+    const [year, month, dayNum] = selectedDate.split("-");
+    const monthName = months[parseInt(month, 10) - 1];
+    const formattedDisplay = `${monthName} ${parseInt(dayNum, 10)}, ${year}`;
+    dateInput.value = formattedDisplay;
+    hiddenDateInput.value = selectedDate; // store original in dat hidden input
+    updateTimeslots(selectedDate);
+
+} else {
+    dateInput.placeholder = "No available dates"; 
 }
 
 //Jquery DatePicker and select2 for date input
@@ -110,23 +158,21 @@ $(document).ready(function () {
         dateFormat: "MM dd, yy", // Example: April 1, 2025
         onSelect: function (dateText, inst) {
             const selectedDate = $(this).datepicker("getDate");
-
-            // Format to "2025-04-10"
-            const year = selectedDate.getFullYear();
-            const month = (selectedDate.getMonth() + 1).toString().padStart(2, "0");
-            const day = selectedDate.getDate().toString().padStart(2, "0");
-            const formatted = `${year}-${month}-${day}`;
-
-            updateTimeslots(formatted);
-            const hiddenDateInput = document.getElementById("hiddenDateInput");
+            // Format to "yyyy-mm-dd"
+            const formatted = formatDate(selectedDate);
             hiddenDateInput.value = formatted;
-        }
+            updateTimeslots(formatted);
+        },
+        beforeShowDay: enableAllTheseDays,
     });
 
     $('#timeSelect').select2({
         multiple: true,  // Allow multiple selections
         width: '100%',
         placeholder: "Select Timeslot",
-        dropdownParent: $('#submissionModal')
+        dropdownParent: $('#popup')
     });
+
+    // Call the functions when the page is loaded
+    fetchLanguages();
 });

@@ -2,6 +2,7 @@
 include "../config/conf.php";
 include "../utils/constants.php"; //contains userTables
 include "../utils/usernameExists.php";
+include "../utils/emailExists.php";
 
 $ref_num = $_SESSION['ref_num'];
 
@@ -18,10 +19,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $birthday = $_POST['birthday'];
     $bio = $_POST['bio'];
 
-    //if username field is empty set it to null (to avoid duplicate db error)
-    if (usernameExists($conn, $username, $userTables, $ref_num)) {
+    if (trim($email) == '' && trim($username) == '') {
+        echo json_encode(['success' => false, 'error' => "Email and Username cannot be both empty"]);
+    } else if (usernameExists($conn, $username, $userTables, $ref_num)) {
         echo json_encode(['success' => false, 'error' => "Username already exists!"]);
+    } else if (emailExists($conn, $email, $userTables, $ref_num)) {
+        echo json_encode(['success' => false, 'error' => "Email already exists!"]);
     } else {
+        //if username field is empty set it to null (to avoid duplicate db error)
         if (trim($username) == '') {
             $username = NULL;
         }

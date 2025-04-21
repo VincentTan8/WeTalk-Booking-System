@@ -10,7 +10,7 @@ function login($conn, $input, $password, $userTables)
 
     foreach ($tables as $table) {
         // $query = "SELECT `email` FROM `$table` WHERE email = ?  AND password = ?";
-        $query = "SELECT `email`, `username` FROM `$table` WHERE (email = ? OR username = ?) AND password = ?";
+        $query = "SELECT `ref_num`, `email`, `username` FROM `$table` WHERE (email = ? OR username = ?) AND `password` = ?";
         $stmt = $conn->prepare($query);
         // $stmt->bind_param("ss", $input, $password);
         $stmt->bind_param("sss", $input, $input, $password);
@@ -34,6 +34,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if ($loginResult) {
         $userType = $loginResult['user_type'];
         $_SESSION['access'] = $userType;
+        $_SESSION['ref_num'] = $loginResult['user_data']['ref_num']; // Store ref_num in session
         $_SESSION['email'] = $loginResult['user_data']['email']; // Store email in session
         $_SESSION['username'] = $loginResult['user_data']['username']; // Store username in session
 

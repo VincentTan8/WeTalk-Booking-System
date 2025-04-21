@@ -38,73 +38,134 @@ include 'conf.php';
 // 			);"
 // );
 
+//for adding new column
+$tablename = $prefix . '_resources.`teachers_in_sched`';  //tablename
+$col_name = 'language_id';
+$column_attr = "INT DEFAULT NULL";
+$col = mysqli_query($conn, "SELECT " . $col_name . " FROM " . $tablename);
+if (!$col) {
+	mysqli_query($conn, "ALTER TABLE " . $tablename . " ADD " . $col_name . " " . $column_attr);
+	echo $col_name . ' added </br>';
+} else {
+	echo $col_name . ' already exists! </br>';
+}
+
+$tablename = $prefix . '_resources.`student`';  //tablename
+$col_name = 'profile_pic';
+$column_attr = "VARCHAR(100)";
+$col = mysqli_query($conn, "SELECT " . $col_name . " FROM " . $tablename);
+if (!$col) {
+	mysqli_query($conn, "ALTER TABLE " . $tablename . " ADD " . $col_name . " " . $column_attr);
+	echo $col_name . ' added </br>';
+} else {
+	echo $col_name . ' already exists! </br>';
+}
+
+$tablename = $prefix . '_resources.`teacher`';  //tablename
+$col_name = 'profile_pic';
+$column_attr = "VARCHAR(100)";
+$col = mysqli_query($conn, "SELECT " . $col_name . " FROM " . $tablename);
+if (!$col) {
+	mysqli_query($conn, "ALTER TABLE " . $tablename . " ADD " . $col_name . " " . $column_attr);
+	echo $col_name . ' added </br>';
+} else {
+	echo $col_name . ' already exists! </br>';
+}
+
+$tablename = $prefix . '_resources.`parent`';  //tablename
+$col_name = 'profile_pic';
+$column_attr = "VARCHAR(100)";
+$col = mysqli_query($conn, "SELECT " . $col_name . " FROM " . $tablename);
+if (!$col) {
+	mysqli_query($conn, "ALTER TABLE " . $tablename . " ADD " . $col_name . " " . $column_attr);
+	echo $col_name . ' added </br>';
+} else {
+	echo $col_name . ' already exists! </br>';
+}
+
+$tablename = $prefix . '_resources.`cs`';  //tablename
+$col_name = 'profile_pic';
+$column_attr = "VARCHAR(100)";
+$col = mysqli_query($conn, "SELECT " . $col_name . " FROM " . $tablename);
+if (!$col) {
+	mysqli_query($conn, "ALTER TABLE " . $tablename . " ADD " . $col_name . " " . $column_attr);
+	echo $col_name . ' added </br>';
+} else {
+	echo $col_name . ' already exists! </br>';
+}
+
+//for modifying existing column
+$tablename = $prefix . '_resources.`teachers_in_sched`';  //tablename
+$col_name = 'platform';
+$column_attr = "INT NOT NULL";
+$col = mysqli_query($conn, "SELECT " . $col_name . " FROM " . $tablename);
+if ($col) {
+	// Column exists, so modify it
+	$alter = mysqli_query($conn, "ALTER TABLE " . $tablename . " MODIFY COLUMN " . $col_name . " " . $column_attr);
+	if ($alter) {
+		echo $col_name . ' modified </br>';
+	} else {
+		echo 'Failed to modify ' . $col_name . ': ' . mysqli_error($conn) . '</br>';
+	}
+} else {
+	echo $col_name . ' does not exist!</br>';
+}
 
 // $tablename = $prefix . '_resources.`teacher`';  //tablename
 // $col_name = 'email';
-// $column_attr = "LONGTEXT NOT NULL";
-// $col = mysqli_query($conn, "SELECT " . $col_name . " FROM " . $tablename);
-// if (!$col) {
-// 	mysqli_query($conn, "ALTER TABLE " . $tablename . " ADD " . $col_name . " " . $column_attr);
-// 	echo $col_name . ' added </br>';
+// $index_result = mysqli_query($conn, "SHOW INDEX FROM $tablename WHERE column_name = '$col_name'");
+// if (mysqli_num_rows($index_result) == 0) {
+// 	$add_index = "ALTER TABLE $tablename ADD INDEX ($col_name);";
+// 	if (mysqli_query($conn, $add_index)) {
+// 		echo "Index on $col_name added.</br>";
+// 	} else {
+// 		echo "Error adding index: " . mysqli_error($conn) . "</br>";
+// 	}
 // } else {
-// 	echo $col_name . ' already exists! </br>';
+// 	echo "Index on $col_name already exists.</br>";
 // }
 
-$tablename = $prefix . '_resources.`teacher`';  //tablename
-$col_name = 'email';
-$index_result = mysqli_query($conn, "SHOW INDEX FROM $tablename WHERE column_name = '$col_name'");
-if (mysqli_num_rows($index_result) == 0) {
-	$add_index = "ALTER TABLE $tablename ADD INDEX ($col_name);";
-	if (mysqli_query($conn, $add_index)) {
-		echo "Index on $col_name added.</br>";
-	} else {
-		echo "Error adding index: " . mysqli_error($conn) . "</br>";
-	}
-} else {
-	echo "Index on $col_name already exists.</br>";
-}
+// $tablename = $prefix . '_resources.`parent`';
+// $col_name = 'email';
+// $index_result = mysqli_query($conn, "SHOW INDEX FROM $tablename WHERE column_name = '$col_name'");
+// if (mysqli_num_rows($index_result) == 0) {
+// 	$add_index = "ALTER TABLE $tablename ADD INDEX ($col_name);";
+// 	if (mysqli_query($conn, $add_index)) {
+// 		echo "Index on $col_name added.</br>";
+// 	} else {
+// 		echo "Error adding index: " . mysqli_error($conn) . "</br>";
+// 	}
+// } else {
+// 	echo "Index on $col_name already exists.</br>";
+// }
 
-$tablename = $prefix . '_resources.`parent`';
-$col_name = 'email';
-$index_result = mysqli_query($conn, "SHOW INDEX FROM $tablename WHERE column_name = '$col_name'");
-if (mysqli_num_rows($index_result) == 0) {
-	$add_index = "ALTER TABLE $tablename ADD INDEX ($col_name);";
-	if (mysqli_query($conn, $add_index)) {
-		echo "Index on $col_name added.</br>";
-	} else {
-		echo "Error adding index: " . mysqli_error($conn) . "</br>";
-	}
-} else {
-	echo "Index on $col_name already exists.</br>";
-}
+// $tablename = $prefix . '_resources.`student`';
+// $col_name = 'email';
+// $index_result = mysqli_query($conn, "SHOW INDEX FROM $tablename WHERE column_name = '$col_name'");
+// if (mysqli_num_rows($index_result) == 0) {
+// 	$add_index = "ALTER TABLE $tablename ADD INDEX ($col_name);";
+// 	if (mysqli_query($conn, $add_index)) {
+// 		echo "Index on $col_name added.</br>";
+// 	} else {
+// 		echo "Error adding index: " . mysqli_error($conn) . "</br>";
+// 	}
+// } else {
+// 	echo "Index on $col_name already exists.</br>";
+// }
 
-$tablename = $prefix . '_resources.`student`';
-$col_name = 'email';
-$index_result = mysqli_query($conn, "SHOW INDEX FROM $tablename WHERE column_name = '$col_name'");
-if (mysqli_num_rows($index_result) == 0) {
-	$add_index = "ALTER TABLE $tablename ADD INDEX ($col_name);";
-	if (mysqli_query($conn, $add_index)) {
-		echo "Index on $col_name added.</br>";
-	} else {
-		echo "Error adding index: " . mysqli_error($conn) . "</br>";
-	}
-} else {
-	echo "Index on $col_name already exists.</br>";
-}
-
-$tablename = $prefix . '_resources.`cs`';
-$col_name = 'email';
-$index_result = mysqli_query($conn, "SHOW INDEX FROM $tablename WHERE column_name = '$col_name'");
-if (mysqli_num_rows($index_result) == 0) {
-	$add_index = "ALTER TABLE $tablename ADD INDEX ($col_name);";
-	if (mysqli_query($conn, $add_index)) {
-		echo "Index on $col_name added.</br>";
-	} else {
-		echo "Error adding index: " . mysqli_error($conn) . "</br>";
-	}
-} else {
-	echo "Index on $col_name already exists.</br>";
-}
+// $tablename = $prefix . '_resources.`cs`';
+// $col_name = 'email';
+// $index_result = mysqli_query($conn, "SHOW INDEX FROM $tablename WHERE column_name = '$col_name'");
+// if (mysqli_num_rows($index_result) == 0) {
+// 	$add_index = "ALTER TABLE $tablename ADD INDEX ($col_name);";
+// 	if (mysqli_query($conn, $add_index)) {
+// 		echo "Index on $col_name added.</br>";
+// 	} else {
+// 		echo "Error adding index: " . mysqli_error($conn) . "</br>";
+// 	}
+// } else {
+// 	echo "Index on $col_name already exists.</br>";
+// }
 
 echo 'done!';
 

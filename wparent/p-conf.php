@@ -6,15 +6,16 @@ if (!isset($_SESSION)) {
 ?>
 
 <?php
-if (isset($_SESSION['email']) && !empty($_SESSION['email'])) {
-	$email = $_SESSION['email'];
+if (isset($_SESSION['ref_num']) && !empty($_SESSION['ref_num'])) {
+	$ref_num = $_SESSION['ref_num'];
 
 	$tablename = $prefix . "_resources.`parent`";
-	$student = $conn->query("SELECT * FROM $tablename WHERE `email` = '$email' LIMIT 1;");
+	$student = $conn->query("SELECT * FROM $tablename WHERE `ref_num` = '$ref_num' LIMIT 1;");
 
 	if ($student) {
 		for ($i = 0; $i < $student->num_rows; $i++) {
 			$row = $student->fetch_assoc();
+			$_SESSION['email'] = $row['email'];
 			$_SESSION['username'] = $row['username'];
 			$_SESSION['fname'] = $row['fname'];
 			$_SESSION['lname'] = $row['lname'];
@@ -24,7 +25,6 @@ if (isset($_SESSION['email']) && !empty($_SESSION['email'])) {
 			$_SESSION['gender'] = $row['gender'];
 			$_SESSION['birthday'] = $row['birthday'];
 			$_SESSION['id'] = $row['id'];
-			$_SESSION['ref_num'] = $row['ref_num'];
 			$_SESSION['profile_pic'] = $row['profile_pic'];
 		}
 	} else {

@@ -115,6 +115,7 @@ $query = "CREATE TABLE `$tablename` (
 		`phone` VARCHAR(50),
 		`birthday` DATE,
 		`gender` VARCHAR(20),
+		`profile_pic` VARCHAR(100),
 		`language_id` INT DEFAULT NULL,
 		`password` VARCHAR(100) NOT NULL,
 		FOREIGN KEY (`language_id`) REFERENCES `language`(`id`) ON DELETE SET NULL,
@@ -153,6 +154,7 @@ $query = "CREATE TABLE `$tablename` (
 		`phone` VARCHAR(50),
 		`birthday` DATE,
 		`gender` VARCHAR(20),
+		`profile_pic` VARCHAR(100),
 		`password` VARCHAR(100) NOT NULL,
 		INDEX (`email`)
 	);"
@@ -181,6 +183,7 @@ $query = "CREATE TABLE `$tablename` (
 		`age` INT,
 		`nationality` VARCHAR(100),
 		`gender` VARCHAR(20),
+		`profile_pic` VARCHAR(100),
 		`password` VARCHAR(100) NOT NULL,
 		`parent_ref_num` VARCHAR(100) NULL,
 		FOREIGN KEY (`parent_ref_num`) REFERENCES `parent`(`ref_num`) ON DELETE SET NULL,
@@ -264,7 +267,8 @@ $query = "CREATE TABLE `$tablename` (
 		`scheddate` DATE,
 		`schedstarttime` TIME,
 		`schedendtime` TIME,
-		`platform` BOOLEAN NOT NULL,
+		`platform` INT NOT NULL,
+		`language_id` INT DEFAULT NULL,
 		`teacher_ids` TEXT NOT NULL
 	);"
 ;
@@ -289,6 +293,7 @@ $query = "CREATE TABLE `$tablename` (
 		`phone` VARCHAR(50),
 		`birthday` DATE,
 		`gender` VARCHAR(20),
+		`profile_pic` VARCHAR(100),
 		`password` VARCHAR(100) NOT NULL,
 		INDEX (`email`)
 	);"

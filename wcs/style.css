@@ -1,6 +1,10 @@
 /* Prevent Bootstrap from messing with your calendar */
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
 
+:root {
+    --cs-color: #2F8B58;
+}
+
 * {
     margin: 0;
     padding: 0;
@@ -72,29 +76,29 @@ body {
 }
 
 .calendar .days li.active {
-    background-color: #2F8B58;
+    background-color: var(--cs-color);
     color: white;
 }
 
 .mini-calendar .days-mini li.today {
-    border: 2px solid #2F8B58;
-    color: #2F8B58;
+    border: 2px solid var(--cs-color);
+    color: var(--cs-color);
 }
 
 /* Headings */
 .announcement-section h4,
 .bulletin-section h4 {
-    background: #2F8B58;
+    background: var(--cs-color);
     color: white;
 }
 
 
 .my-schedule-label {
-    background: #2F8B58;
+    background: var(--cs-color);
 }
 
 .scheduled {
-    background-color: #2F8B58 !important;
+    background-color: var(--cs-color) !important;
     color: white !important;
     border-radius: 50%;
 }
@@ -103,7 +107,7 @@ header {
     display: flex;
     justify-content: center;
     align-items: center;
-    color: #2F8B58;
+    color: var(--cs-color);
     gap: 10px;
     /* Add space between the icons and the month name */
 }
@@ -130,12 +134,12 @@ header {
 
 .toggle-btn {
     padding: 5px 10px;
-    border: 1px solid #2F8B58;
+    border: 1px solid var(--cs-color);
     border-radius: 0px 0px 0px 0px;
     background: none;
     cursor: pointer;
     margin-right: 5px;
-    color: #2F8B58;
+    color: var(--cs-color);
     text-align: center;
     font-family: Poppins;
     font-size: 12px;
@@ -155,6 +159,10 @@ header {
     border: 1px solid #FAB755;
 }
 
+.highlight-cs {
+    background-color: var(--cs-color);
+}
+
 .disabled {
     color: gray !important;
     cursor: not-allowed !important;
@@ -162,7 +170,7 @@ header {
 
 .custom-save-btn {
     border-radius: 5px;
-    background: #2F8B58;
+    background: var(--cs-color);
     box-shadow: 0px 4px 8.1px 0px rgba(3, 1, 30, 0.25);
     color: white;
     border: none;
