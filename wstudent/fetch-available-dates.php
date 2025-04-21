@@ -1,6 +1,6 @@
 <?php
 //fetch available dates based on platform and language values
-//and are after 30 minutes of current time (not yet implemented)
+//and are after 30 minutes of current time
 require '../config/conf.php';
 
 // if (!isset($_POST['platform']) || !isset($_POST['language_id'])) {
@@ -12,7 +12,11 @@ require '../config/conf.php';
 // $language_id = $_POST['language_id'];
 
 $scheduletable = $prefix . "_resources.`schedule`";
-$query = "SELECT DISTINCT `scheddate` FROM $scheduletable WHERE `booking_ref_num` IS NULL ORDER BY `scheddate` ASC";
+$query = "SELECT DISTINCT `scheddate` 
+            FROM $scheduletable 
+            WHERE STR_TO_DATE(CONCAT(scheddate, ' ', schedstarttime), '%Y-%m-%d %H:%i:%s') >= DATE_ADD(NOW(), INTERVAL 30 MINUTE) 
+            AND `booking_ref_num` IS NULL  
+            ORDER BY `scheddate` ASC";
 $result = $conn->query($query);
 
 $dates = [];
