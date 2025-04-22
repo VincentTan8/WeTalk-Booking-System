@@ -7,38 +7,40 @@ if (!isset($_SESSION)) {
 
 <?php
 $current = 'class'; ?>
-<div class="container">
-    <?php include "header.php" ?>
+<div style="display: grid">
+    <div class="col-9" style="justify-self: center;">
+        <?php include "header.php" ?>
 
-    <!-- Include DataTables CSS & JS -->
-    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css" />
-    <link rel="stylesheet" type="text/css"
-        href="https://cdn.datatables.net/responsive/2.2.9/css/responsive.dataTables.min.css" />
-    <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
-    <script src="https://cdn.datatables.net/responsive/2.2.9/js/dataTables.responsive.min.js"></script>
-    <div class="row mt-4">
-        <div class="col-12 col-lg-9 " style="margin-bottom:20px;">
-            <div class=" p-3 bg-white  rounded ">
-                <table id="bookingTable" class="display" style="width:100%; margin-top:20px;">
-                    <thead>
-                        <tr>
-                            <!-- No delete column?? maybe?? -->
-                            <th class='highlight-cs' style='color: white;'>Student Name</th>
-                            <th class='highlight-cs' style='color: white;'>Teacher Name</th>
-                            <th class='highlight-cs' style='color: white;'>Schedule Date</th>
-                            <th class='highlight-cs' style='color: white;'>Start Time</th>
-                            <th class='highlight-cs' style='color: white;'>End Time</th>
-                            <th class='highlight-cs' style='color: white;'>Platform</th>
-                            <th class='highlight-cs' style='color: white;'>Status</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                    </tbody>
-                </table>
+        <!-- Include DataTables CSS & JS -->
+        <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css" />
+        <link rel="stylesheet" type="text/css"
+            href="https://cdn.datatables.net/responsive/2.2.9/css/responsive.dataTables.min.css" />
+        <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+        <script src="https://cdn.datatables.net/responsive/2.2.9/js/dataTables.responsive.min.js"></script>
+        <div class="row mt-4">
+            <div class="col-12 col-lg-9 " style="margin-bottom:20px;">
+                <div class=" p-3 bg-white  rounded ">
+                    <table id="bookingTable" class="display" style="width:100%; margin-top:20px;">
+                        <thead>
+                            <tr>
+                                <!-- No delete column?? maybe?? -->
+                                <th class='highlight-cs' style='color: white;'>Student Name</th>
+                                <th class='highlight-cs' style='color: white;'>Teacher Name</th>
+                                <th class='highlight-cs' style='color: white;'>Schedule Date</th>
+                                <th class='highlight-cs' style='color: white;'>Start Time</th>
+                                <th class='highlight-cs' style='color: white;'>End Time</th>
+                                <th class='highlight-cs' style='color: white;'>Platform</th>
+                                <th class='highlight-cs' style='color: white;'>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
+                </div>
             </div>
-        </div>
-        <div class="col-lg-3 col-md-12 minical-container">
-            <?php include "../utils/sidebar.php"; ?>
+            <div class="col-lg-3 col-md-12 minical-container">
+                <?php include "../utils/sidebar.php"; ?>
+            </div>
         </div>
     </div>
 </div>

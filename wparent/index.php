@@ -3,19 +3,21 @@ $current = 'home';
 include "../config/conf.php";
 include "p-conf.php";
 
-$username = $_SESSION['username'];
-$fname = $_SESSION['fname'];
-$lname = $_SESSION['lname'];
-$email = $_SESSION['email'];
-$bio = $_SESSION['bio'];
-$city = $_SESSION['city'];
-$phone = $_SESSION['phone'];
-$gender = $_SESSION['gender'];
-$birthday = $_SESSION['birthday'];
-$id = $_SESSION['id'];
-$ref_num = $_SESSION['ref_num'];
-$profile_pic = $_SESSION['profile_pic'];
-$user_type = $_SESSION['access'];
+if (isset($_SESSION['ref_num'])) {
+    $username = $_SESSION['username'];
+    $fname = $_SESSION['fname'];
+    $lname = $_SESSION['lname'];
+    $email = $_SESSION['email'];
+    $bio = $_SESSION['bio'];
+    $city = $_SESSION['city'];
+    $phone = $_SESSION['phone'];
+    $gender = $_SESSION['gender'];
+    $birthday = $_SESSION['birthday'];
+    $id = $_SESSION['id'];
+    $ref_num = $_SESSION['ref_num'];
+    $profile_pic = $_SESSION['profile_pic'];
+    $user_type = $_SESSION['access'];
+}
 ?>
 
 <div style="display: grid">
