@@ -324,6 +324,7 @@ body {
     /* Margin bottom */
 }
 
+#addStudent-button,
 #sched-button {
     display: flex;
     align-items: center;
