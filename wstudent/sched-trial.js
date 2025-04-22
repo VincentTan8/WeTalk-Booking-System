@@ -95,39 +95,52 @@ const updateTimeslots = async (selectedDate) => {
     }
 };
 
-//todo update this function to submit configured schedules
-const fetchTeachers = () => {
-    const scheduleId = document.getElementById('scheduleSelect').value;
-    if (scheduleId === "") {
-        teacherSelect.innerHTML = '<option value="">Select Teacher</option>';
-        return;
-    }
-
-    if (scheduleId) {
-        fetch('../utils/fetch-available-teacher.php', {
-            method: 'POST',
+const fetchTeachers = async (timeslot) => {
+    const selectedPlatform = document.querySelector('input[name="platform"]:checked').value;
+    const selectedLanguage = languageSelect.value;
+    const selectedDate = hiddenDateInput.value;
+    const selectedTimeslot = timeslot;
+    try {
+        const response = await fetch("../utils/fetch-available-teacher.php", {
+            method: "POST",
             headers: {
-                'Content-Type': 'application/x-www-form-urlencoded',
+                "Content-Type": "application/x-www-form-urlencoded"
             },
-            body: 'sched_id=' + scheduleId
-        })
-            .then(response => response.text())
-            .then(data => {
-                teacherSelect.innerHTML = data;
-            })
-            .catch(error => console.error('Error fetching teachers:', error));
+            body: `date=${encodeURIComponent(selectedDate)}` +
+                  `&timeslot=${encodeURIComponent(selectedTimeslot)}` +
+                  `&platform=${encodeURIComponent(selectedPlatform)}` +
+                  `&language_id=${encodeURIComponent(selectedLanguage)}`
+        });
+        const data = await response.json();
+
+        if (data.length === 0) {
+            teacherSelect.innerHTML = '<option value="">No Available Teachers</option>';
+        } else {
+            teacherSelect.innerHTML = ''; // Clear any previous options
+
+            data.forEach(teacher => {
+                let option = document.createElement("option");
+                option.value = teacher.ref_num;  //could change to sched ref num
+                const teacher_alias = (teacher.alias ?? '').trim() == '' ? '' : ' | ' + teacher.alias;
+                option.textContent = teacher.lname + ', ' + teacher.fname + teacher_alias;
+                teacherSelect.appendChild(option);
+            });
+        }
+    } catch (error) {
+        console.error("Error loading Teachers: ", error);
+        teacherSelect.innerHTML = '<option value="">Error Loading Teachers</option>';
     }
 }
 
 languageSelect.addEventListener("change", async function () {
-    //todo reset date time and teacher selection by calling a function
-    await refreshDateTime();
+    enableDays = await fetchDates();
+    await refreshOptions(enableDays[0]);
 });
 
 platforms.forEach(platform => {
     platform.addEventListener("change", async function () {
-        //todo reset date time and teacher selection by calling a function
-        await refreshDateTime();
+        enableDays = await fetchDates();
+        await refreshOptions(enableDays[0]);
     });
 });
 
@@ -143,21 +156,23 @@ function enableAllTheseDays(date) {
     return result;
 }
 
-const refreshDateTime = async () => {
-    //Initialize date values
-    enableDays = await fetchDates();
-    if(enableDays.length > 0) {
-        const selectedDate = formatDate(enableDays[0]);
+const refreshOptions = async (date) => {
+    const selectedDate = formatDate(date);
+    if(enableDays.includes(selectedDate)) {
         const [year, month, dayNum] = selectedDate.split("-");
         const monthName = months[parseInt(month, 10) - 1];
         const formattedDisplay = `${monthName} ${parseInt(dayNum, 10)}, ${year}`;
         dateInput.value = formattedDisplay;
         hiddenDateInput.value = selectedDate; // store original in dat hidden input
-        updateTimeslots(selectedDate);
+        await updateTimeslots(selectedDate);
+        await fetchTeachers($('#timeSelect').val());
 
     } else {
+        //clear date time teachers if no days available
         dateInput.value = '';
         dateInput.placeholder = "No available dates"; 
+        timeSelect.innerHTML = ''; // Clear any previous options
+        teacherSelect.innerHTML = '<option value="">No available teachers</option>';
     }
 }
 
@@ -165,23 +180,26 @@ const refreshDateTime = async () => {
 $(document).ready(async function () {
     $("#dateInput").datepicker({
         dateFormat: "MM dd, yy", // Example: April 1, 2025
-        onSelect: function (dateText, inst) {
+        onSelect: async function (dateText, inst) {
             const selectedDate = $(this).datepicker("getDate");
-            // Format to "yyyy-mm-dd"
-            const formatted = formatDate(selectedDate);
-            hiddenDateInput.value = formatted;
-            updateTimeslots(formatted);
+            await refreshOptions(selectedDate);
         },
         beforeShowDay: enableAllTheseDays,
     });
 
     $('#timeSelect').select2({
-        multiple: true,  // Allow multiple selections
+        multiple: false,  // Allow multiple selections
         width: '100%',
         placeholder: "Select Timeslot",
         dropdownParent: $('#popup')
+    }).on('change', async function (e) {
+        const selectedValue = $(this).val(); // timeslot id
+        await fetchTeachers(selectedValue);
     });
 
-    await fetchLanguages();  //call it to populate languages on first run
-    await refreshDateTime();
+    //Initialize fields
+    await fetchLanguages(); 
+    //Only use enableDays when platform or language is changed
+    enableDays = await fetchDates();
+    await refreshOptions(enableDays[0]); //refreshes date time and teacher fields
 });
