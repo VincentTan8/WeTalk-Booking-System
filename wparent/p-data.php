@@ -1,25 +1,56 @@
 <?php
 include "../config/conf.php";
-$parent_ref_num = $_SESSION['ref_num'];
+$ref_num = $_SESSION['ref_num'];
+$bookingtable = $prefix . "_resources.`booking`";
 $studenttable = $prefix . "_resources.`student`";
+$scheduletable = $prefix . "_resources.`schedule`";
+$teachertable = $prefix . "_resources.`teacher`";
+
 
 $sql = "SELECT 
-            student.ref_num AS student_ref_num,
-            CONCAT(student.fname, ' ', student.lname) AS full_name,
-            student.gender
-        FROM $studenttable AS student
+     b.ref_num AS booking_ref_num,
+CONCAT(student.fname, ' ', student.lname) AS student_name, 
+               CONCAT(teacher.fname, ' ', teacher.lname) AS teacher_name, 
+               schedule.schedstarttime, 
+               schedule.schedendtime,
+               schedule.scheddate, 
+               schedule.platform,
+        CASE 
+            WHEN NOW() BETWEEN 
+                STR_TO_DATE(CONCAT(scheddate, ' ', schedstarttime), '%Y-%m-%d %H:%i:%s') 
+                AND 
+                STR_TO_DATE(CONCAT(scheddate, ' ', schedendtime), '%Y-%m-%d %H:%i:%s') 
+            THEN 'In Progress'
+            WHEN NOW() > 
+                STR_TO_DATE(CONCAT(scheddate, ' ', schedendtime), '%Y-%m-%d %H:%i:%s') 
+            THEN 'Finished'
+            ELSE 'Upcoming'
+        END AS status 
+        FROM $bookingtable b
+        JOIN $studenttable student ON b.student_ref_num = student.ref_num
+        JOIN $scheduletable schedule ON b.schedule_ref_num = schedule.ref_num
+        JOIN $teachertable teacher ON schedule.teacher_ref_num = teacher.ref_num
         WHERE student.parent_ref_num = ?";
 
+$bookings = [];
 $stmt = $conn->prepare($sql);
-$stmt->bind_param("i", $parent_ref_num);
+$stmt->bind_param("s", $ref_num);
 $stmt->execute();
 $result = $stmt->get_result();
 
-$students = [];
 while ($row = $result->fetch_assoc()) {
-    $students[] = $row;
+    $row['platform'] = ($row['platform'] == 1) ? "Online" : "Offline";
+
+    $row['statusColor'] = match ($row['status']) {
+        'Upcoming' => 'red',
+        'In Progress' => 'orange',
+        'Finished' => 'green',
+        default => ''
+    };
+
+    $bookings[] = $row;
 }
 
 header('Content-Type: application/json');
-echo json_encode($students);
+echo json_encode($bookings);
 exit;

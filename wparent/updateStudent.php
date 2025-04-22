@@ -1,11 +1,11 @@
 <?php
+//this is similar to updateProfile.php of student
 include "../config/conf.php";
+include "../utils/constants.php"; //contains userTables
+include "../utils/usernameExists.php";
+include "../utils/emailExists.php";
+
 header('Content-Type: application/json');
-
-// Enable errors for debugging (you can turn this off in production)
-error_reporting(E_ALL);
-ini_set('display_errors', 1);
-
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $ref_num = $_POST['ref_num'] ?? '';
 
@@ -14,45 +14,60 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         exit;
     }
 
-    // Define possible fields to update
-    $fields = ['fname', 'lname', 'email', 'username', 'nickname', 'phone', 'city', 'gender', 'birthday', 'bio'];
-    $updates = [];
-    $params = [];
-    $types = '';
+    // Define possible fields to update'';
+    $fname = $_POST['fname'];
+    $lname = $_POST['lname'];
+    $email = $_POST['email'];
+    $username = $_POST['username'];
+    $nickname = $_POST['nickname'];
+    $phone = $_POST['phone'];
+    $city = $_POST['city'];
+    $gender = $_POST['gender'];
+    $birthday = $_POST['birthday'];
+    $age = $_POST['age'];
+    $nationality = $_POST['nationality'];
+    $bio = $_POST['bio'];
 
-    foreach ($fields as $field) {
-        if (isset($_POST[$field]) && $_POST[$field] !== '') {
-            $updates[] = "$field = ?";
-            $params[] = $_POST[$field];
-            $types .= 's'; // all fields are strings
-        }
-    }
-
-    if (empty($updates)) {
-        echo json_encode(["success" => false, "message" => "No fields to update."]);
-        exit;
-    }
-
-    $sql = "UPDATE student SET " . implode(', ', $updates) . " WHERE ref_num = ?";
-    $params[] = $ref_num;
-    $types .= 's';
-
-    $stmt = $conn->prepare($sql);
-    if ($stmt === false) {
-        echo json_encode(["success" => false, "message" => "Failed to prepare statement: " . $conn->error]);
-        exit;
-    }
-
-    // Use ... unpack operator to bind the array dynamically
-    $stmt->bind_param($types, ...$params);
-
-    if ($stmt->execute()) {
-        echo json_encode(["success" => true, "message" => "Student details updated successfully."]);
+    if (trim($email) == '' && trim($username) == '') {
+        echo json_encode(['success' => false, 'error' => "Email and Username cannot be both empty"]);
+    } else if (usernameExists($conn, $username, $userTables, $ref_num)) {
+        echo json_encode(['success' => false, 'error' => "Username already exists!"]);
+    } else if (emailExists($conn, $email, $userTables, $ref_num)) {
+        echo json_encode(['success' => false, 'error' => "Email already exists!"]);
     } else {
-        echo json_encode(["success" => false, "message" => "Error updating student: " . $stmt->error]);
-    }
+        //if username field is empty set it to null (to avoid duplicate db error)
+        if (trim($username) == '') {
+            $username = NULL;
+        }
+        $tablename = $prefix . "_resources.`student`";
+        $sql = "UPDATE $tablename 
+            SET `fname` = ?, `lname` = ?, `email` = ?, `username` = ?, `nickname` = ?, `phone` = ?, `city` = ?, `gender` = ?, `birthday` = ?, `age` = ?, `nationality` = ?, `bio` = ? 
+            WHERE `ref_num` = ?";
 
-    $stmt->close();
-} else {
-    echo json_encode(["success" => false, "message" => "Invalid request method."]);
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param("sssssssssssss", $fname, $lname, $email, $username, $nickname, $phone, $city, $gender, $birthday, $age, $nationality, $bio, $ref_num);
+
+        if ($stmt->execute()) {
+            // Send back the updated data as a JSON response
+            echo json_encode([
+                'success' => true,
+                'fname' => $fname,
+                'lname' => $lname,
+                'email' => $email,
+                'username' => $username,
+                'nickname' => $nickname,
+                'phone' => $phone,
+                'gender' => $gender,
+                'city' => $city,
+                'birthday' => $birthday,
+                'age' => $age,
+                'nationality' => $nationality,
+                'bio' => $bio
+            ]);
+        } else {
+            echo json_encode(['success' => false, 'error' => $stmt->error]);
+        }
+        $stmt->close();
+    }
 }
+?>

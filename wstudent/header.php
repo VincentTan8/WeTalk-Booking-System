@@ -50,8 +50,9 @@ $profile_pic = $_SESSION['profile_pic']; ?>
             <!-- Profile Section -->
             <div class="d-flex align-items-center position-relative" style="padding-right: 50px;">
                 <div class="profile-nav dropdown">
-                    <img class="rounded-circle me-2" src="upload/<?php echo $profile_pic ?>" alt="Student Profile"
-                        width="40" height="40">
+                    <img class="rounded-circle me-2"
+                        src="upload/<?php echo !empty($profile_pic) ? $profile_pic : 'student.jpg'; ?>"
+                        alt="Profile Picture" width="40" height="40">
                     <a class="dropdown-toggle text-dark fw-bold nickname" href="#" id="navbarDropdown" role="button"
                         data-bs-toggle="dropdown" aria-expanded="false" style="font-family: Poppins;">
                         Hi <?php echo $student_name; ?>

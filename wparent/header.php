@@ -44,7 +44,8 @@ $profile_pic = $_SESSION['profile_pic']; ?>
                         Profile</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link {{ $current == 'students' ? 'active text-primary' : '' }}" href="student.php">My
+                    <a class="nav-link <?php echo $current == 'student' ? 'active fw-bold text-primary' : ''; ?>"
+                        href="student.php">My
                         Students</a>
                 </li>
 
