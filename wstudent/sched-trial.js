@@ -101,7 +101,7 @@ const fetchTeachers = async (timeslot) => {
     const selectedDate = hiddenDateInput.value;
     const selectedTimeslot = timeslot;
     try {
-        const response = await fetch("../utils/fetch-available-teacher.php", {
+        const response = await fetch("../utils/fetch-available-teachers.php", {
             method: "POST",
             headers: {
                 "Content-Type": "application/x-www-form-urlencoded"
