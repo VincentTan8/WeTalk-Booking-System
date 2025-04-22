@@ -1,6 +1,10 @@
 /* Prevent Bootstrap from messing with your calendar */
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
 
+:root {
+    --parent-color: #FFAC00;
+}
+
 * {
     margin: 0;
     padding: 0;
@@ -37,113 +41,6 @@ body {
     /* Adds space between image and name */
 }
 
-@media (max-width: 1104px) {
-    .custom-navbar {
-        overflow: hidden;
-    }
-
-    /* Navbar items - collapsed view */
-    .navbar-nav {
-        flex-direction: column !important;
-        align-items: flex-start;
-        padding-left: 20px;
-        gap: 10px !important;
-        transition: transform 0.3s ease-in-out;
-        opacity: 0;
-        visibility: hidden;
-        transform: translateY(-20px);
-        /* Slightly hide for smooth transition */
-    }
-
-    .custom-navbar.show .navbar-nav {
-        opacity: 1;
-        visibility: visible;
-        transform: translateY(0);
-        /* Slide in from top */
-        transition: opacity 0.3s ease, visibility 0s 0s, transform 0.3s ease-in-out;
-    }
-
-    .profile-nav {
-        opacity: 0;
-        visibility: hidden;
-        transform: translateY(-20px);
-        transition: opacity 0.3s ease 0s, visibility 0s 0s, transform 0.3s ease-in-out 0s;
-    }
-
-    /* When navbar is toggled, profile should appear after menu animation */
-    .custom-navbar.show .profile-nav {
-        opacity: 1;
-        visibility: visible;
-        transform: translateY(0);
-        transition: opacity 0.3s ease 0.1s, visibility 0s 0s, transform 0.3s ease-in-out;
-    }
-
-    /* Adjust dropdown menu visibility */
-    .custom-navbar .dropdown-menu {
-        opacity: 0;
-        visibility: hidden;
-        height: 0;
-        padding: 0;
-        transition: opacity 0.3s ease, visibility 0s 0.3s, height 0.3s ease, padding 0.3s ease;
-    }
-
-    .custom-navbar.show .dropdown-menu {
-        opacity: 1;
-        visibility: visible;
-        height: auto;
-        padding: 10px 0;
-    }
-
-    /* Navbar toggler button */
-    .navbar-toggler {
-        display: block;
-        font-size: 30px;
-        color: white;
-        border: none;
-        padding: 10px;
-        border-radius: 5px;
-    }
-
-    /* When navbar is toggled */
-    .navbar-collapse.show .navbar-nav {
-        opacity: 1;
-        /* Make it visible after animation */
-        visibility: visible;
-        /* Set visibility to visible */
-        transform: translateY(0);
-        /* Move to original position */
-        transition: opacity 0.3s ease, visibility 0.3s ease 0.3s;
-        /* Delay visibility until after transform */
-    }
-
-    /* Ensure the navbar toggler works and content collapses */
-    .navbar-collapse {
-        display: block;
-        overflow: visible !important;
-    }
-
-    .navbar-toggler {
-        display: block;
-    }
-}
-
-@media (min-width: 1105px) {
-
-    /* No stacking, navbar should behave normally */
-    .navbar-nav {
-        flex-direction: row !important;
-        transform: none;
-    }
-
-    .navbar-collapse {
-        display: flex !important;
-        overflow: visible !important;
-    }
-
-    .navbar-toggler {
-        display: none;
-    }
-}
 
 .calendar ul {
     list-style-type: none;
@@ -174,7 +71,7 @@ body {
 }
 
 .calendar .days li.active {
-    background-color: #FFAC00;
+    background-color: var(--parent-color);
     color: white;
 }
 
@@ -201,7 +98,7 @@ body {
 
 .my-schedule-label {
     border-radius: 15px 15px 0px 0px;
-    background: #FFAC00;
+    background: var(--parent-color);
     padding: 10px;
     text-align: center;
     font-family: 'Poppins', sans-serif;
@@ -215,24 +112,21 @@ body {
 /* Mini Calendar for Student, CS , and Teacher */
 /* Mini calendar for all */
 .mini-calendar .days-mini li.today {
-    border: 2px solid #FFAC00;
-    color: #FFAC00;
+    border: 2px solid var(--parent-color);
+    color: var(--parent-color);
 
 }
 
 /* Headings */
 .announcement-section h4,
 .bulletin-section h4 {
-    background: #FFAC00;
+    background: var(--parent-color);
     color: white;
 }
 
 .my-schedule-label {
-    background: #FFAC00;
+    background: var(--parent-color);
 }
-
-
-
 
 .platform-option {
     border-radius: 10px;
@@ -252,14 +146,14 @@ body {
 
 .platform-option.active {
     border-radius: 10px;
-    border: 2px solid #FFAC00;
+    border: 2px solid var(--parent-color);
 
     background: #FBF9F9;
 }
 
 .custom-save-btn {
     border-radius: 5px;
-    background: #FFAC00;
+    background: var(--parent-color);
     box-shadow: 0px 4px 8.1px 0px rgba(3, 1, 30, 0.25);
     color: white;
     border: none;
@@ -304,11 +198,243 @@ body {
     margin: 5px;
 }
 
-/* .modal-content{
-    width:80%; 
-    border-radius: 15px; 
-    background: #FFF; 
-    box-shadow: 0px 0px 25px 0px rgba(3, 1, 30, 0.15); 
-    position: fixed; 
+#student-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 13px 54px;
+    color: #FFF;
+    font-family: 'Poppins', sans-serif;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    letter-spacing: 0.32px;
+    background-color: var(--parent-color);
+    /* Keep default btn-warning or customize */
+    border: none;
 }
- */
+
+#sched-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 13px 54px;
+    color: #FFF;
+    font-family: 'Poppins', sans-serif;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    letter-spacing: 0.32px;
+    background-color: var(--parent-color);
+    /* Keep default btn-warning or customize */
+    border: none;
+}
+
+.toggle-group {
+    display: flex;
+    gap: 10px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.toggle-radio {
+    display: none;
+}
+
+.toggle-label {
+    flex: 1;
+    text-align: center;
+    padding: 14px 0;
+    border-radius: 10px;
+    background-color: #FBF9F9;
+    border: 2px solid #a3a1a1;
+    cursor: pointer;
+    font-weight: 500;
+    font-size: 14px;
+    transition: background-color 0.3s, color 0.3s, border 0.3s;
+}
+
+.toggle-radio:checked+.toggle-label {
+    border: 2px solid var(--parent-color);
+    background: #FBF9F9;
+}
+
+#studentSelect,
+#languageSelect {
+    border-radius: 10px;
+    border: 2px solid #a3a1a1;
+    background: #FBF9F9;
+    padding: 13px 15px;
+    font-size: 14px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.datetime-group {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+    margin-top: 20px;
+    margin-bottom: 30px;
+}
+
+.datetime-group .form-group {
+    width: 100%;
+}
+
+@media (min-width: 768px) {
+    .datetime-group {
+        flex-direction: row;
+        justify-content: space-between;
+    }
+
+    .datetime-group .form-group {
+        flex: 1;
+    }
+
+}
+
+#dateInput,
+#timeSelect {
+    flex: 1;
+    height: 53px;
+    /* You can adjust this to exactly match our toggle buttons */
+    border-radius: 10px;
+    border: 2px solid #a3a1a1;
+    background: #FBF9F9;
+    font-size: 14px;
+    padding: 0 15px;
+    /* Horizontal padding only */
+    box-sizing: border-box;
+}
+
+#studentSelect,
+#languageSelect,
+#platformSelect,
+#teacherSelect,
+.datetime-group {
+    margin-top: 20px;
+    /* Margin top */
+    margin-bottom: 30px;
+    /* Margin bottom */
+}
+
+#sched-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 13px 54px;
+    color: #FFF;
+    font-family: 'Poppins', sans-serif;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    letter-spacing: 0.32px;
+    background-color: #f0ad4e;
+    /* Keep default btn-warning or customize */
+    border: none;
+}
+
+#teacherSelect {
+    border-radius: 10px;
+    border: 2px solid #a3a1a1;
+    background: #FBF9F9;
+    padding: 13px 15px;
+    font-size: 14px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.select2-container--default .select2-selection--single .select2-selection__rendered,
+.select2-container--default .select2-selection--multiple .select2-selection__rendered,
+.select2-container--default .select2-search--inline .select2-search__field {
+    font-size: 14px !important;
+}
+
+.select2-container {
+    z-index: 9999;
+}
+
+.select2-dropdown {
+    z-index: 9999 !important;
+}
+
+.select2-container--default .select2-selection--single .select2-selection__rendered {
+    text-align: center;
+    /* Center the text */
+}
+
+.select2-container--default .select2-selection__clear {
+    position: fixed;
+    /* Absolute position to keep it fixed in place */
+    right: 10px;
+    /* Keep it on the right side */
+    top: 50%;
+    /* Center it vertically in the selection container */
+    transform: translateY(-50%);
+    /* Adjust for exact vertical centering */
+    color: #fff;
+    /* Color of the button */
+    font-size: 16px;
+    /* Adjust size for visibility */
+    background: none;
+    /* Remove any background */
+    border: none;
+    /* Remove any border */
+    cursor: pointer;
+    /* Ensure it's clickable */
+    z-index: 9999;
+}
+
+.select2-container--default .select2-selection--multiple {
+    height: 53px !important;
+    border-radius: 10px !important;
+    border: 2px solid #a3a1a1 !important;
+    background: #FBF9F9 !important;
+    align-content: center !important;
+    align-items: center !important;
+    padding: 0 15px !important;
+    overflow-y: auto;
+    justify-content: center !important;
+    box-sizing: border-box !important;
+}
+
+.select2-container .select2-search--inline .select2-search__field {
+    height: auto !important;
+    text-align: center;
+    place-content: center;
+    color: #03011E !important;
+    margin-top: 0px !important;
+    margin-left: 0px !important;
+}
+
+.select2-container--default .select2-selection--multiple .select2-selection__arrow {
+    top: 50% !important;
+    transform: translateY(-50%);
+    right: 10px;
+    height: auto !important;
+    position: absolute;
+    color: #03011E !important;
+}
+
+.select2-container--default .select2-selection__rendered {
+    line-height: normal !important;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+    margin: 0 !important;
+    text-align: left !important;
+    display: flex;
+    align-items: center;
+    height: 100%;
+}
+
+.highlight-parent {
+    background-color: var(--parent-color);
+}
