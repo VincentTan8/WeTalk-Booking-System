@@ -66,7 +66,7 @@
                     </select>
 
                     <div class="text-center">
-                        <input type="submit" value="Save"
+                        <input type="submit" value="Book Trial Class"
                             style="border-radius: 10px; background: #FFAC00;padding: 13px 54px; color:white; border:none;">
                     </div>
                 </form>
