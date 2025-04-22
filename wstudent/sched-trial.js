@@ -37,7 +37,7 @@ const fetchDates = async () => {
     const selectedPlatform = document.querySelector('input[name="platform"]:checked').value;
     const selectedLanguage = languageSelect.value;
     try {
-        const response = await fetch("fetch-available-dates.php", {
+        const response = await fetch("../utils/fetch-available-dates.php", {
             method: "POST",
             headers: {
                 "Content-Type": "application/x-www-form-urlencoded"
@@ -58,7 +58,7 @@ const updateTimeslots = async (selectedDate) => {
     const selectedPlatform = document.querySelector('input[name="platform"]:checked').value;
     const selectedLanguage = languageSelect.value;
     try {
-        const response = await fetch("fetch-available-times.php", {
+        const response = await fetch("../utils/fetch-available-times.php", {
             method: "POST",
             headers: {
                 "Content-Type": "application/x-www-form-urlencoded"
@@ -120,7 +120,7 @@ const fetchTeachers = async (timeslot) => {
 
             data.forEach(teacher => {
                 let option = document.createElement("option");
-                option.value = teacher.ref_num;  //could change to sched ref num
+                option.value = teacher.schedule_ref_num;  //this is intentionally sched ref num
                 const teacher_alias = (teacher.alias ?? '').trim() == '' ? '' : ' | ' + teacher.alias;
                 option.textContent = teacher.lname + ', ' + teacher.fname + teacher_alias;
                 teacherSelect.appendChild(option);
