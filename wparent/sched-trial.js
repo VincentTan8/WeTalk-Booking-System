@@ -5,6 +5,7 @@ document.getElementById('sched-button').addEventListener('click', () => {
     $('#popup').modal('show');
 });
 
+const studentSelect = document.getElementById("studentSelect");
 const languageSelect = document.getElementById("languageSelect");
 const platforms = document.querySelectorAll('input[name="platform"]');
 const timeSelect = document.getElementById("timeSelect");
@@ -18,7 +19,6 @@ const fetchStudents = async () => {
         const response = await fetch("fetch-student-names.php");
         const data = await response.json();
 
-        const studentSelect = document.getElementById("studentSelect");
         studentSelect.innerHTML = '<option value="">Choose Student</option>'; // reset
 
         data.forEach(student => {
