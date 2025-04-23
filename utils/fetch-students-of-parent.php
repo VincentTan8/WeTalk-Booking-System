@@ -3,7 +3,7 @@
 include "../config/conf.php";
 header('Content-Type: application/json');
 
-$parent_ref_num = $_SESSION['ref_num'];
+$parent_ref_num = $_POST['parent_ref_num'];
 $studenttable = $prefix . "_resources.`student`";
 
 $sql = "SELECT 
