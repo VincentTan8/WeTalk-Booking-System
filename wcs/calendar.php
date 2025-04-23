@@ -47,13 +47,11 @@ if (!isset($_SESSION)) {
                                 <!-- Month Navigation (Bottom Row) -->
                                 <div class="d-flex align-items-center justify-content-center flex-grow-1">
                                     <div class="icons">
-                                        <span id="prev" class="material-symbols-outlined"
-                                            style="cursor: pointer; color: #f0f0f0;">chevron_left</span>
+                                        <span id="prev" class="material-symbols-outlined">chevron_left</span>
                                     </div>
                                     <p class="current-date mb-0 mx-3"></p>
                                     <div class="icons">
-                                        <span id="next" class="material-symbols-outlined"
-                                            style="cursor: pointer; color: #f0f0f0;">chevron_right</span>
+                                        <span id="next" class="material-symbols-outlined">chevron_right</span>
                                     </div>
                                 </div>
                             </header>

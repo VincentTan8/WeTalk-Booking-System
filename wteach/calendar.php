@@ -21,13 +21,11 @@ $current = 'class'; ?>
                         <div class="wrapper  rounded">
                             <header class="header" style="margin-bottom:30px;">
                                 <div class="icons">
-                                    <span id="prev" class="material-symbols-outlined"
-                                        style="color: #916DFF;">chevron_left</span>
+                                    <span id="prev" class="material-symbols-outlined">chevron_left</span>
                                 </div>
                                 <p class="current-date">April 2025</p> <!-- This will be updated dynamically by JS -->
                                 <div class="icons">
-                                    <span id="next" class="material-symbols-outlined"
-                                        style="color: #916DFF;">chevron_right</span>
+                                    <span id="next" class="material-symbols-outlined">chevron_right</span>
                                 </div>
                             </header>
                             <div class="calendar">

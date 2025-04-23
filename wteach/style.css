@@ -46,8 +46,10 @@ body {
     overflow-x: auto;
     padding: 10px;
     box-sizing: border-box;
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
 }
-
 
 .calendar ul {
     list-style-type: none;
@@ -61,6 +63,7 @@ body {
     grid-template-columns: repeat(7, 1fr);
     gap: 10px;
     text-align: right;
+    cursor: pointer;
 }
 
 .calendar .days li {
@@ -82,12 +85,6 @@ body {
     color: white;
 }
 
-.calendar-wrapper {
-    background: white;
-    padding: 20px;
-    border-radius: 10px;
-}
-
 /* Mini Calendar for Student, CS , and Teacher */
 /* Mini calendar for all */
 .mini-calendar .days-mini li.today {
@@ -107,17 +104,13 @@ body {
     background: var(--teacher-color);
 }
 
-
-.scheduled {
-    background-color: var(--teacher-color) !important;
-    color: white !important;
-    border-radius: 50%;
+.calendar .days .scheduled {
+    background-color: var(--teacher-color);
+    color: white;
 }
 
-.available {
-    background-color: #6f42c1 !important;
-    color: white !important;
-    border-radius: 50%;
+.calendar .days .scheduled:hover {
+    background-color: color-mix(in srgb, var(--teacher-color) 90%, black);
 }
 
 .custom-save-btn {
@@ -249,11 +242,9 @@ header {
     /* Add space between the icons and the month name */
 }
 
-.icons {
+.icons .material-symbols-outlined {
     color: var(--teacher-color);
-    /* Set the same color for both chevrons */
     font-size: 24px;
-    /* Adjust size of chevrons */
     cursor: pointer;
 }
 

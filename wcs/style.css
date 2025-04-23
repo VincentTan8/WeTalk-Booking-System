@@ -126,10 +126,19 @@ body {
     background: var(--cs-color);
 }
 
-.scheduled {
-    background-color: var(--cs-color) !important;
-    color: white !important;
-    border-radius: 50%;
+.calendar .days .scheduled {
+    background-color: var(--cs-color);
+    color: white;
+    cursor: pointer;
+}
+
+.calendar .days .scheduled:hover {
+    background-color: color-mix(in srgb, var(--cs-color) 90%, black);
+}
+
+.disabled {
+    color: gray;
+    cursor: not-allowed;
 }
 
 header {
@@ -138,27 +147,19 @@ header {
     align-items: center;
     color: var(--cs-color);
     gap: 10px;
-    /* Add space between the icons and the month name */
 }
 
-.icons {
-    color: #f0f0f0 !important;
-    /* Set the same color for both chevrons */
+.icons .material-symbols-outlined {
+    color: #f0f0f0;
     font-size: 24px;
-    /* Adjust size of chevrons */
     cursor: pointer;
 }
 
 .current-date {
     font-size: 18px;
-    /* Size of the month text */
     font-weight: 700;
-    /* Bold text */
     color: #f0f0f0;
-    /* Apply your desired color here */
     margin: 0;
-    /* Optional: remove any default margin */
-
 }
 
 .toggle-group {
@@ -194,10 +195,6 @@ header {
     background-color: var(--cs-color);
 }
 
-.disabled {
-    color: gray !important;
-    cursor: not-allowed !important;
-}
 
 .custom-save-btn {
     border-radius: 5px;
@@ -262,6 +259,8 @@ header {
     max-width: 120px;
     transition: background 0.3s, color 0.3s, opacity 0.3s;
     text-align: center;
+    text-align-last: center;
+    appearance: none;
 
 }
 
