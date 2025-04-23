@@ -108,10 +108,13 @@ body {
 }
 
 
-.scheduled {
-    background-color: var(--teacher-color) !important;
-    color: white !important;
-    border-radius: 50%;
+.calendar .days .scheduled {
+    background-color: var(--teacher-color);
+    color: white;
+}
+
+.calendar .days .scheduled:hover {
+    background-color: color-mix(in srgb, var(--teacher-color) 90%, black);
 }
 
 .available {
