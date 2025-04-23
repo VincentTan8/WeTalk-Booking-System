@@ -182,6 +182,6 @@ $(document).ready(function () {
         width: '100%',
         placeholder: "Select Timeslot",
         allowClear: false,
-        dropdownParent: $('#submissionModal')
+        dropdownParent: $('#submissionModal .modal-content')
     });
 });

@@ -210,7 +210,7 @@ $(document).ready(async function () {
         multiple: false,  
         width: '100%',
         placeholder: "Select Timeslot",
-        dropdownParent: $('#popup')
+        dropdownParent: $('#popup .modal-content')
     }).on('change', async function (e) {
         const selectedValue = $(this).val(); // timeslot id
         await fetchTeachers(selectedValue);
