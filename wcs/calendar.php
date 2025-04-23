@@ -88,6 +88,9 @@ if (!isset($_SESSION)) {
                     <div class="modal-body">
                         <p id="selectedDate"></p>
                         <form action="add-booking.php" method="POST">
+                            <!-- To indicate where to go after booking -->
+                            <input type="hidden" id="returnUrl" name="returnUrl" value="../wcs/calendar.php">
+
                             <label for="parentSelect" class="form-label text-start d-block">1. Select Parent:</label>
                             <select id="parentSelect" name="parent" class="form-select mb-3" required>
                                 <option value="">Select Parent</option>
@@ -107,7 +110,6 @@ if (!isset($_SESSION)) {
                             <label for="emailAdd" class="form-label text-start d-block">4. Email:</label>
                             <input type="text" id="emailAdd" name="email" class="form-control mb-3"
                                 placeholder="Enter Email" required>
-
 
 
                             <label for="languageSelect">5. Select Language.</label>
@@ -155,4 +157,5 @@ if (!isset($_SESSION)) {
 </div>
 
 <script src="calendar.js"></script>
+<script src="sched-trial.js" type="module"></script>
 <script src="../utils/minical.js"></script>

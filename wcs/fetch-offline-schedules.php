@@ -1,10 +1,10 @@
 <?php
-// <!-- Gets online free schedules, not booked schedules -->
+// <!-- Gets offline free schedules, not booked schedules -->
 include "../config/conf.php";
 
 $tablename = $prefix . "_resources.`schedule`";
-$sql = "SELECT scheddate, schedstarttime, schedendtime, platform 
-        FROM $tablename WHERE `booking_ref_num` IS NULL AND (`platform` = 1 OR `platform` = 2)";
+$sql = "SELECT `scheddate`, `schedstarttime`, `schedendtime`, `platform` 
+        FROM $tablename WHERE `booking_ref_num` IS NULL AND (`platform` = 0 OR `platform` = 2)";
 $result = $conn->query($sql);
 
 $schedules = [];

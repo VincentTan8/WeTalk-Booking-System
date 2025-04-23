@@ -24,8 +24,10 @@
             </div>
             <div class="modal-body">
                 <form action="../utils/add-booking.php" method="post">
+                    <!-- This hidden input is here to pass parent ref num for js access -->
+                    <input type="hidden" id="parentSelect" name="parent" value="<?php echo $_SESSION['ref_num'] ?>">
                     <!-- To indicate where to go after booking -->
-                    <input type="hidden" id="returnUrl" name="returnUrl" value="../wstudent/class.php">
+                    <input type="hidden" id="returnUrl" name="returnUrl" value="../wparent/class.php">
 
                     <label for="studentSelect">1. Select Student.</label>
                     <select id="studentSelect" name="student" class="form-select mb-3" required>
@@ -78,5 +80,4 @@
     </div>
 </div>
 
-<!-- Bootstrap JS & Dependencies (jQuery, Popper.js) -->
 <script src="sched-trial.js" type="module"></script>

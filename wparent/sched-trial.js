@@ -5,6 +5,8 @@ document.getElementById('sched-button').addEventListener('click', () => {
     $('#popup').modal('show');
 });
 
+//hidden in parent version
+const parentSelect = document.getElementById("parentSelect");
 const studentSelect = document.getElementById("studentSelect");
 const languageSelect = document.getElementById("languageSelect");
 const platforms = document.querySelectorAll('input[name="platform"]');
@@ -15,8 +17,16 @@ const teacherSelect = document.getElementById('teacherSelect');
 let enableDays = [];
 
 const fetchStudents = async () => {
+    //Parent version no need for checking if parent value is empty
+    const selectedParent = parentSelect.value
     try {
-        const response = await fetch("fetch-student-names.php");
+        const response = await fetch("../utils/fetch-students-of-parent.php", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/x-www-form-urlencoded"
+            },
+            body: `parent_ref_num=${encodeURIComponent(selectedParent)}`
+        });
         const data = await response.json();
 
         studentSelect.innerHTML = '<option value="">Choose Student</option>'; // reset
@@ -210,7 +220,7 @@ $(document).ready(async function () {
         multiple: false,  
         width: '100%',
         placeholder: "Select Timeslot",
-        dropdownParent: $('#popup')
+        dropdownParent: $('#popup .modal-content')
     }).on('change', async function (e) {
         const selectedValue = $(this).val(); // timeslot id
         await fetchTeachers(selectedValue);

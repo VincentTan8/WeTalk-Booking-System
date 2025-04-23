@@ -1,5 +1,5 @@
 <?php
-//fetch all student names under parent 
+//fetch all student names under a parent 
 include "../config/conf.php";
 header('Content-Type: application/json');
 
@@ -28,4 +28,3 @@ if ($result && $result->num_rows > 0) {
 }
 
 echo json_encode($students);
-exit;

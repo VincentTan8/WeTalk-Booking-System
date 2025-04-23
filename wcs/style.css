@@ -333,3 +333,91 @@ header {
 #teacherSelect {
     margin-top: 20px;
 }
+
+.select2-container--default .select2-selection--single .select2-selection__rendered,
+.select2-container--default .select2-selection--multiple .select2-selection__rendered,
+.select2-container--default .select2-search--inline .select2-search__field,
+.select2-container--default .select2-selection--single .select2-selection__placeholder {
+    font-size: 14px !important;
+}
+
+.select2-container {
+    z-index: 9999;
+}
+
+.select2-dropdown {
+    z-index: 9999 !important;
+}
+
+.select2-container--default .select2-selection--single .select2-selection__rendered {
+    text-align: center;
+    /* Center the text */
+}
+
+.select2-container--default .select2-selection__clear {
+    position: fixed;
+    /* Absolute position to keep it fixed in place */
+    right: 10px;
+    /* Keep it on the right side */
+    top: 50%;
+    /* Center it vertically in the selection container */
+    transform: translateY(-50%);
+    /* Adjust for exact vertical centering */
+    color: #fff;
+    /* Color of the button */
+    font-size: 16px;
+    /* Adjust size for visibility */
+    background: none;
+    /* Remove any background */
+    border: none;
+    /* Remove any border */
+    cursor: pointer;
+    /* Ensure it's clickable */
+    z-index: 9999;
+}
+
+.select2-container--default .select2-selection--single,
+.select2-container--default .select2-selection--multiple {
+    height: 53px !important;
+    border-radius: 10px !important;
+    border: 2px solid #a3a1a1 !important;
+    background: #FBF9F9 !important;
+    align-content: center !important;
+    align-items: center !important;
+    padding: 0 15px !important;
+    overflow-y: auto;
+    justify-content: center !important;
+    box-sizing: border-box !important;
+}
+
+.select2-container .select2-search--inline .select2-search__field {
+    height: auto !important;
+    text-align: center;
+    place-content: center;
+    color: #03011E !important;
+    margin-top: 0px !important;
+    margin-left: 0px !important;
+}
+
+.select2-container--default .select2-selection--single .select2-selection__arrow,
+.select2-container--default .select2-selection--multiple .select2-selection__arrow {
+    top: 50% !important;
+    transform: translateY(-50%);
+    right: 10px;
+    height: auto !important;
+    position: absolute;
+    color: #03011E !important;
+}
+
+.select2-container--default .select2-selection__rendered {
+    line-height: normal !important;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+    margin: 0 !important;
+    text-align: center !important;
+    /* centered for parent view in selecting single timeslot */
+    display: flex;
+    align-items: center;
+    align-content: center;
+    height: 100%;
+}

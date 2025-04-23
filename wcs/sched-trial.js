@@ -1,3 +1,5 @@
+//copied from wparent, not yet verified
+
 import { months, formatDate } from "../utils/constants.js";
 
 document.getElementById('sched-button').addEventListener('click', () => {
@@ -5,6 +7,7 @@ document.getElementById('sched-button').addEventListener('click', () => {
     $('#popup').modal('show');
 });
 
+const studentSelect = document.getElementById("studentSelect");
 const languageSelect = document.getElementById("languageSelect");
 const platforms = document.querySelectorAll('input[name="platform"]');
 const timeSelect = document.getElementById("timeSelect");
@@ -12,6 +15,24 @@ const dateInput = document.getElementById("dateInput");
 const hiddenDateInput = document.getElementById("hiddenDateInput");
 const teacherSelect = document.getElementById('teacherSelect');
 let enableDays = [];
+
+const fetchStudents = async () => {
+    try {
+        const response = await fetch("../utils/fetch-students-of-parent.php");
+        const data = await response.json();
+
+        studentSelect.innerHTML = '<option value="">Choose Student</option>'; // reset
+
+        data.forEach(student => {
+            const option = document.createElement("option");
+            option.value = student.ref_num;
+            option.textContent = student.name;
+            studentSelect.appendChild(option);
+        });
+    } catch (error) {
+        console.error("Error fetching students:", error);
+    }
+};
 
 const fetchLanguages = async () => {
     try {
@@ -150,7 +171,7 @@ function enableAllTheseDays(date) {
     var result = [false, "", "No Dates Available"];
     $.each(enableDays, function(k, d) {
         if (currentDate === d) {
-            result = [true, "highlight-student", "Available"];
+            result = [true, "highlight-parent", "Available"];
         }
     });
     return result;
@@ -191,13 +212,14 @@ $(document).ready(async function () {
         multiple: false,  
         width: '100%',
         placeholder: "Select Timeslot",
-        dropdownParent: $('#popup .modal-content')
+        dropdownParent: $('#popup')
     }).on('change', async function (e) {
         const selectedValue = $(this).val(); // timeslot id
         await fetchTeachers(selectedValue);
     });
 
     //Initialize fields
+    await fetchStudents();
     await fetchLanguages(); 
     //Only use enableDays when platform or language is changed
     enableDays = await fetchDates();

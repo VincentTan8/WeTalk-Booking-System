@@ -1,15 +1,14 @@
 <?php
-// <!-- Gets free schedules of all teachers, not booked schedules -->
+// <!-- Gets online free schedules, not booked schedules -->
 include "../config/conf.php";
-include 'cs-conf.php';
 
 $tablename = $prefix . "_resources.`schedule`";
-$sql = "SELECT scheddate, schedstarttime, schedendtime, platform 
-        FROM $tablename WHERE `booking_ref_num` IS NULL";
+$sql = "SELECT `scheddate`, `schedstarttime`, `schedendtime`, `platform` 
+        FROM $tablename WHERE `booking_ref_num` IS NULL AND (`platform` = 1 OR `platform` = 2)";
 $result = $conn->query($sql);
 
 $schedules = [];
-if ($result) {
+if ($result->num_rows > 0) {
     while ($row = $result->fetch_assoc()) {
         $schedules[] = [
             'scheddate' => $row['scheddate'],
