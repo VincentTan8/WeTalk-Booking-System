@@ -1,3 +1,5 @@
+//copied from wparent, not yet verified
+
 import { months, formatDate } from "../utils/constants.js";
 
 document.getElementById('sched-button').addEventListener('click', () => {
