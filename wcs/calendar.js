@@ -1,38 +1,48 @@
 const toggleButtons = document.querySelectorAll(".toggle-btn");
+const toggleOnline = document.getElementById("calOnline");
+const toggleOffline = document.getElementById("calOffline");
+let type = "online";
+
 
 // Toggle button functionality
-toggleButtons.forEach(button => {
-    button.addEventListener("click", function () {
-        toggleButtons.forEach(btn => {
-            btn.style.background = "none";
-            btn.style.color = "#29B866";
-            btn.style.border = "1px solid #29B866";
+
+
+const calLanguageSelect = document.getElementById("calLanguageSelect");
+const fetchLanguages = async () => {
+    try {
+        const response = await fetch("../utils/fetch-language.php");
+        const data = await response.json();
+
+        // Clear existing options
+        calLanguageSelect.innerHTML = '';
+
+        // Populate the select element with the languages
+        data.forEach(language => {
+            let option = document.createElement("option");
+            option.value = language.id;
+            option.textContent = language.details;
+            calLanguageSelect.appendChild(option);
         });
-        this.style.background = "#FAB755";
-        this.style.color = "#FFF";
-        this.style.border = "1px solid #FAB755";
-    });
+    } catch (error) {
+        console.error("Error fetching languages:", error);
+    }
+};
+fetchLanguages();
+
+
+toggleOnline.addEventListener("change", function () {
+    if (this.checked) {
+        type = "online";
+        renderCalendar(type);
+    }
 });
 
-let type = "free";
-const toggleOnline = document.getElementById("toggleOnline");
-const toggleOffline = document.getElementById("toggleOffline");
-const toggleFree = document.getElementById("toggleFree");
-
-toggleOnline.addEventListener("click", function () {
-    type = "online";
-    renderCalendar(type);
-})
-
-toggleOffline.addEventListener("click", function () {
-    type = "offline";
-    renderCalendar(type);
-})
-
-toggleFree.addEventListener("click", function () {
-    type = "free";
-    renderCalendar(type);
-})
+toggleOffline.addEventListener("change", function () {
+    if (this.checked) {
+        type = "offline";
+        renderCalendar(type);
+    }
+});
 
 const daysTag = document.querySelector(".days"),
     currentDateElement = document.querySelector(".current-date"),
@@ -101,13 +111,8 @@ const renderCalendar = async (type) => {
                     document.querySelectorAll('input[name="platform"]').forEach(platform => {
                         platform.checked = false;
                     })
-                    const scheduleSelect = document.getElementById("scheduleSelect");
-                    const teacherSelect = document.getElementById("teacherSelect");
-                    scheduleSelect.innerHTML = '<option value="">Select Schedule</option>';
-                    teacherSelect.innerHTML = '<option value="">Select Teacher</option>';
 
                     const selectedDate = day.getAttribute("data-date");
-                    document.getElementById("scheduleSelect").setAttribute("data-date", selectedDate);
                     const modal = new bootstrap.Modal(document.getElementById('submissionModal'));
                     modal.show();
                 });
@@ -134,6 +139,21 @@ const renderCalendar = async (type) => {
         }
 
         addLastDays(lastDayOfMonth, liTag);
+
+        document.querySelectorAll(".days li").forEach(day => {
+            if (!day.classList.contains("inactive") && day.classList.contains("scheduled")) {
+                day.addEventListener("click", () => {
+                    //reset offline/online selection
+                    document.querySelectorAll('input[name="platform"]').forEach(platform => {
+                        platform.checked = false;
+                    })
+
+                    const selectedDate = day.getAttribute("data-date");
+                    const modal = new bootstrap.Modal(document.getElementById('submissionModal'));
+                    modal.show();
+                });
+            }
+        });
     } else if (type === "offline") {
         //render calendar for showing offline booked schedules
         //gets offline bookings only
@@ -155,6 +175,21 @@ const renderCalendar = async (type) => {
         }
 
         addLastDays(lastDayOfMonth, liTag);
+
+        document.querySelectorAll(".days li").forEach(day => {
+            if (!day.classList.contains("inactive") && day.classList.contains("scheduled")) {
+                day.addEventListener("click", () => {
+                    //reset offline/online selection
+                    document.querySelectorAll('input[name="platform"]').forEach(platform => {
+                        platform.checked = false;
+                    })
+
+                    const selectedDate = day.getAttribute("data-date");
+                    const modal = new bootstrap.Modal(document.getElementById('submissionModal'));
+                    modal.show();
+                });
+            }
+        });
     }
 
     currentDateElement.innerText = `${months[currMonth]} ${currYear}`;
