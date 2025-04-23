@@ -266,21 +266,4 @@ $(document).ready(async function () {
     //Only use enableDays when platform or language is changed
     enableDays = await fetchDates();
     await refreshOptions(enableDays[0]); //refreshes date time and teacher fields
-
-    //Prefill the form with platform language and date
-    document.querySelectorAll(".days li").forEach(day => {
-        if (!day.classList.contains("inactive") && day.classList.contains("scheduled")) {
-            day.addEventListener("click", () => {
-                //todo prefill platform and language
-
-                //todo prefill date based on clicked cell
-                const selectedDate = day.getAttribute("data-date");
-
-                //document.getElementById("scheduleSelect").setAttribute("data-date", selectedDate);
-
-                const modal = new bootstrap.Modal(document.getElementById('submissionModal'));
-                modal.show();
-            });
-        }
-    });
 });
