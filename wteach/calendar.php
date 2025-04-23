@@ -95,7 +95,7 @@ $current = 'class'; ?>
                                 </div>
                             </div>
                             <div class="text-center">
-                                <input type="submit" value="Save"
+                                <input type="submit" value="Add Schedule/s"
                                     style="border-radius: 10px; background: #916DFF;padding: 13px 54px; color:white; border:none;">
                             </div>
                         </form>

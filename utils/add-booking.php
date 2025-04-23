@@ -1,14 +1,6 @@
 <?php
-if (!isset($_SESSION)) {
-    session_start();
-    ob_start();
-}
-?>
-
-<?php
 // Database connection
 include "../config/conf.php";
-include 's-conf.php';
 include '../utils/generateRefNum.php';
 
 // Check connection
@@ -16,7 +8,11 @@ if (!$conn) {
     die("Connection failed: " . mysqli_connect_error());
 }
 
+//Get current encoder of booking
+$ref_num = $_SESSION['ref_num'];
 $presentdate = date('Y-m-d H:i:s'); //used for encoding
+$returnUrl = isset($_POST['returnUrl']) ? $_POST['returnUrl'] : '../index.php'; //for specifying which page to appear after booking
+
 // Get current time and add 30 minutes
 $currentTime = new DateTime();
 $currentTime->modify('+30 minutes');
@@ -24,27 +20,43 @@ $currentTimeFormatted = $currentTime->format('Y-m-d H:i:s');
 
 // Check if form is submitted
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Get input values and sanitize them
-    $student_ref_num = $ref_num;
-    $schedgroup_id = mysqli_real_escape_string($conn, $_POST['schedule']);
-    $teacher_ref_num = mysqli_real_escape_string($conn, $_POST['teacher']);
+    $student_ref_num = $_POST['student']; //student ref num
+    $schedule_ref_num = $_POST['teacher']; //teacher really containes sched ref num trust me, check sched-trial.js or fetch-available-teachers.php
 
+    $studenttable = $prefix . "_resources.`student`";
     $scheduletable = $prefix . "_resources.`schedule`";
     $teachertable = $prefix . "_resources.`teacher`";
-    $tistable = $prefix . "_resources.`teachers_in_sched`";
     $bookingtable = $prefix . "_resources.`booking`";
 
-    $query = "SELECT s.ref_num as schedule_ref_num, s.scheddate, s.schedstarttime, s.schedendtime, t.email as teacher_email, t.fname as teacher_fname, t.lname as teacher_lname 
-              FROM $scheduletable s
-              JOIN $tistable ts ON s.scheddate = ts.scheddate AND s.schedstarttime = ts.schedstarttime AND s.teacher_ref_num = '$teacher_ref_num'
-              JOIN $teachertable t ON t.ref_num = '$teacher_ref_num'
-              WHERE ts.id = $schedgroup_id AND CONCAT(s.scheddate, ' ', s.schedstarttime) >= '$currentTimeFormatted'"; // Filter schedules after current time + 30 minutes
+    //Get student info
+    $query = "SELECT `email`, `fname`, `lname` FROM $studenttable WHERE `ref_num` = ?";
+    $stmt = $conn->prepare($query);
+    $stmt->bind_param("s", $student_ref_num);
+    $stmt->execute();
+    $result = $stmt->get_result();
 
-    $student_email = $email;
-    $student_fname = $fname;
-    $student_lname = $lname;
+    if ($result && $result->num_rows > 0) {
+        $row = $result->fetch_assoc();
+        $student_email = $row["email"];
+        $student_fname = $row["fname"];
+        $student_lname = $row["lname"];
+    } else {
+        echo "<script type='text/javascript'>alert('Invalid student, please try again'); window.location.href='$returnUrl';</script>";
+        exit;
+    }
 
-    $result = $conn->query($query);
+    // Verify schedule to be 30 mins or more before booking
+    $query = "SELECT s.ref_num as schedule_ref_num, s.scheddate, s.schedstarttime, s.schedendtime, t.email as teacher_email, t.fname as teacher_fname, t.lname as teacher_lname
+              FROM $scheduletable s 
+              JOIN $teachertable t ON s.teacher_ref_num = t.ref_num
+              WHERE CONCAT(s.scheddate, ' ', s.schedstarttime) >= '$currentTimeFormatted'   
+              AND s.ref_num = ?";
+
+    $stmt = $conn->prepare($query);
+    $stmt->bind_param("s", $schedule_ref_num);
+    $stmt->execute();
+    $result = $stmt->get_result();
+
     if ($result && $result->num_rows > 0) {
         $row = $result->fetch_assoc();
         $schedule_ref_num = $row['schedule_ref_num'];
@@ -61,6 +73,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $ref_num_prefix = 'B-' . $timestamp;
         $new_ref_num = generateRefNum($conn, $ref_num_prefix, $bookingtable);
 
+        //Encoder here is whoever is using the session
         $sql = "INSERT INTO $bookingtable (`ref_num`, `schedule_ref_num`, `student_ref_num`, `encoded_by`) 
                 VALUES ('$new_ref_num', '$schedule_ref_num', '$student_ref_num', '$ref_num - $presentdate');";
 
@@ -103,15 +116,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
             // Check if both emails are sent
             if ($mailToStudent && $mailToTeacher) {
-                echo "<script type='text/javascript'>alert('Booking added successfully!'); window.location.href='class_n.php';</script>";
+                echo "<script type='text/javascript'>alert('Booking added successfully!'); window.location.href='$returnUrl';</script>";
             } else {
-                echo "<script type='text/javascript'>alert('Booking added successfully, but failed to send emails.'); window.location.href='class.php';</script>";
+                echo "<script type='text/javascript'>alert('Booking added successfully, but failed to send emails.'); window.location.href='$returnUrl';</script>";
             }
         } else {
-            echo "Error: " . $conn->error;
+            echo "<script type='text/javascript'>alert('Error: $conn->error'); window.location.href='$returnUrl';</script>";
         }
     } else {
-        echo "Invalid schedule or teacher selection.";
+        echo "<script type='text/javascript'>alert('Invalid schedule, please try again'); window.location.href='$returnUrl';</script>";
     }
     $result->free(); // Free result memory
 }

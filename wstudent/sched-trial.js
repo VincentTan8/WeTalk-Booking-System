@@ -188,7 +188,7 @@ $(document).ready(async function () {
     });
 
     $('#timeSelect').select2({
-        multiple: false,  // Allow multiple selections
+        multiple: false,  
         width: '100%',
         placeholder: "Select Timeslot",
         dropdownParent: $('#popup')
