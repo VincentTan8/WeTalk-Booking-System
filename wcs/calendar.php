@@ -3,9 +3,6 @@ if (!isset($_SESSION)) {
     session_start();
     ob_start();
 }
-
-//todo remove conf and other fetch statements here. Move them into their own fetch files
-include "../config/conf.php";
 ?>
 <?php $current = 'schedule';
 ?>
@@ -19,18 +16,35 @@ include "../config/conf.php";
                 <!-- Calendar Column -->
                 <div class="col-12 col-lg-9 col-md-12" style="margin-bottom:10px;">
                     <div class="rounded">
-                        <div class="wrapper p-3 rounded">
+                        <div class="wrapper rounded">
 
-                            <header class="d-flex justify-content-between align-items-center mb-3"
+                            <header class="d-flex flex-column align-items-center mb-3"
                                 style="color:#f0f0f0 !important;">
-                                <!-- Toggle Buttons (Left Side) -->
-                                <div class="d-flex">
-                                    <button class="toggle-btn" id="toggleOnline" value="online">Online</button>
-                                    <button class="toggle-btn" id="toggleOffline" value="offline">Offline</button>
-                                    <button class="toggle-btn" id="toggleFree" value="free">Free</button>
+                                <!-- Top Row: Toggle Buttons and Language Select -->
+                                <div class="d-flex align-items-center justify-content-between " style="width: 100%;">
+                                    <!-- Toggle Buttons (Left Side) -->
+                                    <div class="col-auto d-flex toggleCalendar">
+                                        <div id="calendarTypeSelect" class="calToggle-group">
+                                            <input type="radio" class="calToggle-radio" id="calOnline"
+                                                name="calendarType" value="online" checked>
+                                            <label class="calToggle-label" for="calOnline">Online</label>
+
+                                            <input type="radio" class="calToggle-radio" id="calOffline"
+                                                name="calendarType" value="offline">
+                                            <label class="calToggle-label" for="calOffline">Offline</label>
+                                        </div>
+                                    </div>
+
+                                    <!-- Language Selector (Right Side) -->
+                                    <div class="d-flex align-items-center">
+                                        <label for="calLanguageSelect"></label>
+                                        <select id="calLanguageSelect" name="language" class="form-select" required>
+                                            <option value="">Language</option>
+                                        </select>
+                                    </div>
                                 </div>
 
-                                <!-- Month Navigation -->
+                                <!-- Month Navigation (Bottom Row) -->
                                 <div class="d-flex align-items-center justify-content-center flex-grow-1">
                                     <div class="icons">
                                         <span id="prev" class="material-symbols-outlined"
@@ -43,6 +57,7 @@ include "../config/conf.php";
                                     </div>
                                 </div>
                             </header>
+
 
                             <div class="calendar">
                                 <ul class="weeks justify-content-between" style="text-align: end;">
@@ -78,43 +93,64 @@ include "../config/conf.php";
                     <div class="modal-body">
                         <p id="selectedDate"></p>
                         <form action="add-booking.php" method="POST">
-                            <label for="platformSelect">1. Select Platform.</label>
-                            <div id="platformSelect" class="toggle-group">
+                            <label for="parentSelect" class="form-label text-start d-block">1. Select Parent:</label>
+                            <select id="parentSelect" name="parent" class="form-select mb-3" required>
+                                <option value="">Select Parent</option>
+
+                            </select>
+
+                            <label for="studentSelect" class="form-label text-start d-block">2. Select Student:</label>
+                            <select id="studentSelect" name="student" class="form-select mb-3" required>
+                                <option value="">Select Student</option>
+
+                            </select>
+
+                            <label for="phoneNumber" class="form-label text-start d-block">3. Phone:</label>
+                            <input type="text" id="phoneNumber" name="phone" class="form-control mb-3"
+                                placeholder="Enter Phone Number" required>
+
+                            <label for="emailAdd" class="form-label text-start d-block">4. Email:</label>
+                            <input type="text" id="emailAdd" name="email" class="form-control mb-3"
+                                placeholder="Enter Email" required>
+
+
+
+                            <label for="languageSelect">5. Select Language.</label>
+                            <select id="languageSelect" name="language" class="form-select mb-3" required>
+                                <option value="">Choose Language</option>
+
+                            </select>
+                            <label for="platformSelect">6. Select Platform.</label>
+                            <div id="platformSelect" class="toggle-group mb-3">
+                                <input type="radio" class="toggle-radio" id="online" name="platform" value="1" checked>
+                                <label class="toggle-label" for="online">Online</label>
                                 <input type="radio" class="toggle-radio" id="offline" name="platform" value="0">
                                 <label class="toggle-label" for="offline">Offline</label>
-                                <input type="radio" class="toggle-radio" id="online" name="platform" value="1">
-                                <label class="toggle-label" for="online">Online</label>
                             </div>
 
-                            <label>Schedules Available:</label><br>
-                            <select id="scheduleSelect" name="schedule" data-date="" required>
-                                <option value="">Select Schedule</option>
-                            </select>
-                            <br><br>
+                            <label for="dayInput">7. Select Date/Time Preferred.</label>
+                            <div class="datetime-group">
+                                <div class="form-group flex-fill">
+                                    <input type="text" id="dateInput" name="formatteddate"
+                                        class="form-control text-center" required>
+                                    <input type="hidden" id="hiddenDateInput" name="scheddate">
+                                </div>
+                                <div class="form-group flex-fill">
+                                    <select id="timeSelect" name="schedtime[]" class="form-select" required>
+                                    </select>
+                                </div>
+                            </div>
 
-                            <label>Teacher:</label>
-                            <select id="teacherSelect" name="teacher" required>
+                            <label for="teacherSelect" class="form-label text-start d-block">8. Select Teacher:</label>
+                            <select id="teacherSelect" name="teacher" class="form-select mb-3" required>
                                 <option value="">Select Teacher</option>
-                            </select>
-                            <br><br>
 
-                            <label>Student Name:</label>
-                            <select name="student" required>
-                                <option value="">Select Student</option>
-                                <?php
-                                $studentlist = $conn->query("SELECT * FROM  `student` ORDER BY `lname` ASC;");
-                                while ($row = $studentlist->fetch_assoc()) {
-                                    $fname = $row["fname"];
-                                    $lname = $row["lname"];
-                                    $id = $row["id"];
-                                    echo "<option value='$id'>$lname, $fname</option>";
-                                }
-                                ?>
                             </select>
-                            <br><br>
 
-                            <input type="submit" value="Add Booking"
-                                style="border-radius: 10px; background: #29B866; color:white;">
+                            <div class="text-center">
+                                <input type="submit" value="Add Booking"
+                                    style="border-radius: 10px; background: #29B866;padding: 13px 54px; color: white; border: none;">
+                            </div>
                         </form>
                     </div>
                 </div>
@@ -125,53 +161,3 @@ include "../config/conf.php";
 
 <script src="calendar.js"></script>
 <script src="../utils/minical.js"></script>
-<script>
-    //script for toggles/filters
-    document.addEventListener("DOMContentLoaded", function () {
-        const platforms = document.querySelectorAll('input[name="platform"]');
-        const scheduleSelect = document.getElementById("scheduleSelect");
-        const teacherSelect = document.getElementById("teacherSelect");
-
-        platforms.forEach(platform => {
-            platform.addEventListener("change", function () {
-                //reset schedule and teacher selection
-                scheduleSelect.innerHTML = '<option value="">Select Schedule</option>';
-                teacherSelect.innerHTML = '<option value="">Select Teacher</option>';
-
-                fetch("fetch-schedule.php", {
-                    method: "POST",
-                    headers: { "Content-Type": "application/x-www-form-urlencoded" },
-                    body: "platform=" + encodeURIComponent(this.value) +
-                        "&selectedDate=" + encodeURIComponent(scheduleSelect.getAttribute("data-date"))
-                })
-                    .then(response => response.text())
-                    .then(data => {
-                        scheduleSelect.innerHTML = data; // Update dropdown
-                    })
-                    .catch(error => console.error("Error fetching schedules:", error));
-            });
-        });
-
-        scheduleSelect.addEventListener("change", function () {
-            const sched_id = this.value;
-
-            // Clear the teachers dropdown if no timeslot is selected
-            if (sched_id === "") {
-                teacherSelect.innerHTML = '<option value="">Select Teacher</option>';
-                return;
-            }
-
-            // Use fetch() to get teachers based on the selected timeslot
-            fetch("fetch-teacher.php", {
-                method: "POST",
-                headers: { "Content-Type": "application/x-www-form-urlencoded" },
-                body: "sched_id=" + encodeURIComponent(sched_id)
-            })
-                .then(response => response.text())
-                .then(data => {
-                    teacherSelect.innerHTML = data; // Update dropdown
-                })
-                .catch(error => console.error("Error fetching teachers:", error));
-        });
-    });
-</script>
