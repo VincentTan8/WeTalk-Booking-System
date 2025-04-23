@@ -25,13 +25,10 @@ if (!isset($_SESSION)) {
                                     <!-- Toggle Buttons (Left Side) -->
                                     <div class="col-auto d-flex toggleCalendar">
                                         <div id="calendarTypeSelect" class="calToggle-group">
-                                            <input type="radio" class="calToggle-radio" id="calOnline"
-                                                name="calendarType" value="online" checked>
-                                            <label class="calToggle-label" for="calOnline">Online</label>
-
-                                            <input type="radio" class="calToggle-radio" id="calOffline"
-                                                name="calendarType" value="offline">
-                                            <label class="calToggle-label" for="calOffline">Offline</label>
+                                            <button class="toggle-btn active" id="toggleOnline"
+                                                value="online">Online</button>
+                                            <button class="toggle-btn" id="toggleOffline"
+                                                value="offline">Offline</button>
                                         </div>
                                     </div>
 
@@ -47,13 +44,11 @@ if (!isset($_SESSION)) {
                                 <!-- Month Navigation (Bottom Row) -->
                                 <div class="d-flex align-items-center justify-content-center flex-grow-1">
                                     <div class="icons">
-                                        <span id="prev" class="material-symbols-outlined"
-                                            style="cursor: pointer; color: #f0f0f0;">chevron_left</span>
+                                        <span id="prev" class="material-symbols-outlined">chevron_left</span>
                                     </div>
                                     <p class="current-date mb-0 mx-3"></p>
                                     <div class="icons">
-                                        <span id="next" class="material-symbols-outlined"
-                                            style="cursor: pointer; color: #f0f0f0;">chevron_right</span>
+                                        <span id="next" class="material-symbols-outlined">chevron_right</span>
                                     </div>
                                 </div>
                             </header>

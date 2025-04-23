@@ -126,10 +126,19 @@ body {
     background: var(--cs-color);
 }
 
-.scheduled {
-    background-color: var(--cs-color) !important;
-    color: white !important;
-    border-radius: 50%;
+.calendar .days .scheduled {
+    background-color: var(--cs-color);
+    color: white;
+    cursor: pointer;
+}
+
+.calendar .days .scheduled:hover {
+    background-color: color-mix(in srgb, var(--cs-color) 90%, black);
+}
+
+.disabled {
+    color: gray;
+    cursor: not-allowed;
 }
 
 header {
@@ -138,27 +147,19 @@ header {
     align-items: center;
     color: var(--cs-color);
     gap: 10px;
-    /* Add space between the icons and the month name */
 }
 
-.icons {
-    color: #f0f0f0 !important;
-    /* Set the same color for both chevrons */
+.icons .material-symbols-outlined {
+    color: #f0f0f0;
     font-size: 24px;
-    /* Adjust size of chevrons */
     cursor: pointer;
 }
 
 .current-date {
     font-size: 18px;
-    /* Size of the month text */
     font-weight: 700;
-    /* Bold text */
     color: #f0f0f0;
-    /* Apply your desired color here */
     margin: 0;
-    /* Optional: remove any default margin */
-
 }
 
 .toggle-group {
@@ -190,14 +191,32 @@ header {
     background: #FBF9F9;
 }
 
+.toggle-btn {
+    background: none;
+    color: #000;
+    border: none;
+    border-radius: 10px;
+    padding: 5px;
+    opacity: .5;
+    cursor: pointer;
+    font-size: 14px;
+    max-width: 120px;
+    transition: background 0.3s, color 0.3s, opacity 0.3s;
+    text-align: center;
+}
+
+/* Active state for the toggle buttons */
+.toggle-btn.active {
+    background: #FAB755;
+    color: #FFF;
+    border: 1px solid #FAB755;
+    opacity: 1;
+}
+
 .highlight-cs {
     background-color: var(--cs-color);
 }
 
-.disabled {
-    color: gray !important;
-    cursor: not-allowed !important;
-}
 
 .custom-save-btn {
     border-radius: 5px;
@@ -262,6 +281,8 @@ header {
     max-width: 120px;
     transition: background 0.3s, color 0.3s, opacity 0.3s;
     text-align: center;
+    text-align-last: center;
+    appearance: none;
 
 }
 
@@ -273,9 +294,6 @@ header {
     text-align: center;
 }
 
-#toggleCalendar {
-    gap: 10px;
-}
 
 #dateInput,
 #timeSelect {

@@ -20,7 +20,7 @@ $current = 'class'; ?>
         <div class="row mt-4">
             <div class="col-12 col-lg-9 " style="margin-bottom:20px;">
                 <div class=" p-3 bg-white  rounded ">
-                    <table id="bookingTable" class="display" style="width:100%; margin-top:20px;">
+                    <table id="bookingTable" class="display" style="width:100%;">
                         <thead>
                             <tr>
                                 <!-- No delete column?? maybe?? -->

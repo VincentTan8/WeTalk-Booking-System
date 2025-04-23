@@ -57,7 +57,8 @@ $profile_pic = $_SESSION['profile_pic']; ?>
             <!-- Profile Section -->
             <div class="d-flex align-items-center" style="padding-right: 50px;">
                 <div class="profile-nav">
-                    <img class="rounded-circle me-2" src="upload/<?php echo $profile_pic ?>" alt="Parent Profile"
+                    <img class="rounded-circle me-2"
+                        src="upload/<?php echo $profile_pic ? $profile_pic : 'parent.jpg'; ?>" alt="Parent Profile"
                         width="40" height="40">
                     <div class="dropdown">
                         <a class="dropdown-toggle text-dark fw-bold alias" href="#" id="navbarDropdown" role="button"

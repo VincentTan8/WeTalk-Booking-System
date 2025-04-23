@@ -23,6 +23,11 @@ body {
     min-height: 100vh;
 }
 
+.parentStudentDetail,
+.parentStudentDetail:hover {
+    background: var(--parent-color);
+}
+
 .navbar-nav {
     display: flex;
     justify-content: center;
@@ -84,16 +89,6 @@ body {
 .calendar ul {
     list-style-type: none;
     padding: 0;
-}
-
-/* Header for all */
-.navbar-nav .nav-link {
-    opacity: 0.75;
-}
-
-.navbar-nav .nav-link.active {
-    font-weight: bold;
-    color: black !important;
 }
 
 .my-schedule-label {

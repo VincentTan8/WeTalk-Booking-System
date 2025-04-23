@@ -29,7 +29,7 @@ if (isset($_SESSION['ref_num'])) {
         <?php include "header.php"; ?>
 
 
-        <div class=" myprofile" style="margin-top:5em;">
+        <div class="myprofile">
             <div class="row d-flex align-items-stretch" style="gap: 15px; width:100%;">
 
                 <!-- Profile Information Display (Left Side) -->
@@ -43,7 +43,7 @@ if (isset($_SESSION['ref_num'])) {
                             <div class="profile-pic-wrapper"
                                 onclick="document.getElementById('profile-pic-upload').click();">
                                 <img class="myprofile-pic me-3" alt="Profile"
-                                    src="upload/<?php echo $profile_pic ? $profile_pic : 'cs.jpg'; ?>">
+                                    src="upload/<?php echo $profile_pic ? $profile_pic : 'student.jpg'; ?>">
                                 <div class="camera-overlay">
                                     <i class="fa fa-camera" style="color: white; font-size: 24px;"></i>
                                 </div>

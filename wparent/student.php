@@ -22,7 +22,7 @@ $current = 'student'; ?>
 
         <div class="row mt-4">
             <div class="col-12 col-lg-9 ">
-                <div class=" p-3 bg-white  rounded " style="margin-bottom:20px;">
+                <div class=" p-3 bg-white rounded " style="margin-bottom:20px;">
 
                     <table id="studentTable" class="display" style="width:100%;">
                         <thead>
@@ -58,7 +58,7 @@ $current = 'student'; ?>
 
             <!-- Add Student Modal -->
             <div id="popup" class="modal fade" tabindex="-1" role="dialog">
-                <div class="modal-dialog modal-xl" role="document">
+                <div class="modal-dialog modal-m" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
                             <h5 class="modal-title">Add Student</h5>
@@ -108,7 +108,7 @@ $current = 'student'; ?>
 
             <!-- View/Edit Student Modal -->
             <div id="studentModal" class="modal fade" tabindex="-1" role="dialog">
-                <div class="modal-dialog modal-xl" role="document">
+                <div class="modal-dialog modal-m" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
                             <h5 class="modal-title">Student Details</h5>
@@ -168,7 +168,8 @@ $current = 'student'; ?>
                                 <input type="hidden" id="ref_num" name="ref_num">
 
                                 <div class="text-center">
-                                    <button type="submit" id="updateStudentBtn" class="btn btn-primary">Save</button>
+                                    <button type="submit" id="updateStudentBtn" class="btn btn-primary"
+                                        style="border-radius: 10px; background: #FFAC00;padding: 13px 54px; color:white; border:none;">Update</button>
                                 </div>
                             </form>
                         </div>
@@ -186,10 +187,10 @@ $current = 'student'; ?>
 
 <!-- Script -->
 <script>
-
+    let table;
 
     $(document).ready(function () {
-        let table = $('#studentTable').DataTable({
+        table = $('#studentTable').DataTable({
             paging: true,
             searching: true,
             ordering: true,
@@ -207,7 +208,7 @@ $current = 'student'; ?>
                 {
                     data: "student_ref_num",
                     render: function (data) {
-                        return `<button class="btn btn-sm btn-primary view-details" data-id="${data}">Details</button>`;
+                        return `<button class="btn btn-sm btn-primary view-details parentStudentDetail" style ="border:none;" data-id="${data}">Details</button>`;
                     }
                 }
             ],
@@ -233,19 +234,20 @@ $current = 'student'; ?>
                 .then(response => response.json())
                 .then(data => {
                     if (data) {
-                        document.querySelector('#fname').value = data.fname;
-                        document.querySelector('#lname').value = data.lname;
-                        document.querySelector('#email').value = data.email;
-                        document.querySelector('#username').value = data.username;
-                        document.querySelector('#nickname').value = data.nickname;
-                        document.querySelector('#phone').value = data.phone;
-                        document.querySelector('#city').value = data.city;
-                        document.querySelector('#age').value = data.age;
-                        document.querySelector('#nationality').value = data.nationality;
-                        document.querySelector('#gender').value = data.gender;
-                        document.querySelector('#birthday').value = data.birthday;
-                        document.querySelector('#bio').value = data.bio;
-                        document.querySelector('#ref_num').value = ref_num; // ✅ Set hidden input
+                        const modal = document.querySelector('#studentModal');
+                        modal.querySelector('#fname').value = data.fname;
+                        modal.querySelector('#lname').value = data.lname;
+                        modal.querySelector('#email').value = data.email;
+                        modal.querySelector('#username').value = data.username;
+                        modal.querySelector('#nickname').value = data.nickname;
+                        modal.querySelector('#phone').value = data.phone;
+                        modal.querySelector('#city').value = data.city;
+                        modal.querySelector('#age').value = data.age;
+                        modal.querySelector('#nationality').value = data.nationality;
+                        modal.querySelector('#gender').value = data.gender;
+                        modal.querySelector('#birthday').value = data.birthday;
+                        modal.querySelector('#bio').value = data.bio;
+                        modal.querySelector('#ref_num').value = ref_num;
 
                         $('#studentModal').modal('show');
                     } else {
@@ -268,7 +270,7 @@ $current = 'student'; ?>
                 if (data.success) {
                     alert('Student updated successfully!');
                     $('#studentModal').modal('hide');
-                    table.ajax.reload(null, false); // ✅ Refresh table
+                    table.ajax.reload(null, false);
                 } else {
                     alert('Update failed: ' + data.error);
                 }
