@@ -283,6 +283,15 @@ a:hover {
     /* Adjust the spacing between the two choices */
 }
 
+.navbar {
+    margin-bottom: 50px;
+}
+
+#bookingTable tbody tr td,
+#studentTable tbody tr td {
+    font-weight: normal !important;
+}
+
 .navbar-nav .nav-link {
     opacity: 0.75;
 }

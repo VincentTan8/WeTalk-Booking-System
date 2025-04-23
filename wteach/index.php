@@ -26,7 +26,7 @@ if (isset($_SESSION['ref_num'])) {
         <?php include "header.php"; ?>
 
 
-        <div class=" myprofile" style="margin-top:5em;">
+        <div class="myprofile">
             <div class="row d-flex align-items-stretch" style="gap: 15px; width:100%;">
 
                 <!-- Profile Information Display (Left Side) -->
