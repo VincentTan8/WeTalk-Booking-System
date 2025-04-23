@@ -22,10 +22,13 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
             </div>
             <div class="modal-body">
-                <form action="add-booking.php" method="post">
+                <form action="../utils/add-booking.php" method="post">
+                    <!-- This hidden input is here to pass student ref num to a reusable add booking php file -->
+                    <input type="hidden" id="studentSelect" name="student" value="<?php echo $_SESSION['ref_num'] ?>">
+                    <!-- To indicate where to go after booking -->
+                    <input type="hidden" id="returnUrl" name="returnUrl" value="../wstudent/class.php">
 
                     <!-- Language Selection -->
-                    <!-- 1. Select Language -->
                     <label for="languageSelect">1. Select Language.</label>
                     <select id="languageSelect" name="language" class="form-select mb-3" required>
                         <option value="">Choose Language</option>
@@ -63,7 +66,7 @@
                     </select>
 
                     <div class="text-center">
-                        <input type="submit" value="Save"
+                        <input type="submit" value="Book Trial Class"
                             style="border-radius: 10px; background: #FFAC00;padding: 13px 54px; color:white; border:none;">
                     </div>
                 </form>
