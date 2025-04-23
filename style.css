@@ -415,6 +415,13 @@ a:hover {
     opacity: 1;
 }
 
+@media (max-width: 600px) {
+    .calendar .days li {
+
+        text-align: center;
+    }
+}
+
 /* Mini calendar for all */
 .mini-calendar {
     margin-bottom: 20px;
