@@ -3,7 +3,8 @@
 include "../config/conf.php";
 
 $tablename = $prefix . "_resources.`student`";
-$sql = "SELECT `ref_num`, `fname`, `lname` FROM $tablename WHERE `parent_ref_num` IS NULL ORDER BY fname ASC";
+$sql = "SELECT `ref_num`, CONCAT(`fname`, ' ', `lname`) AS full_name 
+        FROM $tablename WHERE `parent_ref_num` IS NULL ORDER BY fname ASC";
 $result = $conn->query($sql);
 
 $students = [];
@@ -11,8 +12,7 @@ if ($result) {
     while ($row = $result->fetch_assoc()) {
         $students[] = [
             'ref_num' => $row['ref_num'],
-            'fname' => $row['fname'],
-            'lname' => $row['lname']
+            'name' => $row['full_name']
         ];
     }
 }
