@@ -1,12 +1,6 @@
-//copied from wparent, not yet verified
-
 import { months, formatDate } from "../utils/constants.js";
 
-document.getElementById('sched-button').addEventListener('click', () => {
-    //open Popup
-    $('#popup').modal('show');
-});
-
+const parentSelect = document.getElementById("parentSelect");
 const studentSelect = document.getElementById("studentSelect");
 const languageSelect = document.getElementById("languageSelect");
 const platforms = document.querySelectorAll('input[name="platform"]');
@@ -16,9 +10,50 @@ const hiddenDateInput = document.getElementById("hiddenDateInput");
 const teacherSelect = document.getElementById('teacherSelect');
 let enableDays = [];
 
-const fetchStudents = async () => {
+const fetchParents = async () => {
     try {
-        const response = await fetch("../utils/fetch-students-of-parent.php");
+        const response = await fetch("../utils/fetch-parents.php");
+        const data = await response.json();
+
+        // Clear existing options
+        parentSelect.innerHTML = '';
+        let emptyParent = document.createElement("option");
+        emptyParent.value = '';
+        emptyParent.textContent = "None";
+        parentSelect.appendChild(emptyParent);
+
+        // Populate the select element with parents registered in the system
+        data.forEach(parent => {
+            let option = document.createElement("option");
+            option.value = parent.ref_num;
+            option.textContent = parent.name;
+            parentSelect.appendChild(option);
+        });
+    } catch (error) {
+        console.error("Error fetching parents:", error);
+    }
+};
+
+const fetchStudents = async () => {
+    //CS version needs checking if parent value is empty
+    let selectedParent = parentSelect.value
+    //todo check if this works or if any other value may come in
+    selectedParent = selectedParent === '' ? null : selectedParent;
+
+    try {
+        let response;
+        if(selectedParent){
+            response = await fetch("../utils/fetch-students-of-parent.php", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/x-www-form-urlencoded"
+                },
+                body: `parent_ref_num=${encodeURIComponent(selectedParent)}`
+            });
+        } else {
+            response = await fetch("../utils/fetch-students-wo-parent.php");
+        }
+
         const data = await response.json();
 
         studentSelect.innerHTML = '<option value="">Choose Student</option>'; // reset
@@ -153,6 +188,12 @@ const fetchTeachers = async (timeslot) => {
     }
 }
 
+parentSelect.addEventListener("change", async function() {
+    await fetchStudents();
+
+    //todo update phone and email fields
+});
+
 languageSelect.addEventListener("change", async function () {
     enableDays = await fetchDates();
     await refreshOptions(enableDays[0]);
@@ -171,7 +212,7 @@ function enableAllTheseDays(date) {
     var result = [false, "", "No Dates Available"];
     $.each(enableDays, function(k, d) {
         if (currentDate === d) {
-            result = [true, "highlight-parent", "Available"];
+            result = [true, "highlight-cs", "Available"];
         }
     });
     return result;
@@ -212,16 +253,34 @@ $(document).ready(async function () {
         multiple: false,  
         width: '100%',
         placeholder: "Select Timeslot",
-        dropdownParent: $('#popup')
+        dropdownParent: $('#submissionModal .modal-content')
     }).on('change', async function (e) {
         const selectedValue = $(this).val(); // timeslot id
         await fetchTeachers(selectedValue);
     });
 
     //Initialize fields
+    await fetchParents();
     await fetchStudents();
     await fetchLanguages(); 
     //Only use enableDays when platform or language is changed
     enableDays = await fetchDates();
     await refreshOptions(enableDays[0]); //refreshes date time and teacher fields
+
+    //Prefill the form with platform language and date
+    document.querySelectorAll(".days li").forEach(day => {
+        if (!day.classList.contains("inactive") && day.classList.contains("scheduled")) {
+            day.addEventListener("click", () => {
+                //todo prefill platform and language
+
+                //todo prefill date based on clicked cell
+                const selectedDate = day.getAttribute("data-date");
+
+                //document.getElementById("scheduleSelect").setAttribute("data-date", selectedDate);
+
+                const modal = new bootstrap.Modal(document.getElementById('submissionModal'));
+                modal.show();
+            });
+        }
+    });
 });
