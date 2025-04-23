@@ -169,7 +169,7 @@ function enableAllTheseDays(date) {
     var result = [false, "", "No Dates Available"];
     $.each(enableDays, function(k, d) {
         if (currentDate === d) {
-            result = [true, "highlight-student", "Available"];
+            result = [true, "highlight-parent", "Available"];
         }
     });
     return result;
