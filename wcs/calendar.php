@@ -25,13 +25,10 @@ if (!isset($_SESSION)) {
                                     <!-- Toggle Buttons (Left Side) -->
                                     <div class="col-auto d-flex toggleCalendar">
                                         <div id="calendarTypeSelect" class="calToggle-group">
-                                            <input type="radio" class="calToggle-radio" id="calOnline"
-                                                name="calendarType" value="online" checked>
-                                            <label class="calToggle-label" for="calOnline">Online</label>
-
-                                            <input type="radio" class="calToggle-radio" id="calOffline"
-                                                name="calendarType" value="offline">
-                                            <label class="calToggle-label" for="calOffline">Offline</label>
+                                            <button class="toggle-btn active" id="toggleOnline"
+                                                value="online">Online</button>
+                                            <button class="toggle-btn" id="toggleOffline"
+                                                value="offline">Offline</button>
                                         </div>
                                     </div>
 

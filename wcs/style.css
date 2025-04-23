@@ -191,6 +191,28 @@ header {
     background: #FBF9F9;
 }
 
+.toggle-btn {
+    background: none;
+    color: #000;
+    border: none;
+    border-radius: 10px;
+    padding: 5px;
+    opacity: .5;
+    cursor: pointer;
+    font-size: 14px;
+    max-width: 120px;
+    transition: background 0.3s, color 0.3s, opacity 0.3s;
+    text-align: center;
+}
+
+/* Active state for the toggle buttons */
+.toggle-btn.active {
+    background: #FAB755;
+    color: #FFF;
+    border: 1px solid #FAB755;
+    opacity: 1;
+}
+
 .highlight-cs {
     background-color: var(--cs-color);
 }
@@ -272,9 +294,6 @@ header {
     text-align: center;
 }
 
-#toggleCalendar {
-    gap: 10px;
-}
 
 #dateInput,
 #timeSelect {

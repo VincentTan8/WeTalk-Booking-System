@@ -1,11 +1,23 @@
 const toggleButtons = document.querySelectorAll(".toggle-btn");
-const toggleOnline = document.getElementById("calOnline");
-const toggleOffline = document.getElementById("calOffline");
 let type = "online";
 
+// Function to handle button selection
+const selectButton = (selectedButton) => {
+    // Reset all buttons (remove active class)
+    toggleOnline.classList.remove("active");
+    toggleOffline.classList.remove("active");
 
-// Toggle button functionality
+    // Add the active class to the selected button
+    selectedButton.classList.add("active");
 
+    // Set the type based on the selected button
+    type = selectedButton.value;
+    renderCalendar(type);
+};
+toggleButtons.forEach(button => {
+    button.addEventListener("click", () => selectButton(button));
+
+});
 
 const calLanguageSelect = document.getElementById("calLanguageSelect");
 const fetchLanguages = async () => {
@@ -176,20 +188,6 @@ const renderCalendar = async (type) => {
 
         addLastDays(lastDayOfMonth, liTag);
 
-        document.querySelectorAll(".days li").forEach(day => {
-            if (!day.classList.contains("inactive") && day.classList.contains("scheduled")) {
-                day.addEventListener("click", () => {
-                    //reset offline/online selection
-                    document.querySelectorAll('input[name="platform"]').forEach(platform => {
-                        platform.checked = false;
-                    })
-
-                    const selectedDate = day.getAttribute("data-date");
-                    const modal = new bootstrap.Modal(document.getElementById('submissionModal'));
-                    modal.show();
-                });
-            }
-        });
     }
 
     currentDateElement.innerText = `${months[currMonth]} ${currYear}`;
