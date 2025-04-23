@@ -1,9 +1,9 @@
 <?php
-// <!-- Get all student list -->
+//Get all students without a parent
 include "../config/conf.php";
 
 $tablename = $prefix . "_resources.`student`";
-$sql = "SELECT `ref_num`, `fname`, `lname` FROM $tablename ORDER BY fname ASC";
+$sql = "SELECT `ref_num`, `fname`, `lname` FROM $tablename WHERE `parent_ref_num` IS NULL ORDER BY fname ASC";
 $result = $conn->query($sql);
 
 $students = [];
