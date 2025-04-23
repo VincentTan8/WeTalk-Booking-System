@@ -156,6 +156,6 @@ if (!isset($_SESSION)) {
     </div>
 </div>
 
-<script src="calendar.js"></script>
 <script src="sched-trial.js" type="module"></script>
+<script src="calendar.js"></script>
 <script src="../utils/minical.js"></script>
