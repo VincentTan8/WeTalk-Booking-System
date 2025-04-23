@@ -1,9 +1,9 @@
-// Toggle button functionality
-const toggleButtons = document.querySelectorAll(".toggle-btn");
-let type = "online";
+//todo change platform toggle value to 1 or 0
+let type;
+let language_id;
 
 // Function to handle button selection
-const selectButton = (selectedButton) => {
+const selectButton = async (selectedButton) => {
     // Reset all buttons (remove active class)
     toggleOnline.classList.remove("active");
     toggleOffline.classList.remove("active");
@@ -13,11 +13,11 @@ const selectButton = (selectedButton) => {
 
     // Set the type based on the selected button
     type = selectedButton.value;
-    renderCalendar(type);
+    await renderCalendar(type, language_id);
 };
-toggleButtons.forEach(button => {
-    button.addEventListener("click", () => selectButton(button));
-});
+
+// Platform toggle above calendar
+const toggleButtons = document.querySelectorAll(".toggle-btn");
 
 //Language toggle above calendar
 const calLanguageSelect = document.getElementById("calLanguageSelect");
@@ -40,7 +40,15 @@ const fetchLanguages = async () => {
         console.error("Error fetching languages:", error);
     }
 };
-fetchLanguages();
+
+toggleButtons.forEach(button => {
+    button.addEventListener("click", () => selectButton(button));
+});
+
+calLanguageSelect.addEventListener("change", async function () {
+    language_id = this.value;
+    await renderCalendar(type, language_id);
+});
 
 const daysTag = document.querySelector(".days"),
     currentDateElement = document.querySelector(".current-date"),
@@ -55,25 +63,30 @@ const months = ["January", "February", "March", "April", "May", "June", "July",
 
 let schedules = []; //initialize schedules
 
-const renderCalendar = async (type) => {
-    if (type === "online") {
-        //render calendar for showing online free schedules
-        await fetch('fetch-online-schedules.php')
-            .then(response => response.json())
-            .then(data => {
-                schedules = data;
-            })
-            .catch(error => console.error('Error fetching online schedules:', error));
-    } else if (type === "offline") {
-        //render calendar for showing offline free schedules
-        await fetch('fetch-offline-schedules.php')
-            .then(response => response.json())
-            .then(data => {
-                schedules = data;
-            })
-            .catch(error => console.error('Error fetching offline schedules:', error));
-    }
+const renderCalendar = async (type, language_id) => {
+    let selectedPlatform;
+    let selectedLanguage = language_id;
 
+    if (type === "online") {
+        selectedPlatform = 1;
+    } else if (type === "offline"){
+        selectedPlatform = 0;
+    }
+    //render calendar for showing schedules
+    await fetch('fetch-schedules.php', {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/x-www-form-urlencoded"
+        },
+        body: `platform=${encodeURIComponent(selectedPlatform)}` +
+              `&language_id=${encodeURIComponent(selectedLanguage)}`
+    })
+    .then(response => response.json())
+    .then(data => {
+        schedules = data;
+    })
+    .catch(error => console.error('Error fetching schedules:', error));
+    
     let liTag = "";
     const firstDayOfMonth = new Date(currYear, currMonth, 1).getDay(),
         lastDateOfMonth = new Date(currYear, currMonth + 1, 0).getDate(),
@@ -111,12 +124,34 @@ const renderCalendar = async (type) => {
     daysTag.innerHTML = liTag; //for the document query selector on li click events to work
 
     currentDateElement.innerText = `${months[currMonth]} ${currYear}`;
+
+    //Prefill the form with platform language and date
+    document.querySelectorAll(".days li").forEach(day => {
+        if (!day.classList.contains("inactive") && day.classList.contains("scheduled")) {
+            day.addEventListener("click", () => {
+                //Prefill platform 
+                if(type === "online"){      
+                    $('input[name="platform"][value="1"]').prop('checked', true); // Online
+                } else if(type === "offline") {
+                    $('input[name="platform"][value="0"]').prop('checked', true); // Offline
+                }
+
+                //Prefill language
+                document.getElementById('languageSelect').value = calLanguageSelect.value;
+
+                //Prefill date based on clicked cell
+                const selectedDate = day.getAttribute("data-date");
+                $("#dateInput").datepicker("setDate", new Date(selectedDate));
+
+                const modal = new bootstrap.Modal(document.getElementById('submissionModal'));
+                modal.show();
+            });
+        }
+    });
 };
 
-renderCalendar(type);
-
 prevNextIcon.forEach(icon => {
-    icon.addEventListener("click", () => {
+    icon.addEventListener("click", async () => {
         currMonth = icon.id === "prev" ? currMonth - 1 : currMonth + 1;
         //used a different date object to avoid conflict with "date"
         let changeDate;
@@ -127,6 +162,14 @@ prevNextIcon.forEach(icon => {
         } else {
             date = new Date();
         }
-        renderCalendar(type);
+        await renderCalendar(type, language_id);
     });
+});
+
+$(document).ready(async function () {
+    await fetchLanguages();
+    type = document.querySelector('#calendarTypeSelect .toggle-btn.active').value;
+    language_id = calLanguageSelect.value;
+
+    await renderCalendar(type, language_id);
 });
