@@ -87,12 +87,12 @@ if (!isset($_SESSION)) {
                     </div>
                     <div class="modal-body">
                         <p id="selectedDate"></p>
-                        <form action="add-booking.php" method="POST">
+                        <form action="../utils/add-booking.php" method="POST">
                             <!-- To indicate where to go after booking -->
                             <input type="hidden" id="returnUrl" name="returnUrl" value="../wcs/calendar.php">
 
                             <label for="parentSelect" class="form-label text-start d-block">1. Select Parent:</label>
-                            <select id="parentSelect" name="parent" class="form-select mb-3" required>
+                            <select id="parentSelect" name="parent" class="form-select mb-3">
                                 <option value="">Select Parent</option>
 
                             </select>
