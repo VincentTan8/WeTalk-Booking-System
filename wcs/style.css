@@ -19,7 +19,8 @@
 }
 
 body {
-    background-image: linear-gradient(180deg, #1eb089 27.29%, #1caf88 105.37%);
+    /* background-image: linear-gradient(180deg, #37cfa7 27.29%, #1caf88 105.37%); */
+    background-image: linear-gradient(180deg, #87CEEB 27.29%, #1caf88 105.37%);
     min-height: 100vh;
 }
 
@@ -150,7 +151,8 @@ header {
 }
 
 .icons .material-symbols-outlined {
-    color: #f0f0f0;
+    color: #000;
+    opacity: 0.5;
     font-size: 24px;
     cursor: pointer;
 }
@@ -158,7 +160,8 @@ header {
 .current-date {
     font-size: 18px;
     font-weight: 700;
-    color: #f0f0f0;
+    color: #000;
+    opacity: 0.5;
     margin: 0;
 }
 
