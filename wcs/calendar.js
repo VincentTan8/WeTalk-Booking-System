@@ -141,7 +141,12 @@ const renderCalendar = async (type, language_id) => {
 
                 //Prefill date based on clicked cell
                 const selectedDate = day.getAttribute("data-date");
+                //this is why sched-trial is called first in the php before this file
                 $("#dateInput").datepicker("setDate", new Date(selectedDate));
+
+                //todo prefill timeslots
+
+                //todo prefill teacher
 
                 const modal = new bootstrap.Modal(document.getElementById('submissionModal'));
                 modal.show();
