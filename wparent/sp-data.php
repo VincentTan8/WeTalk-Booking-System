@@ -11,7 +11,7 @@ $sql = "SELECT
         WHERE student.parent_ref_num = ?";
 
 $stmt = $conn->prepare($sql);
-$stmt->bind_param("i", $parent_ref_num);
+$stmt->bind_param("s", $parent_ref_num);
 $stmt->execute();
 $result = $stmt->get_result();
 
