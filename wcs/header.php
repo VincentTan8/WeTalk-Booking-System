@@ -11,7 +11,7 @@ $profile_pic = $_SESSION['profile_pic']; ?>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>WeTalk Booking System</title>
-
+    <link rel="icon" href="../uploads/logo/favicon.ico">
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="../style.css">
