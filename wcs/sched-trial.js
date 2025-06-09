@@ -218,7 +218,7 @@ function enableAllTheseDays(date) {
     return result;
 }
 
-const refreshOptions = async (date) => {
+export const refreshOptions = async (date) => {
     const selectedDate = formatDate(date);
     if(enableDays.includes(selectedDate)) {
         const [year, month, dayNum] = selectedDate.split("-");
@@ -238,13 +238,44 @@ const refreshOptions = async (date) => {
     }
 }
 
+export const updateEnabledDays = async () => {
+    enableDays = await fetchDates();
+}
+
 //Jquery DatePicker and select2 for date input
 $(document).ready(async function () {
-    $("#dateInput").datepicker({
+    const $input = $("#dateInput");
+    let modalScrollTop = 0;
+    $input.on('focus', function () {
+        // Save scroll position when input gains focus
+        modalScrollTop = $('#submissionModal').scrollTop();
+    });
+
+    $input.datepicker({
         dateFormat: "MM dd, yy", // Example: April 1, 2025
         onSelect: async function (dateText, inst) {
+            // Restore scroll position immediately after selection
+            setTimeout(() => {
+                $('#submissionModal').scrollTop(modalScrollTop);
+            }, 0);
             const selectedDate = $(this).datepicker("getDate");
             await refreshOptions(selectedDate);
+        },
+        beforeShow: function(input, inst) {
+            setTimeout(function () {
+                $('#ui-datepicker-div table td a').attr('href', 'javascript:;');
+                $('#ui-datepicker-div table td a').click(function(event) {
+                    event.preventDefault();
+                });
+            }, 0);
+        },
+        onChangeMonthYear: function(year, month, inst) {
+            setTimeout(function () {
+                $('#ui-datepicker-div table td a').attr('href', 'javascript:;');
+                $('#ui-datepicker-div table td a').click(function(event) {
+                    event.preventDefault();
+                });
+            }, 0);
         },
         beforeShowDay: enableAllTheseDays,
     });
