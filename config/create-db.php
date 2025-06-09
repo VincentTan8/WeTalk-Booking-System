@@ -247,32 +247,16 @@ $query = "CREATE TABLE `$tablename` (
 		`ref_num` VARCHAR(100) NOT NULL UNIQUE,
 		`schedule_ref_num` VARCHAR(100) NOT NULL,
 		`student_ref_num` VARCHAR(100) NOT NULL,
+		`phone` VARCHAR(50),
+		`email` VARCHAR(100) NOT NULL,
 		`encoded_by` VARCHAR(100) NOT NULL,
 		FOREIGN KEY (`schedule_ref_num`) REFERENCES `schedule`(`ref_num`) ON DELETE CASCADE,
 		FOREIGN KEY (`student_ref_num`) REFERENCES `student`(`ref_num`) ON DELETE CASCADE
 	);"
 ;
-//add foreign key fpr schedule
+//add foreign key for schedule
 if ($conn->query($query) === TRUE) {
 	mysqli_query($conn, "ALTER TABLE `schedule` ADD FOREIGN KEY (`booking_ref_num`) REFERENCES `booking`(`ref_num`) ON DELETE SET NULL");
-	echo "Table $tablename created successfully.<br>";
-} else {
-	echo "Error creating table `$tablename`: $conn->error <br>";
-}
-
-//Grouped Teachers Per Sched Table
-$tablename = 'teachers_in_sched';
-$query = "CREATE TABLE `$tablename` (
-		`id` INT AUTO_INCREMENT PRIMARY KEY,  
-		`scheddate` DATE,
-		`schedstarttime` TIME,
-		`schedendtime` TIME,
-		`platform` INT NOT NULL,
-		`language_id` INT DEFAULT NULL,
-		`teacher_ids` TEXT NOT NULL
-	);"
-;
-if ($conn->query($query) === TRUE) {
 	echo "Table $tablename created successfully.<br>";
 } else {
 	echo "Error creating table `$tablename`: $conn->error <br>";
