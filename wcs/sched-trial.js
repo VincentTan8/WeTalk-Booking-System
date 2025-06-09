@@ -7,7 +7,9 @@ const platforms = document.querySelectorAll('input[name="platform"]');
 const timeSelect = document.getElementById("timeSelect");
 const dateInput = document.getElementById("dateInput");
 const hiddenDateInput = document.getElementById("hiddenDateInput");
-const teacherSelect = document.getElementById('teacherSelect');
+const teacherSelect = document.getElementById("teacherSelect");
+const phoneNumber = document.getElementById("phoneNumber");
+const emailAdd = document.getElementById("emailAdd");
 let enableDays = [];
 
 const fetchParents = async () => {
@@ -36,7 +38,7 @@ const fetchParents = async () => {
 
 const fetchStudents = async () => {
     //CS version needs checking if parent value is empty
-    let selectedParent = parentSelect.value
+    let selectedParent = parentSelect.value;
     //todo check if this works or if any other value may come in
     selectedParent = selectedParent === '' ? null : selectedParent;
 
@@ -188,10 +190,60 @@ const fetchTeachers = async (timeslot) => {
     }
 }
 
+const fetchContactDetails = async () => {
+    let selectedParent = parentSelect.value;
+    let selectedStudent = studentSelect.value;
+    //todo check if this works or if any other value may come in
+    selectedParent = selectedParent === '' ? null : selectedParent;
+    selectedStudent = selectedStudent === '' ? null : selectedStudent;
+    
+    try {
+        let response;
+        if(selectedParent){
+            response = await fetch("../utils/fetch-parent-contact.php", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/x-www-form-urlencoded"
+                },
+                body: `parent_ref_num=${encodeURIComponent(selectedParent)}`
+            });
+
+            const data = await response.json();
+            data.forEach(contact => {
+                phoneNumber.value = contact.phone;
+                emailAdd.value = contact.email;
+            });
+        } else if (selectedStudent) {
+            response = await fetch("../utils/fetch-student-contact.php", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/x-www-form-urlencoded"
+                },
+                body: `student_ref_num=${encodeURIComponent(selectedStudent)}`
+            });
+
+            const data = await response.json();
+            data.forEach(contact => {
+                phoneNumber.value = contact.phone;
+                emailAdd.value = contact.email;
+            });
+        } else {
+            //reset contact details
+            phoneNumber.value = '';
+            emailAdd.value = '';
+        }
+    } catch (error) {
+        console.error("Error fetching contact details:", error);
+    }
+}
+
 parentSelect.addEventListener("change", async function() {
     await fetchStudents();
+    await fetchContactDetails();
+});
 
-    //todo update phone and email fields
+studentSelect.addEventListener("change", async function() {
+    await fetchContactDetails();
 });
 
 languageSelect.addEventListener("change", async function () {
