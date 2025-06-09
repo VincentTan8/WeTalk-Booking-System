@@ -91,33 +91,12 @@ if (!isset($_SESSION)) {
                             <!-- To indicate where to go after booking -->
                             <input type="hidden" id="returnUrl" name="returnUrl" value="../wcs/calendar.php">
 
-                            <label for="parentSelect" class="form-label text-start d-block">1. Select Parent:</label>
-                            <select id="parentSelect" name="parent" class="form-select mb-3">
-                                <option value="">Select Parent</option>
-
-                            </select>
-
-                            <label for="studentSelect" class="form-label text-start d-block">2. Select Student:</label>
-                            <select id="studentSelect" name="student" class="form-select mb-3" required>
-                                <option value="">Select Student</option>
-
-                            </select>
-
-                            <label for="phoneNumber" class="form-label text-start d-block">3. Phone:</label>
-                            <input type="text" id="phoneNumber" name="phone" class="form-control mb-3"
-                                placeholder="Enter Phone Number" required>
-
-                            <label for="emailAdd" class="form-label text-start d-block">4. Email:</label>
-                            <input type="text" id="emailAdd" name="email" class="form-control mb-3"
-                                placeholder="Enter Email" required>
-
-
-                            <label for="languageSelect">5. Select Language.</label>
+                            <label for="languageSelect">1. Select Language.</label>
                             <select id="languageSelect" name="language" class="form-select mb-3" required>
                                 <option value="">Choose Language</option>
 
                             </select>
-                            <label for="platformSelect">6. Select Platform.</label>
+                            <label for="platformSelect">2. Select Platform.</label>
                             <div id="platformSelect" class="toggle-group mb-3">
                                 <input type="radio" class="toggle-radio" id="online" name="platform" value="1" checked>
                                 <label class="toggle-label" for="online">Online</label>
@@ -125,7 +104,7 @@ if (!isset($_SESSION)) {
                                 <label class="toggle-label" for="offline">Offline</label>
                             </div>
 
-                            <label for="dayInput">7. Select Date/Time Preferred.</label>
+                            <label for="dayInput">3. Select Date/Time Preferred.</label>
                             <div class="datetime-group">
                                 <div class="form-group flex-fill">
                                     <input type="text" id="dateInput" name="formatteddate"
@@ -138,15 +117,35 @@ if (!isset($_SESSION)) {
                                 </div>
                             </div>
 
-                            <label for="teacherSelect" class="form-label text-start d-block">8. Select Teacher:</label>
+                            <label for="teacherSelect" class="form-label text-start d-block">4. Select Teacher:</label>
                             <select id="teacherSelect" name="teacher" class="form-select mb-3" required>
                                 <option value="">Select Teacher</option>
 
                             </select>
 
+                            <label for="parentSelect" class="form-label text-start d-block">5. Select Parent:</label>
+                            <select id="parentSelect" name="parent" class="form-select mb-3">
+                                <option value="">Select Parent</option>
+
+                            </select>
+
+                            <label for="studentSelect" class="form-label text-start d-block">6. Select Student:</label>
+                            <select id="studentSelect" name="student" class="form-select mb-3" required>
+                                <option value="">Select Student</option>
+
+                            </select>
+
+                            <label for="phoneNumber" class="form-label text-start d-block">7. Phone:</label>
+                            <input type="text" id="phoneNumber" name="phone" class="form-control mb-3"
+                                placeholder="Enter Phone Number" required>
+
+                            <label for="emailAdd" class="form-label text-start d-block">8. Email:</label>
+                            <input type="text" id="emailAdd" name="email" class="form-control mb-3"
+                                placeholder="Enter Email" required>
+
                             <div class="text-center">
                                 <input type="submit" value="Add Booking"
-                                    style="border-radius: 10px; background: #29B866;padding: 13px 54px; color: white; border: none;">
+                                    style="border-radius: 10px; background: #2F8B58;padding: 13px 54px; color: white; border: none;">
                             </div>
                         </form>
                     </div>
@@ -157,5 +156,5 @@ if (!isset($_SESSION)) {
 </div>
 
 <script src="sched-trial.js" type="module"></script>
-<script src="calendar.js"></script>
+<script src="calendar.js" type="module"></script>
 <script src="../utils/minical.js"></script>
