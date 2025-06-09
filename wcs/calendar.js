@@ -1,3 +1,6 @@
+import { months } from "../utils/constants.js";
+import { refreshOptions, updateEnabledDays } from "./sched-trial.js";
+
 //todo change platform toggle value to 1 or 0
 let type;
 let language_id;
@@ -57,9 +60,6 @@ const daysTag = document.querySelector(".days"),
 let date = new Date(),
     currYear = date.getFullYear(),
     currMonth = date.getMonth();
-
-const months = ["January", "February", "March", "April", "May", "June", "July",
-    "August", "September", "October", "November", "December"];
 
 let schedules = []; //initialize schedules
 
@@ -128,7 +128,7 @@ const renderCalendar = async (type, language_id) => {
     //Prefill the form with platform language and date
     document.querySelectorAll(".days li").forEach(day => {
         if (!day.classList.contains("inactive") && day.classList.contains("scheduled")) {
-            day.addEventListener("click", () => {
+            day.addEventListener("click", async () => {
                 //Prefill platform 
                 if(type === "online"){      
                     $('input[name="platform"][value="1"]').prop('checked', true); // Online
@@ -144,9 +144,9 @@ const renderCalendar = async (type, language_id) => {
                 //this is why sched-trial is called first in the php before this file
                 $("#dateInput").datepicker("setDate", new Date(selectedDate));
 
-                //todo prefill timeslots
-
-                //todo prefill teacher
+                //Prefill timeslots and teacher
+                await updateEnabledDays();
+                refreshOptions(selectedDate);
 
                 const modal = new bootstrap.Modal(document.getElementById('submissionModal'));
                 modal.show();
