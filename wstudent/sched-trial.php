@@ -25,6 +25,8 @@
                 <form action="../utils/add-booking.php" method="post">
                     <!-- This hidden input is here to pass student ref num to a reusable add booking php file -->
                     <input type="hidden" id="studentSelect" name="student" value="<?php echo $_SESSION['ref_num'] ?>">
+                    <input type="hidden" id="phoneNumber" name="phone" value="<?php echo $_SESSION['phone'] ?>">
+                    <input type="hidden" id="emailAdd" name="email" value="<?php echo $_SESSION['email'] ?>">
                     <!-- To indicate where to go after booking -->
                     <input type="hidden" id="returnUrl" name="returnUrl" value="../wstudent/class.php">
 
