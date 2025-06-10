@@ -18,9 +18,8 @@ $current = 'student'; ?>
         <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
         <script src="https://cdn.datatables.net/responsive/2.2.9/js/dataTables.responsive.min.js"></script>
         <div class="row mt-4">
-            <div class="col-12 col-lg-9" style="margin-bottom:20px;">
+            <div class="col-12 col-md-12 col-lg-9" style="margin-bottom:20px;">
                 <div class=" p-3 bg-white rounded ">
-
                     <table id="bookingTable" class="display" style="width:100%;">
                         <thead>
                             <tr>

@@ -3,11 +3,6 @@ if (!isset($_SESSION)) {
     session_start();
     ob_start();
 }
-//todo fix booking count
-// // Booking check
-// $booking_check_sql = "SELECT COUNT(*) as booking_count FROM $bookingtable WHERE student_ref_num = '$ref_num'";
-// $booking_check_result = $conn->query($booking_check_sql);
-// $booking_count = $booking_check_result->fetch_assoc()['booking_count'];
 ?>
 
 <?php
@@ -25,10 +20,8 @@ $current = 'class';
         <script src="https://cdn.datatables.net/responsive/2.2.9/js/dataTables.responsive.min.js"></script>
 
         <div class="row mt-4">
-            <!-- todo compare with student.php in teacher for col-md-12 -->
             <div class="col-12 col-md-12 col-lg-9" style="margin-bottom:20px;">
                 <div class="p-3 bg-white rounded">
-
                     <table id='bookingTable' class='display' style='width:100%;'>
                         <thead>
                             <tr>
