@@ -23,7 +23,7 @@ $current = 'class'; ?>
                     <table id="bookingTable" class="display" style="width:100%;">
                         <thead>
                             <tr>
-                                <!-- No delete column?? maybe?? -->
+                                <th class="highlight-cs"></th> <!-- Column for delete button -->
                                 <th class='highlight-cs' style='color: white;'>Student Name</th>
                                 <th class='highlight-cs' style='color: white;'>Teacher Name</th>
                                 <th class='highlight-cs' style='color: white;'>Schedule Date</th>
@@ -59,6 +59,13 @@ $current = 'class'; ?>
                 "dataSrc": ""
             },
             "columns": [
+                {
+                    "data": "booking_ref_num",
+                    "render": function (data, type, row) {
+                        return `<button class="delete-btn" data-refnum="${data}" style="background:none;border:none;color:red;cursor:pointer;">❌</button>`;
+                    },
+                    "orderable": false
+                },
                 { "data": "student_name" },
                 { "data": "teacher_name" },
                 { "data": "scheddate" },
@@ -72,6 +79,26 @@ $current = 'class'; ?>
                     }
                 }
             ]
+        });
+
+        // Delete button click event
+        $('#bookingTable tbody').on('click', '.delete-btn', function () {
+            let b_ref_num = $(this).data('refnum');
+
+            if (confirm("Are you sure you want to delete this booking?")) {
+                $.ajax({
+                    url: '../utils/delete-booking.php',
+                    type: 'POST',
+                    data: { booking_ref_num: b_ref_num },
+                    success: function (response) {
+                        alert(response);
+                        table.ajax.reload(null, false); // Refresh table
+                    },
+                    error: function () {
+                        alert("Error deleting booking.");
+                    }
+                });
+            }
         });
 
         // Refresh DataTable every 10 seconds
