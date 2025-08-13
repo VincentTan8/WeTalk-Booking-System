@@ -6,7 +6,7 @@ if (!isset($_SESSION)) {
 ?>
 
 <?php
-$current = 'class'; ?>
+$current = 'add-schedule'; ?>
 <div style="display: grid">
     <div class="col-9" style="justify-self: center;">
         <?php include "header.php";
