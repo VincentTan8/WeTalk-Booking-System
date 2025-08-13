@@ -15,6 +15,8 @@ if (!$conn) {
     die("Connection failed: " . mysqli_connect_error());
 }
 
+$returnUrl = isset($_POST['returnUrl']) ? $_POST['returnUrl'] : '../index.php'; //for specifying which page to appear after adding schedule
+
 // Check if form is submitted
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Get input values and sanitize them
@@ -47,7 +49,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $result = $stmt->get_result();
 
         if ($result->fetch_assoc()) {
-            echo "<script type='text/javascript'>alert('Schedule already exists!'); window.location.href='schedule.php';</script>";
+            echo "<script type='text/javascript'>alert('Schedule already exists!'); window.location.href='$returnUrl';</script>";
         } else {
             //Schedule reference num generate
             //SC-{date}{time}{count}
@@ -61,11 +63,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $stmt = $conn->prepare($sql);
             $stmt->bind_param("sssssii", $new_ref_num, $scheddate, $schedstarttime, $schedendtime, $teacher_ref_num, $platform, $language_id);
             if (!$stmt->execute()) {
-                echo "<script type='text/javascript'>alert('Error adding schedule: " . addslashes($stmt->error) . "'); window.location.href='schedule.php';</script>";
+                echo "<script type='text/javascript'>alert('Error adding schedule: " . addslashes($stmt->error) . "'); window.location.href='$returnUrl';</script>";
             }
         }
     }
-    echo "<script type='text/javascript'>alert('Schedule added successfully!'); window.location.href='schedule.php';</script>";
+    echo "<script type='text/javascript'>alert('Schedule added successfully!'); window.location.href='$returnUrl';</script>";
 
 }
 
