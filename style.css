@@ -288,7 +288,8 @@ a:hover {
 }
 
 #bookingTable tbody tr td,
-#studentTable tbody tr td {
+#studentTable tbody tr td,
+#scheduleTable tbody tr td {
     font-weight: normal !important;
 }
 
