@@ -198,14 +198,14 @@ a:hover {
 .social-login-container {
     display: flex;
     justify-content: center;
-    gap: 15px;
+    gap: 25px;
     margin-top: 15px;
 }
 
 .social-btn img {
-    width: 50px;
+    width: 40px;
     /* Adjust size as needed */
-    height: 50px;
+    height: 40px;
     transition: transform 0.2s ease-in-out;
 }
 

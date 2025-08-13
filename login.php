@@ -121,6 +121,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     <button type="submit" class="btn btn-success w-100 mt-3">Sign In</button>
                 </form>
 
+                <!-- Social Login Icons -->
+                <!-- <div class="social-login-container">
+                    <a href="https://www.facebook.com/login.php" class="social-btn">
+                        <img src="uploads/logo/facebook.png" alt="Facebook Login">
+                    </a>
+                    <a href="https://accounts.google.com/signin" class="social-btn">
+                        <img src="uploads/logo/google.png" alt="Google Login">
+                    </a>
+                </div> -->
+
                 <div class="text-center mt-3">
                     <span>Don't have an account? <br> <a href="signupnow.php" class="fw-bold text-dark"
                             id="signUpText">Sign Up</a></span>
