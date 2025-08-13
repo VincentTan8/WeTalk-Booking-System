@@ -29,7 +29,8 @@ $sql = "SELECT
         JOIN $studenttable ON b.student_ref_num = student.ref_num
         JOIN $scheduletable ON b.schedule_ref_num = schedule.ref_num
         JOIN $teachertable ON schedule.teacher_ref_num = teacher.ref_num
-        WHERE teacher.ref_num = ?";
+        WHERE teacher.ref_num = ?
+        ORDER BY STR_TO_DATE(CONCAT(scheddate, ' ', schedstarttime), '%Y-%m-%d %H:%i:%s') ASC"; //todo add ordering by STATUS then by date
 
 $bookings = [];
 $stmt = $conn->prepare($sql);
@@ -38,7 +39,12 @@ $stmt->execute();
 $result = $stmt->get_result();
 
 while ($row = $result->fetch_assoc()) {
-    $row['platform'] = ($row['platform'] == 1) ? "Online" : "Offline";
+    $platformMap = [
+        2 => "Online/Offline",
+        1 => "Online",
+        0 => "Offline"
+    ];
+    $row['platform'] = $platformMap[$row['platform']] ?? "Invalid";
 
     $row['statusColor'] = match ($row['status']) {
         'Upcoming' => 'red',

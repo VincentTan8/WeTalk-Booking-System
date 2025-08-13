@@ -39,7 +39,12 @@ $stmt->execute();
 $result = $stmt->get_result();
 
 while ($row = $result->fetch_assoc()) {
-    $row['platform'] = ($row['platform'] == 1) ? "Online" : "Offline";
+    $platformMap = [
+        2 => "Online/Offline",
+        1 => "Online",
+        0 => "Offline"
+    ];
+    $row['platform'] = $platformMap[$row['platform']] ?? "Invalid";
 
     $row['statusColor'] = match ($row['status']) {
         'Upcoming' => 'red',
