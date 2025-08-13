@@ -53,7 +53,7 @@ $current = 'student'; ?>
             "scrollX": true,
             "responsive": true, // Enable Responsive
             "ajax": {
-                "url": "t-data.php", // Fetch data dynamically
+                "url": "t-booked-data.php", // Fetch data dynamically
                 "dataSrc": ""
             },
             "columns": [
