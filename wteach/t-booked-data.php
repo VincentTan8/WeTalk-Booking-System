@@ -22,7 +22,7 @@ $sql = "SELECT
             THEN 'In Progress'
             WHEN NOW() > 
                 STR_TO_DATE(CONCAT(scheddate, ' ', schedendtime), '%Y-%m-%d %H:%i:%s') 
-            THEN 'Finished'
+            THEN 'For Assessment'
             ELSE 'Upcoming'
         END AS status 
         FROM $bookingtable b
@@ -49,7 +49,7 @@ while ($row = $result->fetch_assoc()) {
     $row['statusColor'] = match ($row['status']) {
         'Upcoming' => 'red',
         'In Progress' => 'orange',
-        'Finished' => 'green',
+        'For Assessment' => 'green',
         default => ''
     };
 
