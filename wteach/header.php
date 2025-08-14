@@ -42,12 +42,16 @@ $profile_pic = $_SESSION['profile_pic']; ?>
                         href="index.php">My Profile</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link <?php echo $current == 'student' ? 'active fw-bold text-primary' : ''; ?>"
-                        href="student.php">My Student</a>
+                    <a class="nav-link <?php echo $current == 'add-schedule' ? 'active fw-bold text-primary' : ''; ?>"
+                        href="add-sched-calendar.php">Add Schedule</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link <?php echo $current == 'class' ? 'active fw-bold text-primary' : ''; ?>"
-                        href="calendar.php">My Schedule</a>
+                    <a class="nav-link <?php echo $current == 'view-schedule' ? 'active fw-bold text-primary' : ''; ?>"
+                        href="view-sched-calendar.php">View Schedules</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link <?php echo $current == 'student' ? 'active fw-bold text-primary' : ''; ?>"
+                        href="view-booked-sched.php">View Booked Schedules</a>
                 </li>
             </ul>
             <!-- Profile Section -->
