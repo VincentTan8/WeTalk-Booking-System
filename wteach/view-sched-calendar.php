@@ -84,7 +84,7 @@ $current = 'view-schedule'; ?>
 
             if (confirm("Are you sure you want to delete this schedule?")) {
                 $.ajax({
-                    url: 'delete-schedule.php',
+                    url: '../utils/delete-schedule.php',
                     type: 'POST',
                     data: { schedule_ref_num: s_ref_num },
                     success: function (response) {
