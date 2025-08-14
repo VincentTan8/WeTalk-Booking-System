@@ -61,14 +61,17 @@ $current = 'add-schedule'; ?>
                     </div>
                     <div class="modal-body">
                         <p id="selectedDate"></p>
-                        <form action="add-schedule.php" method="POST">
+                        <form action="../utils/add-schedule.php" method="POST">
+                            <!-- To indicate where to go after adding schedule -->
+                            <input type="hidden" id="returnUrl" name="returnUrl"
+                                value="../wteach/add-sched-calendar.php">
+
                             <!-- 1. Select Language -->
                             <label for="languageSelect">1. Select Language.</label>
                             <select id="languageSelect" name="language" class="form-select mb-3" required>
                                 <option value="">Choose Language</option>
 
                             </select>
-
 
                             <label for="platformSelect">2. Select Platform.</label>
                             <div id="platformSelect" class="toggle-group mb-3">
