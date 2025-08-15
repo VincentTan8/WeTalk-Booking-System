@@ -39,6 +39,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $_SESSION['username'] = $loginResult['user_data']['username']; // Store username in session
 
         $loginMap = [
+            'admin' => 'wadmin',
             'student' => 'wstudent',
             'teacher' => 'wteach',
             'cs' => 'wcs',
