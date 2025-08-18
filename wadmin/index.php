@@ -22,20 +22,10 @@ if (isset($_SESSION['ref_num'])) {
 
         <div class="myprofile">
             <div class="row d-flex align-items-stretch" style="gap: 15px; width:100%;">
-                <!-- Profile Information Display (Left Side) -->
+                <!-- Admin Information Display (Left Side) -->
                 <div class="col-12 col-md-12 col-lg-6 myprofileinfo d-flex flex-column"
                     style="background-color: #FBF9F9; padding: 20px; border-radius: 10px;">
-                    <div class="myprofile-name d-flex flex-column flex-md-row align-items-center text-center text-md-start"
-                        style="width: 100%;">
-                        <!-- Profile Name and Bio aligned to the left -->
-                        <div class="profile-container">
-                            <div class="name-text" style="font-size: 1.5em; font-weight: bold;">
-                                <?php echo $fname . " " . $lname; ?>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Profile Info Section -->
+                    <!-- Admin Info Section -->
                     <div class="profile-info mt-4">
                         <div class="inline d-flex justify-content-between mb-2">
                             <div class="profile-info-text">Email:</div>
@@ -49,6 +39,8 @@ if (isset($_SESSION['ref_num'])) {
                             <div class="profile-info-text">ADMIN ID:</div>
                             <div class="profile-info-text2"><?php echo $ref_num; ?></div>
                         </div>
+
+                        <!-- Consider adding stats here such as user count and other overview typa stuff -->
                     </div>
                 </div>
 
