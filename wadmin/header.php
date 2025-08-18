@@ -40,6 +40,22 @@ $admin_name = $_SESSION['fname']; ?>
                     <a class="nav-link <?php echo $current == 'home' ? 'active fw-bold text-primary' : ''; ?>"
                         href="index.php">My Profile</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link <?php echo $current == 'manage-users' ? 'active fw-bold text-primary' : ''; ?>"
+                        href="manage-users.php">Manage Users</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link <?php echo $current == '' ? 'active fw-bold text-primary' : ''; ?>"
+                        href="">Manage Bookings</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link <?php echo $current == '' ? 'active fw-bold text-primary' : ''; ?>"
+                        href="">Manage Schedules</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link <?php echo $current == '' ? 'active fw-bold text-primary' : ''; ?>"
+                        href="">Manage Calendar</a>
+                </li>
             </ul>
             <!-- Profile Section -->
             <div class="d-flex align-items-center" style="padding-right: 50px;">
