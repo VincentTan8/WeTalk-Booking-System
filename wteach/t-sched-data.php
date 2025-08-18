@@ -25,7 +25,7 @@ $sql = "SELECT
         WHERE teacher.ref_num = ? 
         ORDER BY STR_TO_DATE(CONCAT(scheddate, ' ', schedstarttime), '%Y-%m-%d %H:%i:%s') ASC";
 
-$bookings = [];
+$schedules = [];
 $stmt = $conn->prepare($sql);
 $stmt->bind_param("s", $ref_num);
 $stmt->execute();
@@ -47,9 +47,9 @@ while ($row = $result->fetch_assoc()) {
         default => ''
     };
 
-    $bookings[] = $row;
+    $schedules[] = $row;
 }
 
 header('Content-Type: application/json');
-echo json_encode($bookings);
+echo json_encode($schedules);
 exit;
