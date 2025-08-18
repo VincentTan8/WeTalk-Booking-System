@@ -213,10 +213,9 @@ header {
     opacity: 1;
 }
 
-.highlight-cs {
+.highlight-admin {
     background-color: var(--admin-color);
 }
-
 
 .custom-save-btn {
     border-radius: 5px;
