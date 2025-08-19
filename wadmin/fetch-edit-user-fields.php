@@ -1,14 +1,12 @@
 <?php
 include "../config/conf.php";
-//this fetches the fields that should show up given a user type
+//this fetches the fields to be edited that should show up given a user type
 
 if (isset($_POST['ref_num'])) {
     $ref_num = $_POST['ref_num'];
     $usertype = strtolower($_POST['usertype']); //lowercase to match tablename for example: Student becomes student
 
     // Get user info by searching in appropriate table
-    $user = null;
-
     $tablename = $prefix . "_resources.`$usertype`";
     $sql = "SELECT * FROM $tablename WHERE ref_num = ?";
     $stmt = $conn->prepare($sql);
