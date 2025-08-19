@@ -88,8 +88,8 @@ $current = 'manage-users'; ?>
             </div>
             <div class="modal-footer">
                 <div class="edit mt-4 text-center">
-                    <button type="submit" id="saveEditsBtn" class="btn-primary me-2 custom-save-btn" name="save">Save
-                        Edits</button>
+                    <button type="submit" id="saveEditsBtn" class="btn-primary me-2 custom-save-btn" name="save"
+                        form="editUserForm">Save Edits</button>
                 </div>
             </div>
         </div>
@@ -188,6 +188,7 @@ $current = 'manage-users'; ?>
                 data: { ref_num: ref_num, usertype: usertype },
                 success: function (response) {
                     // Put the returned form inside the modal body
+                    $('#editUserModalLabel').text('Edit ' + usertype);
                     $('#editUserModal .modal-body').html(response);
                     $('#editUserModal').modal('show');
                 },
@@ -198,8 +199,10 @@ $current = 'manage-users'; ?>
         });
 
         // Save edits button click
-        $('#saveEditsBtn').on('click', function () {
-            let formData = $('#editUserForm').serialize();
+        $(document).on('submit', '#editUserForm', function (e) {
+            e.preventDefault();
+
+            let formData = $(this).serialize();
 
             $.ajax({
                 url: 'update-user.php',
