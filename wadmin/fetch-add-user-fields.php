@@ -4,6 +4,28 @@ include "../utils/generateRefNum.php";
 //this fetches the fields for adding that should show up given a user type
 
 if (isset($_POST['usertype'])) {
+    //Get language list for teachers
+    $languages = [];
+    $tablename = $prefix . "_resources.`language`";
+    $sql = "SELECT * FROM $tablename";
+    $stmt = $conn->prepare($sql);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    while ($row = $result->fetch_assoc()) {
+        $languages[] = $row;
+    }
+
+    //Get parent list for students if needed
+    $parents = [];
+    $tablename = $prefix . "_resources.`parent`";
+    $sql = "SELECT `ref_num`, CONCAT_WS(' ', `fname`, `lname`) AS `fullname` FROM $tablename";
+    $stmt = $conn->prepare($sql);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    while ($row = $result->fetch_assoc()) {
+        $parents[] = $row;
+    }
+
     $usertype = strtolower($_POST['usertype']); //lowercase to match tablename for example: Student becomes student
     $tablename = $prefix . "_resources.`$usertype`";
     $ref_num_prefix = "WT-";    //default prefix
@@ -79,11 +101,24 @@ if (isset($_POST['usertype'])) {
                 </div>";
         echo "<div class='form-group'>
                     <label>Gender</label>
-                    <input type='text' name='gender' class='form-control'>
+                    <select name='gender' class='form-control'>
+                        <option value='Male'>Male</option>
+                        <option value='Female'>Female</option>
+                    </select>
                 </div>";
     }
 
     if ($usertype === "student") {
+        //Parent selector
+        echo "<div class='form-group'>
+                <label>Parent (if any)</label>
+                <select name='parent' class='form-control'>
+            <option value=''>None</option>";
+        foreach ($parents as $parent) {
+            echo "<option value='{$parent['ref_num']}'>" . $parent['fullname'] . "</option>";
+        }
+        echo "  </select>
+            </div>";
         echo "<div class='form-group'>
                     <label>Nickname</label>
                     <input type='text' name='nickname' class='form-control'>
@@ -97,6 +132,15 @@ if (isset($_POST['usertype'])) {
                     <input type='text' name='nationality' class='form-control'>
                 </div>";
     } elseif ($usertype === "teacher") {
+        //Language selector
+        echo "<div class='form-group'>
+                <label>Language</label>
+                <select name='language' class='form-control'>";
+        foreach ($languages as $language) {
+            echo "<option value='{$language['id']}'>" . ucfirst($language['details']) . "</option>";
+        }
+        echo "  </select>
+            </div>";
         echo "<div class='form-group'>
                     <label>Alias</label>
                     <input type='text' name='alias' class='form-control'>

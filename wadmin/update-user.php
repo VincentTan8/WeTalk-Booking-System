@@ -59,17 +59,22 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $nickname = $_POST['nickname'];
             $age = $_POST['age'];
             $nationality = $_POST['nationality'];
+            $parent = $_POST['parent'];
+            if (trim($parent) == '') {
+                $parent = NULL;
+            }
 
-            $sql .= ", `nickname` = ?, `age` = ?, `nationality` = ?";
-            array_push($params, $nickname, $age, $nationality);
-            $types .= "sss";
+            $sql .= ", `nickname` = ?, `age` = ?, `nationality` = ?, `parent_ref_num` = ?";
+            array_push($params, $nickname, $age, $nationality, $parent);
+            $types .= "ssss";
         } elseif ($usertype === "teacher") {
             // Teacher fields
             $alias = $_POST['alias'];
+            $language = $_POST['language'];
 
-            $sql .= ", `alias` = ?";
-            array_push($params, $alias);
-            $types .= "s";
+            $sql .= ", `alias` = ?, `language_id` = ?";
+            array_push($params, $alias, $language);
+            $types .= "si";
         }
 
         // Last part of the query
@@ -77,14 +82,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         array_push($params, $ref_num);
         $types .= "s";
 
-        // Prepare & execute
         $stmt = $conn->prepare($sql);
         $stmt->bind_param($types, ...$params);
 
         if ($stmt->execute()) {
-            echo "User updated successfully!";
+            echo json_encode(['success' => true, 'message' => "User updated successfully!"]);
         } else {
-            echo "Error updating user: " . $stmt->error;
+            echo json_encode(['success' => false, 'error' => "Error updating user: " . $stmt->error]);
         }
 
         $stmt->close();

@@ -53,18 +53,23 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $nickname = $_POST['nickname'];
             $age = $_POST['age'];
             $nationality = $_POST['nationality'];
+            $parent = $_POST['parent'];
+            if (trim($parent) == '') {
+                $parent = NULL;
+            }
 
-            $columns = array_merge($columns, ["nickname", "age", "nationality"]);
-            $placeholders = array_merge($placeholders, ["?", "?", "?"]);
-            array_push($params, $nickname, $age, $nationality);
-            $types .= "sss";
+            $columns = array_merge($columns, ["nickname", "age", "nationality", "parent_ref_num"]);
+            $placeholders = array_merge($placeholders, ["?", "?", "?", "?"]);
+            array_push($params, $nickname, $age, $nationality, $parent);
+            $types .= "ssss";
         } elseif ($usertype === "teacher") {
             $alias = $_POST['alias'];
+            $language = $_POST['language'];
 
-            $columns = array_merge($columns, ["alias"]);
-            $placeholders = array_merge($placeholders, ["?"]);
-            array_push($params, $alias);
-            $types .= "s";
+            $columns = array_merge($columns, ["alias", "language_id"]);
+            $placeholders = array_merge($placeholders, ["?", "?"]);
+            array_push($params, $alias, $language);
+            $types .= "si";
         }
 
         $sql = "INSERT INTO $tablename (`" . implode("`, `", $columns) . "`) 

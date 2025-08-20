@@ -15,6 +15,28 @@ if (isset($_POST['ref_num'])) {
     $result = $stmt->get_result();
     $user = $result->fetch_assoc();
 
+    //Get language list for teachers
+    $languages = [];
+    $tablename = $prefix . "_resources.`language`";
+    $sql = "SELECT * FROM $tablename";
+    $stmt = $conn->prepare($sql);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    while ($row = $result->fetch_assoc()) {
+        $languages[] = $row;
+    }
+
+    //Get parent list for students if needed
+    $parents = [];
+    $tablename = $prefix . "_resources.`parent`";
+    $sql = "SELECT `ref_num`, CONCAT_WS(' ', `fname`, `lname`) AS `fullname` FROM $tablename";
+    $stmt = $conn->prepare($sql);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    while ($row = $result->fetch_assoc()) {
+        $parents[] = $row;
+    }
+
     if ($user) {
         // Generate form dynamically based on user type
         echo "<form id='editUserForm'>";  //this id is important btw, the listener for this is in the manage users php file
@@ -67,11 +89,25 @@ if (isset($_POST['ref_num'])) {
                   </div>";
             echo "<div class='form-group'>
                     <label>Gender</label>
-                    <input type='text' name='gender' class='form-control' value='{$user['gender']}'>
-                  </div>";
+                    <select name='gender' class='form-control'>
+                        <option value='Male' " . ($user['gender'] == 'Male' ? 'selected' : '') . ">Male</option>
+                        <option value='Female' " . ($user['gender'] == 'Female' ? 'selected' : '') . ">Female</option>
+                    </select>
+                </div>";
         }
 
         if ($usertype === "student") {
+            //Parent selector
+            echo "<div class='form-group'>
+                    <label>Parent (if any)</label>
+                    <select name='parent' class='form-control'>
+                    <option value=''>None</option>";
+            foreach ($parents as $parent) {
+                $selected = ($user['parent_ref_num'] == $parent['ref_num']) ? 'selected' : ''; //preselect only for editing
+                echo "<option value='{$parent['ref_num']}' {$selected}>" . $parent['fullname'] . "</option>";
+            }
+            echo "  </select>
+                </div>";
             echo "<div class='form-group'>
                     <label>Nickname</label>
                     <input type='text' name='nickname' class='form-control' value='{$user['nickname']}'>
@@ -85,10 +121,21 @@ if (isset($_POST['ref_num'])) {
                     <input type='text' name='nationality' class='form-control' value='{$user['nationality']}'>
                   </div>";
         } elseif ($usertype === "teacher") {
+            //Language selector
+            echo "<div class='form-group'>
+                    <label>Language</label>
+                    <select name='language' class='form-control'>";
+            foreach ($languages as $language) {
+                $selected = ($user['language_id'] == $language['id']) ? 'selected' : ''; //preselect only for editing I think
+                echo "<option value='{$language['id']}' {$selected}>" . ucfirst($language['details']) . "</option>";
+            }
+            echo "  </select>
+                </div>";
+
             echo "<div class='form-group'>
                     <label>Alias</label>
                     <input type='text' name='alias' class='form-control' value='{$user['alias']}'>
-                  </div>";
+                </div>";
         }
 
         echo "</form>";
