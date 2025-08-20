@@ -46,8 +46,8 @@ $profile_pic = $_SESSION['profile_pic']; ?>
                         href="calendar.php">Book Trial Class</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link <?php echo $current == 'class' ? 'active fw-bold text-primary' : ''; ?>"
-                        href="student.php">Booked Class</a>
+                    <a class="nav-link <?php echo $current == 'booked-class' ? 'active fw-bold text-primary' : ''; ?>"
+                        href="booked.php">Booked Class</a>
                 </li>
             </ul>
             <!-- Profile Section -->
