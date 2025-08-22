@@ -264,7 +264,7 @@ function enableAllTheseDays(date) {
     var result = [false, "", "No Dates Available"];
     $.each(enableDays, function(k, d) {
         if (currentDate === d) {
-            result = [true, "highlight-cs", "Available"];
+            result = [true, "highlight-admin", "Available"];
         }
     });
     return result;
@@ -297,37 +297,15 @@ export const updateEnabledDays = async () => {
 //Jquery DatePicker and select2 for date input
 $(document).ready(async function () {
     const $input = $("#dateInput");
-    let modalScrollTop = 0;
-    $input.on('focus', function () {
-        // Save scroll position when input gains focus
-        modalScrollTop = $('#submissionModal').scrollTop();
-    });
 
     $input.datepicker({
         dateFormat: "MM dd, yy", // Example: April 1, 2025
         onSelect: async function (dateText, inst) {
-            // Restore scroll position immediately after selection
-            setTimeout(() => {
-                $('#submissionModal').scrollTop(modalScrollTop);
-            }, 0);
             const selectedDate = $(this).datepicker("getDate");
             await refreshOptions(selectedDate);
         },
         beforeShow: function(input, inst) {
-            setTimeout(function () {
-                $('#ui-datepicker-div table td a').attr('href', 'javascript:;');
-                $('#ui-datepicker-div table td a').click(function(event) {
-                    event.preventDefault();
-                });
-            }, 0);
-        },
-        onChangeMonthYear: function(year, month, inst) {
-            setTimeout(function () {
-                $('#ui-datepicker-div table td a').attr('href', 'javascript:;');
-                $('#ui-datepicker-div table td a').click(function(event) {
-                    event.preventDefault();
-                });
-            }, 0);
+            $('#ui-datepicker-div').appendTo($('#addBookingModal .modal-body'));
         },
         beforeShowDay: enableAllTheseDays,
     });
@@ -336,7 +314,7 @@ $(document).ready(async function () {
         multiple: false,  
         width: '100%',
         placeholder: "Select Timeslot",
-        dropdownParent: $('#submissionModal .modal-content')
+        dropdownParent: $('#addBookingModal .modal-body')
     }).on('change', async function (e) {
         const selectedValue = $(this).val(); // timeslot id
         await fetchTeachers(selectedValue);
