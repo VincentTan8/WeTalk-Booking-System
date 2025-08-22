@@ -6,7 +6,7 @@ if (!isset($_SESSION)) {
 ?>
 
 <?php
-$current = 'student'; ?>
+$current = 'view-booked'; ?>
 <div style="display: grid">
     <div class="col-9" style="justify-self: center;">
         <?php include "header.php" ?>

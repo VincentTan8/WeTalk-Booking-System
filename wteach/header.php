@@ -47,10 +47,10 @@ $profile_pic = $_SESSION['profile_pic']; ?>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link <?php echo $current == 'view-schedule' ? 'active fw-bold text-primary' : ''; ?>"
-                        href="view-sched-calendar.php">View Schedules</a>
+                        href="view-all-schedules.php">View Schedules</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link <?php echo $current == 'student' ? 'active fw-bold text-primary' : ''; ?>"
+                    <a class="nav-link <?php echo $current == 'view-booked' ? 'active fw-bold text-primary' : ''; ?>"
                         href="view-booked-sched.php">View Booked Schedules</a>
                 </li>
             </ul>
