@@ -49,8 +49,8 @@ $admin_name = $_SESSION['fname']; ?>
                         href="manage-bookings.php">Manage Bookings</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link <?php echo $current == '' ? 'active fw-bold text-primary' : ''; ?>"
-                        href="">Manage Schedules</a>
+                    <a class="nav-link <?php echo $current == 'manage-schedules' ? 'active fw-bold text-primary' : ''; ?>"
+                        href="manage-schedules.php">Manage Schedules</a>
                 </li>
                 <!-- <li class="nav-item">
                     <a class="nav-link <?php //echo $current == '' ? 'active fw-bold text-primary' : ''; ?>"
