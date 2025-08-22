@@ -29,7 +29,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $timeslottable = $prefix . "_resources.`timeslots`";
     $scheduletable = $prefix . "_resources.`schedule`";
 
-    $teacher_ref_num = $_SESSION['ref_num']; //from t-conf.php
+    if (!isset($_POST['teacher_ref_num']))
+        $teacher_ref_num = $_SESSION['ref_num']; //from t-conf.php
+    else
+        $teacher_ref_num = $_POST['teacher_ref_num']; //from admin's choice probably
 
     foreach ($schedtime_ids as $schedtime_id) {
         $sql = "SELECT `starttime`, `endtime` FROM $timeslottable WHERE `id` = ?";
