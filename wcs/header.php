@@ -47,7 +47,7 @@ $profile_pic = $_SESSION['profile_pic']; ?>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link <?php echo $current == 'booked-class' ? 'active fw-bold text-primary' : ''; ?>"
-                        href="booked.php">Booked Class</a>
+                        href="bookings.php">Booked Class</a>
                 </li>
             </ul>
             <!-- Profile Section -->
