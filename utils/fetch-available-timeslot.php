@@ -9,7 +9,10 @@ if (!isset($_POST['date'])) {
     exit;
 }
 $selectedDate = $_POST['date'];
-$teacher_ref_num = $_SESSION['ref_num']; // Ensure teacher_id is stored in session
+if (!isset($_POST['teacher_ref_num']))
+    $teacher_ref_num = $_SESSION['ref_num']; // Ensure teacher_id is stored in session
+else
+    $teacher_ref_num = $_POST['teacher_ref_num'];
 
 $timeslottable = $prefix . "_resources.`timeslots`";
 $scheduletable = $prefix . "_resources.`schedule`";
