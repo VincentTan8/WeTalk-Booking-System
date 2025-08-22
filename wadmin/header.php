@@ -45,17 +45,17 @@ $admin_name = $_SESSION['fname']; ?>
                         href="manage-users.php">Manage Users</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link <?php echo $current == '' ? 'active fw-bold text-primary' : ''; ?>"
-                        href="">Manage Bookings</a>
+                    <a class="nav-link <?php echo $current == 'manage-bookings' ? 'active fw-bold text-primary' : ''; ?>"
+                        href="manage-bookings.php">Manage Bookings</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link <?php echo $current == '' ? 'active fw-bold text-primary' : ''; ?>"
                         href="">Manage Schedules</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link <?php echo $current == '' ? 'active fw-bold text-primary' : ''; ?>"
+                <!-- <li class="nav-item">
+                    <a class="nav-link <?php //echo $current == '' ? 'active fw-bold text-primary' : ''; ?>"
                         href="">Manage Calendar</a>
-                </li>
+                </li> -->
             </ul>
             <!-- Profile Section -->
             <div class="d-flex align-items-center" style="padding-right: 50px;">
