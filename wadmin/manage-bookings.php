@@ -19,8 +19,8 @@ $current = 'manage-bookings'; ?>
         <script src="https://cdn.datatables.net/responsive/2.2.9/js/dataTables.responsive.min.js"></script>
         <div class="row mt-4">
             <div class="col-lg-2 col-md-12" style="display: flex; flex-direction: column; gap: 1rem;">
-                <button type="submit" class="add-booking-btn btn-primary me-2 custom-save-btn" name="addbooking"
-                    data-usertype="Admin">Add Booking</button>
+                <button type="submit" class="add-booking-btn btn-primary me-2 custom-save-btn" name="addbooking">Add
+                    Booking</button>
             </div>
             <div class="col-md-12 col-lg-10 " style="margin-bottom:20px;">
                 <div class=" p-3 bg-white  rounded ">
@@ -47,7 +47,7 @@ $current = 'manage-bookings'; ?>
 </div>
 
 <!-- Add Bookings Modal -->
-<div id="addBookingsModal" class="modal fade" tabindex="-1" aria-hidden="true">
+<div id="addBookingModal" class="modal fade" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <div class="modal-content p-4">
             <div class="modal-header">
@@ -114,7 +114,7 @@ $current = 'manage-bookings'; ?>
 
                     <div class="text-center">
                         <input type="submit" value="Add Booking"
-                            style="border-radius: 10px; background: #2F8B58;padding: 13px 54px; color: white; border: none;">
+                            style="border-radius: 10px; background: #782222;padding: 13px 54px; color: white; border: none;">
                     </div>
                 </form>
             </div>
@@ -157,6 +157,11 @@ $current = 'manage-bookings'; ?>
                     }
                 }
             ]
+        });
+
+        // Open add booking modal click event
+        $('.add-booking-btn').on('click', function () {
+            $('#addBookingModal').modal('show');
         });
 
         // Delete button click event
