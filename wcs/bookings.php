@@ -55,7 +55,7 @@ $current = 'booked-class'; ?>
             "scrollX": true,
             "responsive": true, // Enable Responsive
             "ajax": {
-                "url": "cs-data.php", // Fetch data dynamically
+                "url": "../utils/bookings-data.php", // Fetch data dynamically
                 "dataSrc": ""
             },
             "columns": [
