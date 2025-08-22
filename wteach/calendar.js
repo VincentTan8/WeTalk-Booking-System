@@ -40,7 +40,7 @@ const updateTimeslots = async (selectedDate) => {
     const timeSelect = document.getElementById("timeSelect");
 
     try {
-        const response = await fetch("fetch-available-timeslot.php", {
+        const response = await fetch("../utils/fetch-available-timeslot.php", {
             method: "POST",
             headers: {
                 "Content-Type": "application/x-www-form-urlencoded"
