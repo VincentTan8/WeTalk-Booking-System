@@ -64,11 +64,9 @@ $current = 'manage-users'; ?>
             <div class="modal-body">
                 <!-- insert dynamic content here -->
             </div>
-            <div class="modal-footer">
-                <div class="edit mt-4 text-center">
-                    <button type="submit" id="addUserBtn" class="btn-primary me-2 custom-save-btn" name="add"
-                        form="addUserForm">Add User</button>
-                </div>
+            <div class="mt-2 mb-2 text-center">
+                <button type="submit" id="addUserBtn" class="btn-primary me-2 custom-save-btn" name="add"
+                    form="addUserForm">Add User</button>
             </div>
         </div>
     </div>
@@ -86,11 +84,9 @@ $current = 'manage-users'; ?>
             <div class="modal-body">
                 <!-- insert dynamic content here -->
             </div>
-            <div class="modal-footer">
-                <div class="edit mt-4 text-center">
-                    <button type="submit" id="saveEditsBtn" class="btn-primary me-2 custom-save-btn" name="save"
-                        form="editUserForm">Save Edits</button>
-                </div>
+            <div class="mt-2 mb-2 text-center">
+                <button type="submit" id="saveEditsBtn" class="btn-primary me-2 custom-save-btn" name="save"
+                    form="editUserForm">Save Edits</button>
             </div>
         </div>
     </div>
