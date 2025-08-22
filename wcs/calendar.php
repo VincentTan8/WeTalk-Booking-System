@@ -78,7 +78,7 @@ if (!isset($_SESSION)) {
         </div>
 
         <!-- Modal for Clicking Dates -->
-        <div id="submissionModal" class="modal fade" tabindex="-1" aria-hidden="true">
+        <div id="addBookingModal" class="modal fade" tabindex="-1" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content p-4">
                     <div class="modal-header">

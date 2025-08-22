@@ -148,7 +148,7 @@ const renderCalendar = async (type, language_id) => {
                 await updateEnabledDays();
                 refreshOptions(selectedDate);
 
-                const modal = new bootstrap.Modal(document.getElementById('submissionModal'));
+                const modal = new bootstrap.Modal(document.getElementById('addBookingModal'));
                 modal.show();
             });
         }
