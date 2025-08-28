@@ -58,7 +58,7 @@ $current = 'manage-schedules'; ?>
                     <input type="hidden" id="returnUrl" name="returnUrl" value="../wadmin/manage-schedules.php">
 
                     <label for="teacherSelect" class="form-label text-start d-block">1. Select Teacher:</label>
-                    <select id="teacherSelect" name="teacher" class="form-select mb-3" required>
+                    <select id="teacherSelect" name="teacher_ref_num" class="form-select mb-3" required>
                         <option value="">Select Teacher</option>
 
                     </select>
@@ -82,7 +82,8 @@ $current = 'manage-schedules'; ?>
                     <label for="dayInput">4. Select Date/Time Preferred.</label>
                     <div class="datetime-group">
                         <div class="form-group flex-fill">
-                            <input type="text" id="dateInput" name="formatteddate" class="form-control" required>
+                            <input type="text" id="dateInput" placeholder="Select Date" name="formatteddate"
+                                class="form-control" required>
                             <input type="hidden" id="hiddenDateInput" name="scheddate">
                         </div>
                         <div class="form-group flex-fill">
