@@ -1,6 +1,7 @@
 let schedules = []; //initialize schedules
 
 const languageSelect = document.getElementById("languageSelect");
+const teacherSelect = document.getElementById("teacherSelect");
 
 const fetchLanguages = async () => {
     try {
@@ -22,11 +23,33 @@ const fetchLanguages = async () => {
     }
 };
 
-// Call the fetchLanguages function when the page is loaded
-fetchLanguages();
+const fetchTeachers = async () => {
+    try {
+        const response = await fetch("../utils/fetch-all-teachers.php");
+        const data = await response.json();
+
+        if (data.length === 0) {
+            teacherSelect.innerHTML = '<option value="">No Available Teachers</option>';
+        } else {
+            teacherSelect.innerHTML = ''; // Clear any previous options
+
+            data.forEach(teacher => {
+                let option = document.createElement("option");
+                option.value = teacher.ref_num; 
+                const teacher_alias = (teacher.alias ?? '').trim() == '' ? '' : ' | ' + teacher.alias;
+                option.textContent = teacher.lname + ', ' + teacher.fname + teacher_alias;
+                teacherSelect.appendChild(option);
+            });
+        }
+    } catch (error) {
+        console.error("Error loading Teachers: ", error);
+        teacherSelect.innerHTML = '<option value="">Error Loading Teachers</option>';
+    }
+}
 
 const updateTimeslots = async (selectedDate) => {
     const timeSelect = document.getElementById("timeSelect");
+    const selectedTeacher = teacherSelect.value;
 
     try {
         const response = await fetch("../utils/fetch-available-timeslot.php", {
@@ -34,7 +57,8 @@ const updateTimeslots = async (selectedDate) => {
             headers: {
                 "Content-Type": "application/x-www-form-urlencoded"
             },
-            body: `date=${encodeURIComponent(selectedDate)}`
+            body: `date=${encodeURIComponent(selectedDate)}` +
+                  `&teacher_ref_num=${encodeURIComponent(selectedTeacher)}`
         });
         const data = await response.json();
         if (data.length === 0) {
@@ -64,24 +88,36 @@ const updateTimeslots = async (selectedDate) => {
     }
 };
 
+const getTimeslots = () => {
+    // Get selected date as a Date object
+    const selectedDate = $("#dateInput").datepicker("getDate");
+
+    if(selectedDate) {
+        // Format to desired output ("2025-04-10")
+        const year = selectedDate.getFullYear();
+        const month = (selectedDate.getMonth() + 1).toString().padStart(2, "0");
+        const day = selectedDate.getDate().toString().padStart(2, "0");
+        const formatted = `${year}-${month}-${day}`;
+
+        updateTimeslots(formatted);
+        const hiddenDateInput = document.getElementById("hiddenDateInput");
+        hiddenDateInput.value = formatted;
+    } else {
+        console.log("No date yet");
+    }
+}
+
+teacherSelect.addEventListener("change", async function() {
+    getTimeslots();
+});
+
 //Jquery DatePicker and select2
 //for updating the text of the date picker into our desired format
-$(document).ready(function () {
+$(document).ready(async function () {
     $("#dateInput").datepicker({
         dateFormat: "MM dd, yy", // Example: April 1, 2025
         onSelect: function (dateText, inst) {
-            // Get selected date as a Date object
-            const selectedDate = $(this).datepicker("getDate");
-
-            // Format to desired output ("2025-04-10")
-            const year = selectedDate.getFullYear();
-            const month = (selectedDate.getMonth() + 1).toString().padStart(2, "0");
-            const day = selectedDate.getDate().toString().padStart(2, "0");
-            const formatted = `${year}-${month}-${day}`;
-
-            updateTimeslots(formatted);
-            const hiddenDateInput = document.getElementById("hiddenDateInput");
-            hiddenDateInput.value = formatted;
+            getTimeslots();
         }
     });
 
@@ -92,4 +128,8 @@ $(document).ready(function () {
         allowClear: false,
         dropdownParent: $('#addScheduleModal .modal-content')
     });
+
+    //Intialize fields
+    await fetchLanguages();
+    await fetchTeachers();
 });
