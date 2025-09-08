@@ -22,6 +22,7 @@ $currentTimeFormatted = $currentTime->format('Y-m-d H:i:s');
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $phone = $_POST['phone'];
     $email = $_POST['email'];
+    $platform = $_POST['platform'];
     $student_ref_num = $_POST['student']; //student ref num
     $schedule_ref_num = $_POST['teacher']; //teacher really containes sched ref num trust me, check sched-trial.js or fetch-available-teachers.php
 
@@ -76,8 +77,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $new_ref_num = generateRefNum($conn, $ref_num_prefix, $bookingtable);
 
         //Encoder here is whoever is using the session
-        $sql = "INSERT INTO $bookingtable (`ref_num`, `schedule_ref_num`, `student_ref_num`, `phone`, `email`, `encoded_by`) 
-                VALUES ('$new_ref_num', '$schedule_ref_num', '$student_ref_num', '$phone', '$email', '$ref_num - $presentdate');";
+        $sql = "INSERT INTO $bookingtable (`ref_num`, `schedule_ref_num`, `student_ref_num`, `platform`, `phone`, `email`, `encoded_by`) 
+                VALUES ('$new_ref_num', '$schedule_ref_num', '$student_ref_num', '$platform', '$phone', '$email', '$ref_num - $presentdate');";
 
         if ($conn->query($sql)) {
             $sql = "UPDATE $scheduletable SET `booking_ref_num` = '$new_ref_num' WHERE `ref_num` = '$schedule_ref_num'";
