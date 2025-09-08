@@ -13,7 +13,7 @@ $sql = "SELECT
             schedule.schedstarttime, 
             schedule.schedendtime,
             schedule.scheddate, 
-            schedule.platform,
+            b.platform,
             CASE 
                 WHEN NOW() BETWEEN 
                     STR_TO_DATE(CONCAT(scheddate, ' ', schedstarttime), '%Y-%m-%d %H:%i:%s') 
