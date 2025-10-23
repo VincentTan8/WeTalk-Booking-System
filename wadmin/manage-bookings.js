@@ -37,9 +37,8 @@ const fetchParents = async () => {
 };
 
 const fetchStudents = async () => {
-    //CS version needs checking if parent value is empty
+    //Admin version needs checking if parent value is empty
     let selectedParent = parentSelect.value;
-    //todo check if this works or if any other value may come in
     selectedParent = selectedParent === '' ? null : selectedParent;
 
     try {
@@ -193,7 +192,6 @@ const fetchTeachers = async (timeslot) => {
 const fetchContactDetails = async () => {
     let selectedParent = parentSelect.value;
     let selectedStudent = studentSelect.value;
-    //todo check if this works or if any other value may come in
     selectedParent = selectedParent === '' ? null : selectedParent;
     selectedStudent = selectedStudent === '' ? null : selectedStudent;
     
