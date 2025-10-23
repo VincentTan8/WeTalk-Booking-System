@@ -9,7 +9,10 @@ $teachertable = $prefix . "_resources.`teacher`";
 
 $sql = "SELECT 
             b.ref_num AS booking_ref_num, 
-            concat(student.fname, ' ', student.lname) AS student_name, 
+            concat(student.fname, ' ', student.lname) AS student_name,
+            concat(teacher.fname, ' ', teacher.lname) AS teacher_name,
+            student.ref_num AS student_ref_num,
+            teacher.ref_num AS teacher_ref_num, 
             schedule.schedstarttime, 
             schedule.schedendtime,
             schedule.scheddate, 
