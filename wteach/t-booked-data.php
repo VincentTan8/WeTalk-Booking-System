@@ -27,13 +27,13 @@ $sql = "SELECT
                 STR_TO_DATE(CONCAT(scheddate, ' ', schedendtime), '%Y-%m-%d %H:%i:%s') 
             THEN 'For Assessment'
             ELSE 'Upcoming'
-        END AS status 
+        END AS `status` 
         FROM $bookingtable b
         JOIN $studenttable ON b.student_ref_num = student.ref_num
         JOIN $scheduletable ON b.schedule_ref_num = schedule.ref_num
         JOIN $teachertable ON schedule.teacher_ref_num = teacher.ref_num
         WHERE teacher.ref_num = ?
-        ORDER BY STR_TO_DATE(CONCAT(scheddate, ' ', schedstarttime), '%Y-%m-%d %H:%i:%s') ASC"; //todo add ordering by STATUS then by date
+        ORDER BY `status` DESC, STR_TO_DATE(CONCAT(scheddate, ' ', schedstarttime), '%Y-%m-%d %H:%i:%s') ASC";
 
 $bookings = [];
 $stmt = $conn->prepare($sql);
