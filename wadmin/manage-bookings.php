@@ -122,6 +122,8 @@ $current = 'manage-bookings'; ?>
     </div>
 </div>
 
+<?php include "../utils/assessment-modal.php" ?>
+
 <!-- Initialize DataTable -->
 <script>
     $(document).ready(function () {
@@ -153,7 +155,16 @@ $current = 'manage-bookings'; ?>
                 {
                     "data": "status",
                     "render": function (data, type, row) {
-                        return `<span style="color: ${row.statusColor};">${data}</span>`;
+                        if (row.status === 'Finished')
+                            return `<span 
+                                        class="assessment-link" 
+                                        data-studentrefnum="${row.student_ref_num}"
+                                        data-teacherrefnum="${row.teacher_ref_num}"
+                                        data-studentname="${row.student_name}"
+                                        data-teachername="${row.teacher_name}"  
+                                        style="color: ${row.statusColor}; cursor:pointer; text-decoration:underline;">${data}</span>`;
+                        else
+                            return `<span style="color: ${row.statusColor};">${data}</span>`;
                     }
                 }
             ]
@@ -182,6 +193,18 @@ $current = 'manage-bookings'; ?>
                     }
                 });
             }
+        });
+
+        // Open Assessment Modal
+        $('#bookingTable tbody').on('click', '.assessment-link', function () {
+            const studentName = $(this).data('studentname');
+            const teacherName = $(this).data('teachername');
+
+            // Update modal content 
+            document.getElementById('assess-modal-student-name').textContent = studentName;
+            document.getElementById('assess-modal-teacher-name').textContent = teacherName;
+
+            $('#assessmentModal').modal('show');
         });
 
         // Refresh DataTable every 10 seconds
