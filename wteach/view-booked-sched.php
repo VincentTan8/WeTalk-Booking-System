@@ -43,34 +43,7 @@ $current = 'view-booked'; ?>
     </div>
 </div>
 
-<!-- Assessment Modal -->
-<div id="assessmentModal" class="modal fade" tabindex="-1">
-    <div class="modal-dialog" style="max-width: 1442px">
-        <div class="modal-content p-4">
-            <div class="modal-header">
-                <h5 class="modal-title">Student Class Record</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-            </div>
-            <div class="modal-body">
-                <!-- Insert other content here kung kailangan -->
-                <span>Student:</span> <span style="font-weight: 400" id="assess-modal-student-name"></span>
-                <br>
-                <span>Teacher:</span> <span style="font-weight: 400" id="assess-modal-teacher-name"></span>
-
-                <form action="" method="POST">
-                    <!-- To indicate where to go after adding schedule -->
-                    <input type="hidden" id="returnUrl" name="returnUrl" value="">
-
-                    <div class="text-center">
-                        <input type="submit" value="Save"
-                            style="border-radius: 10px; background: #916DFF;padding: 13px 54px; color:white; border:none;">
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-</div>
-
+<?php include "../utils/assessment-modal.php" ?>
 
 <!-- Initialize DataTable -->
 <script>
@@ -141,8 +114,7 @@ $current = 'view-booked'; ?>
         $('#bookingTable tbody').on('click', '.assessment-link', function () {
             const studentName = $(this).data('studentname');
             const teacherName = $(this).data('teachername');
-            console.log(studentName);
-            console.log(teacherName);
+
             // Update modal content 
             document.getElementById('assess-modal-student-name').textContent = studentName;
             document.getElementById('assess-modal-teacher-name').textContent = teacherName;
