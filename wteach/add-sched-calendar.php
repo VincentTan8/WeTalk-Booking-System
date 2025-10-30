@@ -23,7 +23,7 @@ $current = 'add-schedule'; ?>
                                 <div class="icons">
                                     <span id="prev" class="material-symbols-outlined">chevron_left</span>
                                 </div>
-                                <p class="current-date">April 2025</p> <!-- This will be updated dynamically by JS -->
+                                <p class="current-date"></p> <!-- This will be updated dynamically by JS -->
                                 <div class="icons">
                                     <span id="next" class="material-symbols-outlined">chevron_right</span>
                                 </div>
@@ -109,5 +109,5 @@ $current = 'add-schedule'; ?>
 </div>
 
 <!-- Scripts -->
-<script src="calendar.js"></script>
+<script src="calendar.js" type="module"></script>
 <script src="../utils/minical.js"></script>
