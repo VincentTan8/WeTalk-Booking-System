@@ -63,7 +63,6 @@ body {
     grid-template-columns: repeat(7, 1fr);
     gap: 10px;
     text-align: right;
-    cursor: pointer;
 }
 
 .calendar .days li {
