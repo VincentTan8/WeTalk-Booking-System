@@ -107,13 +107,15 @@ const renderCalendar = async (type, language_id) => {
         // Check if the date is before today
         const currentDate = new Date();
         const compareDate = new Date(currYear, currMonth, i);
+        // TODO: consider changing how isPast applies since free sched today that are past the time should not display as clickable
         const isPast = compareDate < currentDate.setHours(0, 0, 0, 0);
 
-        // TODO: consider changing which class should apply first since free sched today that are past the time does not display on the modal
         const highlightClass = isScheduled ? "scheduled" : isPast ? "past" : "";
         // const highlightClass = isScheduled ? "scheduled" : isToday ? "active" : "";
 
-        liTag += `<li class="${highlightClass}" data-date="${fullDate}" ${isPast ? 'style="pointer-events: none; opacity: 0.5;"' : ''} ${!isScheduled ? 'style="pointer-events: none;"' : ''}>${i}</li>`;
+        liTag += `<li class="${highlightClass}" data-date="${fullDate}" 
+                    ${isPast ? 'style="pointer-events: none; opacity: 0.5;"' : ''} 
+                    ${!isScheduled ? 'style="pointer-events: none;"' : ''}>${i}</li>`; //empty cells are not clickable on cs view unlike teacher view
         // liTag += `<li class="${highlightClass}" data-date="${fullDate}">${i}</li>`;
     }
 
