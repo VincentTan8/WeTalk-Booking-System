@@ -1,3 +1,5 @@
+import { months } from "../utils/constants.js";
+
 const daysTag = document.querySelector(".days"),
     currentDate = document.querySelector(".current-date"),
     prevNextIcon = document.querySelectorAll(".icons span");
@@ -5,9 +7,6 @@ const daysTag = document.querySelector(".days"),
 let date = new Date(),
     currYear = date.getFullYear(),
     currMonth = date.getMonth();
-
-const months = ["January", "February", "March", "April", "May", "June", "July",
-    "August", "September", "October", "November", "December"];
 
 let schedules = []; //initialize schedules
 
@@ -83,7 +82,7 @@ const renderCalendar = async () => {
         lastDayOfMonth = new Date(currYear, currMonth, lastDateOfMonth).getDay();
 
     for (let i = firstDayOfMonth; i > 0; i--) {
-        liTag += `<li class="inactive" style = "color:grey; justify-content:right;">${lastDateOfPrevMonth - i + 1}</li>`;
+        liTag += `<li class="inactive" style="pointer-events: none; opacity: 0.5;">${lastDateOfPrevMonth - i + 1}</li>`;
     }
 
     //gets free schedules, does not include booked schedules
@@ -98,22 +97,30 @@ const renderCalendar = async () => {
         const isScheduled = schedules.some(s => s.scheddate === fullDate);
         const isToday = i === date.getDate() && currMonth === date.getMonth() && currYear === date.getFullYear();
 
-        const highlightClass = isScheduled ? "scheduled" : "";
+        // Check if the date is before today
+        const currentDate = new Date();
+        const compareDate = new Date(currYear, currMonth, i);
+        const isPast = compareDate < currentDate.setHours(0, 0, 0, 0);
 
-        liTag += `<li class="${highlightClass}" data-date="${fullDate}" style="justify-content:right;">${i}</li>`;
+        const highlightClass = `${isScheduled ? "scheduled" : ""} ${isPast ? "past" : ""}`.trim();
+        //const highlightClass = isScheduled ? "scheduled" : "";
+
+        liTag += `<li class="${highlightClass}" data-date="${fullDate}"} 
+                    ${isPast ? 'style="pointer-events: none; opacity: 0.5;"' : 'style="cursor: pointer"'}>${i}</li>`;
+        //liTag += `<li class="${highlightClass}" data-date="${fullDate}" ${isPast ? 'style="pointer-events: none; opacity: 0.5;"' : ''} ${!isScheduled ? 'style="pointer-events: none;"' : ''}>${i}</li>`;
         // liTag += `<li class="${isToday}" data-date="${currYear}-${String(currMonth + 1).padStart(2, '0')}-${String(i).padStart(2, '0')}" style = "justify-content:right;">${i}</li>`;
     }
 
     for (let i = lastDayOfMonth; i < 6; i++) {
-        liTag += `<li class="inactive" style = "color:grey; justify-content:right;">${i - lastDayOfMonth + 1}</li>`;
+        liTag += `<li class="inactive" style="pointer-events: none; opacity: 0.5;">${i - lastDayOfMonth + 1}</li>`;
     }
 
     currentDate.innerText = `${months[currMonth]} ${currYear}`;
     daysTag.innerHTML = liTag;
 
     document.querySelectorAll(".days li").forEach(day => {
-        day.addEventListener("click", () => {
-            if (!day.classList.contains("inactive")) {
+        if (!day.classList.contains("inactive") && !day.classList.contains("past")) {
+            day.addEventListener("click", () => {
                 const selectedDate = day.getAttribute("data-date");
                 const [year, month, dayNum] = selectedDate.split("-");
                 const monthName = months[parseInt(month, 10) - 1];
@@ -132,8 +139,8 @@ const renderCalendar = async () => {
                     const modal = new bootstrap.Modal(modalElement);
                     modal.show();
                 }
-            }
-        });
+            });
+        }
     });
 
 };
