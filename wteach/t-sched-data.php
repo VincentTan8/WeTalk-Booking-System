@@ -18,17 +18,17 @@ $sql = "SELECT
             ELSE s.platform
         END AS `platform`,
         CASE
-            WHEN booking_ref_num IS NOT NULL AND STR_TO_DATE(CONCAT(scheddate, ' ', schedendtime), '%Y-%m-%d %H:%i:%s') <= NOW() THEN 'Finished'
+            WHEN booking_ref_num IS NOT NULL AND STR_TO_DATE(CONCAT(scheddate, ' ', schedendtime), '%Y-%m-%d %H:%i:%s') <= NOW() THEN 'Finished' -- consider deleting this line since it will no longer show up
             WHEN booking_ref_num IS NOT NULL THEN 'Booked'
-            WHEN STR_TO_DATE(CONCAT(scheddate, ' ', schedstarttime), '%Y-%m-%d %H:%i:%s') <= DATE_ADD(NOW(), INTERVAL 30 MINUTE) THEN 'Closed'
+            WHEN STR_TO_DATE(CONCAT(scheddate, ' ', schedstarttime), '%Y-%m-%d %H:%i:%s') <= DATE_ADD(NOW(), INTERVAL 30 MINUTE) THEN 'Closed' -- consider deleting this line since it will no longer show up
             ELSE 'Free'
         END AS `status`
         FROM $scheduletable s
         LEFT JOIN $bookingtable b ON s.booking_ref_num = b.ref_num
         JOIN $teachertable ON s.teacher_ref_num = teacher.ref_num
         JOIN $languagetable ON s.language_id = language.id
-        WHERE teacher.ref_num = ? 
-        ORDER BY STR_TO_DATE(CONCAT(scheddate, ' ', schedstarttime), '%Y-%m-%d %H:%i:%s') ASC";
+        WHERE teacher.ref_num = ? AND STR_TO_DATE(CONCAT(scheddate, ' ', schedstarttime), '%Y-%m-%d %H:%i:%s') > DATE_ADD(NOW(), INTERVAL 30 MINUTE)
+        ORDER BY `status` DESC, STR_TO_DATE(CONCAT(scheddate, ' ', schedstarttime), '%Y-%m-%d %H:%i:%s') ASC";
 
 $schedules = [];
 $stmt = $conn->prepare($sql);
