@@ -124,7 +124,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 echo "<script type='text/javascript'>alert('Booking added successfully, but failed to send emails.'); window.location.href='$returnUrl';</script>";
             }
         } else {
-            echo "<script type='text/javascript'>alert('Error: $conn->error'); window.location.href='$returnUrl';</script>";
+            echo "<script type='text/javascript'>
+                      alert('Booking not successful. It may have just been booked by someone else');
+                      console.log(\"Error: $conn->error\"); 
+                      window.location.href='$returnUrl';
+                  </script>";
         }
     } else {
         echo "<script type='text/javascript'>alert('Invalid schedule, please try again'); window.location.href='$returnUrl';</script>";
