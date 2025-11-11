@@ -52,7 +52,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             header("Location: student.php");  // Redirects to student.php after successful submission
             exit(); // Ensure no further code is executed after the redirect
         } else {
-            echo "<script type='text/javascript'>alert(Error adding student: $stmt->error);</script>";
+            echo "<script type='text/javascript'>alert(`Error adding student: $stmt->error`);</script>";
             header("Location: student.php");
         }
 
