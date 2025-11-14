@@ -17,8 +17,8 @@
                     <input type="hidden" id="returnUrl" name="returnUrl" value="">
 
                     <div class="text-center">
-                        <input type="submit" value="Save"
-                            style="border-radius: 10px; background: #0f0f0f; padding: 13px 54px; color:white; border:none;">
+                        <input type="submit" value="Save" id="assessment-button"
+                            style="border-radius: 10px; padding: 13px 54px; color:white; border:none;">
                     </div>
                 </form>
             </div>
