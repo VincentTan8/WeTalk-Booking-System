@@ -118,6 +118,7 @@ $current = 'booked-class'; ?>
             // Update modal content 
             document.getElementById('assess-modal-student-name').textContent = studentName;
             document.getElementById('assess-modal-teacher-name').textContent = teacherName;
+            document.getElementById('assessment-button').classList.add('highlight-cs');
 
             $('#assessmentModal').modal('show');
         });
