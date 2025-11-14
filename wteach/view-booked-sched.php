@@ -75,16 +75,13 @@ $current = 'view-booked'; ?>
                 {
                     "data": "status",
                     "render": function (data, type, row) {
-                        if (row.status === 'For Assessment')
-                            return `<span 
-                                        class="assessment-link" 
-                                        data-studentrefnum="${row.student_ref_num}"
-                                        data-teacherrefnum="${row.teacher_ref_num}"
-                                        data-studentname="${row.student_name}"
-                                        data-teachername="${row.teacher_name}"  
-                                        style="color: ${row.statusColor}; cursor:pointer; text-decoration:underline;">${data}</span>`;
-                        else
-                            return `<span style="color: ${row.statusColor};">${data}</span>`;
+                        return `<span 
+                                class="assessment-link" 
+                                data-studentrefnum="${row.student_ref_num}"
+                                data-teacherrefnum="${row.teacher_ref_num}"
+                                data-studentname="${row.student_name}"
+                                data-teachername="${row.teacher_name}"  
+                                style="color: ${row.statusColor}; cursor:pointer; text-decoration:underline;">${data}</span>`;
                     }
                 }
             ]
