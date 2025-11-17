@@ -76,5 +76,6 @@ $profile_pic = $_SESSION['profile_pic']; ?>
     </div>
 </nav>
 
+<?php include "../utils/profile-modal.php" ?>
 
 <!-- Main Content -->

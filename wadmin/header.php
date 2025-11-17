@@ -76,4 +76,6 @@ $admin_name = $_SESSION['fname']; ?>
     </div>
 </nav>
 
+<?php include "../utils/profile-modal.php" ?>
+
 <!-- Main Content -->
