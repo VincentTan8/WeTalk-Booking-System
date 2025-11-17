@@ -67,7 +67,16 @@ $current = 'view-booked'; ?>
                     },
                     "orderable": false
                 },
-                { "data": "student_name" },
+                {
+                    "data": "student_name",
+                    "render": function (data, type, row) {
+                        return `<span
+                                class="profile-link"
+                                data-refnum="${row.student_ref_num}"
+                                data-usertype="student"
+                                style="cursor:pointer; text-decoration:underline;">${data}</span>`;
+                    }
+                },
                 { "data": "scheddate" },
                 { "data": "schedstarttime" },
                 { "data": "schedendtime" },
@@ -105,6 +114,35 @@ $current = 'view-booked'; ?>
                     }
                 });
             }
+        });
+
+        //Open Profile Modal
+        $('#bookingTable tbody').on('click', '.profile-link', function () {
+            const refNum = $(this).data('refnum');
+            const userType = $(this).data('usertype');
+
+            // Update modal content 
+            document.getElementById('profileUserType').value = userType;
+            $('#profileModalBody').html('Loading...');
+
+
+            fetch('../utils/profile-modal-content-loader.php', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                body: new URLSearchParams({ refNum, userType })
+            })
+                .then(response => response.text())
+                .then(html => {
+                    $('#profileModalBody').html(html);
+                    $('#profileModal').modal('show');
+                })
+                .catch(err => {
+                    $('#profileModalBody').html('Error loading profile.');
+                });
+
+            document.getElementById('userTypeName').textContent = userType.charAt(0).toUpperCase() + userType.slice(1) + " Profile";
+
+            $('#profileModal').modal('show');
         });
 
         // Open Assessment Modal
