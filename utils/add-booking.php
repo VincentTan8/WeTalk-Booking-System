@@ -111,14 +111,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
             // Send email to student 
             $headersStudent = $headers;
-            $mailToStudent = mail($student_email, "WeTalk Free Trial Class Confirmation", $studentMessage, $headersStudent);
+            // $mailToStudent = mail($student_email, "WeTalk Free Trial Class Confirmation", $studentMessage, $headersStudent);
 
             // Send email to teacher
             $headersTeacher = $headers;
             $mailToTeacher = mail($teacher_email, "WeTalk Trial Class Booking", $teacherMessage, $headersTeacher);
 
             // Check if both emails are sent
-            if ($mailToStudent && $mailToTeacher) {
+            // if ($mailToStudent && $mailToTeacher) {
+            if ($mailToTeacher) {
                 echo "<script type='text/javascript'>alert('Booking added successfully!'); window.location.href='$returnUrl';</script>";
             } else {
                 echo "<script type='text/javascript'>alert('Booking added successfully, but failed to send emails.'); window.location.href='$returnUrl';</script>";
