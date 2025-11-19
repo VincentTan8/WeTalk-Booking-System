@@ -78,4 +78,16 @@ $admin_name = $_SESSION['fname']; ?>
 
 <?php include "../utils/profile-modal.php" ?>
 
+<script>
+    setInterval(() => {
+        fetch("../session_check.php")
+            .then(res => res.json())
+            .then(data => {
+                if (!data.active) {
+                    window.location.href = "../";
+                }
+            });
+    }, 8 * 1000); // every 8 seconds
+</script>
+
 <!-- Main Content -->
