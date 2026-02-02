@@ -104,11 +104,20 @@ $current = 'manage-bookings'; ?>
 
                     </select>
 
-                    <label for="phoneNumber" class="form-label text-start d-block">7. Phone:</label>
+                    <label for="languageLevel" class="form-label text-start d-block">7. Language Level:</label>
+                    <select id="languageLevel" name="languageLevel" class="form-select mb-3" required>
+                        <option value="">Select Level</option>
+                        <option value="Beginner">Beginner</option>
+                        <option value="Intermediate">Intermediate</option>
+                        <option value="Advanced">Advanced</option>
+                        <option value="N/A">N/A</option>
+                    </select>
+
+                    <label for="phoneNumber" class="form-label text-start d-block">8. Phone:</label>
                     <input type="text" id="phoneNumber" name="phone" class="form-control mb-3"
                         placeholder="Enter Phone Number" required>
 
-                    <label for="emailAdd" class="form-label text-start d-block">8. Email:</label>
+                    <label for="emailAdd" class="form-label text-start d-block">9. Email:</label>
                     <input type="text" id="emailAdd" name="email" class="form-control mb-3" placeholder="Enter Email"
                         required>
 
