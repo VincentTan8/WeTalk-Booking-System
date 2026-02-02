@@ -20,13 +20,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["booking_ref_num"])) {
 
     if ($row = $result->fetch_assoc()) {
         //Insert into new table for logging/tracking
-        $sql = "INSERT INTO $deletedbookingstable (`ref_num`, `deleted_by`, `schedule_ref_num`, `student_ref_num`, `platform`, `phone`, `email`, `encoded_by`) 
-                VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+        $sql = "INSERT INTO $deletedbookingstable (`ref_num`, `deleted_by`, `schedule_ref_num`, `student_ref_num`, `platform`, `phone`, `email`, `language_level`, `encoded_by`) 
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
         $stmt = $conn->prepare($sql);
 
         $deleted_by = "$ref_num - $presentdate";
         $stmt->bind_param(
-            "ssssisss",
+            "ssssissss",
             $row['ref_num'],
             $deleted_by,
             $row['schedule_ref_num'],
@@ -34,6 +34,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["booking_ref_num"])) {
             $row['platform'],
             $row['phone'],
             $row['email'],
+            $row['language_level'],
             $row['encoded_by']
         );
         $stmt->execute();
