@@ -317,7 +317,8 @@ header {
 #phoneNumber,
 #emailAdd,
 #teacherSelect,
-#languageSelect {
+#languageSelect,
+#languageLevel {
     border-radius: 10px;
     border: 2px solid #a3a1a1;
     background: #FBF9F9;
@@ -333,7 +334,8 @@ header {
 #emailAdd,
 #languageSelect,
 #platformSelect,
-#teacherSelect {
+#teacherSelect,
+#languageLevel {
     margin-top: 20px;
 }
 
