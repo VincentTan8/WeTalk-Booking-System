@@ -31,6 +31,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $scheduletable = $prefix . "_resources.`schedule`";
     $teachertable = $prefix . "_resources.`teacher`";
     $bookingtable = $prefix . "_resources.`booking`";
+    $assessmenttable = $prefix . "_resources.`assessment_records`";
 
     //Get student info
     $query = "SELECT `email`, `fname`, `lname` FROM $studenttable WHERE `ref_num` = ?";
@@ -50,7 +51,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
     // Verify schedule to be 30 mins or more before booking
-    $query = "SELECT s.ref_num as schedule_ref_num, s.scheddate, s.schedstarttime, s.schedendtime, t.email as teacher_email, t.fname as teacher_fname, t.lname as teacher_lname
+    $query = "SELECT s.ref_num as schedule_ref_num, s.scheddate, s.schedstarttime, s.schedendtime, t.ref_num as teacher_ref_num, t.email as teacher_email, t.fname as teacher_fname, t.lname as teacher_lname
               FROM $scheduletable s 
               JOIN $teachertable t ON s.teacher_ref_num = t.ref_num
               WHERE CONCAT(s.scheddate, ' ', s.schedstarttime) >= '$currentTimeFormatted'   
@@ -67,6 +68,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $scheddate = $row['scheddate'];
         $schedstarttime = $row['schedstarttime'];
         $schedendtime = $row['schedendtime'];
+        $teacher_ref_num = $row['teacher_ref_num'];
         $teacher_email = $row['teacher_email'];
         $teacher_fname = $row['teacher_fname'];
         $teacher_lname = $row['teacher_lname'];
@@ -75,15 +77,22 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         //B-{date}{time}{count}
         $timestamp = date('YmdHis'); // e.g., 20250407152345
         $ref_num_prefix = 'B-' . $timestamp;
-        $new_ref_num = generateRefNum($conn, $ref_num_prefix, $bookingtable);
+        $b_ref_num = generateRefNum($conn, $ref_num_prefix, $bookingtable);
 
         //Encoder here is whoever is using the session
         $sql = "INSERT INTO $bookingtable (`ref_num`, `schedule_ref_num`, `student_ref_num`, `platform`, `phone`, `email`, `language_level`, `encoded_by`) 
-                VALUES ('$new_ref_num', '$schedule_ref_num', '$student_ref_num', '$platform', '$phone', '$email', '$language_level', '$ref_num - $presentdate');";
+                VALUES ('$b_ref_num', '$schedule_ref_num', '$student_ref_num', '$platform', '$phone', '$email', '$language_level', '$ref_num - $presentdate');";
 
         if ($conn->query($sql)) {
-            $sql = "UPDATE $scheduletable SET `booking_ref_num` = '$new_ref_num' WHERE `ref_num` = '$schedule_ref_num'";
+            $sql = "UPDATE $scheduletable SET `booking_ref_num` = '$b_ref_num' WHERE `ref_num` = '$schedule_ref_num'";
             $conn->query($sql);
+            //Assessment record ref num generate, we reuse timestamp here from booking
+            $ref_num_prefix = 'AR-' . $timestamp;
+            $ar_ref_num = generateRefNum($conn, $ref_num_prefix, $assessmenttable);
+            $sql = "INSERT INTO $assessmenttable (`ref_num`, `booking_ref_num`, `student_ref_num`, `teacher_ref_num`)
+                    VALUES ('$ar_ref_num', '$b_ref_num', '$student_ref_num', '$teacher_ref_num');";
+            if (!$conn->query($sql))
+                echo $conn->error;
 
             $studentMessage = "Thank you for joining us, $student_fname!\n\n"
                 . "Your learning journey on WeTalk is about to begin!\n\n"
