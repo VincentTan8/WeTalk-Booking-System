@@ -86,6 +86,7 @@ $current = 'view-booked'; ?>
                     "render": function (data, type, row) {
                         return `<span 
                                 class="assessment-link" 
+                                data-bookingrefnum="${row.booking_ref_num}"
                                 data-studentrefnum="${row.student_ref_num}"
                                 data-teacherrefnum="${row.teacher_ref_num}"
                                 data-studentname="${row.student_name}"
@@ -145,15 +146,83 @@ $current = 'view-booked'; ?>
             $('#profileModal').modal('show');
         });
 
+        let currentFiles = [];
+        function deleteFile(fileId) {
+            if (!confirm("Delete this file?")) return;
+
+            $.post('../utils/delete-assessment.php', { id: fileId }, function (response) {
+                if (response.success) {
+                    currentFiles = currentFiles.filter(f => f.id !== fileId);
+                    renderFiles(currentFiles);
+                } else {
+                    alert(response.message);
+                }
+            }, 'json');
+        }
+
+        function renderFiles(files) {
+            const container = document.getElementById('assessmentExistingFile');
+            container.innerHTML = ''; // clear old files
+
+            if (files.length === 0) {
+                container.innerHTML = '<p>No uploaded files.</p>';
+                return;
+            }
+
+            files.forEach(file => {
+                const div = document.createElement('div');
+                div.style.marginBottom = "5px";
+
+                const link = document.createElement('a');
+                link.href = `../uploads/assessment-files/${file.file_url}`;
+                link.target = "_blank";
+                link.textContent = file.file_url.split('/').pop();
+
+                const button = document.createElement('button');
+                button.type = "button";
+                button.style.padding = "1px 6px";
+                button.style.marginLeft = "4px";
+                button.textContent = "Delete";
+                button.addEventListener('click', function () {
+                    deleteFile(file.id);
+                });
+
+                div.appendChild(link);
+                div.appendChild(button);
+                container.appendChild(div);
+            });
+        }
+
         // Open Assessment Modal
         $('#bookingTable tbody').on('click', '.assessment-link', function () {
             const studentName = $(this).data('studentname');
             const teacherName = $(this).data('teachername');
+            document.getElementById('assessmentReport').value = "";
 
             // Update modal content 
             document.getElementById('assess-modal-student-name').textContent = studentName;
             document.getElementById('assess-modal-teacher-name').textContent = teacherName;
             document.getElementById('assessment-button').classList.add('highlight-teacher');
+
+            let b_ref_num = $(this).data('bookingrefnum');
+            document.getElementById('bookingRefNum').value = b_ref_num;
+            document.getElementById('assessmentReturnUrl').value = "../wteach/view-booked-sched.php";
+
+            //Show existing content for modal if it exists
+            $.ajax({
+                url: '../utils/fetch-assessment-record.php',
+                type: 'POST',
+                data: { booking_ref_num: b_ref_num },
+                dataType: 'json',
+                success: function (response) {
+                    document.getElementById('assessmentReport').value = response.report || '';
+                    currentFiles = response.files;
+                    renderFiles(currentFiles || []);
+                },
+                error: function () {
+                    alert("Error fetching assessment record.");
+                }
+            });
 
             $('#assessmentModal').modal('show');
         });
